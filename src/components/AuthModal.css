@@ -13,7 +13,7 @@
 }
 
 .auth-modal {
-  background: white;
+  background: var(--color-light);
   border-radius: 16px;
   padding: 32px;
   max-width: 400px;
@@ -30,31 +30,31 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--color-gray-400);
   line-height: 1;
   padding: 4px;
 }
 
 .auth-modal-close:hover {
-  color: #4b5563;
+  color: var(--color-gray-600);
 }
 
 .auth-modal h2 {
   margin: 0 0 8px 0;
   font-size: 1.5rem;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .auth-modal-subtitle {
   margin: 0 0 24px 0;
-  color: #6b7280;
+  color: var(--color-gray-500);
   font-size: 0.9rem;
 }
 
 .auth-error {
   background-color: #fee2e2;
-  border: 1px solid #ef4444;
-  color: #dc2626;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -70,58 +70,61 @@
   margin-bottom: 6px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--color-gray-700);
 }
 
 .form-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-gray-300);
   border-radius: 8px;
   font-size: 1rem;
   box-sizing: border-box;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #00843D;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(17, 232, 246, 0.15);
 }
 
 .auth-submit-btn {
   width: 100%;
   padding: 14px;
-  background-color: #00843D;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   margin-top: 8px;
 }
 
 .auth-submit-btn:hover:not(:disabled) {
-  background-color: #006b32;
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 .auth-submit-btn:disabled {
-  background-color: #9ca3af;
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-500);
   cursor: not-allowed;
 }
 
 .auth-switch {
   text-align: center;
   margin-top: 20px;
-  color: #6b7280;
+  color: var(--color-gray-500);
   font-size: 0.9rem;
 }
 
 .auth-switch button {
   background: none;
   border: none;
-  color: #00843D;
+  color: var(--color-primary-dark);
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;

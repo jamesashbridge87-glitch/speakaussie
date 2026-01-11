@@ -10,18 +10,18 @@
 .plans-header h2 {
   margin: 0 0 8px 0;
   font-size: 1.75rem;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .plans-header p {
   margin: 0;
-  color: #6b7280;
+  color: var(--color-gray-500);
 }
 
 .plans-error {
   background-color: #fee2e2;
-  border: 1px solid #ef4444;
-  color: #dc2626;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -36,26 +36,27 @@
 }
 
 .plan-card {
-  background: white;
-  border: 2px solid #e2e8f0;
+  background: var(--color-light);
+  border: 2px solid var(--color-gray-200);
   border-radius: 16px;
   padding: 24px;
   position: relative;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: all 0.2s ease;
 }
 
 .plan-card:hover {
-  border-color: #00843D;
+  border-color: var(--color-primary);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(253, 164, 0, 0.15);
 }
 
 .plan-card.popular {
-  border-color: #00843D;
+  border-color: var(--color-primary);
 }
 
 .plan-card.current {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: var(--color-secondary);
+  background: #e6f9fb;
 }
 
 .popular-badge {
@@ -63,12 +64,12 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #00843D;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-dark);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .current-badge {
@@ -76,23 +77,23 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #22c55e;
-  color: white;
+  background: var(--color-secondary);
+  color: var(--color-dark);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .plan-card h3 {
   margin: 0 0 4px 0;
   font-size: 1.25rem;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .plan-description {
   margin: 0 0 16px 0;
-  color: #6b7280;
+  color: var(--color-gray-500);
   font-size: 0.85rem;
 }
 
@@ -103,18 +104,18 @@
 .price-amount {
   font-size: 2rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .price-period {
-  color: #6b7280;
+  color: var(--color-gray-500);
   font-size: 0.9rem;
 }
 
 .plan-minutes {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #00843D;
+  color: var(--color-primary-dark);
   margin-bottom: 16px;
 }
 
@@ -128,7 +129,7 @@
   padding: 6px 0;
   padding-left: 24px;
   position: relative;
-  color: #4b5563;
+  color: var(--color-gray-600);
   font-size: 0.9rem;
 }
 
@@ -136,56 +137,59 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: #22c55e;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
 .plan-button {
   width: 100%;
   padding: 12px;
-  background: #00843D;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-dark);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .plan-button:hover:not(:disabled) {
-  background: #006b32;
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
 }
 
 .plan-button:disabled {
-  background: #9ca3af;
+  background: var(--color-gray-300);
+  color: var(--color-gray-500);
   cursor: not-allowed;
 }
 
 .plan-button.current {
-  background: #22c55e;
+  background: var(--color-secondary);
+  color: var(--color-dark);
 }
 
 .manage-subscription {
   text-align: center;
   padding-top: 16px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--color-gray-200);
 }
 
 .manage-btn {
   padding: 10px 24px;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: var(--color-light);
+  border: 1px solid var(--color-gray-300);
   border-radius: 8px;
-  color: #4b5563;
+  color: var(--color-gray-600);
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: all 0.2s;
 }
 
 .manage-btn:hover {
-  background: #f8fafc;
-  border-color: #9ca3af;
+  background: var(--color-gray-50);
+  border-color: var(--color-secondary);
 }
 
 @media (max-width: 640px) {

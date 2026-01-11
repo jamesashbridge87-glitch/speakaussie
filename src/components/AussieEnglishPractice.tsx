@@ -286,7 +286,10 @@ export function AussieEnglishPractice() {
     <div className="aussie-practice-container">
       <header className="practice-header">
         <div className="header-top">
-          <h1>SpeakAussie</h1>
+          <div className="header-brand">
+            <img src="/logo.png" alt="Your Aussie Uncle" className="header-logo" />
+            <h1>SpeakAussie</h1>
+          </div>
           <div className="header-actions">
             {isAuthenticated ? (
               <UserMenu onShowPlans={() => setShowPlans(true)} />

@@ -5,7 +5,7 @@
 .mode-selector h3 {
   margin: 0 0 16px 0;
   font-size: 1.1rem;
-  color: #1a1a2e;
+  color: var(--color-dark);
   text-align: center;
 }
 
@@ -20,8 +20,8 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 16px;
-  background-color: #ffffff;
-  border: 2px solid #e2e8f0;
+  background-color: var(--color-light);
+  border: 2px solid var(--color-gray-200);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -29,14 +29,14 @@
 }
 
 .mode-option:hover:not(:disabled) {
-  border-color: #00843D;
-  background-color: #f0fdf4;
+  border-color: var(--color-primary);
+  background-color: #fff8e6;
 }
 
 .mode-option.selected {
-  border-color: #00843D;
-  background-color: #f0fdf4;
-  box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.1);
+  border-color: var(--color-primary);
+  background-color: #fff8e6;
+  box-shadow: 0 0 0 3px rgba(253, 164, 0, 0.15);
 }
 
 .mode-option:disabled {
@@ -52,13 +52,13 @@
 .mode-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--color-dark);
   margin-bottom: 4px;
 }
 
 .mode-description {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--color-gray-500);
   line-height: 1.4;
 }
 

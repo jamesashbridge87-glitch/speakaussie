@@ -1,19 +1,19 @@
 .usage-badge {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 16px;
 }
 
 .usage-badge.low {
-  background: #fef3c7;
-  border-color: #fbbf24;
+  background: #fff8e6;
+  border-color: var(--color-primary);
 }
 
 .usage-badge.exhausted {
   background: #fee2e2;
-  border-color: #ef4444;
+  border-color: var(--color-error);
 }
 
 .usage-header {
@@ -27,43 +27,43 @@
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: #00843D;
-  background: #f0fdf4;
+  color: var(--color-primary-dark);
+  background: #fff8e6;
   padding: 2px 8px;
   border-radius: 4px;
 }
 
 .usage-badge.exhausted .plan-label {
-  color: #dc2626;
+  color: var(--color-error);
   background: #fef2f2;
 }
 
 .usage-text {
   font-size: 0.85rem;
-  color: #4b5563;
+  color: var(--color-gray-600);
 }
 
 .usage-badge.exhausted .usage-text {
-  color: #dc2626;
+  color: var(--color-error);
   font-weight: 500;
 }
 
 .usage-bar {
   height: 6px;
-  background: #e2e8f0;
+  background: var(--color-gray-200);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .usage-fill {
   height: 100%;
-  background: linear-gradient(90deg, #00843D, #22c55e);
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
   border-radius: 3px;
   transition: width 0.3s ease;
 }
 
 .usage-badge.low .usage-fill {
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
 }
 
 .usage-badge.exhausted .usage-fill {
@@ -75,16 +75,16 @@
   width: 100%;
   margin-top: 8px;
   padding: 8px;
-  background: #00843D;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-dark);
   border: none;
   border-radius: 6px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .upgrade-hint:hover {
-  background: #006b32;
+  background: var(--color-primary-dark);
 }
