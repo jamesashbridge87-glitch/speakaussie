@@ -5,6 +5,7 @@ import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useAuth } from '../hooks/useAuth';
 import { useSubscription } from '../hooks/useSubscription';
+import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
 import { PracticeModeSelector, modePrompts } from './PracticeModeSelector';
 import { ProgressDashboard } from './ProgressDashboard';
 import { AudioVisualizer } from './AudioVisualizer';
@@ -37,8 +38,10 @@ export function AussieEnglishPractice() {
   const [showProgress, setShowProgress] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
+  const [showSignupPrompt, setShowSignupPrompt] = useState(false);
   const [sessionRemainingMinutes, setSessionRemainingMinutes] = useState(0);
   const backendSessionId = useRef<string | null>(null);
+  const anonymousSessionStart = useRef<number | null>(null);
 
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const {
@@ -48,6 +51,11 @@ export function AussieEnglishPractice() {
     recordSessionUsage,
     refreshUsage,
   } = useSubscription();
+  const {
+    remainingMinutes: anonRemainingMinutes,
+    canStartSession: canStartAnonSession,
+    endSessionTracking: endAnonSessionTracking,
+  } = useAnonymousUsage();
 
   const {
     sessions,
@@ -124,22 +132,27 @@ export function AussieEnglishPractice() {
   };
 
   const startSession = async () => {
-    // Check authentication
-    if (!isAuthenticated) {
-      setShowAuthModal(true);
-      return;
+    // Check usage limits based on authentication status
+    if (isAuthenticated) {
+      // Logged-in user: check backend usage limits
+      const canStart = await checkCanStartSession();
+      if (!canStart.allowed) {
+        setError(canStart.message || 'Cannot start session');
+        setShowPlans(true);
+        return;
+      }
+      setSessionRemainingMinutes(canStart.remaining || 0);
+    } else {
+      // Anonymous user: check localStorage usage limits
+      const anonCheck = canStartAnonSession();
+      if (!anonCheck.allowed) {
+        setError(anonCheck.message || 'Cannot start session');
+        setShowSignupPrompt(true);
+        return;
+      }
+      setSessionRemainingMinutes(anonCheck.remaining || 0);
+      anonymousSessionStart.current = Date.now();
     }
-
-    // Check usage limits
-    const canStart = await checkCanStartSession();
-    if (!canStart.allowed) {
-      setError(canStart.message || 'Cannot start session');
-      setShowPlans(true);
-      return;
-    }
-
-    // Store remaining minutes for timer
-    setSessionRemainingMinutes(canStart.remaining || 0);
 
     const hasPermission = await requestMicrophonePermission();
     if (!hasPermission) return;
@@ -148,9 +161,11 @@ export function AussieEnglishPractice() {
       setError(null);
       setMessages([]);
 
-      // Start backend session for tracking
-      const sessionId = await startBackendSession(selectedMode);
-      backendSessionId.current = sessionId;
+      // Start backend session for tracking (only for logged-in users)
+      if (isAuthenticated) {
+        const sessionId = await startBackendSession(selectedMode);
+        backendSessionId.current = sessionId;
+      }
 
       await conversation.startSession({
         agentId: 'g50Lc7IzLlbPiRpgNXQJ',
@@ -181,19 +196,25 @@ export function AussieEnglishPractice() {
         finalizeSessionScores(currentSession.id, selectedMode);
       }
 
-      // Record usage with backend
-      if (backendSessionId.current) {
+      // Record usage based on authentication status
+      if (isAuthenticated && backendSessionId.current) {
         await recordSessionUsage(
           backendSessionId.current,
           feedback,
           messages.filter(m => m.role === 'user').length
         );
         backendSessionId.current = null;
+        refreshUsage();
+      } else if (anonymousSessionStart.current) {
+        // Track anonymous usage in localStorage
+        endAnonSessionTracking(anonymousSessionStart.current);
+        anonymousSessionStart.current = null;
+        // Show signup prompt after anonymous session ends
+        setShowSignupPrompt(true);
       }
 
       endTracking(feedback);
       setIsSessionActive(false);
-      refreshUsage();
     } catch (err) {
       console.error('Failed to end session:', err);
     }
@@ -315,6 +336,40 @@ export function AussieEnglishPractice() {
         </div>
       )}
 
+      {showSignupPrompt && !isAuthenticated && (
+        <div className="plans-modal-overlay" onClick={() => setShowSignupPrompt(false)}>
+          <div className="signup-prompt-modal" onClick={e => e.stopPropagation()}>
+            <button className="plans-modal-close" onClick={() => setShowSignupPrompt(false)}>
+              &times;
+            </button>
+            <div className="signup-prompt-content">
+              <h2>Great practice session!</h2>
+              <p>Sign up to save your progress and get more practice time each day.</p>
+              <div className="signup-prompt-benefits">
+                <div className="benefit-item">Track your learning progress</div>
+                <div className="benefit-item">Unlock achievements</div>
+                <div className="benefit-item">Get more daily practice time</div>
+              </div>
+              <button
+                className="signup-prompt-btn primary"
+                onClick={() => {
+                  setShowSignupPrompt(false);
+                  setShowAuthModal(true);
+                }}
+              >
+                Sign Up Free
+              </button>
+              <button
+                className="signup-prompt-btn secondary"
+                onClick={() => setShowSignupPrompt(false)}
+              >
+                Maybe Later
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {error && (
         <div className="error-message">
           {error}
@@ -328,8 +383,13 @@ export function AussieEnglishPractice() {
             <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation, or practice your pronunciation below.</p>
           </div>
 
-          {isAuthenticated && usage && (
+          {isAuthenticated && usage ? (
             <UsageBadge onUpgradeClick={() => setShowPlans(true)} />
+          ) : !isAuthenticated && (
+            <div className="anonymous-usage-badge">
+              <span className="usage-time">{anonRemainingMinutes} min</span>
+              <span className="usage-label">free today</span>
+            </div>
           )}
 
           <PracticeModeSelector

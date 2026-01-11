@@ -429,6 +429,101 @@
   font-size: 0.9rem;
 }
 
+/* Anonymous usage badge */
+.anonymous-usage-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #00843D 0%, #006b32 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.anonymous-usage-badge .usage-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.anonymous-usage-badge .usage-label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Signup prompt modal */
+.signup-prompt-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+}
+
+.signup-prompt-content h2 {
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  margin: 0 0 12px 0;
+}
+
+.signup-prompt-content > p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.signup-prompt-benefits {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.benefit-item {
+  padding: 8px 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.benefit-item::before {
+  content: "✓ ";
+  color: #00843D;
+  font-weight: bold;
+}
+
+.signup-prompt-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+
+.signup-prompt-btn.primary {
+  background: linear-gradient(135deg, #00843D 0%, #006b32 100%);
+  color: white;
+}
+
+.signup-prompt-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 132, 61, 0.3);
+}
+
+.signup-prompt-btn.secondary {
+  background: transparent;
+  color: #666;
+}
+
+.signup-prompt-btn.secondary:hover {
+  background: #f0f0f0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .aussie-practice-container {
