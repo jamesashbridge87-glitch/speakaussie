@@ -398,10 +398,10 @@ export function AussieEnglishPractice() {
           />
 
           <button
-            className="start-button"
+            className="start-button pulse-animation"
             onClick={startSession}
           >
-            Start Aussie Chat
+            Start Practising Now
           </button>
           <p className="button-subtitle">Chat with Your Aussie Uncle</p>
 

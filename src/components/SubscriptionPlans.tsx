@@ -44,14 +44,6 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
 
   const planDetails = [
     {
-      id: 'free',
-      name: 'Free',
-      price: 0,
-      minutes: 2,
-      description: 'Try it out',
-      features: ['2 minutes per day', 'All practice modes', 'Basic progress tracking'],
-    },
-    {
       id: 'basic',
       name: 'Basic',
       price: 25,
