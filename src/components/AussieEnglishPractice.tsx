@@ -38,7 +38,6 @@ export function AussieEnglishPractice() {
   const [showProgress, setShowProgress] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  const [showSignupPrompt, setShowSignupPrompt] = useState(false);
   const [sessionRemainingMinutes, setSessionRemainingMinutes] = useState(0);
   const backendSessionId = useRef<string | null>(null);
   const anonymousSessionStart = useRef<number | null>(null);
@@ -147,7 +146,7 @@ export function AussieEnglishPractice() {
       const anonCheck = canStartAnonSession();
       if (!anonCheck.allowed) {
         setError(anonCheck.message || 'Cannot start session');
-        setShowSignupPrompt(true);
+        setShowPlans(true);
         return;
       }
       setSessionRemainingMinutes(anonCheck.remaining || 0);
@@ -209,8 +208,8 @@ export function AussieEnglishPractice() {
         // Track anonymous usage in localStorage
         endAnonSessionTracking(anonymousSessionStart.current);
         anonymousSessionStart.current = null;
-        // Show signup prompt after anonymous session ends
-        setShowSignupPrompt(true);
+        // Show plans after anonymous session ends
+        setShowPlans(true);
       }
 
       endTracking(feedback);
@@ -332,40 +331,6 @@ export function AussieEnglishPractice() {
               &times;
             </button>
             <SubscriptionPlans onAuthRequired={() => setShowAuthModal(true)} />
-          </div>
-        </div>
-      )}
-
-      {showSignupPrompt && !isAuthenticated && (
-        <div className="plans-modal-overlay" onClick={() => setShowSignupPrompt(false)}>
-          <div className="signup-prompt-modal" onClick={e => e.stopPropagation()}>
-            <button className="plans-modal-close" onClick={() => setShowSignupPrompt(false)}>
-              &times;
-            </button>
-            <div className="signup-prompt-content">
-              <h2>Great practice session!</h2>
-              <p>Want more practice time? Subscribe to get up to 15 minutes per day!</p>
-              <div className="signup-prompt-benefits">
-                <div className="benefit-item">Up to 15 minutes daily practice</div>
-                <div className="benefit-item">Track your learning progress</div>
-                <div className="benefit-item">Unlock achievements</div>
-              </div>
-              <button
-                className="signup-prompt-btn primary"
-                onClick={() => {
-                  setShowSignupPrompt(false);
-                  setShowPlans(true);
-                }}
-              >
-                View Plans
-              </button>
-              <button
-                className="signup-prompt-btn secondary"
-                onClick={() => setShowSignupPrompt(false)}
-              >
-                Maybe Later
-              </button>
-            </div>
           </div>
         </div>
       )}
