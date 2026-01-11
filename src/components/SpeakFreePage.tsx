@@ -1,12 +1,7 @@
-import { useState } from 'react';
-import { PracticeMode } from '../hooks/useProgressTracking';
-import { PracticeModeSelector } from './PracticeModeSelector';
 import { PronunciationPractice } from './PronunciationPractice';
 import './SpeakFreePage.css';
 
 export function SpeakFreePage() {
-  const [selectedMode, setSelectedMode] = useState<PracticeMode>('everyday');
-
   return (
     <div className="speak-free-container">
       <header className="speak-free-header">
@@ -20,17 +15,12 @@ export function SpeakFreePage() {
       <main className="speak-free-main">
         <div className="instructions">
           <h2>G'day, mate!</h2>
-          <p>Practice your Australian pronunciation for free. Choose a mode and start speaking!</p>
+          <p>Practice your Australian pronunciation for free. Tap the button below to start!</p>
         </div>
-
-        <PracticeModeSelector
-          selectedMode={selectedMode}
-          onSelectMode={setSelectedMode}
-        />
 
         <div className="pronunciation-section">
           <PronunciationPractice
-            mode={selectedMode}
+            mode="everyday"
             isSessionActive={true}
           />
         </div>
