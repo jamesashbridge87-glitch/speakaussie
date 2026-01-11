@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { slangData, categories, categoryNames, SlangCategory, SlangTerm } from '../../data/slangData';
 import { useSlangProgress } from '../../hooks/useSlangProgress';
+import { useSoundEffects } from '../../hooks/useSoundEffects';
 import './SlangQuiz.css';
 
 type QuizDirection = 'term-to-meaning' | 'meaning-to-term';
@@ -60,6 +61,7 @@ export function SlangQuiz() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const { updateQuizScore, progress } = useSlangProgress();
+  const { playCorrect, playIncorrect, playSuccess } = useSoundEffects();
 
   const filteredTerms = useMemo(() => {
     return selectedCategory === 'all'
@@ -86,17 +88,25 @@ export function SlangQuiz() {
       const correct = answer === questions[currentQuestion].correctAnswer;
       setSelectedAnswer(answer);
       setIsCorrect(correct);
+
+      // Play sound effect
+      if (correct) {
+        playCorrect();
+      } else {
+        playIncorrect();
+      }
       if (correct) {
         setScore((prev) => prev + 1);
       }
       setQuizState('feedback');
     },
-    [questions, currentQuestion]
+    [questions, currentQuestion, playCorrect, playIncorrect]
   );
 
   const nextQuestion = useCallback(() => {
     if (currentQuestion + 1 >= questions.length) {
       updateQuizScore(score + (isCorrect ? 1 : 0));
+      playSuccess();
       setQuizState('results');
     } else {
       setCurrentQuestion((prev) => prev + 1);
@@ -104,7 +114,7 @@ export function SlangQuiz() {
       setIsCorrect(null);
       setQuizState('playing');
     }
-  }, [currentQuestion, questions.length, score, isCorrect, updateQuizScore]);
+  }, [currentQuestion, questions.length, score, isCorrect, updateQuizScore, playSuccess]);
 
   const getResultMessage = (finalScore: number, total: number) => {
     const percentage = (finalScore / total) * 100;

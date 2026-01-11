@@ -9,7 +9,6 @@ import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
 import { PracticeModeSelector, modePrompts } from './PracticeModeSelector';
 import { ProgressDashboard } from './ProgressDashboard';
 import { AudioVisualizer } from './AudioVisualizer';
-import { PronunciationPractice } from './PronunciationPractice';
 import { AuthModal } from './AuthModal';
 import { UserMenu } from './UserMenu';
 import { UsageBadge } from './UsageBadge';
@@ -348,7 +347,7 @@ export function AussieEnglishPractice() {
         <div className="start-section">
           <div className="instructions">
             <h2>G'day, mate!</h2>
-            <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation, or practice your pronunciation below.</p>
+            <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation with Your Aussie Uncle!</p>
           </div>
 
           {isAuthenticated && usage ? (
@@ -372,16 +371,6 @@ export function AussieEnglishPractice() {
             Start Practising Now
           </button>
           <p className="button-subtitle">Chat with Your Aussie Uncle</p>
-
-          {/* Standalone Pronunciation Practice */}
-          <div className="pronunciation-section">
-            <h3 className="section-title">Aussie Pronunciation</h3>
-            <p className="section-subtitle">Practice saying phrases and get scored</p>
-            <PronunciationPractice
-              mode={selectedMode}
-              isSessionActive={true}
-            />
-          </div>
         </div>
       ) : (
         <div className="session-section">

@@ -1,11 +1,14 @@
 import { useState, useCallback } from 'react';
 import { slangData, categories, categoryNames, SlangCategory } from '../../data/slangData';
+import { useTextToSpeech } from '../../hooks/useTextToSpeech';
 import './SlangFlashcards.css';
 
 export function SlangFlashcards() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<SlangCategory | 'all'>('all');
+
+  const { speak, isSpeaking, isSupported } = useTextToSpeech();
 
   const filteredCards = selectedCategory === 'all'
     ? slangData
@@ -31,6 +34,11 @@ export function SlangFlashcards() {
     setSelectedCategory(category);
     setCurrentIndex(0);
     setIsFlipped(false);
+  };
+
+  const handleSpeak = (e: React.MouseEvent, text: string) => {
+    e.stopPropagation();
+    speak(text);
   };
 
   if (filteredCards.length === 0) {
@@ -66,10 +74,31 @@ export function SlangFlashcards() {
           <div className="flashcard-inner">
             <div className="flashcard-front">
               <span className="term">{currentCard.term}</span>
+              {isSupported && (
+                <button
+                  className={`speak-btn ${isSpeaking ? 'speaking' : ''}`}
+                  onClick={(e) => handleSpeak(e, currentCard.term)}
+                  aria-label="Listen to pronunciation"
+                >
+                  <span className="speaker-icon">🔊</span>
+                </button>
+              )}
             </div>
             <div className="flashcard-back">
               <span className="meaning">{currentCard.meaning}</span>
-              <span className="example">"{currentCard.example}"</span>
+              <div className="example-section">
+                <span className="example-label">Example:</span>
+                <span className="example">"{currentCard.example}"</span>
+                {isSupported && (
+                  <button
+                    className={`speak-btn small ${isSpeaking ? 'speaking' : ''}`}
+                    onClick={(e) => handleSpeak(e, currentCard.example)}
+                    aria-label="Listen to example"
+                  >
+                    <span className="speaker-icon">🔊</span>
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
