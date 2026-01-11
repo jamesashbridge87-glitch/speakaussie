@@ -1,11 +1,20 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthProvider, AuthProvider } from './hooks/useAuth';
 import { AussieEnglishPractice } from './components/AussieEnglishPractice';
+import { SpeakFreePage } from './components/SpeakFreePage';
 
-function AppContent() {
+function AppRoutes() {
   return (
-    <div className="app">
-      <AussieEnglishPractice />
-    </div>
+    <Routes>
+      <Route path="/app" element={
+        <div className="app">
+          <AussieEnglishPractice />
+        </div>
+      } />
+      <Route path="/speak" element={<SpeakFreePage />} />
+      <Route path="/" element={<Navigate to="/app" replace />} />
+      <Route path="*" element={<Navigate to="/app" replace />} />
+    </Routes>
   );
 }
 
@@ -14,7 +23,9 @@ function App() {
 
   return (
     <AuthProvider value={auth}>
-      <AppContent />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </AuthProvider>
   );
 }
