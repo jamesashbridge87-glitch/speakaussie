@@ -20,7 +20,25 @@ interface SessionOptions {
   mode: PracticeMode;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Auto-detect production environment and use correct backend URL
+function getApiBaseUrl(): string {
+  // If explicitly set via environment variable, use that
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+
+  // Auto-detect production based on hostname
+  const hostname = window.location.hostname;
+
+  if (hostname === 'youraussieuncle.io' || hostname === 'www.youraussieuncle.io') {
+    return 'https://aussie-english-practice-production-ef99.up.railway.app';
+  }
+
+  // Default to localhost for development
+  return 'http://localhost:3001';
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Hook to manage Fish Audio conversations
