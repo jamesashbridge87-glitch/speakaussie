@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_API_URL: https://aussie-english-practice-production.up.railway.app/api
+          VITE_API_URL: https://aussie-english-practice-production-ef99.up.railway.app
 
       - name: Prepare deployment structure
         run: |
@@ -42,7 +42,7 @@ jobs:
           # Move built files to deploy directory
           mv ./dist/* ./deploy/
           # Add CNAME at root level
-          echo "youraussieuncle.com" > ./deploy/CNAME
+          echo "youraussieuncle.io" > ./deploy/CNAME
           # Copy index.html to 404.html for SPA routing support
           # GitHub Pages will serve 404.html for any unknown paths
           cp ./deploy/index.html ./deploy/404.html
