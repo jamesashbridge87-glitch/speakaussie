@@ -13,6 +13,7 @@ from loguru import logger
 
 from pipecat.audio.vad.silero import SileroVADAnalyzer
 from pipecat.audio.vad.vad_analyzer import VADParams
+from pipecat.processors.turn_detector.smart_turn import SmartTurnAnalyzer
 from pipecat.frames.frames import LLMRunFrame
 from pipecat.pipeline.pipeline import Pipeline
 from pipecat.pipeline.runner import PipelineRunner
@@ -82,6 +83,13 @@ async def create_bot(
         model="nova-2",
     )
 
+    # Smart Turn analyzer for better turn-taking detection
+    # Uses semantic understanding to know when user finished their thought
+    smart_turn = SmartTurnAnalyzer(
+        model_path="pipecat-ai/smart-turn-v3",  # Auto-downloads from HuggingFace
+        min_volume=0.5,
+    )
+
     tts = FishAudioTTSService(
         api_key=settings.fish_api_key,
         model=settings.fish_voice_id,
@@ -114,10 +122,12 @@ Additional guidelines:
     user_aggregator, assistant_aggregator = LLMContextAggregatorPair(context)
 
     # Build pipeline
+    # Smart Turn sits after STT to analyze transcribed text for end-of-turn
     pipeline = Pipeline(
         [
             transport.input(),
             stt,
+            smart_turn,
             user_aggregator,
             llm,
             tts,
