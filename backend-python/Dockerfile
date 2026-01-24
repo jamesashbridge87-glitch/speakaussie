@@ -30,9 +30,5 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Expose port (Railway will set PORT env var)
 EXPOSE 3001
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT:-3001}/health')" || exit 1
-
 # Start command - Railway sets PORT env var
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-3001}"]
