@@ -4,16 +4,21 @@ import './ScenarioSelector.css';
 
 interface ScenarioSelectorProps {
   onSelectScenario: (scenario: Scenario) => void;
+  onSelectCustom?: () => void;
   disabled?: boolean;
 }
 
-export function ScenarioSelector({ onSelectScenario, disabled = false }: ScenarioSelectorProps) {
+export function ScenarioSelector({ onSelectScenario, onSelectCustom, disabled = false }: ScenarioSelectorProps) {
   const [selectedCategory, setSelectedCategory] = useState<ScenarioCategory | null>(null);
 
   const sortedCategories = [...categories].sort((a, b) => a.order - b.order);
 
   const handleCategoryClick = (category: ScenarioCategory) => {
-    setSelectedCategory(category);
+    if (category === 'custom' && onSelectCustom) {
+      onSelectCustom();
+    } else {
+      setSelectedCategory(category);
+    }
   };
 
   const handleBack = () => {
@@ -42,18 +47,21 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
 
         <div className="category-grid">
           {sortedCategories.map((category) => {
+            const isCustom = category.id === 'custom';
             const scenarioCount = getScenariosByCategory(category.id).length;
             return (
               <button
                 key={category.id}
-                className="category-card"
+                className={`category-card ${isCustom ? 'custom-category' : ''}`}
                 onClick={() => handleCategoryClick(category.id)}
                 disabled={disabled}
               >
                 <span className="category-icon">{category.icon}</span>
                 <span className="category-title">{category.title}</span>
                 <span className="category-description">{category.description}</span>
-                <span className="category-count">{scenarioCount} scenario{scenarioCount !== 1 ? 's' : ''}</span>
+                <span className="category-count">
+                  {isCustom ? 'Your job details' : `${scenarioCount} scenario${scenarioCount !== 1 ? 's' : ''}`}
+                </span>
               </button>
             );
           })}

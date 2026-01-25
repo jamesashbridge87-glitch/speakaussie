@@ -8,6 +8,7 @@ import { useSubscription } from '../hooks/useSubscription';
 import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
 import { ScenarioSelector } from './ScenarioSelector';
 import { ScenarioIntro } from './ScenarioIntro';
+import CustomScenarioForm from './CustomScenarioForm';
 import { ProgressDashboard } from './ProgressDashboard';
 import { AudioVisualizer } from './AudioVisualizer';
 import { AuthModal } from './AuthModal';
@@ -15,7 +16,7 @@ import { UserMenu } from './UserMenu';
 import { UsageBadge } from './UsageBadge';
 import { SubscriptionPlans } from './SubscriptionPlans';
 import { SessionTimer } from './SessionTimer';
-import { Scenario, getCategoryInfo } from '../data/scenarios';
+import { Scenario, getCategoryInfo, CustomScenarioInput, createCustomScenario } from '../data/scenarios';
 import './AussieEnglishPractice.css';
 
 interface Message {
@@ -24,7 +25,7 @@ interface Message {
   timestamp: Date;
 }
 
-type ViewState = 'selector' | 'intro' | 'session';
+type ViewState = 'selector' | 'intro' | 'session' | 'custom-form';
 
 export function AussieEnglishPractice() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -141,6 +142,17 @@ export function AussieEnglishPractice() {
     setSelectedScenario(scenario);
     setViewState('intro');
     setError(null);
+  };
+
+  const handleSelectCustom = () => {
+    setViewState('custom-form');
+    setError(null);
+  };
+
+  const handleCustomFormSubmit = (input: CustomScenarioInput) => {
+    const customScenario = createCustomScenario(input);
+    setSelectedScenario(customScenario);
+    setViewState('intro');
   };
 
   const handleBackToSelector = () => {
@@ -352,8 +364,18 @@ export function AussieEnglishPractice() {
             </div>
           )}
 
-          <ScenarioSelector onSelectScenario={handleSelectScenario} />
+          <ScenarioSelector
+            onSelectScenario={handleSelectScenario}
+            onSelectCustom={handleSelectCustom}
+          />
         </div>
+      )}
+
+      {viewState === 'custom-form' && (
+        <CustomScenarioForm
+          onSubmit={handleCustomFormSubmit}
+          onBack={handleBackToSelector}
+        />
       )}
 
       {viewState === 'intro' && selectedScenario && (

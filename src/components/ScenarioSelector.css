@@ -188,6 +188,17 @@
   color: var(--text-secondary, #666);
 }
 
+/* Custom Category Card */
+.category-card.custom-category {
+  border-style: dashed;
+  background: #fafbfc;
+}
+
+.category-card.custom-category:hover:not(:disabled) {
+  border-color: var(--primary-color, #2563eb);
+  background: white;
+}
+
 /* Mobile Responsive */
 @media (max-width: 640px) {
   .category-grid {
