@@ -31,7 +31,7 @@ function getApiBaseUrl(): string {
   const hostname = window.location.hostname;
 
   if (hostname === 'youraussieuncle.io' || hostname === 'www.youraussieuncle.io' ||
-      hostname === 'app.youraussieuncle.com') {
+      hostname === 'app.youraussieuncle.com.au') {
     return 'https://aussie-english-practice-production-ef99.up.railway.app';
   }
 
