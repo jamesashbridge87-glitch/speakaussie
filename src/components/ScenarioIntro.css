@@ -1,0 +1,223 @@
+.scenario-intro {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: var(--primary-color, #2563eb);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+/* Header */
+.intro-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.intro-icon {
+  font-size: 3rem;
+}
+
+.intro-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.intro-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.difficulty-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.duration-tag {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+}
+
+/* Sections */
+.intro-section {
+  margin-bottom: 1.5rem;
+}
+
+.intro-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a2e);
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.intro-section p {
+  margin: 0;
+  color: var(--text-secondary, #444);
+  line-height: 1.6;
+}
+
+/* Roles */
+.intro-roles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.role-box {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.role-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #888);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.role-value {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a2e);
+}
+
+/* Goals */
+.goals-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.goals-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary, #444);
+  line-height: 1.5;
+}
+
+.goals-list li::marker {
+  color: var(--primary-color, #2563eb);
+}
+
+/* Vocab */
+.vocab-section {
+  background: #f0f9ff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #bae6fd;
+}
+
+.vocab-section h3 {
+  color: #0369a1;
+}
+
+.vocab-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.vocab-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.vocab-term {
+  font-weight: 600;
+  color: #0369a1;
+  font-size: 0.95rem;
+}
+
+.vocab-meaning {
+  color: var(--text-secondary, #444);
+  font-size: 0.9rem;
+}
+
+.vocab-example {
+  color: var(--text-tertiary, #888);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* Cultural Tip */
+.tip-section {
+  background: #fefce8;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #fde047;
+}
+
+.tip-section h3 {
+  color: #a16207;
+}
+
+.cultural-tip {
+  color: #78350f;
+  font-size: 0.95rem;
+}
+
+/* Start Button */
+.start-scenario-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-color, #2563eb), #1d4ed8);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.start-scenario-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.start-scenario-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .intro-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro-meta {
+    justify-content: center;
+  }
+
+  .intro-roles {
+    grid-template-columns: 1fr;
+  }
+}
