@@ -30,7 +30,8 @@ function getApiBaseUrl(): string {
   // Auto-detect production based on hostname
   const hostname = window.location.hostname;
 
-  if (hostname === 'youraussieuncle.io' || hostname === 'www.youraussieuncle.io') {
+  if (hostname === 'youraussieuncle.io' || hostname === 'www.youraussieuncle.io' ||
+      hostname === 'app.youraussieuncle.com') {
     return 'https://aussie-english-practice-production-ef99.up.railway.app';
   }
 

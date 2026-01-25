@@ -27,6 +27,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'https://youraussieuncle.io',
   'https://www.youraussieuncle.io',
+  'https://app.youraussieuncle.com',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 

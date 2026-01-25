@@ -26,6 +26,7 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "https://youraussieuncle.io",
         "https://www.youraussieuncle.io",
+        "https://app.youraussieuncle.com",
     ]
 
     # Stripe
