@@ -1,7 +1,8 @@
 """
 SpeakAussie API - FastAPI Backend
 
-Real-time Australian English practice with voice AI.
+Authentication and subscription management for Australian English practice app.
+Voice AI handled directly via ElevenLabs.
 """
 
 from contextlib import asynccontextmanager

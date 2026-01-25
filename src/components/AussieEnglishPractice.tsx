@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useDailyConversation, PracticeMode } from '../hooks/useDailyConversation';
+import { useElevenLabsConversation, PracticeMode } from '../hooks/useElevenLabsConversation';
 import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
@@ -75,9 +75,9 @@ export function AussieEnglishPractice() {
     clearPronunciationData,
   } = usePronunciationScoring();
 
-  const conversation = useDailyConversation({
+  const conversation = useElevenLabsConversation({
     onConnect: () => {
-      console.log('Connected to Daily voice room');
+      console.log('Connected to ElevenLabs conversation');
       setError(null);
     },
     onDisconnect: () => {
