@@ -28,20 +28,6 @@ class Settings(BaseSettings):
         "https://www.youraussieuncle.io",
     ]
 
-    # Fish Audio
-    fish_api_key: str = ""
-    fish_voice_id: str = ""
-
-    # Anthropic (Claude)
-    anthropic_api_key: str = ""
-
-    # Deepgram (STT)
-    deepgram_api_key: str = ""
-
-    # Daily (WebRTC)
-    daily_api_key: str = ""
-    daily_api_url: str = "https://api.daily.co/v1"
-
     # Stripe
     stripe_secret_key: str = ""
     stripe_webhook_secret: str = ""
