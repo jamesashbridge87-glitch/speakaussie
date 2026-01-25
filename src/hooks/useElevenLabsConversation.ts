@@ -1,8 +1,6 @@
 import { useConversation } from '@elevenlabs/react';
 import { useCallback } from 'react';
-import { modePrompts } from '../components/PracticeModeSelector';
-
-export type PracticeMode = 'everyday' | 'slang' | 'workplace';
+import { Scenario } from '../data/scenarios';
 
 export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -19,15 +17,8 @@ interface ConversationOptions {
 }
 
 interface SessionOptions {
-  mode: PracticeMode;
+  scenario: Scenario;
 }
-
-// First messages for each mode
-const modeFirstMessages: Record<PracticeMode, string> = {
-  everyday: "G'day! Ready to practice some everyday Aussie English? What would you like to chat about today?",
-  slang: "G'day mate! Ready to learn some fair dinkum Aussie slang? No worries, I'll help you sound like a true blue Aussie in no time!",
-  workplace: "Good morning! Ready to practice professional Australian English for the workplace? Let's make sure you're prepared for your Aussie work environment.",
-};
 
 // Your ElevenLabs Agent ID
 const AGENT_ID = 'g50Lc7IzLlbPiRpgNXQJ';
@@ -70,18 +61,20 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
     elevenLabsStatus === 'connecting' ? 'connecting' : 'disconnected';
 
   /**
-   * Start a new conversation session
+   * Start a new conversation session with a scenario
    */
   const startSession = useCallback(async (sessionOptions: SessionOptions) => {
     try {
+      const { scenario } = sessionOptions;
+
       await conversation.startSession({
         agentId: AGENT_ID,
         overrides: {
           agent: {
             prompt: {
-              prompt: modePrompts[sessionOptions.mode],
+              prompt: scenario.prompt,
             },
-            firstMessage: modeFirstMessages[sessionOptions.mode],
+            firstMessage: scenario.firstMessage,
           },
         },
       });
@@ -144,7 +137,6 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
 
   const toggleMute = useCallback(() => {
     // ElevenLabs SDK may not expose mute control directly
-    // This is a placeholder - check ElevenLabs docs for actual implementation
     console.warn('Mute toggle not directly supported - ElevenLabs handles audio automatically');
   }, []);
 

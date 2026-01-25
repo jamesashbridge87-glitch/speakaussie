@@ -1,12 +1,13 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useElevenLabsConversation, PracticeMode } from '../hooks/useElevenLabsConversation';
+import { useElevenLabsConversation } from '../hooks/useElevenLabsConversation';
 import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useAuth } from '../hooks/useAuth';
 import { useSubscription } from '../hooks/useSubscription';
 import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
-import { PracticeModeSelector } from './PracticeModeSelector';
+import { ScenarioSelector } from './ScenarioSelector';
+import { ScenarioIntro } from './ScenarioIntro';
 import { ProgressDashboard } from './ProgressDashboard';
 import { AudioVisualizer } from './AudioVisualizer';
 import { AuthModal } from './AuthModal';
@@ -14,6 +15,7 @@ import { UserMenu } from './UserMenu';
 import { UsageBadge } from './UsageBadge';
 import { SubscriptionPlans } from './SubscriptionPlans';
 import { SessionTimer } from './SessionTimer';
+import { Scenario, getCategoryInfo } from '../data/scenarios';
 import './AussieEnglishPractice.css';
 
 interface Message {
@@ -22,15 +24,18 @@ interface Message {
   timestamp: Date;
 }
 
+type ViewState = 'selector' | 'intro' | 'session';
+
 export function AussieEnglishPractice() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isSessionActive, setIsSessionActive] = useState(false);
+  const [viewState, setViewState] = useState<ViewState>('selector');
+  const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedMode, setSelectedMode] = useState<PracticeMode>('everyday');
   const [showProgress, setShowProgress] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const [sessionRemainingMinutes, setSessionRemainingMinutes] = useState(0);
+  const [isStarting, setIsStarting] = useState(false);
   const backendSessionId = useRef<string | null>(null);
   const anonymousSessionStart = useRef<number | null>(null);
 
@@ -82,7 +87,8 @@ export function AussieEnglishPractice() {
     },
     onDisconnect: () => {
       console.log('Disconnected from conversation');
-      setIsSessionActive(false);
+      setViewState('selector');
+      setSelectedScenario(null);
     },
     onMessage: (message) => {
       if (message.source === 'user' && message.message) {
@@ -101,6 +107,7 @@ export function AussieEnglishPractice() {
     onError: (error) => {
       console.error('Conversation error:', error);
       setError('Connection error. Please try again.');
+      setIsStarting(false);
     },
   });
 
@@ -130,10 +137,22 @@ export function AussieEnglishPractice() {
     }
   };
 
+  const handleSelectScenario = (scenario: Scenario) => {
+    setSelectedScenario(scenario);
+    setViewState('intro');
+    setError(null);
+  };
+
+  const handleBackToSelector = () => {
+    setSelectedScenario(null);
+    setViewState('selector');
+  };
+
   const startSession = async () => {
+    if (!selectedScenario) return;
+
     // Check usage limits based on authentication status
     if (isAuthenticated) {
-      // Logged-in user: check backend usage limits
       const canStart = await checkCanStartSession();
       if (!canStart.allowed) {
         setError(canStart.message || 'Cannot start session');
@@ -142,7 +161,6 @@ export function AussieEnglishPractice() {
       }
       setSessionRemainingMinutes(canStart.remaining || 0);
     } else {
-      // Anonymous user: check localStorage usage limits
       const anonCheck = canStartAnonSession();
       if (!anonCheck.allowed) {
         setError(anonCheck.message || 'Cannot start session');
@@ -157,24 +175,27 @@ export function AussieEnglishPractice() {
     if (!hasPermission) return;
 
     try {
+      setIsStarting(true);
       setError(null);
       setMessages([]);
 
       // Start backend session for tracking (only for logged-in users)
       if (isAuthenticated) {
-        const sessionId = await startBackendSession(selectedMode);
+        const sessionId = await startBackendSession(selectedScenario.category);
         backendSessionId.current = sessionId;
       }
 
       await conversation.startSession({
-        mode: selectedMode,
+        scenario: selectedScenario,
       });
 
-      startTracking(selectedMode);
-      setIsSessionActive(true);
+      startTracking(selectedScenario.category as 'everyday' | 'slang' | 'workplace');
+      setViewState('session');
+      setIsStarting(false);
     } catch (err) {
       console.error('Failed to start session:', err);
       setError('Failed to start practice session. Please try again.');
+      setIsStarting(false);
     }
   };
 
@@ -183,8 +204,8 @@ export function AussieEnglishPractice() {
       await conversation.endSession();
 
       // Finalize pronunciation scores if any
-      if (currentSession) {
-        finalizeSessionScores(currentSession.id, selectedMode);
+      if (currentSession && selectedScenario) {
+        finalizeSessionScores(currentSession.id, selectedScenario.category as 'everyday' | 'slang' | 'workplace');
       }
 
       // Record usage based on authentication status
@@ -197,15 +218,14 @@ export function AussieEnglishPractice() {
         backendSessionId.current = null;
         refreshUsage();
       } else if (anonymousSessionStart.current) {
-        // Track anonymous usage in localStorage
         endAnonSessionTracking(anonymousSessionStart.current);
         anonymousSessionStart.current = null;
-        // Show plans after anonymous session ends
         setShowPlans(true);
       }
 
       endTracking(feedback);
-      setIsSessionActive(false);
+      setViewState('selector');
+      setSelectedScenario(null);
     } catch (err) {
       console.error('Failed to end session:', err);
     }
@@ -217,7 +237,6 @@ export function AussieEnglishPractice() {
   };
 
   const handleTimeUp = useCallback(() => {
-    // Auto-end session when time runs out
     endSession();
   }, []);
 
@@ -253,6 +272,8 @@ export function AussieEnglishPractice() {
     );
   }
 
+  const categoryInfo = selectedScenario ? getCategoryInfo(selectedScenario.category) : null;
+
   return (
     <div className="aussie-practice-container">
       <header className="practice-header">
@@ -274,7 +295,7 @@ export function AussieEnglishPractice() {
             )}
           </div>
         </div>
-        <p>Practice your Australian English with a native speaker</p>
+        <p>Master Australian workplace English</p>
         <button
           className="toggle-progress-btn"
           onClick={() => setShowProgress(!showProgress)}
@@ -315,11 +336,11 @@ export function AussieEnglishPractice() {
         </div>
       )}
 
-      {!isSessionActive ? (
+      {viewState === 'selector' && (
         <div className="start-section">
           <div className="instructions">
             <h2>G'day, mate!</h2>
-            <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation with Your Aussie Uncle!</p>
+            <p>Choose a scenario to practice your Australian workplace English. From job interviews to Friday drinks - we've got you covered!</p>
           </div>
 
           {isAuthenticated && usage ? (
@@ -331,33 +352,35 @@ export function AussieEnglishPractice() {
             </div>
           )}
 
-          <PracticeModeSelector
-            selectedMode={selectedMode}
-            onSelectMode={setSelectedMode}
-          />
-
-          <button
-            className="start-button pulse-animation"
-            onClick={startSession}
-          >
-            Start Practising Now
-          </button>
-          <p className="button-subtitle">Chat with Your Aussie Uncle</p>
+          <ScenarioSelector onSelectScenario={handleSelectScenario} />
         </div>
-      ) : (
+      )}
+
+      {viewState === 'intro' && selectedScenario && (
+        <ScenarioIntro
+          scenario={selectedScenario}
+          onStart={startSession}
+          onBack={handleBackToSelector}
+          isLoading={isStarting}
+        />
+      )}
+
+      {viewState === 'session' && selectedScenario && (
         <div className="session-section">
           {/* Session Timer */}
           <SessionTimer
             remainingMinutes={sessionRemainingMinutes}
-            isActive={isSessionActive}
+            isActive={viewState === 'session'}
             onTimeUp={handleTimeUp}
             warningThresholdSeconds={10}
           />
 
           <div className="session-mode-badge">
-            {selectedMode === 'everyday' && 'Everyday English'}
-            {selectedMode === 'slang' && 'Aussie Slang'}
-            {selectedMode === 'workplace' && 'Workplace English'}
+            <span className="scenario-badge-icon">{selectedScenario.icon}</span>
+            <span>{selectedScenario.title}</span>
+            {categoryInfo && (
+              <span className="category-badge">{categoryInfo.title}</span>
+            )}
           </div>
 
           {/* Audio Visualizer */}
@@ -385,13 +408,13 @@ export function AussieEnglishPractice() {
           <div className="conversation-display">
             {messages.length === 0 ? (
               <div className="empty-state">
-                Just start speaking - Your Aussie Uncle is listening!
+                Just start speaking - the conversation will begin!
               </div>
             ) : (
               messages.map((msg, index) => (
                 <div key={index} className={`message ${msg.role}`}>
                   <span className="message-role">
-                    {msg.role === 'user' ? 'You' : 'Teacher'}
+                    {msg.role === 'user' ? 'You' : selectedScenario.theirRole}
                   </span>
                   <p className="message-content">{msg.content}</p>
                 </div>
@@ -399,11 +422,11 @@ export function AussieEnglishPractice() {
             )}
           </div>
 
-          {/* Voice controls - Real-time mode with automatic turn-taking */}
+          {/* Voice controls */}
           <div className="voice-input-section">
             <div className="real-time-indicator">
               {isSpeaking ? (
-                <span className="speaking-indicator">Your Aussie Uncle is speaking...</span>
+                <span className="speaking-indicator">{selectedScenario.theirRole} is speaking...</span>
               ) : isListening ? (
                 <span className="listening-indicator">Listening to you...</span>
               ) : (
