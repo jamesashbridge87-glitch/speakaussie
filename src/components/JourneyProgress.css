@@ -1,0 +1,466 @@
+/* Journey Progress Component Styles */
+
+.journey-progress {
+  background: linear-gradient(135deg, #faf5ff 0%, #f0fdf4 100%);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.journey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.current-phase-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phase-icon {
+  font-size: 2.5rem;
+}
+
+.phase-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.phase-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.phase-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.new-phase-celebration {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.phase-description {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+/* Overall Progress Bar */
+.overall-progress {
+  margin-bottom: 20px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.progress-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.progress-track {
+  height: 12px;
+  background: white;
+  border-radius: 6px;
+  overflow: visible;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+  border-radius: 6px;
+  transition: width 0.5s ease-out;
+  position: relative;
+}
+
+.phase-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.phase-marker {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  transform: translateX(-50%);
+}
+
+.progress-phases {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 0 4px;
+}
+
+.progress-phase-label {
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.progress-phase-label.active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Next Phase Countdown */
+.next-phase-countdown {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.countdown-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #8b5cf6;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Weekly Goal */
+.weekly-goal {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid #10b981;
+}
+
+.goal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.goal-icon {
+  font-size: 1.1rem;
+}
+
+.goal-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.goal-text {
+  margin: 0;
+  color: #1e293b;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Recommendation */
+.recommendation {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-left: 4px solid #3b82f6;
+}
+
+.recommendation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.recommendation-icon {
+  font-size: 1.1rem;
+}
+
+.recommendation-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.recommendation-text {
+  margin: 0;
+  color: #1e293b;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Phase Tips */
+.phase-tips {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.phase-tips h4 {
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.phase-tips ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.phase-tips li {
+  color: #4b5563;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.phase-tips li:last-child {
+  margin-bottom: 0;
+}
+
+/* Journey Timeline */
+.journey-timeline {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.journey-timeline h4 {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  z-index: 1;
+  background: #f1f5f9;
+  border: 2px solid #e2e8f0;
+}
+
+.timeline-item.completed .timeline-marker {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+  font-size: 1rem;
+}
+
+.timeline-item.current .timeline-marker {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.timeline-connector {
+  position: absolute;
+  left: 19px;
+  top: 44px;
+  width: 2px;
+  height: calc(100% - 44px);
+  background: #e2e8f0;
+}
+
+.timeline-connector.completed {
+  background: #10b981;
+}
+
+.timeline-content {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-phase-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.timeline-weeks {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.timeline-description {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.timeline-item.upcoming .timeline-description {
+  opacity: 0.7;
+}
+
+.timeline-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.timeline-sessions {
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.timeline-current-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Journey Compact */
+.journey-compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+}
+
+.journey-compact:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.journey-compact-icon {
+  font-size: 1.5rem;
+}
+
+.journey-compact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.journey-compact-phase {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.journey-compact-day {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.journey-compact-progress {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.journey-compact-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.journey-compact-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .journey-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

@@ -1,7 +1,7 @@
 import { db } from '../db/database.js';
 import { v4 as uuidv4 } from 'uuid';
 
-export type PlanType = 'free' | 'basic' | 'standard' | 'premium';
+export type PlanType = 'free' | 'starter' | 'professional' | 'executive';
 export type SubscriptionStatus = 'active' | 'canceled' | 'past_due' | 'trialing';
 
 export interface Subscription {

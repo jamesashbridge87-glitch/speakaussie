@@ -1,0 +1,321 @@
+/* Post Session Feedback Modal */
+.post-session-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.post-session-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  overflow: hidden;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Feedback Steps */
+.feedback-step {
+  padding: 32px;
+  text-align: center;
+}
+
+/* Feeling Step */
+.feeling-step .step-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.feeling-step h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.scenario-name {
+  margin: 0 0 24px 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.feeling-question {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.feeling-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.feeling-btn {
+  flex: 1;
+  max-width: 120px;
+  padding: 20px 16px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.feeling-btn:hover {
+  transform: translateY(-2px);
+}
+
+.feeling-btn.great:hover {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.feeling-btn.okay:hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.feeling-btn.tough:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.feeling-emoji {
+  font-size: 2rem;
+}
+
+.feeling-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.feeling-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Encouragement Step */
+.encouragement-step {
+  padding: 40px 32px;
+}
+
+.encouragement-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: iconPop 0.4s ease-out;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.encouragement-message {
+  font-size: 1.2rem;
+  color: #1e293b;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  font-weight: 500;
+}
+
+.tip-box {
+  background: #fef3c7;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.tip-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #92400e;
+  line-height: 1.5;
+}
+
+.continue-btn {
+  padding: 14px 40px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.continue-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Next Step */
+.next-step h2 {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.next-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.next-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+
+.next-option:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.next-option .option-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.next-option .option-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.next-option .option-title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.next-option .option-desc {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.next-option.recommended {
+  border-color: #fda400;
+  background: #fffbeb;
+}
+
+.next-option.recommended:hover {
+  border-color: #e59400;
+  background: #fef3c7;
+}
+
+.recommended-badge {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  background: #fda400;
+  color: #1e293b;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .post-session-modal {
+    border-radius: 16px;
+  }
+
+  .feedback-step {
+    padding: 24px;
+  }
+
+  .feeling-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .feeling-btn {
+    max-width: none;
+    flex-direction: row;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .feeling-emoji {
+    font-size: 1.5rem;
+  }
+
+  .feeling-label {
+    flex: 1;
+    text-align: left;
+  }
+
+  .feeling-desc {
+    display: none;
+  }
+
+  .encouragement-step {
+    padding: 32px 24px;
+  }
+
+  .encouragement-message {
+    font-size: 1.1rem;
+  }
+
+  .tip-box {
+    padding: 14px 16px;
+  }
+
+  .tip-text {
+    font-size: 0.9rem;
+  }
+}

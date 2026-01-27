@@ -18,9 +18,9 @@ export function UsageBadge({ onUpgradeClick }: UsageBadgeProps) {
 
   const getPlanLabel = (plan: string) => {
     switch (plan) {
-      case 'basic': return 'Basic';
-      case 'standard': return 'Standard';
-      case 'premium': return 'Premium';
+      case 'starter': return 'Starter';
+      case 'professional': return 'Professional';
+      case 'executive': return 'Executive';
       default: return 'Free';
     }
   };

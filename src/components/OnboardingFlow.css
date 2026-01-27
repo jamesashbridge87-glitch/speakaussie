@@ -1,0 +1,320 @@
+/* Onboarding Flow Styles */
+
+.onboarding-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.onboarding-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress bar */
+.onboarding-progress {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.onboarding-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  transition: width 0.3s ease;
+}
+
+/* Step container */
+.onboarding-step {
+  padding: 32px;
+}
+
+.onboarding-step h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+  text-align: center;
+}
+
+.step-description {
+  color: #64748b;
+  text-align: center;
+  margin: 0 0 24px 0;
+  font-size: 0.95rem;
+}
+
+/* Welcome step */
+.welcome-step {
+  text-align: center;
+}
+
+.welcome-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: #475569;
+  margin: 0 0 12px 0;
+}
+
+.welcome-description {
+  color: #64748b;
+  margin: 0 0 24px 0;
+  font-size: 0.95rem;
+}
+
+.name-input-group {
+  margin-bottom: 24px;
+}
+
+.name-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.name-input-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.name-input-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.name-input-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* Options grid */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.option-card:hover {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+}
+
+.option-card.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.option-icon {
+  font-size: 2rem;
+}
+
+.option-label {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.option-description {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Ready step */
+.ready-step {
+  text-align: center;
+}
+
+.ready-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.encouragement-message {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+.encouragement-message p {
+  margin: 0;
+  color: #0f766e;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.ready-summary {
+  text-align: left;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.ready-summary h3 {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ready-summary ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ready-summary li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.ready-summary li:last-child {
+  border-bottom: none;
+}
+
+.summary-icon {
+  font-size: 1.25rem;
+}
+
+/* Action buttons */
+.onboarding-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.onboarding-btn {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.onboarding-btn.primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.onboarding-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.onboarding-btn.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.onboarding-btn.primary.large {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.onboarding-btn.primary.large:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.onboarding-btn.secondary {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.onboarding-btn.secondary:hover {
+  background: #e2e8f0;
+}
+
+.onboarding-btn.text {
+  background: none;
+  color: #64748b;
+  padding: 14px 16px;
+}
+
+.onboarding-btn.text:hover {
+  color: #475569;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .onboarding-modal {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .onboarding-step {
+    padding: 24px 20px;
+  }
+
+  .onboarding-step h2 {
+    font-size: 1.25rem;
+  }
+
+  .onboarding-actions {
+    flex-direction: column-reverse;
+  }
+
+  .onboarding-btn {
+    width: 100%;
+  }
+}

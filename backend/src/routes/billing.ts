@@ -9,7 +9,7 @@ const router = Router();
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 const checkoutSchema = z.object({
-  plan: z.enum(['basic', 'standard', 'premium']),
+  plan: z.enum(['starter', 'professional', 'executive']),
 });
 
 // POST /billing/checkout - Create checkout session

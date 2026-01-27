@@ -1,0 +1,348 @@
+/* NPS Survey Overlay */
+.nps-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2100;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  animation: npsOverlayIn 0.3s ease-out;
+}
+
+.nps-overlay.leaving {
+  animation: npsOverlayOut 0.3s ease-in forwards;
+}
+
+@keyframes npsOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes npsOverlayOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* NPS Modal */
+.nps-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  animation: npsModalIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+.nps-overlay.leaving .nps-modal {
+  animation: npsModalOut 0.3s ease-in forwards;
+}
+
+@keyframes npsModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes npsModalOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+}
+
+.nps-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f1f5f9;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  z-index: 1;
+}
+
+.nps-close:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+/* NPS Content */
+.nps-content {
+  padding: 36px 32px;
+}
+
+.nps-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.nps-emoji {
+  font-size: 2rem;
+}
+
+.nps-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.nps-question {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 28px 0;
+}
+
+/* NPS Scale */
+.nps-scale {
+  margin-bottom: 8px;
+}
+
+.nps-scores {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.nps-score-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.nps-score-btn:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.nps-score-btn.selected {
+  border-color: #3b82f6;
+  background: #3b82f6;
+  color: white;
+}
+
+/* Color coding for scores */
+.nps-score-btn:nth-child(-n+7):hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.nps-score-btn:nth-child(-n+7).selected {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: white;
+}
+
+.nps-score-btn:nth-child(n+8):nth-child(-n+9):hover {
+  border-color: #84cc16;
+  background: #f7fee7;
+  color: #65a30d;
+}
+
+.nps-score-btn:nth-child(n+8):nth-child(-n+9).selected {
+  background: #84cc16;
+  border-color: #84cc16;
+  color: white;
+}
+
+.nps-score-btn:nth-child(n+10):hover {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.nps-score-btn:nth-child(n+10).selected {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+
+.nps-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  padding: 0 4px;
+}
+
+/* Feedback Step */
+.nps-score-badge {
+  display: inline-block;
+  background: #f1f5f9;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.nps-score-badge strong {
+  color: #1e293b;
+}
+
+.nps-feedback-prompt {
+  font-size: 1.15rem;
+  color: #1e293b;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+}
+
+.nps-feedback-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s;
+  margin-bottom: 20px;
+}
+
+.nps-feedback-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.nps-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.nps-skip {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nps-skip:hover {
+  color: #334155;
+}
+
+.nps-submit {
+  padding: 12px 28px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nps-submit:hover {
+  background: #2563eb;
+}
+
+/* Thanks Step */
+.nps-thanks {
+  text-align: center;
+  padding: 48px 32px;
+}
+
+.thanks-emoji {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.nps-thanks h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.nps-thanks p {
+  margin: 0 0 28px 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.nps-done {
+  padding: 12px 32px;
+  background: #1e293b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nps-done:hover {
+  background: #334155;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 560px) {
+  .nps-content {
+    padding: 28px 20px;
+  }
+
+  .nps-scores {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nps-score-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .nps-question {
+    font-size: 1rem;
+  }
+
+  .nps-feedback-prompt {
+    font-size: 1.05rem;
+  }
+}

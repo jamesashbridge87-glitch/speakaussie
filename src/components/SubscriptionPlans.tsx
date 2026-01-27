@@ -13,7 +13,7 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSelectPlan = async (plan: 'basic' | 'standard' | 'premium') => {
+  const handleSelectPlan = async (plan: 'starter' | 'professional' | 'executive') => {
     if (!isAuthenticated) {
       onAuthRequired?.();
       return;
@@ -44,29 +44,29 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
 
   const planDetails = [
     {
-      id: 'basic',
-      name: 'Basic',
-      price: 25,
+      id: 'starter',
+      name: 'Starter',
+      price: 29,
       minutes: 5,
-      description: 'Great for casual learners',
-      features: ['5 minutes per day', 'All practice modes', 'Progress tracking', 'Pronunciation scoring'],
+      description: 'Start building confidence',
+      features: ['5 minutes per day', 'All scenarios', 'Slang library', 'Basic progress tracking'],
     },
     {
-      id: 'standard',
-      name: 'Standard',
+      id: 'professional',
+      name: 'Professional',
       price: 49,
-      minutes: 10,
+      minutes: 15,
       description: 'Most popular',
       popular: true,
-      features: ['10 minutes per day', 'All practice modes', 'Progress tracking', 'Pronunciation scoring', 'Priority support'],
+      features: ['15 minutes per day', 'All scenarios', 'Confidence score tracking', 'Session recordings', 'Priority support'],
     },
     {
-      id: 'premium',
-      name: 'Premium',
-      price: 79,
-      minutes: 15,
-      description: 'For serious learners',
-      features: ['15 minutes per day', 'All practice modes', 'Progress tracking', 'Pronunciation scoring', 'Priority support', 'Early access to new features'],
+      id: 'executive',
+      name: 'Executive',
+      price: 99,
+      minutes: 60,
+      description: 'For serious communicators',
+      features: ['Unlimited practice', 'All Professional features', 'Monthly group coaching call', 'Direct feedback on progress', 'Early access to new scenarios'],
     },
   ];
 
@@ -113,7 +113,7 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
               {plan.id !== 'free' && (
                 <button
                   className={`plan-button ${isCurrentPlan ? 'current' : ''}`}
-                  onClick={() => handleSelectPlan(plan.id as 'basic' | 'standard' | 'premium')}
+                  onClick={() => handleSelectPlan(plan.id as 'starter' | 'professional' | 'executive')}
                   disabled={isDisabled || loadingPlan !== null}
                 >
                   {loadingPlan === plan.id

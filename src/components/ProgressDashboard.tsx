@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { ProgressStats, PracticeMode, SessionRecord } from '../hooks/useProgressTracking';
 import { UnlockedAchievement } from '../hooks/useAchievements';
+import { useConfidenceScore } from '../hooks/useConfidenceScore';
+import { useJourneyProgress } from '../hooks/useJourneyProgress';
 import { AchievementDisplay, AchievementToast, AchievementWithProgress } from './AchievementDisplay';
+import { ConfidenceScore, MilestoneDisplay } from './ConfidenceScore';
+import { JourneyProgressDisplay, JourneyTimeline } from './JourneyProgress';
 import { ExportMenu } from './ExportMenu';
 import { PronunciationStatsDisplay } from './PronunciationPractice';
 import './ProgressDashboard.css';
@@ -57,7 +61,7 @@ const modeLabels: Record<PracticeMode, string> = {
   workplace: 'Workplace',
 };
 
-type TabType = 'overview' | 'achievements' | 'pronunciation';
+type TabType = 'overview' | 'journey' | 'confidence' | 'achievements' | 'pronunciation';
 
 export function ProgressDashboard({
   stats,
@@ -73,6 +77,16 @@ export function ProgressDashboard({
 }: ProgressDashboardProps) {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const totalModeCount = stats.modeBreakdown.everyday + stats.modeBreakdown.slang + stats.modeBreakdown.workplace;
+
+  // Calculate confidence score
+  const confidenceScore = useConfidenceScore(
+    stats,
+    sessions,
+    pronunciationStats?.averageScore || 0
+  );
+
+  // Calculate journey progress
+  const journeyProgress = useJourneyProgress(sessions);
 
   return (
     <div className="progress-dashboard">
@@ -97,6 +111,7 @@ export function ProgressDashboard({
           </div>
         </div>
         <div className="header-right">
+          <ConfidenceScore data={confidenceScore} compact />
           <ExportMenu
             studentName={studentName}
             sessions={sessions}
@@ -114,6 +129,20 @@ export function ProgressDashboard({
           onClick={() => setActiveTab('overview')}
         >
           Overview
+        </button>
+        <button
+          className={`tab-btn ${activeTab === 'journey' ? 'active' : ''}`}
+          onClick={() => setActiveTab('journey')}
+        >
+          Journey
+          <span className="tab-badge">{journeyProgress.currentPhase.icon}</span>
+        </button>
+        <button
+          className={`tab-btn ${activeTab === 'confidence' ? 'active' : ''}`}
+          onClick={() => setActiveTab('confidence')}
+        >
+          Confidence
+          <span className="tab-badge highlight">{confidenceScore.overall}</span>
         </button>
         <button
           className={`tab-btn ${activeTab === 'achievements' ? 'active' : ''}`}
@@ -213,6 +242,25 @@ export function ProgressDashboard({
             </button>
           )}
         </>
+      )}
+
+      {/* Journey Tab */}
+      {activeTab === 'journey' && (
+        <div className="journey-tab">
+          <JourneyProgressDisplay progress={journeyProgress} />
+          <JourneyTimeline progress={journeyProgress} />
+        </div>
+      )}
+
+      {/* Confidence Tab */}
+      {activeTab === 'confidence' && (
+        <div className="confidence-tab">
+          <ConfidenceScore data={confidenceScore} />
+          <MilestoneDisplay
+            milestones={confidenceScore.milestones}
+            nextMilestone={confidenceScore.nextMilestone}
+          />
+        </div>
       )}
 
       {/* Achievements Tab */}

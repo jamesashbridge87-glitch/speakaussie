@@ -16,7 +16,8 @@ export type SlangCategory =
   | 'food'
   | 'actions'
   | 'descriptive'
-  | 'wildlife';
+  | 'wildlife'
+  | 'workplace';
 
 export type SlangDifficulty = 'beginner' | 'intermediate' | 'advanced';
 
@@ -30,6 +31,7 @@ export const categoryNames: Record<SlangCategory, string> = {
   actions: 'Actions',
   descriptive: 'Descriptive',
   wildlife: 'Wildlife',
+  workplace: 'Workplace',
 };
 
 export const difficultyNames: Record<SlangDifficulty, string> = {
@@ -165,6 +167,38 @@ export const slangData: SlangTerm[] = [
   { id: 'up-shit-creek', term: 'Up shit creek', meaning: 'In big trouble', example: "If we miss this deadline, we're up shit creek.", category: 'expressions', difficulty: 'intermediate' },
   { id: 'piece-of-piss', term: 'Piece of piss', meaning: 'Very easy', example: 'That exam was a piece of piss!', category: 'expressions', difficulty: 'intermediate' },
   { id: 'dogs-breakfast', term: "Dog's breakfast", meaning: 'A mess / Disaster', example: "This project has turned into a dog's breakfast.", category: 'expressions', difficulty: 'advanced' },
+
+  // Workplace Slang
+  { id: 'circle-back', term: 'Circle back', meaning: 'Return to discuss later', example: "Let's circle back on this after the meeting.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'take-offline', term: 'Take it offline', meaning: 'Discuss privately outside the meeting', example: "We should take this offline and chat one-on-one.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'park-that', term: 'Park that', meaning: 'Set aside for later discussion', example: "Let's park that idea for now and focus on priorities.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'loop-in', term: 'Loop in', meaning: 'Include someone in communications', example: 'Can you loop me in on that email chain?', category: 'workplace', difficulty: 'beginner' },
+  { id: 'touch-base', term: 'Touch base', meaning: 'Have a brief meeting or check-in', example: "Let's touch base tomorrow morning.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'jump-on-call', term: 'Jump on a call', meaning: 'Have a quick phone/video call', example: 'Can we jump on a call to discuss this?', category: 'workplace', difficulty: 'beginner' },
+  { id: 'ping', term: 'Ping', meaning: 'Send a quick message to', example: 'Just ping me when you need the files.', category: 'workplace', difficulty: 'beginner' },
+  { id: 'eod', term: 'EOD / End of day', meaning: 'By the end of the work day', example: "I'll have that to you by EOD.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'eow', term: 'EOW / End of week', meaning: 'By Friday', example: "Let's aim to wrap this up by EOW.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'bandwidth', term: 'Bandwidth', meaning: 'Capacity / Availability', example: "I don't have the bandwidth to take that on right now.", category: 'workplace', difficulty: 'intermediate' },
+  { id: 'deep-dive', term: 'Deep dive', meaning: 'Thorough analysis or investigation', example: "Let's do a deep dive into the data.", category: 'workplace', difficulty: 'intermediate' },
+  { id: 'ballpark', term: 'Ballpark', meaning: 'Rough estimate', example: 'What are we looking at, ballpark?', category: 'workplace', difficulty: 'beginner' },
+  { id: 'heads-up', term: 'Heads up', meaning: 'Advance warning or notification', example: 'Just a heads up, the deadline moved to Friday.', category: 'workplace', difficulty: 'beginner' },
+  { id: 'action-item', term: 'Action item', meaning: 'Task to complete', example: "I've got a few action items from that meeting.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'on-my-radar', term: 'On my radar', meaning: 'Aware of and tracking', example: "Yes, that's on my radar.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'low-hanging-fruit', term: 'Low-hanging fruit', meaning: 'Easy wins / Simple tasks', example: "Let's tackle the low-hanging fruit first.", category: 'workplace', difficulty: 'intermediate' },
+  { id: 'move-the-needle', term: 'Move the needle', meaning: 'Make a significant impact', example: 'Will this really move the needle on our targets?', category: 'workplace', difficulty: 'intermediate' },
+  { id: 'sync-up', term: 'Sync up', meaning: 'Align or coordinate', example: "Let's sync up on this before the presentation.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'asap', term: 'ASAP', meaning: 'As soon as possible', example: "I need that report ASAP.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'wfh', term: 'WFH / Working from home', meaning: 'Remote work', example: "I'm WFH tomorrow.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'pto', term: 'PTO / Leave', meaning: 'Paid time off / Annual leave', example: "I've got PTO next week.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'standup', term: 'Standup', meaning: 'Brief daily team meeting', example: "We'll cover that in tomorrow's standup.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'retro', term: 'Retro', meaning: 'Retrospective meeting to review', example: "Let's discuss this in the retro.", category: 'workplace', difficulty: 'intermediate' },
+  { id: 'on-the-same-page', term: 'On the same page', meaning: 'In agreement / Aligned', example: "Let's make sure we're all on the same page.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'get-across', term: 'Get across', meaning: 'Become familiar with / Understand', example: 'Can you get across this before the meeting?', category: 'workplace', difficulty: 'intermediate' },
+  { id: 'crack-on', term: 'Crack on', meaning: 'Get started / Continue working', example: "Right, let's crack on with the agenda.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'give-it-a-go', term: 'Give it a go', meaning: 'Try it / Attempt it', example: "Not sure it'll work but let's give it a go.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'knock-off', term: 'Knock off', meaning: 'Finish work for the day', example: "What time do you knock off today?", category: 'workplace', difficulty: 'beginner' },
+  { id: 'sort-out', term: 'Sort out', meaning: 'Resolve / Fix', example: "I'll sort that out this arvo.", category: 'workplace', difficulty: 'beginner' },
+  { id: 'follow-up', term: 'Follow up', meaning: 'Check on progress / Continue discussion', example: "I'll follow up with the client tomorrow.", category: 'workplace', difficulty: 'beginner' },
 ];
 
 export const categories = [...new Set(slangData.map((item) => item.category))] as SlangCategory[];

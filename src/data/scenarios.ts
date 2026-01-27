@@ -37,42 +37,42 @@ export const categories: CategoryInfo[] = [
   {
     id: 'interview',
     title: 'Getting the Job',
-    description: 'Nail your Australian job interview',
+    description: 'Interview with confidence',
     icon: '🎯',
     order: 1,
   },
   {
     id: 'first-weeks',
     title: 'First Weeks',
-    description: 'Start strong in your new role',
+    description: 'Fit in from day one',
     icon: '🚀',
     order: 2,
   },
   {
     id: 'day-to-day',
     title: 'Day-to-Day',
-    description: 'Everyday workplace interactions',
+    description: 'Everyday conversations made easy',
     icon: '💼',
     order: 3,
   },
   {
     id: 'meetings',
     title: 'Meetings',
-    description: 'Contribute confidently in meetings',
+    description: 'Speak up with confidence',
     icon: '📊',
     order: 4,
   },
   {
     id: 'growth',
-    title: 'Career Growth',
-    description: 'Advance in your role',
+    title: 'Speaking Up',
+    description: 'Be heard and understood',
     icon: '📈',
     order: 5,
   },
   {
     id: 'social',
     title: 'Work Social',
-    description: 'Connect with colleagues',
+    description: 'Connect and belong',
     icon: '🎉',
     order: 6,
   },
@@ -660,6 +660,249 @@ Include:
 
 If they don't drink alcohol, make it totally fine - someone probably isn't drinking either. Make them feel included in the social dynamic.`,
     firstMessage: "Hey, you made it! *raises glass* Good stuff. What are you drinking? First round's on Tom apparently - it's his birthday next week so he's shouting. *Tom waves from the bar* What'll you have?",
+  },
+];
+
+  // ============================================
+  // NEW SCENARIOS - PHASE 5
+  // ============================================
+
+  // DAY-TO-DAY: Joining a Video Call
+  {
+    id: 'joining-video-call',
+    category: 'day-to-day',
+    title: 'Joining a Video Call',
+    shortDescription: 'Navigate remote meeting etiquette',
+    setting: 'You\'re joining a video call with colleagues, some of whom you haven\'t met in person.',
+    yourRole: 'Team member',
+    theirRole: 'Meeting host and colleagues',
+    goals: [
+      'Join smoothly with a friendly greeting',
+      'Handle technical small talk naturally',
+      'Participate actively in remote discussions',
+      'Navigate the casual chat before the meeting starts',
+    ],
+    vocabPreview: [
+      { term: 'Can you hear me?', meaning: 'Standard video call check', example: 'G\'day everyone, can you hear me alright?' },
+      { term: 'You\'re on mute', meaning: 'Your microphone is off', example: 'Mate, I think you\'re on mute.' },
+      { term: 'Drop off', meaning: 'Disconnect from the call', example: 'Sorry, I dropped off for a sec there.' },
+      { term: 'Dodgy connection', meaning: 'Poor internet quality', example: 'Sorry, my connection\'s a bit dodgy today.' },
+    ],
+    culturalTip: 'Aussies often start video calls with casual chat - "How\'s everyone going?", comments about the weather, or jokes about working from home. It\'s normal to wait a minute or two for everyone to join before getting into business.',
+    difficulty: 'beginner',
+    durationMinutes: 5,
+    icon: '💻',
+    prompt: `You are hosting a team video call that the user is joining. Play multiple participants:
+
+1. MEETING HOST (Alex) - Friendly, waits for everyone, starts casual
+2. COLLEAGUE (Sam) - Joining from home, mentions WFH life
+3. COLLEAGUE (Jordan) - Has camera issues, jokes about it
+
+The flow:
+1. Greet them as they join - "Hey! There they are!"
+2. Have casual pre-meeting chat (1-2 mins)
+3. Check everyone can hear/see okay
+4. Someone might have tech issues - model how to handle it lightly
+5. Transition into meeting mode
+
+Communication style:
+- Very casual at the start
+- "How's everyone going?" type openers
+- Jokes about working from home, pets, weather
+- Supportive when there are tech issues
+
+Make remote meetings feel natural and friendly. If they're quiet, ask them a direct question. Model good video call etiquette - greeting people as they join, quick tech checks, and smooth transitions.`,
+    firstMessage: "*You join the video call. A few faces are already on screen.* Hey! There you are! How's it going? We're just waiting on a couple more people. Alex was just telling us about his weekend - apparently he finally fixed that leaky tap. *laughs* Sam, are you working from home today?",
+  },
+
+  // DAY-TO-DAY: Asking for Clarification
+  {
+    id: 'asking-clarification',
+    category: 'day-to-day',
+    title: 'Asking for Clarification',
+    shortDescription: 'When you don\'t understand something',
+    setting: 'A colleague has explained something using unfamiliar terms or Aussie slang, and you need to ask what they mean.',
+    yourRole: 'Team member',
+    theirRole: 'Colleague explaining something',
+    goals: [
+      'Ask for clarification without embarrassment',
+      'Use natural phrases for seeking clarity',
+      'Confirm your understanding',
+      'Learn new vocabulary in context',
+    ],
+    vocabPreview: [
+      { term: 'Sorry, what does X mean?', meaning: 'Direct clarification request', example: 'Sorry, what does "BAS" mean?' },
+      { term: 'Come again?', meaning: 'Please repeat that', example: 'Come again? I didn\'t catch that.' },
+      { term: 'Lost me there', meaning: 'I didn\'t understand', example: 'You\'ve lost me there - what\'s a "servo"?' },
+      { term: 'In plain English', meaning: 'Explain simply', example: 'Can you give that to me in plain English?' },
+    ],
+    culturalTip: 'Australians don\'t expect you to know all the slang or local terms. Asking "Sorry, what\'s that mean?" is totally normal and most people are happy to explain. It often leads to fun conversations about Australian expressions.',
+    difficulty: 'beginner',
+    durationMinutes: 5,
+    icon: '🤔',
+    prompt: `You are an Australian colleague who sometimes uses slang, acronyms, or local references without realizing others might not understand.
+
+Your style:
+- Friendly and natural
+- Use some Aussie slang and workplace terms
+- Very happy to explain when asked
+- Never make them feel bad for not knowing
+
+The conversation should include:
+1. Explain something using at least 2-3 terms they might not know
+2. When they ask for clarification, explain happily
+3. Maybe share the origin or a funny story about the term
+4. Continue the conversation naturally
+5. Use another unfamiliar term to give them practice
+
+Examples of terms you might use:
+- "The BAS is due" (Business Activity Statement - tax)
+- "Grab it from the servo" (service station/gas station)
+- "She'll be right" (it'll be fine)
+- "Having a sickie" (taking a sick day, sometimes not actually sick)
+- "The arvo" (afternoon)
+- "Flat out like a lizard drinking" (very busy)
+
+Be encouraging when they ask questions. Make it a positive learning moment.`,
+    firstMessage: "Hey, so quick heads up - the BAS is due next week so finance will be flat out. Also, the client from Wagga's coming in on Thursday arvo, so we need to have that presentation ready. Reckon you can handle the intro slides?",
+  },
+
+  // MEETINGS: Giving a Standup Update
+  {
+    id: 'standup-update',
+    category: 'meetings',
+    title: 'Standup Update',
+    shortDescription: 'Give a clear, concise daily update',
+    setting: 'Daily standup meeting where each person shares a quick update on their work.',
+    yourRole: 'Team member',
+    theirRole: 'Scrum master/team lead and colleagues',
+    goals: [
+      'Give a concise, structured update',
+      'Mention blockers clearly',
+      'Keep it brief (under 2 minutes)',
+      'Engage with others\' updates appropriately',
+    ],
+    vocabPreview: [
+      { term: 'Cracking on', meaning: 'Making progress / Continuing', example: 'I\'m cracking on with the dashboard.' },
+      { term: 'Blocker', meaning: 'Something preventing progress', example: 'One blocker - I need access to the API.' },
+      { term: 'Smashed it', meaning: 'Completed successfully', example: 'Smashed that bug fix yesterday.' },
+      { term: 'Pick it up', meaning: 'Start working on it', example: 'I\'ll pick that up this arvo.' },
+    ],
+    culturalTip: 'Australian standups are usually quick and informal. Don\'t over-explain. "Did X, doing Y, no blockers" is perfectly fine. If you have a blocker, mention it briefly - detailed discussions happen after standup.',
+    difficulty: 'beginner',
+    durationMinutes: 4,
+    icon: '📊',
+    prompt: `You are running a quick daily standup. You'll play the facilitator and occasionally other team members.
+
+Your style:
+- Keep it moving efficiently
+- React briefly to updates ("Nice", "Good stuff", "Let's chat after about that blocker")
+- Model good standup updates from other team members
+- Casual but focused
+
+The standup flow:
+1. Quick "Morning everyone, let's do a quick round"
+2. Maybe one other person gives their update first (keep it brief)
+3. Ask the user for their update
+4. React appropriately to their update
+5. If they have a blocker, offer to help or park it for after
+6. Wrap up quickly
+
+If their update is too long, gently model brevity. If it's too vague, ask a quick clarifying question. The whole standup should feel efficient but friendly.`,
+    firstMessage: "Morning everyone! Right, quick standup - let's keep it snappy, I know everyone's got heaps on. Sam, kick us off?... *Sam's voice* Yeah, finished the API integration yesterday, today I'm on testing, no blockers... Nice one Sam. *looks at user* How about you? What's on your plate?",
+  },
+
+  // SOCIAL: Work Christmas Party
+  {
+    id: 'christmas-party',
+    category: 'social',
+    title: 'Work Christmas Party',
+    shortDescription: 'Navigate the end-of-year celebration',
+    setting: 'Annual work Christmas party at a venue. Mix of people you know well and others you\'ve only met briefly.',
+    yourRole: 'Team member',
+    theirRole: 'Various colleagues and managers',
+    goals: [
+      'Make small talk with different people',
+      'Handle the more relaxed social atmosphere',
+      'Navigate conversations with senior people',
+      'Know appropriate topics and boundaries',
+    ],
+    vocabPreview: [
+      { term: 'Kris Kringle', meaning: 'Secret Santa gift exchange', example: 'Did you get anything good in Kris Kringle?' },
+      { term: 'Break up', meaning: 'End of year/term', example: 'When do you break up for Christmas?' },
+      { term: 'Heading away?', meaning: 'Going on holiday?', example: 'You heading away over Christmas?' },
+      { term: 'Back into it', meaning: 'Return to work', example: 'When are you back into it in January?' },
+    ],
+    culturalTip: 'Australian work Christmas parties are usually quite relaxed. Common topics: holiday plans, what you\'re doing for Christmas, whether you\'re traveling. Avoid controversial topics (politics, religion) and don\'t over-drink. It\'s still a work event!',
+    difficulty: 'intermediate',
+    durationMinutes: 7,
+    icon: '🎄',
+    prompt: `You are playing multiple people at a work Christmas party:
+
+1. DIRECT COLLEAGUE (Emma) - Friendly, excited about holidays
+2. SENIOR MANAGER (Michael) - Approachable but you don't know him well
+3. SOMEONE FROM ANOTHER TEAM (Priya) - Making small talk, asks about your role
+
+The setting:
+- Relaxed venue, food and drinks
+- Mix of standing and sitting conversations
+- Festive but still professional atmosphere
+
+Include:
+1. Casual chat about Christmas/holiday plans
+2. Someone asking about Kris Kringle gifts
+3. A brief, slightly awkward moment talking to a senior person (but make it go well)
+4. Questions about what they're doing over the break
+5. Maybe reference Australian Christmas (hot weather, beach, BBQ)
+
+Help them navigate the social dynamics. If they seem nervous about talking to the senior person, make it easier. Keep things festive and light.`,
+    firstMessage: "*You're at the Christmas party, drink in hand. A colleague approaches.* Hey! Great party, yeah? Have you tried those little pavlova things? So good. *gestures to the food table* So, big plans for Christmas? You heading anywhere nice?",
+  },
+
+  // SOCIAL: Friday Afternoon Wind-Down
+  {
+    id: 'friday-wind-down',
+    category: 'social',
+    title: 'Friday Wind-Down',
+    shortDescription: 'End-of-week casual chat',
+    setting: 'It\'s late Friday afternoon. Work is winding down and people are in a relaxed mood.',
+    yourRole: 'Team member',
+    theirRole: 'Colleagues winding down for the weekend',
+    goals: [
+      'Join casual end-of-week conversation',
+      'Share weekend plans naturally',
+      'Participate in light banter',
+      'Transition from work mode to social mode',
+    ],
+    vocabPreview: [
+      { term: 'Knock off early', meaning: 'Leave work before normal time', example: 'Might knock off early today.' },
+      { term: 'Big weekend?', meaning: 'Any exciting plans?', example: 'Big weekend planned?' },
+      { term: 'Not much, taking it easy', meaning: 'Relaxed weekend planned', example: 'Not much - just taking it easy.' },
+      { term: 'Recharge the batteries', meaning: 'Rest and recover', example: 'Need to recharge the batteries this weekend.' },
+    ],
+    culturalTip: 'Friday afternoons in Australian offices are usually pretty relaxed. It\'s common to chat about weekend plans, maybe have an early drink if the office does that, and generally wind down. Don\'t start big work discussions on Friday arvo!',
+    difficulty: 'beginner',
+    durationMinutes: 5,
+    icon: '🌅',
+    prompt: `You are colleagues on a Friday afternoon when work is winding down. Play 2 people:
+
+1. COLLEAGUE (Josh) - Excited for the weekend, chatty
+2. COLLEAGUE (Ming) - More relaxed, has chill plans
+
+The vibe:
+- It's 4pm Friday, energy is relaxed
+- People are finishing up work, having casual chats
+- Light, fun conversation about weekend plans
+- Maybe some joking about how long the week felt
+
+Topics to cover:
+1. Weekend plans (yours and theirs)
+2. Something good/bad that happened during the week
+3. Maybe plans for the following week (but keep it light)
+4. Local things - events, weather for the weekend, etc.
+
+Keep it natural and relaxed. If they're still in "work mode", help them shift to casual chat. This is about building rapport through everyday conversation.`,
+    firstMessage: "*It's late Friday afternoon. Josh leans back from his desk and stretches.* Right, I reckon that's me done for the week. Anyone else struggling to focus? What time are you knocking off? Got any big weekend plans?",
   },
 ];
 

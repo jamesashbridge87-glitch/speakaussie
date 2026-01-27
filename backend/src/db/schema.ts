@@ -15,15 +15,15 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Subscription plans reference
--- basic: 5 mins/day ($25 AUD/month)
--- standard: 10 mins/day ($49 AUD/month)
--- premium: 15 mins/day ($79 AUD/month)
+-- starter: 5 mins/day ($29 AUD/month)
+-- professional: 15 mins/day ($49 AUD/month)
+-- executive: unlimited ($99 AUD/month)
 
 -- Subscriptions table
 CREATE TABLE IF NOT EXISTS subscriptions (
   id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  plan TEXT NOT NULL CHECK(plan IN ('free', 'basic', 'standard', 'premium')),
+  plan TEXT NOT NULL CHECK(plan IN ('free', 'starter', 'professional', 'executive')),
   status TEXT NOT NULL CHECK(status IN ('active', 'canceled', 'past_due', 'trialing')),
   stripe_subscription_id TEXT UNIQUE,
   stripe_price_id TEXT,
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS plan_limits (
 -- Insert default plan limits
 INSERT OR IGNORE INTO plan_limits (plan, daily_minutes, monthly_price_cents, description) VALUES
   ('free', 2, 0, 'Free trial - 2 minutes per day'),
-  ('basic', 5, 2500, 'Basic plan - 5 minutes per day'),
-  ('standard', 10, 4900, 'Standard plan - 10 minutes per day'),
-  ('premium', 15, 7900, 'Premium plan - 15 minutes per day');
+  ('starter', 5, 2900, 'Starter plan - 5 minutes per day'),
+  ('professional', 15, 4900, 'Professional plan - 15 minutes per day'),
+  ('executive', 60, 9900, 'Executive plan - Unlimited practice');
 
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);

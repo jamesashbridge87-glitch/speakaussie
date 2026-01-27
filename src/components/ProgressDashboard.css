@@ -247,3 +247,30 @@
   border-color: #dc2626;
   color: #dc2626;
 }
+
+/* Header right section with confidence score */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Confidence tab highlight badge */
+.tab-badge.highlight {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: white;
+}
+
+/* Confidence tab container */
+.confidence-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Journey tab container */
+.journey-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

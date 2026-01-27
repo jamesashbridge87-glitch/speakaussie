@@ -111,7 +111,7 @@ export function useSubscription() {
     };
   }, [isAuthenticated, fetchUsage, state.usage]);
 
-  const startCheckout = useCallback(async (plan: 'basic' | 'standard' | 'premium') => {
+  const startCheckout = useCallback(async (plan: 'starter' | 'professional' | 'executive') => {
     try {
       const response = await fetchWithAuth('/billing/checkout', {
         method: 'POST',

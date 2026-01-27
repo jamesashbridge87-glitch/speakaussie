@@ -1,0 +1,385 @@
+/* Confidence Score Component Styles */
+
+.confidence-score {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #f8fafc;
+}
+
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.score-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.weekly-change {
+  font-size: 0.875rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.weekly-change.positive {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+.score-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.score-ring {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.score-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.score-bg {
+  opacity: 0.3;
+}
+
+.score-fill {
+  transition: stroke-dasharray 0.5s ease-out;
+}
+
+.score-number {
+  font-size: 28px;
+  font-weight: 700;
+  fill: #f8fafc;
+}
+
+.score-label {
+  font-size: 12px;
+  fill: #94a3b8;
+}
+
+.level-info {
+  flex: 1;
+}
+
+.level-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.level-badge[data-level="beginner"] {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+.level-badge[data-level="developing"] {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.level-badge[data-level="confident"] {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.level-badge[data-level="fluent"] {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.level-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.level-progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.level-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.level-progress-text {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.encouragement {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 20px;
+}
+
+.encouragement p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  font-style: italic;
+}
+
+.breakdown h4 {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breakdown-icon {
+  font-size: 1rem;
+}
+
+.breakdown-label {
+  flex: 1;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.breakdown-value {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.breakdown-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 3px;
+  transition: width 0.3s ease-out;
+}
+
+.breakdown-description {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Compact Version */
+.confidence-score-compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #f8fafc;
+}
+
+.score-ring-compact {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.score-ring-compact .score-text {
+  font-size: 18px;
+  font-weight: 700;
+  fill: #f8fafc;
+}
+
+.compact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.compact-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.compact-level {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+/* Milestone Display */
+.milestone-display {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.milestone-display h4 {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.next-milestone {
+  margin-bottom: 16px;
+}
+
+.next-milestone-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.next-milestone-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.next-milestone-card .milestone-icon {
+  font-size: 1.5rem;
+}
+
+.milestone-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.milestone-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.milestone-description {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.milestone-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.milestone-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.milestone-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+  transition: width 0.3s ease-out;
+}
+
+.milestone-progress-text {
+  font-size: 0.75rem;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.achieved-milestones {
+  margin-bottom: 12px;
+}
+
+.achieved-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.achieved-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.achieved-milestone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.achieved-milestone .milestone-icon {
+  font-size: 1rem;
+}
+
+.achieved-milestone .milestone-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+.milestone-count {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-align: center;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .score-main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .level-info {
+    width: 100%;
+  }
+
+  .level-badge {
+    margin-bottom: 16px;
+  }
+}

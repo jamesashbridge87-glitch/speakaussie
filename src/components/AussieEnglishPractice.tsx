@@ -6,16 +6,26 @@ import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useAuth } from '../hooks/useAuth';
 import { useSubscription } from '../hooks/useSubscription';
 import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
+import { useJourneyProgress } from '../hooks/useJourneyProgress';
+import { useOnboarding } from '../hooks/useOnboarding';
+import { useScenarioRecommendations, getDailyRecommendation } from '../hooks/useScenarioRecommendations';
 import { ScenarioSelector } from './ScenarioSelector';
+import { JourneyCompact } from './JourneyProgress';
+import { OnboardingFlow } from './OnboardingFlow';
+import { CelebrationToast, useCelebrations, CELEBRATIONS } from './CelebrationToast';
 import { ScenarioIntro } from './ScenarioIntro';
 import { ProgressDashboard } from './ProgressDashboard';
+import { CultureModuleViewer } from './CultureModuleViewer';
 import { AudioVisualizer } from './AudioVisualizer';
 import { AuthModal } from './AuthModal';
 import { UserMenu } from './UserMenu';
 import { UsageBadge } from './UsageBadge';
 import { SubscriptionPlans } from './SubscriptionPlans';
 import { SessionTimer } from './SessionTimer';
-import { Scenario, getCategoryInfo } from '../data/scenarios';
+import { PostSessionFeedback, SessionFeeling } from './PostSessionFeedback';
+import { FeedbackButton } from './FeedbackButton';
+import { NPSSurvey, useNPSSurvey } from './NPSSurvey';
+import { Scenario, getCategoryInfo, scenarios } from '../data/scenarios';
 import './AussieEnglishPractice.css';
 
 interface Message {
@@ -32,10 +42,13 @@ export function AussieEnglishPractice() {
   const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProgress, setShowProgress] = useState(false);
+  const [showCultureGuide, setShowCultureGuide] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const [sessionRemainingMinutes, setSessionRemainingMinutes] = useState(0);
   const [isStarting, setIsStarting] = useState(false);
+  const [showPostSessionFeedback, setShowPostSessionFeedback] = useState(false);
+  const [completedScenario, setCompletedScenario] = useState<Scenario | null>(null);
   const backendSessionId = useRef<string | null>(null);
   const anonymousSessionStart = useRef<number | null>(null);
 
@@ -80,6 +93,27 @@ export function AussieEnglishPractice() {
     clearPronunciationData,
   } = usePronunciationScoring();
 
+  // Track 90-day journey progress
+  const journeyProgress = useJourneyProgress(sessions);
+
+  // Onboarding and recommendations
+  const {
+    onboardingData,
+    needsOnboarding,
+    completeOnboarding,
+    markFirstSessionCompleted,
+  } = useOnboarding();
+
+  const recommendations = useScenarioRecommendations(onboardingData, sessions);
+  const dailyRecommendation = getDailyRecommendation(recommendations, onboardingData);
+
+  // Celebrations
+  const { currentCelebration, showCelebration, dismissCelebration } = useCelebrations();
+
+  // NPS Survey (shows monthly after 5+ sessions)
+  const stats = getStats();
+  const { shouldShow: shouldShowNPS, recordResponse: recordNPSResponse, dismiss: dismissNPS } = useNPSSurvey(stats.totalSessions);
+
   const conversation = useElevenLabsConversation({
     onConnect: () => {
       console.log('Connected to ElevenLabs conversation');
@@ -122,7 +156,6 @@ export function AussieEnglishPractice() {
   } = conversation;
 
   // Check achievements when stats change
-  const stats = getStats();
   useEffect(() => {
     checkAchievements(stats);
   }, [stats, checkAchievements]);
@@ -199,7 +232,7 @@ export function AussieEnglishPractice() {
     }
   };
 
-  const endSession = async (feedback?: boolean) => {
+  const endSession = async (feedback?: boolean, skipFeedbackFlow?: boolean) => {
     try {
       await conversation.endSession();
 
@@ -220,14 +253,42 @@ export function AussieEnglishPractice() {
       } else if (anonymousSessionStart.current) {
         endAnonSessionTracking(anonymousSessionStart.current);
         anonymousSessionStart.current = null;
-        setShowPlans(true);
       }
 
       endTracking(feedback);
+
+      // Mark first session completed for onboarding and show celebration
+      if (!onboardingData.firstSessionCompleted) {
+        markFirstSessionCompleted();
+        showCelebration(CELEBRATIONS.firstSession());
+      } else {
+        // Check for session milestones (5, 25, 50, 100)
+        const newSessionCount = sessions.length + 1;
+        if ([5, 25, 50, 100].includes(newSessionCount)) {
+          showCelebration(CELEBRATIONS.sessionMilestone(newSessionCount));
+        }
+      }
+
+      // Show post-session feedback flow instead of going directly to selector
+      if (!skipFeedbackFlow && selectedScenario) {
+        setCompletedScenario(selectedScenario);
+        setShowPostSessionFeedback(true);
+      }
+
       setViewState('selector');
       setSelectedScenario(null);
     } catch (err) {
       console.error('Failed to end session:', err);
+    }
+  };
+
+  // Handle post-session feedback completion
+  const handlePostSessionComplete = (feeling: SessionFeeling) => {
+    setShowPostSessionFeedback(false);
+    setCompletedScenario(null);
+    // Show subscription prompt for anonymous users after session feedback
+    if (!isAuthenticated) {
+      setShowPlans(true);
     }
   };
 
@@ -295,13 +356,21 @@ export function AussieEnglishPractice() {
             )}
           </div>
         </div>
-        <p>Master Australian workplace English</p>
-        <button
-          className="toggle-progress-btn"
-          onClick={() => setShowProgress(!showProgress)}
-        >
-          {showProgress ? 'Hide Progress' : 'Show Progress'}
-        </button>
+        <p>Speak with confidence at work</p>
+        <div className="header-toggles">
+          <button
+            className="toggle-progress-btn"
+            onClick={() => { setShowProgress(!showProgress); setShowCultureGuide(false); }}
+          >
+            {showProgress ? 'Hide Progress' : 'Show Progress'}
+          </button>
+          <button
+            className="toggle-culture-btn"
+            onClick={() => { setShowCultureGuide(!showCultureGuide); setShowProgress(false); }}
+          >
+            {showCultureGuide ? 'Hide Culture Guide' : 'Culture Guide'}
+          </button>
+        </div>
       </header>
 
       {showProgress && (
@@ -317,6 +386,20 @@ export function AussieEnglishPractice() {
           onDismissAchievements={dismissNewlyUnlocked}
           pronunciationStats={getPronunciationStats()}
         />
+      )}
+
+      {showCultureGuide && (
+        <div className="culture-guide-section">
+          <CultureModuleViewer
+            onSelectScenario={(scenarioId) => {
+              const scenario = scenarios.find((s) => s.id === scenarioId);
+              if (scenario) {
+                setShowCultureGuide(false);
+                handleSelectScenario(scenario);
+              }
+            }}
+          />
+        </div>
       )}
 
       {showPlans && (
@@ -340,15 +423,41 @@ export function AussieEnglishPractice() {
         <div className="start-section">
           <div className="instructions">
             <h2>G'day, mate!</h2>
-            <p>Choose a scenario to practice your Australian workplace English. From job interviews to Friday drinks - we've got you covered!</p>
+            <p>Practice real conversations. Build real confidence. From interviews to Friday drinks - we've got you covered!</p>
           </div>
 
-          {isAuthenticated && usage ? (
-            <UsageBadge onUpgradeClick={() => setShowPlans(true)} />
-          ) : !isAuthenticated && (
-            <div className="anonymous-usage-badge">
-              <span className="usage-time">{anonRemainingMinutes} min</span>
-              <span className="usage-label">free today</span>
+          <div className="status-badges">
+            {isAuthenticated && usage ? (
+              <UsageBadge onUpgradeClick={() => setShowPlans(true)} />
+            ) : !isAuthenticated && (
+              <div className="anonymous-usage-badge">
+                <span className="usage-time">{anonRemainingMinutes} min</span>
+                <span className="usage-label">free today</span>
+              </div>
+            )}
+            <JourneyCompact
+              progress={journeyProgress}
+              onClick={() => setShowProgress(true)}
+            />
+          </div>
+
+          {/* Daily recommendation */}
+          {dailyRecommendation && (
+            <div className="daily-recommendation">
+              <div className="recommendation-header">
+                <span className="recommendation-badge">Recommended for you</span>
+              </div>
+              <button
+                className="recommendation-card"
+                onClick={() => handleSelectScenario(dailyRecommendation.scenario)}
+              >
+                <span className="recommendation-icon">{dailyRecommendation.scenario.icon}</span>
+                <div className="recommendation-content">
+                  <span className="recommendation-title">{dailyRecommendation.scenario.title}</span>
+                  <span className="recommendation-reason">{dailyRecommendation.reason}</span>
+                </div>
+                <span className="recommendation-arrow">→</span>
+              </button>
             </div>
           )}
 
@@ -464,6 +573,44 @@ export function AussieEnglishPractice() {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
       />
+
+      {/* Onboarding flow for new users */}
+      {needsOnboarding && !authLoading && (
+        <OnboardingFlow
+          onComplete={(exp, goal, comfort, name) => {
+            completeOnboarding(exp, goal, comfort, name);
+            if (name) setStudentName(name);
+          }}
+          onSkip={() => completeOnboarding('settling-in', 'all-of-above', 'getting-there')}
+        />
+      )}
+
+      {/* Celebration toast */}
+      <CelebrationToast
+        celebration={currentCelebration}
+        onDismiss={dismissCelebration}
+      />
+
+      {/* Post-session feedback flow */}
+      {showPostSessionFeedback && completedScenario && (
+        <PostSessionFeedback
+          scenario={completedScenario}
+          onComplete={handlePostSessionComplete}
+          onSelectScenario={handleSelectScenario}
+          recommendedScenario={recommendations[0]?.scenario || null}
+        />
+      )}
+
+      {/* In-app feedback button */}
+      <FeedbackButton />
+
+      {/* NPS Survey (monthly) */}
+      {shouldShowNPS && (
+        <NPSSurvey
+          onComplete={recordNPSResponse}
+          onDismiss={dismissNPS}
+        />
+      )}
     </div>
   );
 }

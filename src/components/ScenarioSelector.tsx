@@ -37,8 +37,8 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
   if (!selectedCategory) {
     return (
       <div className="scenario-selector">
-        <h3>Your Workplace Journey</h3>
-        <p className="selector-subtitle">From interview to thriving in your role</p>
+        <h3>Your Confidence Journey</h3>
+        <p className="selector-subtitle">Practice real conversations. Build real confidence.</p>
 
         <div className="category-grid">
           {sortedCategories.map((category) => {

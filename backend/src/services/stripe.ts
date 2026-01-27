@@ -8,9 +8,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 
 // Map plan names to Stripe price IDs from environment
 const PRICE_IDS: Record<Exclude<PlanType, 'free'>, string> = {
-  basic: process.env.STRIPE_PRICE_BASIC || '',
-  standard: process.env.STRIPE_PRICE_STANDARD || '',
-  premium: process.env.STRIPE_PRICE_PREMIUM || '',
+  starter: process.env.STRIPE_PRICE_STARTER || '',
+  professional: process.env.STRIPE_PRICE_PROFESSIONAL || '',
+  executive: process.env.STRIPE_PRICE_EXECUTIVE || '',
 };
 
 export const StripeService = {
