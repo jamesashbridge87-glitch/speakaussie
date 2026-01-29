@@ -195,7 +195,7 @@ export function SlangQuiz() {
             <p className="high-score">High Score: {progress.quizHighScore}/{QUIZ_LENGTH}</p>
           )}
 
-          <button className="start-btn" onClick={startQuiz}>
+          <button className="start-btn" onClick={startQuiz} aria-label="Start the slang quiz">
             Start Quiz
           </button>
         </div>
@@ -203,7 +203,7 @@ export function SlangQuiz() {
 
       {(quizState === 'playing' || quizState === 'feedback') && question && (
         <div className="quiz-playing">
-          <div className="quiz-progress">
+          <div className="quiz-progress" aria-live="polite">
             <span>
               Question {currentQuestion + 1} of {questions.length}
             </span>
@@ -240,12 +240,12 @@ export function SlangQuiz() {
           </div>
 
           {quizState === 'feedback' && (
-            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`} aria-live="polite">
               <p>
                 {isCorrect ? 'Correct!' : `Wrong! The answer was: ${question.correctAnswer}`}
               </p>
               <p className="example-text">"{question.term.example}"</p>
-              <button className="next-btn" onClick={nextQuestion}>
+              <button className="next-btn" onClick={nextQuestion} aria-label={currentQuestion + 1 >= questions.length ? 'See results' : 'Go to next question'}>
                 {currentQuestion + 1 >= questions.length ? 'See Results' : 'Next Question'}
               </button>
             </div>
@@ -254,14 +254,14 @@ export function SlangQuiz() {
       )}
 
       {quizState === 'results' && (
-        <div className="quiz-results">
+        <div className="quiz-results" aria-live="polite">
           <h2>Quiz Complete!</h2>
           <div className="results-score">
             <span className="big-score">{score}</span>
             <span className="score-label">out of {questions.length}</span>
           </div>
           <p className="results-message">{getResultMessage(score, questions.length)}</p>
-          <button className="start-btn" onClick={startQuiz}>
+          <button className="start-btn" onClick={startQuiz} aria-label="Try the quiz again">
             Try Again
           </button>
         </div>

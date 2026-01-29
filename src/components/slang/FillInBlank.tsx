@@ -215,6 +215,7 @@ export function FillInBlank() {
             className="start-btn"
             onClick={startGame}
             disabled={filteredTerms.length < 5}
+            aria-label="Start fill in the blank game"
           >
             Start Game
           </button>
@@ -223,7 +224,7 @@ export function FillInBlank() {
 
       {(gameState === 'playing' || gameState === 'feedback') && question && (
         <div className="game-playing">
-          <div className="game-progress">
+          <div className="game-progress" aria-live="polite">
             <span>Question {currentQuestion + 1} of {questions.length}</span>
             <span className="game-score">Score: {score}</span>
           </div>
@@ -244,20 +245,20 @@ export function FillInBlank() {
             />
 
             {gameState === 'playing' && (
-              <button className="submit-btn" onClick={handleSubmit} disabled={!userAnswer.trim()}>
+              <button className="submit-btn" onClick={handleSubmit} disabled={!userAnswer.trim()} aria-label="Submit your answer">
                 Submit Answer
               </button>
             )}
 
             {gameState === 'feedback' && (
-              <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+              <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`} aria-live="polite">
                 <p>
                   {isCorrect
                     ? 'Correct! Well done!'
                     : <>Not quite! The answer was: <strong>{question.term}</strong></>
                   }
                 </p>
-                <button className="next-btn" onClick={nextQuestion}>
+                <button className="next-btn" onClick={nextQuestion} aria-label={currentQuestion + 1 >= questions.length ? 'See results' : 'Go to next question'}>
                   {currentQuestion + 1 >= questions.length ? 'See Results' : 'Next Question'}
                 </button>
               </div>
@@ -267,14 +268,14 @@ export function FillInBlank() {
       )}
 
       {gameState === 'results' && (
-        <div className="game-results">
+        <div className="game-results" aria-live="polite">
           <h2>Game Complete!</h2>
           <div className="results-score">
             <span className="big-score">{score}</span>
             <span className="score-label">out of {questions.length}</span>
           </div>
           <p className="results-message">{getResultMessage(score, questions.length)}</p>
-          <button className="start-btn" onClick={startGame}>
+          <button className="start-btn" onClick={startGame} aria-label="Play the game again">
             Play Again
           </button>
         </div>

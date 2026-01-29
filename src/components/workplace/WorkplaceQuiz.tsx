@@ -163,7 +163,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
   return (
     <div className="workplace-quiz">
       <div className="quiz-header">
-        <button className="back-btn" onClick={onBack}>← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
         <h2>{situationNames[situation]} Quiz</h2>
       </div>
 
@@ -175,7 +175,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
             <p>Test your knowledge of {situationNames[situation].toLowerCase()} phrases.</p>
             <p className="quiz-info">{Math.min(QUIZ_LENGTH, phrases.length)} questions</p>
           </div>
-          <button className="start-btn" onClick={startQuiz}>
+          <button className="start-btn" onClick={startQuiz} aria-label="Start the quiz">
             Start Quiz
           </button>
         </div>
@@ -183,7 +183,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
 
       {(quizState === 'playing' || quizState === 'feedback') && question && (
         <div className="quiz-playing">
-          <div className="quiz-progress">
+          <div className="quiz-progress" aria-live="polite">
             <span className="question-count">
               Question {currentQuestion + 1} of {questions.length}
             </span>
@@ -219,7 +219,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
           </div>
 
           {quizState === 'feedback' && (
-            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`} aria-live="polite">
               <p className="feedback-message">
                 {isCorrect ? 'Nice one!' : 'Not quite!'}
               </p>
@@ -229,7 +229,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
                 </p>
               )}
               <p className="explanation">{question.explanation}</p>
-              <button className="next-btn" onClick={nextQuestion}>
+              <button className="next-btn" onClick={nextQuestion} aria-label={currentQuestion + 1 >= questions.length ? 'See results' : 'Go to next question'}>
                 {currentQuestion + 1 >= questions.length ? 'See Results' : 'Next →'}
               </button>
             </div>
@@ -238,7 +238,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
       )}
 
       {quizState === 'results' && (
-        <div className="quiz-results">
+        <div className="quiz-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
               {score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'}
@@ -259,10 +259,10 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
           )}
 
           <div className="results-actions">
-            <button className="retry-btn" onClick={startQuiz}>
+            <button className="retry-btn" onClick={startQuiz} aria-label="Try the quiz again">
               Try Again
             </button>
-            <button className="done-btn" onClick={onBack}>
+            <button className="done-btn" onClick={onBack} aria-label="Finish and go back">
               Done
             </button>
           </div>

@@ -154,7 +154,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
   return (
     <div className="fill-blank">
       <div className="fill-blank-header">
-        <button className="back-btn" onClick={onBack}>← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
         <h2>Fill in the Blank</h2>
       </div>
 
@@ -166,7 +166,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
             <p>Use {situationNames[situation].toLowerCase()} phrases in context.</p>
             <p className="start-info">{Math.min(QUIZ_LENGTH, phrases.length)} sentences</p>
           </div>
-          <button className="start-btn" onClick={startGame}>
+          <button className="start-btn" onClick={startGame} aria-label="Start fill in the blank game">
             Start
           </button>
         </div>
@@ -174,7 +174,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
 
       {(gameState === 'playing' || gameState === 'feedback') && question && (
         <div className="fill-blank-playing">
-          <div className="game-progress">
+          <div className="game-progress" aria-live="polite">
             <span className="question-count">
               {currentIndex + 1} of {questions.length}
             </span>
@@ -221,7 +221,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
                 </p>
               )}
               <p className="feedback-context">{question.phrase.context}</p>
-              <button className="next-btn" onClick={nextQuestion}>
+              <button className="next-btn" onClick={nextQuestion} aria-label={currentIndex + 1 >= questions.length ? 'See results' : 'Go to next question'}>
                 {currentIndex + 1 >= questions.length ? 'See Results' : 'Next →'}
               </button>
             </div>
@@ -230,7 +230,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
       )}
 
       {gameState === 'results' && (
-        <div className="fill-blank-results">
+        <div className="fill-blank-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
               {score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'}
@@ -251,10 +251,10 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
           )}
 
           <div className="results-actions">
-            <button className="retry-btn" onClick={startGame}>
+            <button className="retry-btn" onClick={startGame} aria-label="Try the game again">
               Try Again
             </button>
-            <button className="done-btn" onClick={onBack}>
+            <button className="done-btn" onClick={onBack} aria-label="Finish and go back">
               Done
             </button>
           </div>

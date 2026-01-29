@@ -354,6 +354,7 @@ export function AussieEnglishPractice() {
               <button
                 className="login-btn"
                 onClick={() => setShowAuthModal(true)}
+                aria-label="Log in to your account"
               >
                 Log In
               </button>
@@ -365,24 +366,30 @@ export function AussieEnglishPractice() {
           <button
             className="toggle-progress-btn"
             onClick={() => { setShowProgress(!showProgress); setShowCultureGuide(false); }}
+            aria-label={showProgress ? 'Hide progress dashboard' : 'Show progress dashboard'}
+            aria-expanded={showProgress}
           >
             {showProgress ? 'Hide Progress' : 'Show Progress'}
           </button>
           <button
             className="toggle-culture-btn"
             onClick={() => { setShowCultureGuide(!showCultureGuide); setShowProgress(false); }}
+            aria-label={showCultureGuide ? 'Hide culture guide' : 'Show culture guide'}
+            aria-expanded={showCultureGuide}
           >
             {showCultureGuide ? 'Hide Culture Guide' : 'Culture Guide'}
           </button>
           <button
             className="toggle-workplace-btn"
             onClick={() => navigate('/workplace')}
+            aria-label="Go to workplace phrases section"
           >
             Workplace Phrases
           </button>
           <button
             className="toggle-progress-btn"
             onClick={() => navigate('/stats')}
+            aria-label="Go to stats dashboard"
           >
             Stats Dashboard
           </button>
@@ -426,7 +433,7 @@ export function AussieEnglishPractice() {
       {showPlans && (
         <div className="plans-modal-overlay" onClick={() => setShowPlans(false)}>
           <div className="plans-modal" onClick={e => e.stopPropagation()}>
-            <button className="plans-modal-close" onClick={() => setShowPlans(false)}>
+            <button className="plans-modal-close" onClick={() => setShowPlans(false)} aria-label="Close subscription plans modal">
               &times;
             </button>
             <SubscriptionPlans onAuthRequired={() => setShowAuthModal(true)} />
@@ -441,7 +448,7 @@ export function AussieEnglishPractice() {
       )}
 
       {viewState === 'selector' && (
-        <div className="start-section">
+        <div className="start-section" role="main">
           <div className="instructions">
             <h2>G'day, mate!</h2>
             <p>Practice real conversations. Build real confidence. From interviews to Friday drinks - we've got you covered!</p>
@@ -496,7 +503,7 @@ export function AussieEnglishPractice() {
       )}
 
       {viewState === 'session' && selectedScenario && (
-        <div className="session-section">
+        <div className="session-section" role="main">
           {/* Session Timer */}
           <SessionTimer
             remainingMinutes={sessionRemainingMinutes}
@@ -522,7 +529,7 @@ export function AussieEnglishPractice() {
           />
 
           {/* Status indicator */}
-          <div className="status-bar">
+          <div className="status-bar" aria-live="polite">
             <div className={`status-indicator ${status}`}>
               <span className="status-dot"></span>
               {status === 'connected' ? 'Connected' : 'Connecting...'}
@@ -554,7 +561,7 @@ export function AussieEnglishPractice() {
 
           {/* Voice controls */}
           <div className="voice-input-section">
-            <div className="real-time-indicator">
+            <div className="real-time-indicator" aria-live="polite">
               {isSpeaking ? (
                 <span className="speaking-indicator">{selectedScenario.theirRole} is speaking...</span>
               ) : isListening ? (
@@ -566,6 +573,7 @@ export function AussieEnglishPractice() {
             <button
               className={`mute-btn ${isMuted ? 'muted' : ''}`}
               onClick={toggleMute}
+              aria-label={isMuted ? 'Unmute microphone' : 'Mute microphone'}
             >
               {isMuted ? 'Unmute' : 'Mute'}
             </button>
@@ -576,6 +584,7 @@ export function AussieEnglishPractice() {
             <button
               className="end-button"
               onClick={() => endSession()}
+              aria-label="End the current practice session"
             >
               End Session
             </button>
@@ -584,8 +593,8 @@ export function AussieEnglishPractice() {
           {/* Feedback section */}
           <div className="feedback-section">
             <span>How was this session?</span>
-            <button onClick={() => handleFeedback(true)}>Good</button>
-            <button onClick={() => handleFeedback(false)}>Needs work</button>
+            <button onClick={() => handleFeedback(true)} aria-label="Rate session as good">Good</button>
+            <button onClick={() => handleFeedback(false)} aria-label="Rate session as needs work">Needs work</button>
           </div>
         </div>
       )}
