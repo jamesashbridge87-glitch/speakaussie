@@ -52,7 +52,7 @@ export function WorkplacePage() {
     <div className="workplace-page">
       {/* Header */}
       <header className="workplace-header">
-        <button className="back-to-main" onClick={() => navigate('/app')}>
+        <button className="back-to-main" onClick={() => navigate('/app')} aria-label="Go back to main app">
           ← Back to Main
         </button>
         <div className="header-brand">
@@ -99,34 +99,42 @@ export function WorkplacePage() {
       </header>
 
       {/* Navigation */}
-      <nav className="workplace-nav">
+      <nav className="workplace-nav" aria-label="Workplace navigation">
         <button
           className={`nav-btn ${viewMode === 'home' ? 'active' : ''}`}
           onClick={() => setViewMode('home')}
+          aria-label="Go to home view"
+          aria-current={viewMode === 'home' ? 'page' : undefined}
         >
           Home
         </button>
         <button
           className={`nav-btn ${viewMode === 'all' ? 'active' : ''}`}
           onClick={() => setViewMode('all')}
+          aria-label="View all situations"
+          aria-current={viewMode === 'all' ? 'page' : undefined}
         >
           All Situations
         </button>
         <button
           className={`nav-btn ${viewMode === 'favorites' ? 'active' : ''}`}
           onClick={() => setViewMode('favorites')}
+          aria-label={`View favorites, ${favorites.length} saved`}
+          aria-current={viewMode === 'favorites' ? 'page' : undefined}
         >
           ❤️ {favorites.length}
         </button>
         <button
           className={`nav-btn ${viewMode === 'stats' ? 'active' : ''}`}
           onClick={() => setViewMode('stats')}
+          aria-label="View your statistics"
+          aria-current={viewMode === 'stats' ? 'page' : undefined}
         >
           Stats
         </button>
       </nav>
 
-      <main className="workplace-main">
+      <main className="workplace-main" role="main">
         {viewMode === 'home' && (
           <>
             {/* Quick Prep Section */}
@@ -139,18 +147,21 @@ export function WorkplacePage() {
                   <button
                     className="quick-prep-btn"
                     onClick={() => handleQuickPrep('friday-drinks')}
+                    aria-label="Prepare for Friday drinks conversation"
                   >
                     Friday drinks
                   </button>
                   <button
                     className="quick-prep-btn"
                     onClick={() => handleQuickPrep('presentations')}
+                    aria-label="Prepare for a big meeting"
                   >
                     Big meeting
                   </button>
                   <button
                     className="quick-prep-btn"
                     onClick={() => handleQuickPrep('performance-reviews')}
+                    aria-label="Prepare for performance review"
                   >
                     Performance review
                   </button>
@@ -192,7 +203,7 @@ export function WorkplacePage() {
                 <span className="path-more">· · ·</span>
               </div>
 
-              <button className="see-all-btn" onClick={() => setViewMode('all')}>
+              <button className="see-all-btn" onClick={() => setViewMode('all')} aria-label="See all available situations">
                 See all situations →
               </button>
             </section>
@@ -202,7 +213,7 @@ export function WorkplacePage() {
               <section className="review-reminder">
                 <p>
                   🔁 {totalReviewCount} phrase{totalReviewCount !== 1 ? 's' : ''} getting rusty —{' '}
-                  <button className="link-btn" onClick={() => navigate('/workplace/small-talk')}>
+                  <button className="link-btn" onClick={() => navigate('/workplace/small-talk')} aria-label="Refresh your rusty phrases">
                     quick refresh?
                   </button>
                 </p>
@@ -342,7 +353,7 @@ export function WorkplacePage() {
               </div>
             </div>
 
-            <button className="back-btn" onClick={() => setViewMode('home')}>
+            <button className="back-btn" onClick={() => setViewMode('home')} aria-label="Go back to home view">
               ← Back to Home
             </button>
           </section>
@@ -430,7 +441,7 @@ export function WorkplacePage() {
               </div>
             </div>
 
-            <button className="reset-btn" onClick={resetProgress}>
+            <button className="reset-btn" onClick={resetProgress} aria-label="Reset all workplace progress">
               Reset Workplace Progress
             </button>
           </section>
@@ -443,6 +454,9 @@ export function WorkplacePage() {
           <h3>Practice speaking?</h3>
           <p>Try our pronunciation practice or chat with Your Aussie Uncle!</p>
           <div className="upgrade-links">
+            <a href="/stats" className="upgrade-link secondary">
+              Stats Dashboard
+            </a>
             <a href="/slang" className="upgrade-link secondary">
               Aussie Slang
             </a>

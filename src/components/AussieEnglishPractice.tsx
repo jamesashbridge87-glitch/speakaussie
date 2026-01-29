@@ -26,6 +26,7 @@ import { SessionTimer } from './SessionTimer';
 import { PostSessionFeedback, SessionFeeling } from './PostSessionFeedback';
 import { FeedbackButton } from './FeedbackButton';
 import { NPSSurvey, useNPSSurvey } from './NPSSurvey';
+import { StreakReminder } from './StreakReminder';
 import { Scenario, getCategoryInfo, scenarios } from '../data/scenarios';
 import './AussieEnglishPractice.css';
 
@@ -379,8 +380,19 @@ export function AussieEnglishPractice() {
           >
             Workplace Phrases
           </button>
+          <button
+            className="toggle-progress-btn"
+            onClick={() => navigate('/stats')}
+          >
+            Stats Dashboard
+          </button>
         </div>
       </header>
+
+      {/* Streak Reminder Banner */}
+      {viewState === 'selector' && (
+        <StreakReminder variant="banner" />
+      )}
 
       {showProgress && (
         <ProgressDashboard
