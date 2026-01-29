@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useProgressTracking } from '../hooks/useProgressTracking';
+import { useAchievements } from '../hooks/useAchievements';
+import { exportToJSON } from '../utils/exportProgress';
 import './UserMenu.css';
 
 interface UserMenuProps {
@@ -9,6 +12,15 @@ interface UserMenuProps {
 export function UserMenu({ onShowPlans }: UserMenuProps) {
   const { user, isAuthenticated, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const { sessions, studentName, getStats } = useProgressTracking();
+  const { unlockedAchievements, getAchievementProgress } = useAchievements();
+
+  const handleExportProgress = () => {
+    const stats = getStats();
+    const achievements = getAchievementProgress(stats);
+    exportToJSON(studentName, sessions, stats, unlockedAchievements, achievements.length);
+    setIsOpen(false);
+  };
 
   if (!isAuthenticated || !user) {
     return null;
@@ -49,6 +61,13 @@ export function UserMenu({ onShowPlans }: UserMenuProps) {
               }}
             >
               Subscription & Plans
+            </button>
+            <button
+              className="dropdown-item"
+              onClick={handleExportProgress}
+              disabled={sessions.length === 0}
+            >
+              Export Progress
             </button>
             <button
               className="dropdown-item logout"

@@ -74,7 +74,7 @@ export function SituationPage() {
     return (
       <div className="situation-page locked">
         <header className="situation-header">
-          <button className="back-btn" onClick={() => navigate('/workplace')}>
+          <button className="back-btn" onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">
             ← Back
           </button>
           <h1>🔒 {situationNames[validSituation]}</h1>
@@ -82,7 +82,7 @@ export function SituationPage() {
         <main className="situation-main">
           <div className="locked-message">
             <p>Complete the previous situation to unlock this one!</p>
-            <button onClick={() => navigate('/workplace')}>Go Back</button>
+            <button onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">Go Back</button>
           </div>
         </main>
       </div>
@@ -92,26 +92,27 @@ export function SituationPage() {
   return (
     <div className="situation-page">
       <header className="situation-header">
-        <button className="back-btn" onClick={() => navigate('/workplace')}>
+        <button className="back-btn" onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">
           ← Back
         </button>
         <div className="header-title">
           <span className="header-icon">{situationIcons[validSituation]}</span>
           <h1>{situationNames[validSituation]}</h1>
         </div>
-        <p className="header-progress">
+        <p className="header-progress" aria-live="polite">
           You've nailed {progress.learned} phrases. {progress.total - progress.learned} to go.
         </p>
       </header>
 
       {activeMode === 'overview' && (
-        <main className="situation-main">
+        <main className="situation-main" role="main">
           {/* Up Next Card */}
           <section className="up-next-section">
             <h2>Up Next{nextSubcategory ? `: ${subcategoryNames[nextSubcategory.subcategory] || nextSubcategory.subcategory}` : ''}</h2>
             <button
               className="up-next-card"
               onClick={() => setActiveMode('flashcards')}
+              aria-label="Start learning flashcards"
             >
               <span className="up-next-icon">📇</span>
               <div className="up-next-content">
@@ -129,6 +130,7 @@ export function SituationPage() {
               <button
                 className="practice-card"
                 onClick={() => setActiveMode('quiz')}
+                aria-label="Start quiz to test your recall"
               >
                 <span className="practice-icon">❓</span>
                 <h3>Quiz</h3>
@@ -137,6 +139,7 @@ export function SituationPage() {
               <button
                 className="practice-card"
                 onClick={() => setActiveMode('fillblank')}
+                aria-label="Start fill in the blank practice"
               >
                 <span className="practice-icon">📝</span>
                 <h3>Fill in the Blank</h3>
@@ -145,6 +148,7 @@ export function SituationPage() {
               <button
                 className="practice-card"
                 onClick={() => setActiveMode('favorites')}
+                aria-label="View your favorite phrases"
               >
                 <span className="practice-icon">⭐</span>
                 <h3>Favorites</h3>
@@ -162,6 +166,7 @@ export function SituationPage() {
               <button
                 className="refresh-btn"
                 onClick={() => setActiveMode('flashcards')}
+                aria-label="Refresh rusty phrases with flashcards"
               >
                 Refresh now
               </button>
@@ -187,7 +192,7 @@ export function SituationPage() {
       )}
 
       {activeMode === 'flashcards' && (
-        <main className="situation-main game-mode">
+        <main className="situation-main game-mode" role="main">
           <WorkplaceFlashcards
             situation={validSituation}
             onBack={() => setActiveMode('overview')}
@@ -196,7 +201,7 @@ export function SituationPage() {
       )}
 
       {activeMode === 'quiz' && (
-        <main className="situation-main game-mode">
+        <main className="situation-main game-mode" role="main">
           <WorkplaceQuiz
             situation={validSituation}
             onBack={() => setActiveMode('overview')}
@@ -205,7 +210,7 @@ export function SituationPage() {
       )}
 
       {activeMode === 'fillblank' && (
-        <main className="situation-main game-mode">
+        <main className="situation-main game-mode" role="main">
           <WorkplaceFillBlank
             situation={validSituation}
             onBack={() => setActiveMode('overview')}
@@ -214,8 +219,8 @@ export function SituationPage() {
       )}
 
       {activeMode === 'favorites' && (
-        <main className="situation-main">
-          <button className="mode-back-btn" onClick={() => setActiveMode('overview')}>
+        <main className="situation-main" role="main">
+          <button className="mode-back-btn" onClick={() => setActiveMode('overview')} aria-label="Go back to situation overview">
             ← Back to Overview
           </button>
           <h2>Your Favorites</h2>

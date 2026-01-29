@@ -215,7 +215,7 @@ export function SentenceBuilder() {
           <h2>Sentence Builder</h2>
           <p>Drag and drop the correct word to complete the sentence!</p>
           <p className="game-tip">Tip: Click or drag words to place them in the blank</p>
-          <button className="start-btn" onClick={startGame}>
+          <button className="start-btn" onClick={startGame} aria-label="Start sentence builder game">
             Start Game
           </button>
         </div>
@@ -223,7 +223,7 @@ export function SentenceBuilder() {
 
       {(gameState === 'playing' || gameState === 'feedback') && currentSentence && (
         <div className="game-playing">
-          <div className="game-progress">
+          <div className="game-progress" aria-live="polite">
             <span>Sentence {currentIndex + 1} of {sentences.length}</span>
             <span className="game-score">Score: {score}</span>
           </div>
@@ -269,10 +269,10 @@ export function SentenceBuilder() {
 
           {gameState === 'playing' && isCorrect === null && (
             <div className="game-controls">
-              <button className="hint-btn" onClick={toggleHint}>
+              <button className="hint-btn" onClick={toggleHint} aria-label={showHint ? 'Hide hint' : 'Show hint'}>
                 {showHint ? 'Hide Hint' : 'Show Hint'}
               </button>
-              <button className="skip-btn" onClick={skipSentence}>
+              <button className="skip-btn" onClick={skipSentence} aria-label="Skip this sentence">
                 Skip
               </button>
             </div>
@@ -283,7 +283,7 @@ export function SentenceBuilder() {
           )}
 
           {gameState === 'feedback' && (
-            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+            <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`} aria-live="polite">
               <p>
                 {isCorrect
                   ? 'Correct! Well done!'
@@ -296,14 +296,14 @@ export function SentenceBuilder() {
       )}
 
       {gameState === 'results' && (
-        <div className="game-results">
+        <div className="game-results" aria-live="polite">
           <h2>Game Complete!</h2>
           <div className="results-score">
             <span className="big-score">{score}</span>
             <span className="score-label">out of {sentences.length}</span>
           </div>
           <p className="results-message">{getResultMessage(score, sentences.length)}</p>
-          <button className="start-btn" onClick={startGame}>
+          <button className="start-btn" onClick={startGame} aria-label="Play the game again">
             Play Again
           </button>
         </div>

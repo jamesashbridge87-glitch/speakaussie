@@ -86,7 +86,7 @@ export function SlangPage() {
                 </div>
               </div>
             ))}
-            <button onClick={clearNewAchievements}>Awesome!</button>
+            <button onClick={clearNewAchievements} aria-label="Dismiss achievement notification">Awesome!</button>
           </div>
         </div>
       )}
@@ -135,6 +135,7 @@ export function SlangPage() {
             className={`search-toggle ${showSearch ? 'active' : ''}`}
             onClick={() => setShowSearch(!showSearch)}
             aria-label="Toggle search"
+            aria-expanded={showSearch}
           >
             &#128269;
           </button>
@@ -146,9 +147,10 @@ export function SlangPage() {
                 value={searchQuery}
                 onChange={handleSearch}
                 className="search-input"
+                aria-label="Search slang terms"
               />
               {searchQuery && (
-                <button className="search-clear" onClick={clearSearch}>&#x2715;</button>
+                <button className="search-clear" onClick={clearSearch} aria-label="Clear search">&#x2715;</button>
               )}
             </div>
           )}
@@ -182,30 +184,36 @@ export function SlangPage() {
               <strong>Daily Challenge</strong>
               <p>Learn today's word: <em>{dailyTerm.term}</em></p>
             </div>
-            <button className="daily-btn" onClick={handleDailyChallenge}>
+            <button className="daily-btn" onClick={handleDailyChallenge} aria-label="Complete daily challenge and earn 50 XP">
               Learn +50 XP
             </button>
           </div>
         </div>
       )}
 
-      <nav className="mode-selector">
+      <nav className="mode-selector" aria-label="Learning mode navigation">
         <div className="mode-row">
           <button
             className={`mode-btn ${activeMode === 'flashcards' ? 'active' : ''}`}
             onClick={() => setActiveMode('flashcards')}
+            aria-label="Study with flashcards"
+            aria-current={activeMode === 'flashcards' ? 'page' : undefined}
           >
             Flashcards
           </button>
           <button
             className={`mode-btn ${activeMode === 'quiz' ? 'active' : ''}`}
             onClick={() => setActiveMode('quiz')}
+            aria-label="Take a quiz"
+            aria-current={activeMode === 'quiz' ? 'page' : undefined}
           >
             Quiz
           </button>
           <button
             className={`mode-btn ${activeMode === 'review' ? 'active' : ''}`}
             onClick={() => setActiveMode('review')}
+            aria-label="Review learned terms"
+            aria-current={activeMode === 'review' ? 'page' : undefined}
           >
             Review
           </button>
@@ -214,18 +222,24 @@ export function SlangPage() {
           <button
             className={`mode-btn ${activeMode === 'fillblank' ? 'active' : ''}`}
             onClick={() => setActiveMode('fillblank')}
+            aria-label="Fill in the blank game"
+            aria-current={activeMode === 'fillblank' ? 'page' : undefined}
           >
             Fill Blank
           </button>
           <button
             className={`mode-btn ${activeMode === 'builder' ? 'active' : ''}`}
             onClick={() => setActiveMode('builder')}
+            aria-label="Sentence builder game"
+            aria-current={activeMode === 'builder' ? 'page' : undefined}
           >
             Builder
           </button>
           <button
             className={`mode-btn ${activeMode === 'favorites' ? 'active' : ''}`}
             onClick={() => setActiveMode('favorites')}
+            aria-label={`View favorites, ${favorites.length} saved`}
+            aria-current={activeMode === 'favorites' ? 'page' : undefined}
           >
             &#9825; {favorites.length}
           </button>
@@ -234,19 +248,23 @@ export function SlangPage() {
           <button
             className={`mode-btn small ${activeMode === 'achievements' ? 'active' : ''}`}
             onClick={() => setActiveMode('achievements')}
+            aria-label="View achievements"
+            aria-current={activeMode === 'achievements' ? 'page' : undefined}
           >
             Achievements
           </button>
           <button
             className={`mode-btn small ${activeMode === 'stats' ? 'active' : ''}`}
             onClick={() => setActiveMode('stats')}
+            aria-label="View statistics"
+            aria-current={activeMode === 'stats' ? 'page' : undefined}
           >
             Stats
           </button>
         </div>
       </nav>
 
-      <main className="slang-main">
+      <main className="slang-main" role="main">
         {activeMode === 'flashcards' && <SlangFlashcards />}
         {activeMode === 'quiz' && <SlangQuiz />}
         {activeMode === 'review' && <SlangReview />}
@@ -328,7 +346,7 @@ export function SlangPage() {
                 <span className="stat-name">Total XP</span>
               </div>
             </div>
-            <button className="reset-btn" onClick={resetProgress}>
+            <button className="reset-btn" onClick={resetProgress} aria-label="Reset all slang learning progress">
               Reset All Progress
             </button>
           </div>
@@ -340,6 +358,9 @@ export function SlangPage() {
           <h3>Want to practice speaking?</h3>
           <p>Try our pronunciation practice or chat with Your Aussie Uncle!</p>
           <div className="upgrade-links">
+            <a href="/stats" className="upgrade-link secondary">
+              Stats Dashboard
+            </a>
             <a href="/speak" className="upgrade-link secondary">
               Free Pronunciation
             </a>

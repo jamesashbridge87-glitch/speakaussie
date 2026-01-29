@@ -1,11 +1,16 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthProvider, AuthProvider } from './hooks/useAuth';
 import { AussieEnglishPractice } from './components/AussieEnglishPractice';
-import { SpeakFreePage } from './components/SpeakFreePage';
-import { SlangPage } from './components/slang/SlangPage';
-import { WorkplacePage } from './components/workplace/WorkplacePage';
-import { SituationPage } from './components/workplace/SituationPage';
+import { LoadingSpinner } from './components/LoadingSpinner';
 import { NotFound } from './components/NotFound';
+
+// Lazy load route components for code-splitting
+const SlangPage = lazy(() => import('./components/slang/SlangPage'));
+const WorkplacePage = lazy(() => import('./components/workplace/WorkplacePage'));
+const SituationPage = lazy(() => import('./components/workplace/SituationPage'));
+const SpeakFreePage = lazy(() => import('./components/SpeakFreePage'));
+const UnifiedDashboard = lazy(() => import('./components/UnifiedDashboard'));
 
 function AppRoutes() {
   return (
@@ -15,10 +20,31 @@ function AppRoutes() {
           <AussieEnglishPractice />
         </div>
       } />
-      <Route path="/speak" element={<SpeakFreePage />} />
-      <Route path="/slang" element={<SlangPage />} />
-      <Route path="/workplace" element={<WorkplacePage />} />
-      <Route path="/workplace/:situation" element={<SituationPage />} />
+      <Route path="/speak" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <SpeakFreePage />
+        </Suspense>
+      } />
+      <Route path="/slang" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <SlangPage />
+        </Suspense>
+      } />
+      <Route path="/workplace" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <WorkplacePage />
+        </Suspense>
+      } />
+      <Route path="/workplace/:situation" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <SituationPage />
+        </Suspense>
+      } />
+      <Route path="/stats" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <UnifiedDashboard />
+        </Suspense>
+      } />
       <Route path="/" element={<Navigate to="/app" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

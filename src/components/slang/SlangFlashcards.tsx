@@ -127,7 +127,7 @@ export function SlangFlashcards() {
     return (
       <div className="slang-flashcards">
         <p>No cards available for this filter combination.</p>
-        <button onClick={() => { handleCategoryChange('all'); handleDifficultyChange('all'); }}>
+        <button onClick={() => { handleCategoryChange('all'); handleDifficultyChange('all'); }} aria-label="Reset all filters">
           Reset Filters
         </button>
       </div>
@@ -165,7 +165,7 @@ export function SlangFlashcards() {
             ))}
           </select>
         </div>
-        <span className="card-counter">
+        <span className="card-counter" aria-live="polite">
           Card {currentIndex + 1} of {filteredCards.length}
         </span>
       </div>
@@ -235,7 +235,7 @@ export function SlangFlashcards() {
 
       {/* Voice Practice Feedback */}
       {showVoicePractice && (
-        <div className="voice-practice-section">
+        <div className="voice-practice-section" aria-live="polite">
           {isListening && (
             <div className="listening-indicator">
               <span className="pulse-dot"></span>
@@ -258,13 +258,13 @@ export function SlangFlashcards() {
       )}
 
       <div className="flashcard-nav">
-        <button className="nav-btn" onClick={prevCard}>
+        <button className="nav-btn" onClick={prevCard} aria-label="Go to previous flashcard">
           Previous
         </button>
-        <button className="flip-btn" onClick={flipCard}>
+        <button className="flip-btn" onClick={flipCard} aria-label={isFlipped ? 'Show term side of card' : 'Flip card to see meaning'}>
           {isFlipped ? 'Show Term' : 'Flip Card'}
         </button>
-        <button className="nav-btn" onClick={nextCard}>
+        <button className="nav-btn" onClick={nextCard} aria-label="Go to next flashcard">
           Next
         </button>
       </div>

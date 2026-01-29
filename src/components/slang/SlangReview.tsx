@@ -104,10 +104,11 @@ export function SlangReview() {
               className="start-btn"
               onClick={startReview}
               disabled={dueCount === 0}
+              aria-label={dueCount === 0 ? 'No cards due for review' : 'Start review session'}
             >
               {dueCount === 0 ? 'No Cards Due' : 'Start Review'}
             </button>
-            <button className="reset-btn" onClick={resetProgress}>
+            <button className="reset-btn" onClick={resetProgress} aria-label="Reset review progress">
               Reset Progress
             </button>
           </div>
@@ -116,7 +117,7 @@ export function SlangReview() {
 
       {(reviewState === 'reviewing' || reviewState === 'answer') && currentCard && (
         <div className="review-card-section">
-          <div className="review-progress">
+          <div className="review-progress" aria-live="polite">
             <span>
               Reviewing: {dueCards.length - currentIndex} cards left
             </span>
@@ -137,13 +138,13 @@ export function SlangReview() {
           </div>
 
           {reviewState === 'reviewing' && (
-            <button className="show-answer-btn" onClick={showAnswer}>
+            <button className="show-answer-btn" onClick={showAnswer} aria-label="Reveal the answer">
               Show Answer
             </button>
           )}
 
           {reviewState === 'answer' && (
-            <div className="rating-section">
+            <div className="rating-section" aria-live="polite">
               <p>How well did you know this?</p>
               <div className="rating-buttons">
                 {RATINGS.map((rating) => (
@@ -151,6 +152,7 @@ export function SlangReview() {
                     key={rating.value}
                     className={`rating-btn ${rating.className}`}
                     onClick={() => handleRating(rating.value)}
+                    aria-label={`Rate as ${rating.label}`}
                   >
                     {rating.label}
                   </button>
@@ -162,10 +164,10 @@ export function SlangReview() {
       )}
 
       {reviewState === 'complete' && (
-        <div className="review-complete">
+        <div className="review-complete" aria-live="polite">
           <h2>Review Complete!</h2>
           <p>You've reviewed all due cards. Come back later for more!</p>
-          <button className="start-btn" onClick={backToStats}>
+          <button className="start-btn" onClick={backToStats} aria-label="View your statistics">
             View Stats
           </button>
         </div>
