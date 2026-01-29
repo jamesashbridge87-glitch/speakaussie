@@ -13,6 +13,7 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { WorkplaceFlashcards } from './WorkplaceFlashcards';
 import { WorkplaceQuiz } from './WorkplaceQuiz';
+import { WorkplaceFillBlank } from './WorkplaceFillBlank';
 import './SituationPage.css';
 
 type GameMode = 'overview' | 'flashcards' | 'quiz' | 'fillblank' | 'favorites';
@@ -27,6 +28,7 @@ export function SituationPage() {
     isSituationUnlocked,
     getReviewCount,
     favorites,
+    isPhraseLearned,
   } = useWorkplaceProgress();
 
   useGamification(); // Initialize gamification tracking
@@ -56,9 +58,8 @@ export function SituationPage() {
   const getNextSubcategory = () => {
     for (const sub of subcategories) {
       const subPhrases = phrases.filter(p => p.subcategory === sub);
-      const learned = subPhrases.filter(_p =>
-        // Check if phrase is in learned list (simplified check)
-        progress.learned > 0
+      const learned = subPhrases.filter(p =>
+        isPhraseLearned(p.id, validSituation)
       ).length;
       if (learned < subPhrases.length) {
         return { subcategory: sub, count: subPhrases.length };
@@ -205,11 +206,10 @@ export function SituationPage() {
 
       {activeMode === 'fillblank' && (
         <main className="situation-main game-mode">
-          <div className="coming-soon">
-            <h2>Fill in the Blank</h2>
-            <p>Coming soon!</p>
-            <button onClick={() => setActiveMode('overview')}>Back</button>
-          </div>
+          <WorkplaceFillBlank
+            situation={validSituation}
+            onBack={() => setActiveMode('overview')}
+          />
         </main>
       )}
 

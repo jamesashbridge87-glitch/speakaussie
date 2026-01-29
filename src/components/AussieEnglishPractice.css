@@ -179,6 +179,22 @@
   border-color: var(--color-primary);
 }
 
+.toggle-workplace-btn {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-workplace-btn:hover {
+  background-color: #2563eb;
+  border-color: #1d4ed8;
+}
+
 /* Culture Guide Section */
 .culture-guide-section {
   background: var(--color-light);

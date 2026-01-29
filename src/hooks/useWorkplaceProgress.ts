@@ -181,6 +181,11 @@ export function useWorkplaceProgress() {
     return state.favorites.includes(phraseId);
   }, [state.favorites]);
 
+  // Check if a phrase is learned
+  const isPhraseLearned = useCallback((phraseId: string, situation: WorkplaceSituation): boolean => {
+    return state.situations[situation].phrasesLearned.includes(phraseId);
+  }, [state.situations]);
+
   // Record Quick Prep usage
   const recordQuickPrep = useCallback(() => {
     setState(prev => ({
@@ -249,6 +254,7 @@ export function useWorkplaceProgress() {
     recordQuizComplete,
     toggleFavorite,
     isFavorite,
+    isPhraseLearned,
     recordQuickPrep,
     resetProgress,
 

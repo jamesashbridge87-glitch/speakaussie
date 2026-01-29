@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useElevenLabsConversation } from '../hooks/useElevenLabsConversation';
 import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useAchievements } from '../hooks/useAchievements';
@@ -51,6 +52,7 @@ export function AussieEnglishPractice() {
   const [completedScenario, setCompletedScenario] = useState<Scenario | null>(null);
   const backendSessionId = useRef<string | null>(null);
   const anonymousSessionStart = useRef<number | null>(null);
+  const navigate = useNavigate();
 
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const {
@@ -370,6 +372,12 @@ export function AussieEnglishPractice() {
             onClick={() => { setShowCultureGuide(!showCultureGuide); setShowProgress(false); }}
           >
             {showCultureGuide ? 'Hide Culture Guide' : 'Culture Guide'}
+          </button>
+          <button
+            className="toggle-workplace-btn"
+            onClick={() => navigate('/workplace')}
+          >
+            Workplace Phrases
           </button>
         </div>
       </header>

@@ -52,6 +52,9 @@ export function WorkplacePage() {
     <div className="workplace-page">
       {/* Header */}
       <header className="workplace-header">
+        <button className="back-to-main" onClick={() => navigate('/app')}>
+          ← Back to Main
+        </button>
         <div className="header-brand">
           <img
             src={`${import.meta.env.BASE_URL}logo.png`}
