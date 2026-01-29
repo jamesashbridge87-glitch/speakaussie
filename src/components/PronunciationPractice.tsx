@@ -4,6 +4,61 @@ import { PronunciationScore, usePronunciationScoring } from '../hooks/usePronunc
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition';
 import './PronunciationPractice.css';
 
+// Confidence indicator component for pronunciation feedback
+interface PronunciationConfidenceProps {
+  score: number;
+  label?: string;
+}
+
+function PronunciationConfidence({ score, label }: PronunciationConfidenceProps) {
+  const getConfidenceLevel = (s: number): { level: string; color: string; message: string } => {
+    if (s >= 85) return { level: 'Excellent', color: '#22c55e', message: 'Outstanding pronunciation!' };
+    if (s >= 70) return { level: 'Good', color: '#3b82f6', message: 'Well done, keep it up!' };
+    if (s >= 50) return { level: 'Fair', color: '#f59e0b', message: 'Getting there, practice more.' };
+    return { level: 'Needs Work', color: '#ef4444', message: 'Keep practicing, you\'ll improve!' };
+  };
+
+  const { level, color, message } = getConfidenceLevel(score);
+
+  return (
+    <div className="pronunciation-confidence" aria-live="polite">
+      {label && <span className="confidence-label">{label}</span>}
+      <div className="confidence-ring">
+        <svg viewBox="0 0 100 100" className="confidence-svg">
+          <circle
+            className="confidence-bg"
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke="#e5e7eb"
+            strokeWidth="8"
+          />
+          <circle
+            className="confidence-fill"
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke={color}
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeDasharray={`${score * 2.83} 283`}
+            transform="rotate(-90 50 50)"
+          />
+          <text x="50" y="50" textAnchor="middle" dominantBaseline="central" className="confidence-score">
+            {score}
+          </text>
+        </svg>
+      </div>
+      <div className="confidence-details">
+        <span className="confidence-level" style={{ color }}>{level}</span>
+        <span className="confidence-message">{message}</span>
+      </div>
+    </div>
+  );
+}
+
 interface PronunciationPracticeProps {
   mode: PracticeMode;
   isSessionActive: boolean;
@@ -179,6 +234,7 @@ export function PronunciationPractice({
           className="start-practice-btn"
           onClick={handleStartPractice}
           disabled={!isSupported}
+          aria-label="Start pronunciation practice session"
         >
           Start Pronunciation Practice
         </button>
@@ -197,6 +253,7 @@ export function PronunciationPractice({
                     className="record-btn"
                     onClick={handleStartRecording}
                     disabled={!isSupported}
+                    aria-label="Start recording your pronunciation"
                   >
                     <span className="record-icon">🎤</span>
                     Tap to Record
@@ -204,7 +261,7 @@ export function PronunciationPractice({
                 )}
 
                 {isRecording && (
-                  <div className="recording-active">
+                  <div className="recording-active" aria-live="polite">
                     <div className="recording-indicator">
                       <span className="pulse-dot"></span>
                       <span>Listening...</span>
@@ -215,6 +272,7 @@ export function PronunciationPractice({
                     <button
                       className="stop-record-btn"
                       onClick={handleStopRecording}
+                      aria-label="Stop recording"
                     >
                       Stop Recording
                     </button>
@@ -230,12 +288,14 @@ export function PronunciationPractice({
                         className="submit-btn"
                         onClick={handleSubmit}
                         disabled={isScoring}
+                        aria-label={isScoring ? 'Analyzing your pronunciation' : 'Check your pronunciation score'}
                       >
                         {isScoring ? 'Analyzing...' : 'Check Score'}
                       </button>
                       <button
                         className="retry-btn"
                         onClick={handleStartRecording}
+                        aria-label="Record again"
                       >
                         Try Again
                       </button>
@@ -245,7 +305,7 @@ export function PronunciationPractice({
               </div>
 
               <div className="phrase-actions">
-                <button className="skip-btn" onClick={handleNextPhrase}>
+                <button className="skip-btn" onClick={handleNextPhrase} aria-label="Skip this phrase and get a new one">
                   Skip Phrase
                 </button>
               </div>
@@ -253,13 +313,9 @@ export function PronunciationPractice({
           )}
 
           {showScore && lastScore && (
-            <div className="score-display">
-              <div className="score-header">
-                <span className="score-label">Your Score</span>
-                <span className={`overall-score ${getScoreClass(lastScore.overall)}`}>
-                  {lastScore.overall}
-                </span>
-              </div>
+            <div className="score-display" aria-live="polite">
+              {/* Visual Confidence Score */}
+              <PronunciationConfidence score={lastScore.overall} label="Pronunciation Score" />
 
               {/* What you said vs target */}
               <div className="comparison-section">
@@ -292,10 +348,10 @@ export function PronunciationPractice({
               </div>
 
               <div className="score-actions">
-                <button className="next-btn" onClick={handleNextPhrase}>
+                <button className="next-btn" onClick={handleNextPhrase} aria-label="Go to next phrase">
                   Next Phrase
                 </button>
-                <button className="stop-practice-btn" onClick={handleStopPractice}>
+                <button className="stop-practice-btn" onClick={handleStopPractice} aria-label="Stop pronunciation practice">
                   Stop Practice
                 </button>
               </div>
