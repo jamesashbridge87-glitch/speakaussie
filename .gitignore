@@ -39,3 +39,4 @@ coverage/
 # Backend data
 backend/data/
 *.db
+.worktrees/
