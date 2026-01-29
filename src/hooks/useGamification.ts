@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { slangData } from '../data/slangData';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/storage';
 
 // XP rewards for different activities
 const XP_REWARDS = {
@@ -94,7 +95,7 @@ const defaultState: GamificationState = {
 
 const getInitialState = (): GamificationState => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = safeGetItem(STORAGE_KEY);
     if (stored) {
       return { ...defaultState, ...JSON.parse(stored) };
     }
@@ -111,7 +112,7 @@ export function useGamification() {
 
   // Save to localStorage whenever state changes
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    safeSetItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
 
   // Check and update daily challenge on mount
@@ -416,7 +417,7 @@ export function useGamification() {
   const resetProgress = useCallback(() => {
     if (window.confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
       setState(defaultState);
-      localStorage.removeItem(STORAGE_KEY);
+      safeRemoveItem(STORAGE_KEY);
       showNotification('Progress reset');
     }
   }, [showNotification]);

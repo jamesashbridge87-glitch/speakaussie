@@ -36,11 +36,17 @@ export function SessionTimer({
   // Play warning sound
   const playWarningSound = useCallback(() => {
     try {
-      // Create audio context on demand
+      // Create audio context on demand with error handling
       if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        try {
+          audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        } catch (audioContextError) {
+          console.warn('AudioContext not available:', audioContextError);
+          return;
+        }
       }
       const ctx = audioContextRef.current;
+      if (!ctx) return;
 
       // Play three short beeps
       const playBeep = (time: number, frequency: number, duration: number) => {

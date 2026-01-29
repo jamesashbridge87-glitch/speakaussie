@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { WorkplaceSituation, situationOrder, workplaceData, getSituationPhrases } from '../data/workplaceData';
+import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/storage';
 
 interface SituationProgress {
   phrasesLearned: string[];
@@ -44,7 +45,7 @@ const createDefaultState = (): WorkplaceProgressState => ({
 
 const getInitialState = (): WorkplaceProgressState => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = safeGetItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
       return { ...createDefaultState(), ...parsed };
@@ -60,7 +61,7 @@ export function useWorkplaceProgress() {
 
   // Save to localStorage
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    safeSetItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
 
   // Record a phrase as learned
@@ -239,7 +240,7 @@ export function useWorkplaceProgress() {
   const resetProgress = useCallback(() => {
     if (window.confirm('Are you sure you want to reset all workplace progress? This cannot be undone.')) {
       setState(createDefaultState());
-      localStorage.removeItem(STORAGE_KEY);
+      safeRemoveItem(STORAGE_KEY);
     }
   }, []);
 

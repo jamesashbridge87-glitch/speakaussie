@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { slangData } from '../data/slangData';
+import { safeGetItem, safeSetItem } from '../utils/storage';
 
 interface CardProgress {
   id: string;
@@ -18,7 +19,7 @@ const STORAGE_KEY = 'aussie-slang-progress';
 
 const getInitialProgress = (): SlangProgress => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = safeGetItem(STORAGE_KEY);
     if (stored) {
       return JSON.parse(stored);
     }
@@ -47,7 +48,7 @@ export function useSlangProgress() {
 
   // Save to localStorage whenever progress changes
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    safeSetItem(STORAGE_KEY, JSON.stringify(progress));
   }, [progress]);
 
   const getCardProgress = useCallback(
