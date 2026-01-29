@@ -1,0 +1,636 @@
+.workplace-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+}
+
+/* Header */
+.workplace-header {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.workplace-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  margin: 0.25rem 0 1rem;
+  color: #a0a0b0;
+  font-size: 0.9rem;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-icon {
+  font-size: 1.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+}
+
+/* XP Progress */
+.xp-progress {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.xp-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.xp-text {
+  display: block;
+  font-size: 0.75rem;
+  color: #a0a0b0;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Navigation */
+.workplace-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+}
+
+.workplace-nav .nav-btn {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.workplace-nav .nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.workplace-nav .nav-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* Main content */
+.workplace-main {
+  padding: 1.5rem;
+}
+
+/* Quick Prep Section */
+.quick-prep-section {
+  margin-bottom: 2rem;
+}
+
+.quick-prep-card {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.quick-prep-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.quick-prep-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+}
+
+.quick-prep-card p {
+  margin: 0 0 1rem;
+  opacity: 0.9;
+}
+
+.quick-prep-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.quick-prep-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-prep-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Your Path Section */
+.your-path-section {
+  margin-bottom: 2rem;
+}
+
+.your-path-section h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.path-subtitle {
+  margin: 0 0 1rem;
+  color: #a0a0b0;
+  font-size: 0.85rem;
+}
+
+.path-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.path-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.path-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.path-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.path-item.current {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.path-item.complete {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.path-item.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.path-icon {
+  font-size: 1.5rem;
+}
+
+.path-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.path-status {
+  font-size: 0.65rem;
+  color: #a0a0b0;
+}
+
+.path-arrow {
+  color: #a0a0b0;
+  font-size: 1.25rem;
+}
+
+.path-more {
+  color: #a0a0b0;
+  font-size: 1.25rem;
+}
+
+.see-all-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.see-all-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Review Reminder */
+.review-reminder {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.review-reminder p {
+  margin: 0;
+  color: #fbbf24;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #fbbf24;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+/* All Situations */
+.all-situations {
+  padding-bottom: 2rem;
+}
+
+.all-situations h2 {
+  margin: 0 0 1.5rem;
+}
+
+.tier-group {
+  margin-bottom: 2rem;
+}
+
+.tier-title {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.situation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.situation-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.situation-card:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.situation-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.situation-card.complete {
+  border-color: #22c55e;
+}
+
+.situation-icon {
+  font-size: 2rem;
+}
+
+.situation-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.situation-progress {
+  width: 100%;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+}
+
+.unlock-text {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+}
+
+.complete-badge {
+  font-size: 0.7rem;
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.back-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Favorites Section */
+.favorites-section {
+  padding-bottom: 2rem;
+}
+
+.favorites-section h2 {
+  margin: 0 0 1rem;
+}
+
+.no-favorites {
+  text-align: center;
+  color: #a0a0b0;
+  padding: 2rem;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.favorite-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.fav-phrase {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.fav-meaning {
+  color: #a0a0b0;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.fav-situation {
+  font-size: 0.75rem;
+  color: #3b82f6;
+}
+
+/* Stats Section */
+.stats-section h2 {
+  margin: 0 0 1.5rem;
+}
+
+.overall-progress {
+  margin-bottom: 2rem;
+}
+
+.overall-progress h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.big-progress .progress-bar.large {
+  height: 12px;
+}
+
+.situations-progress {
+  margin-bottom: 2rem;
+}
+
+.situations-progress h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.situation-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.situation-label {
+  flex: 1;
+  font-size: 0.85rem;
+}
+
+.progress-bar.small {
+  width: 100px;
+  height: 6px;
+}
+
+.progress-fraction {
+  font-size: 0.75rem;
+  color: #a0a0b0;
+  min-width: 40px;
+  text-align: right;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat-name {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+  text-transform: uppercase;
+}
+
+.reset-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Upgrade Banner */
+.upgrade-banner {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.upgrade-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.upgrade-content p {
+  margin: 0 0 1rem;
+  color: #a0a0b0;
+  font-size: 0.85rem;
+}
+
+.upgrade-links {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.upgrade-link {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.upgrade-link.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.upgrade-link.primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.upgrade-link:hover {
+  opacity: 0.9;
+}
+
+/* Footer */
+.workplace-footer {
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.workplace-footer p {
+  margin: 0;
+  color: #a0a0b0;
+  font-size: 0.8rem;
+}
+
+.workplace-footer a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.workplace-footer a:hover {
+  text-decoration: underline;
+}
