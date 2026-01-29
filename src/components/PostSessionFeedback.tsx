@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Scenario } from '../data/scenarios';
 import { getRandomEncouragement, getScenarioTip } from '../data/feedbackMessages';
+import { useScenarioProgress, SessionFeedback } from '../hooks/useScenarioProgress';
 import './PostSessionFeedback.css';
 
 export type SessionFeeling = 'great' | 'okay' | 'tough';
@@ -11,6 +12,13 @@ interface PostSessionFeedbackProps {
   onSelectScenario: (scenario: Scenario) => void;
   recommendedScenario?: Scenario | null;
 }
+
+// Map session feeling to spaced repetition feedback
+const feelingToFeedback: Record<SessionFeeling, SessionFeedback> = {
+  great: 'easy',
+  okay: 'good',
+  tough: 'hard',
+};
 
 export function PostSessionFeedback({
   scenario,
@@ -23,6 +31,8 @@ export function PostSessionFeedback({
   const [encouragement, setEncouragement] = useState('');
   const [tip, setTip] = useState('');
 
+  const { recordScenarioCompletion, getDaysUntilReview } = useScenarioProgress();
+
   useEffect(() => {
     if (feeling) {
       setEncouragement(getRandomEncouragement(feeling));
@@ -32,6 +42,11 @@ export function PostSessionFeedback({
 
   const handleFeelingSelect = (selectedFeeling: SessionFeeling) => {
     setFeeling(selectedFeeling);
+
+    // Record the scenario completion for spaced repetition
+    const feedback = feelingToFeedback[selectedFeeling];
+    recordScenarioCompletion(scenario.id, feedback);
+
     setStep('feedback');
   };
 
@@ -59,6 +74,9 @@ export function PostSessionFeedback({
     }
   };
 
+  // Get the next review info after recording
+  const daysUntilReview = getDaysUntilReview(scenario.id);
+
   return (
     <div className="post-session-overlay">
       <div className="post-session-modal">
@@ -67,14 +85,15 @@ export function PostSessionFeedback({
             <div className="step-icon">{scenario.icon}</div>
             <h2>Session Complete!</h2>
             <p className="scenario-name">{scenario.title}</p>
-            <p className="feeling-question">How did that feel?</p>
+            <p className="feeling-question">How did that go?</p>
+            <p className="feeling-hint">This helps schedule your next review</p>
 
             <div className="feeling-buttons">
               <button
                 className="feeling-btn great"
                 onClick={() => handleFeelingSelect('great')}
               >
-                <span className="feeling-emoji">😊</span>
+                <span className="feeling-emoji">&#x1F60A;</span>
                 <span className="feeling-label">Great</span>
                 <span className="feeling-desc">I felt confident</span>
               </button>
@@ -83,7 +102,7 @@ export function PostSessionFeedback({
                 className="feeling-btn okay"
                 onClick={() => handleFeelingSelect('okay')}
               >
-                <span className="feeling-emoji">😐</span>
+                <span className="feeling-emoji">&#x1F610;</span>
                 <span className="feeling-label">Okay</span>
                 <span className="feeling-desc">Getting there</span>
               </button>
@@ -92,7 +111,7 @@ export function PostSessionFeedback({
                 className="feeling-btn tough"
                 onClick={() => handleFeelingSelect('tough')}
               >
-                <span className="feeling-emoji">😓</span>
+                <span className="feeling-emoji">&#x1F613;</span>
                 <span className="feeling-label">Tough</span>
                 <span className="feeling-desc">Found it hard</span>
               </button>
@@ -103,13 +122,27 @@ export function PostSessionFeedback({
         {step === 'feedback' && feeling && (
           <div className="feedback-step encouragement-step">
             <div className="encouragement-icon">
-              {feeling === 'great' ? '🌟' : feeling === 'okay' ? '💪' : '🤗'}
+              {feeling === 'great' ? '\u{1F31F}' : feeling === 'okay' ? '\u{1F4AA}' : '\u{1F917}'}
             </div>
 
             <p className="encouragement-message">{encouragement}</p>
 
+            {daysUntilReview !== null && (
+              <div className="review-schedule-info">
+                <span className="review-icon">&#x1F4C5;</span>
+                <p className="review-text">
+                  {daysUntilReview === 0
+                    ? "We'll remind you to practice this again today"
+                    : daysUntilReview === 1
+                    ? "We'll remind you to practice this again tomorrow"
+                    : `We'll remind you to practice this again in ${daysUntilReview} days`
+                  }
+                </p>
+              </div>
+            )}
+
             <div className="tip-box">
-              <span className="tip-icon">💡</span>
+              <span className="tip-icon">&#x1F4A1;</span>
               <p className="tip-text">{tip}</p>
             </div>
 
@@ -125,7 +158,7 @@ export function PostSessionFeedback({
 
             <div className="next-options">
               <button className="next-option repeat" onClick={handleRepeat}>
-                <span className="option-icon">🔄</span>
+                <span className="option-icon">&#x1F504;</span>
                 <div className="option-content">
                   <span className="option-title">Practice again</span>
                   <span className="option-desc">Repeat {scenario.title}</span>
@@ -144,7 +177,7 @@ export function PostSessionFeedback({
               )}
 
               <button className="next-option browse" onClick={handleDone}>
-                <span className="option-icon">📋</span>
+                <span className="option-icon">&#x1F4CB;</span>
                 <div className="option-content">
                   <span className="option-title">Browse scenarios</span>
                   <span className="option-desc">See all practice options</span>
