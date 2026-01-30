@@ -300,6 +300,16 @@
   text-transform: uppercase;
 }
 
+.next-option.pronunciation {
+  border-color: #11E8F6;
+  background: #f0fdfa;
+}
+
+.next-option.pronunciation:hover {
+  border-color: #0ea5e9;
+  background: #e0f7fa;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 480px) {
   .post-session-modal {

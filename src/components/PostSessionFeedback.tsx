@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Scenario } from '../data/scenarios';
 import { getRandomEncouragement, getScenarioTip } from '../data/feedbackMessages';
 import { useScenarioProgress, SessionFeedback } from '../hooks/useScenarioProgress';
@@ -26,12 +27,20 @@ export function PostSessionFeedback({
   onSelectScenario,
   recommendedScenario,
 }: PostSessionFeedbackProps) {
+  const navigate = useNavigate();
   const [step, setStep] = useState<'feeling' | 'feedback' | 'next'>('feeling');
   const [feeling, setFeeling] = useState<SessionFeeling | null>(null);
   const [encouragement, setEncouragement] = useState('');
   const [tip, setTip] = useState('');
 
   const { recordScenarioCompletion, getDaysUntilReview } = useScenarioProgress();
+
+  const handlePracticePronunciation = () => {
+    if (feeling) {
+      onComplete(feeling);
+      navigate('/speak');
+    }
+  };
 
   useEffect(() => {
     if (feeling) {
@@ -175,6 +184,14 @@ export function PostSessionFeedback({
                   <span className="recommended-badge">Recommended</span>
                 </button>
               )}
+
+              <button className="next-option pronunciation" onClick={handlePracticePronunciation}>
+                <span className="option-icon">&#x1F3A4;</span>
+                <div className="option-content">
+                  <span className="option-title">Practice pronunciation</span>
+                  <span className="option-desc">Polish your Aussie accent</span>
+                </div>
+              </button>
 
               <button className="next-option browse" onClick={handleDone}>
                 <span className="option-icon">&#x1F4CB;</span>

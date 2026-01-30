@@ -142,21 +142,43 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
     }
   };
 
-  const getProgress = () => {
-    const steps: Step[] = ['welcome', 'experience', 'goal', 'comfort', 'ready'];
-    const currentIndex = steps.indexOf(step);
-    return ((currentIndex + 1) / steps.length) * 100;
+  const STEPS: Step[] = ['welcome', 'experience', 'goal', 'comfort', 'ready'];
+  const STEP_LABELS: Record<Step, string> = {
+    welcome: 'Welcome',
+    experience: 'Experience',
+    goal: 'Goals',
+    comfort: 'Comfort',
+    ready: 'Ready!',
   };
+
+  const getCurrentStepIndex = () => STEPS.indexOf(step);
+  const getProgress = () => ((getCurrentStepIndex() + 1) / STEPS.length) * 100;
 
   return (
     <div className="onboarding-overlay">
       <div className="onboarding-modal">
-        {/* Progress bar */}
-        <div className="onboarding-progress">
-          <div
-            className="onboarding-progress-fill"
-            style={{ width: `${getProgress()}%` }}
-          />
+        {/* Progress indicator */}
+        <div className="onboarding-progress-section">
+          <div className="step-indicator">
+            <span className="step-current">Step {getCurrentStepIndex() + 1}</span>
+            <span className="step-divider">/</span>
+            <span className="step-total">{STEPS.length}</span>
+          </div>
+          <div className="onboarding-progress">
+            <div
+              className="onboarding-progress-fill"
+              style={{ width: `${getProgress()}%` }}
+            />
+          </div>
+          <div className="step-dots">
+            {STEPS.map((s, index) => (
+              <div
+                key={s}
+                className={`step-dot ${index <= getCurrentStepIndex() ? 'completed' : ''} ${s === step ? 'active' : ''}`}
+                title={STEP_LABELS[s]}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Welcome Step */}

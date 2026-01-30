@@ -26,18 +26,74 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+/* Progress section */
+.onboarding-progress-section {
+  padding: 16px 24px 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.step-current {
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.step-divider {
+  color: #94a3b8;
+}
+
+.step-total {
+  color: #64748b;
+}
+
 /* Progress bar */
 .onboarding-progress {
-  height: 4px;
+  height: 6px;
   background: #e5e7eb;
-  border-radius: 20px 20px 0 0;
+  border-radius: 3px;
   overflow: hidden;
+  margin-bottom: 12px;
 }
 
 .onboarding-progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #10b981, #3b82f6);
   transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+/* Step dots */
+.step-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.step-dot.completed {
+  background: #3b82f6;
+}
+
+.step-dot.active {
+  background: #3b82f6;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 /* Step container */
