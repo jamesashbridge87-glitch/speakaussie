@@ -9,6 +9,7 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
 import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
+import { Icon } from '../Icon';
 import './WorkplaceQuiz.css';
 
 interface WorkplaceQuizProps {
@@ -187,7 +188,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
       {quizState === 'start' && (
         <div className="quiz-start">
           <div className="quiz-intro">
-            <span className="quiz-icon">❓</span>
+            <span className="quiz-icon"><Icon emoji="❓" size="xl" /></span>
             <h3>Ready for a Quiz?</h3>
             <p>Test your knowledge of {situationNames[situation].toLowerCase()} phrases.</p>
             <p className="quiz-info">{Math.min(QUIZ_LENGTH, phrases.length)} questions</p>
@@ -206,7 +207,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
             </span>
             <span className="quiz-score">Score: {score}</span>
             {streak >= 3 && (
-              <span className="streak-badge">🔥 {streak} in a row!</span>
+              <span className="streak-badge"><Icon emoji="🔥" size="xs" /> {streak} in a row!</span>
             )}
           </div>
 
@@ -263,7 +264,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
         <div className="quiz-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
-              {score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'}
+              <Icon emoji={score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'} size="xl" />
             </span>
             <h3>Quiz Complete!</h3>
           </div>

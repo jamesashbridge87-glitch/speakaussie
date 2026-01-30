@@ -10,6 +10,7 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useTextToSpeech } from '../../hooks/useTextToSpeech';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
+import { Icon } from '../Icon';
 import './WorkplaceFlashcards.css';
 
 interface WorkplaceFlashcardsProps {
@@ -137,7 +138,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
               onClick={handleToggleFavorite}
               aria-label="Toggle favorite"
             >
-              {isFavorite(currentPhrase.id) ? '❤️' : '🤍'}
+              <Icon emoji={isFavorite(currentPhrase.id) ? '❤️' : '🤍'} size="sm" />
             </button>
             {ttsSupported && (
               <button
@@ -145,7 +146,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
                 onClick={(e) => handleSpeak(e, currentPhrase.phrase)}
                 aria-label="Listen to pronunciation"
               >
-                🔊
+                <Icon emoji="🔊" size="sm" />
               </button>
             )}
           </div>
@@ -216,7 +217,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
                     onClick={(e) => handleSpeak(e, currentPhrase.example)}
                     aria-label="Listen to example pronunciation"
                   >
-                    🔊 Listen
+                    <Icon emoji="🔊" size="sm" /> Listen
                   </button>
                 )}
               </div>

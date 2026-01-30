@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SessionRecord, ProgressStats } from '../hooks/useProgressTracking';
 import { UnlockedAchievement } from '../hooks/useAchievements';
 import { exportToJSON, exportToCSV, exportToPDF } from '../utils/exportProgress';
+import { Icon } from './Icon';
 import './ExportMenu.css';
 
 interface ExportMenuProps {
@@ -51,21 +52,21 @@ export function ExportMenu({
           <div className="export-backdrop" onClick={() => setIsOpen(false)} />
           <div className="export-dropdown">
             <button className="export-option" onClick={handleExportJSON}>
-              <span className="export-icon">📄</span>
+              <span className="export-icon"><Icon emoji="📄" size="md" /></span>
               <div className="export-option-info">
                 <span className="export-option-title">Export as JSON</span>
                 <span className="export-option-desc">Complete data for backup or import</span>
               </div>
             </button>
             <button className="export-option" onClick={handleExportCSV}>
-              <span className="export-icon">📊</span>
+              <span className="export-icon"><Icon emoji="📊" size="md" /></span>
               <div className="export-option-info">
                 <span className="export-option-title">Export as CSV</span>
                 <span className="export-option-desc">Open in Excel or Google Sheets</span>
               </div>
             </button>
             <button className="export-option" onClick={handleExportPDF}>
-              <span className="export-icon">🖨️</span>
+              <span className="export-icon"><Icon emoji="🖨️" size="md" /></span>
               <div className="export-option-info">
                 <span className="export-option-title">Print Report</span>
                 <span className="export-option-desc">Generate printable progress report</span>

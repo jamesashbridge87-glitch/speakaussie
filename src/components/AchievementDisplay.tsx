@@ -1,4 +1,5 @@
 import { Achievement } from '../hooks/useAchievements';
+import { Icon } from './Icon';
 import './AchievementDisplay.css';
 
 export interface AchievementWithProgress {
@@ -56,7 +57,7 @@ export function AchievementDisplay({ achievements }: AchievementDisplayProps) {
                   className={`achievement-card ${achievement.unlocked ? 'unlocked' : 'locked'}`}
                 >
                   <div className="achievement-icon">
-                    {achievement.unlocked ? achievement.icon : '🔒'}
+                    <Icon emoji={achievement.unlocked ? achievement.icon : '🔒'} size="lg" />
                   </div>
                   <div className="achievement-info">
                     <span className="achievement-title">{achievement.title}</span>
@@ -106,7 +107,7 @@ export function AchievementToast({ achievements, onDismiss }: AchievementToastPr
         <div className="toast-achievements">
           {achievements.map(achievement => (
             <div key={achievement.id} className="toast-achievement">
-              <span className="toast-icon">{achievement.icon}</span>
+              <span className="toast-icon"><Icon emoji={achievement.icon} size="lg" /></span>
               <div className="toast-info">
                 <span className="toast-achievement-title">{achievement.title}</span>
                 <span className="toast-achievement-desc">{achievement.description}</span>

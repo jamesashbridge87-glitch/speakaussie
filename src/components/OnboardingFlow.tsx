@@ -6,6 +6,7 @@ import {
   COMFORT_MESSAGES,
   WELCOME_MESSAGES,
 } from '../hooks/useOnboarding';
+import { Icon } from './Icon';
 import './OnboardingFlow.css';
 
 interface OnboardingFlowProps {
@@ -233,7 +234,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${experienceLevel === option.value ? 'selected' : ''}`}
                   onClick={() => setExperienceLevel(option.value)}
                 >
-                  <span className="option-icon">{option.icon}</span>
+                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -268,7 +269,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${goal === option.value ? 'selected' : ''}`}
                   onClick={() => setGoal(option.value)}
                 >
-                  <span className="option-icon">{option.icon}</span>
+                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -303,7 +304,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${comfortLevel === option.value ? 'selected' : ''}`}
                   onClick={() => setComfortLevel(option.value)}
                 >
-                  <span className="option-icon">{option.icon}</span>
+                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -328,7 +329,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
         {/* Ready Step */}
         {step === 'ready' && comfortLevel && (
           <div className="onboarding-step ready-step">
-            <div className="ready-icon">🎉</div>
+            <div className="ready-icon"><Icon emoji="🎉" size="xl" /></div>
             <h2>You're all set{name ? `, ${name}` : ''}!</h2>
 
             <div className="encouragement-message">
@@ -339,15 +340,15 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
               <h3>Your personalized plan:</h3>
               <ul>
                 <li>
-                  <span className="summary-icon">📍</span>
+                  <span className="summary-icon"><Icon emoji="📍" size="sm" /></span>
                   <span>Starting point matched to your experience</span>
                 </li>
                 <li>
-                  <span className="summary-icon">🎯</span>
+                  <span className="summary-icon"><Icon emoji="🎯" size="sm" /></span>
                   <span>Scenarios focused on {goal === 'all-of-above' ? 'all your goals' : goal?.replace('-', ' ')}</span>
                 </li>
                 <li>
-                  <span className="summary-icon">📈</span>
+                  <span className="summary-icon"><Icon emoji="📈" size="sm" /></span>
                   <span>Difficulty adjusted to your comfort level</span>
                 </li>
               </ul>

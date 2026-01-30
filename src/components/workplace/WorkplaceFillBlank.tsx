@@ -9,6 +9,7 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
 import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
+import { Icon } from '../Icon';
 import './WorkplaceFillBlank.css';
 
 interface WorkplaceFillBlankProps {
@@ -178,7 +179,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
       {gameState === 'start' && (
         <div className="fill-blank-start">
           <div className="start-intro">
-            <span className="start-icon">📝</span>
+            <span className="start-icon"><Icon emoji="📝" size="xl" /></span>
             <h3>Complete the Sentence</h3>
             <p>Use {situationNames[situation].toLowerCase()} phrases in context.</p>
             <p className="start-info">{Math.min(QUIZ_LENGTH, phrases.length)} sentences</p>
@@ -197,7 +198,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
             </span>
             <span className="game-score">Score: {score}</span>
             {streak >= 3 && (
-              <span className="streak-badge">🔥 {streak} streak!</span>
+              <span className="streak-badge"><Icon emoji="🔥" size="xs" /> {streak} streak!</span>
             )}
           </div>
 
@@ -255,7 +256,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
         <div className="fill-blank-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
-              {score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'}
+              <Icon emoji={score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'} size="xl" />
             </span>
             <h3>Complete!</h3>
           </div>

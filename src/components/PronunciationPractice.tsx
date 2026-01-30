@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { PracticeMode } from '../hooks/useProgressTracking';
 import { PronunciationScore, usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition';
+import { Icon } from './Icon';
 import './PronunciationPractice.css';
 
 // Confidence indicator component for pronunciation feedback
@@ -255,7 +256,7 @@ export function PronunciationPractice({
                     disabled={!isSupported}
                     aria-label="Start recording your pronunciation"
                   >
-                    <span className="record-icon">🎤</span>
+                    <span className="record-icon"><Icon emoji="🎤" size="lg" /></span>
                     Tap to Record
                   </button>
                 )}

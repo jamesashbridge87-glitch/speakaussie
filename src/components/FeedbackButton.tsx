@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Icon } from './Icon';
 import './FeedbackButton.css';
 
 interface FeedbackButtonProps {
@@ -84,7 +85,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
         onClick={() => setIsOpen(true)}
         aria-label="Give feedback"
       >
-        <span className="feedback-icon">💬</span>
+        <span className="feedback-icon"><Icon emoji="💬" size="sm" /></span>
         <span className="feedback-label">Feedback</span>
       </button>
 
@@ -107,7 +108,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
                       className="feedback-type-btn"
                       onClick={() => handleTypeSelect(type.id)}
                     >
-                      <span className="type-icon">{type.icon}</span>
+                      <span className="type-icon"><Icon emoji={type.icon} size="md" /></span>
                       <span className="type-label">{type.label}</span>
                       <span className="type-desc">{type.description}</span>
                     </button>
@@ -124,7 +125,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
 
                 <div className="feedback-type-header">
                   <span className="type-icon-large">
-                    {feedbackTypes.find(t => t.id === selectedType)?.icon}
+                    <Icon emoji={feedbackTypes.find(t => t.id === selectedType)?.icon || ''} size="lg" />
                   </span>
                   <h2>{feedbackTypes.find(t => t.id === selectedType)?.label}</h2>
                 </div>
@@ -162,7 +163,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
 
             {step === 'thanks' && (
               <div className="feedback-content thanks-content">
-                <div className="thanks-icon">🙏</div>
+                <div className="thanks-icon"><Icon emoji="🙏" size="xl" /></div>
                 <h2>Thanks for your feedback!</h2>
                 <p>We really appreciate you taking the time to help us improve SpeakAussie.</p>
                 <button className="feedback-done-btn" onClick={handleClose}>

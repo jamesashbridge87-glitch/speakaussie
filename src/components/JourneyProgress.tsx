@@ -1,4 +1,5 @@
 import { JourneyProgress, JOURNEY_PHASES } from '../hooks/useJourneyProgress';
+import { Icon } from './Icon';
 import './JourneyProgress.css';
 
 interface JourneyProgressProps {
@@ -24,7 +25,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Header with current phase */}
       <div className="journey-header">
         <div className="current-phase-badge">
-          <span className="phase-icon">{currentPhase.icon}</span>
+          <span className="phase-icon"><Icon emoji={currentPhase.icon} size="lg" /></span>
           <div className="phase-info">
             <span className="phase-label">
               {isStarted ? `Week ${currentWeek} · Day ${currentDay}` : 'Ready to begin'}
@@ -34,7 +35,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
         </div>
         {isNewPhase && isStarted && (
           <div className="new-phase-celebration">
-            🎉 New phase unlocked!
+            <Icon emoji="🎉" size="sm" /> New phase unlocked!
           </div>
         )}
       </div>
@@ -68,7 +69,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
               key={phase.id}
               className={`progress-phase-label ${phase.id === currentPhase.id ? 'active' : ''}`}
             >
-              {phase.icon}
+              <Icon emoji={phase.icon} size="xs" />
             </span>
           ))}
         </div>
@@ -85,7 +86,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Weekly goal */}
       <div className="weekly-goal">
         <div className="goal-header">
-          <span className="goal-icon">🎯</span>
+          <span className="goal-icon"><Icon emoji="🎯" size="sm" /></span>
           <span className="goal-title">This Week's Goal</span>
         </div>
         <p className="goal-text">{weeklyGoal}</p>
@@ -94,7 +95,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Recommendation */}
       <div className="recommendation">
         <div className="recommendation-header">
-          <span className="recommendation-icon">💡</span>
+          <span className="recommendation-icon"><Icon emoji="💡" size="sm" /></span>
           <span className="recommendation-title">Recommendation</span>
         </div>
         <p className="recommendation-text">{recommendation}</p>
@@ -137,7 +138,7 @@ export function JourneyTimeline({ progress }: JourneyTimelineProps) {
           return (
             <div key={phase.id} className={`timeline-item ${status}`}>
               <div className="timeline-marker">
-                {status === 'completed' ? '✓' : phase.icon}
+                {status === 'completed' ? '✓' : <Icon emoji={phase.icon} size="sm" />}
               </div>
               <div className="timeline-content">
                 <div className="timeline-header">
@@ -180,7 +181,7 @@ export function JourneyCompact({ progress, onClick }: JourneyCompactProps) {
 
   return (
     <button className="journey-compact" onClick={onClick}>
-      <span className="journey-compact-icon">{currentPhase.icon}</span>
+      <span className="journey-compact-icon"><Icon emoji={currentPhase.icon} size="md" /></span>
       <div className="journey-compact-info">
         <span className="journey-compact-phase">{currentPhase.name}</span>
         <span className="journey-compact-day">

@@ -10,6 +10,7 @@ import {
 } from '../../data/workplaceData';
 import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
+import { Icon } from '../Icon';
 import './WorkplacePage.css';
 
 type ViewMode = 'home' | 'all' | 'favorites' | 'stats';
@@ -68,17 +69,17 @@ export function WorkplacePage() {
         {/* Stats bar */}
         <div className="stats-bar">
           <div className="stat-item">
-            <span className="stat-icon">🔥</span>
+            <span className="stat-icon"><Icon emoji="🔥" size="sm" /></span>
             <span className="stat-value">{streak}</span>
             <span className="stat-label">Streak</span>
           </div>
           <div className="stat-item">
-            <span className="stat-icon">⭐</span>
+            <span className="stat-icon"><Icon emoji="⭐" size="sm" /></span>
             <span className="stat-value">{xp}</span>
             <span className="stat-label">XP</span>
           </div>
           <div className="stat-item">
-            <span className="stat-icon">🏆</span>
+            <span className="stat-icon"><Icon emoji="🏆" size="sm" /></span>
             <span className="stat-value">{level}</span>
             <span className="stat-label">Level</span>
           </div>
@@ -122,7 +123,7 @@ export function WorkplacePage() {
           aria-label={`View favorites, ${favorites.length} saved`}
           aria-current={viewMode === 'favorites' ? 'page' : undefined}
         >
-          ❤️ {favorites.length}
+          <Icon emoji="❤️" size="sm" /> {favorites.length}
         </button>
         <button
           className={`nav-btn ${viewMode === 'stats' ? 'active' : ''}`}
@@ -140,7 +141,7 @@ export function WorkplacePage() {
             {/* Quick Prep Section */}
             <section className="quick-prep-section">
               <div className="quick-prep-card">
-                <span className="quick-prep-icon">🎯</span>
+                <span className="quick-prep-icon"><Icon emoji="🎯" size="lg" /></span>
                 <h2>Quick Prep</h2>
                 <p>Got something coming up?</p>
                 <div className="quick-prep-buttons">
@@ -189,11 +190,11 @@ export function WorkplacePage() {
                         disabled={!isUnlocked}
                       >
                         <span className="path-icon">
-                          {!isUnlocked ? '🔒' : situationIcons[situation]}
+                          <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
                         </span>
                         <span className="path-name">{situationNames[situation].split(' ')[0]}</span>
                         <span className="path-status">
-                          {isComplete ? '✓ Done' : isUnlocked ? `${progress.learned}/${progress.total}` : '🔒'}
+                          {isComplete ? '✓ Done' : isUnlocked ? `${progress.learned}/${progress.total}` : <Icon emoji="🔒" size="xs" />}
                         </span>
                       </button>
                       {index < 2 && <span className="path-arrow">→</span>}
@@ -212,7 +213,7 @@ export function WorkplacePage() {
             {totalReviewCount > 0 && (
               <section className="review-reminder">
                 <p>
-                  🔁 {totalReviewCount} phrase{totalReviewCount !== 1 ? 's' : ''} getting rusty —{' '}
+                  <Icon emoji="🔁" size="sm" /> {totalReviewCount} phrase{totalReviewCount !== 1 ? 's' : ''} getting rusty —{' '}
                   <button className="link-btn" onClick={() => navigate('/workplace/small-talk')} aria-label="Refresh your rusty phrases">
                     quick refresh?
                   </button>
@@ -242,7 +243,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        {!isUnlocked ? '🔒' : situationIcons[situation]}
+                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">
@@ -285,7 +286,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        {!isUnlocked ? '🔒' : situationIcons[situation]}
+                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">
@@ -327,7 +328,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        {!isUnlocked ? '🔒' : situationIcons[situation]}
+                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">

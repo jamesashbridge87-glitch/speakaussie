@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Icon } from './Icon';
 import './NPSSurvey.css';
 
 interface NPSSurveyProps {
@@ -56,7 +57,7 @@ export function NPSSurvey({ onComplete, onDismiss }: NPSSurveyProps) {
         {step === 'score' && (
           <div className="nps-content">
             <div className="nps-header">
-              <span className="nps-emoji">🇦🇺</span>
+              <span className="nps-emoji"><Icon emoji="🇦🇺" size="lg" /></span>
               <h2>Quick question!</h2>
             </div>
 
@@ -114,7 +115,7 @@ export function NPSSurvey({ onComplete, onDismiss }: NPSSurveyProps) {
 
         {step === 'thanks' && (
           <div className="nps-content nps-thanks">
-            <div className="thanks-emoji">🙏</div>
+            <div className="thanks-emoji"><Icon emoji="🙏" size="xl" /></div>
             <h2>Thanks for your feedback!</h2>
             <p>Your input helps us make SpeakAussie better for everyone.</p>
             <button className="nps-done" onClick={handleClose}>

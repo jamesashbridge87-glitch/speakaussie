@@ -14,6 +14,7 @@ import { useGamification } from '../../hooks/useGamification';
 import { WorkplaceFlashcards } from './WorkplaceFlashcards';
 import { WorkplaceQuiz } from './WorkplaceQuiz';
 import { WorkplaceFillBlank } from './WorkplaceFillBlank';
+import { Icon } from '../Icon';
 import './SituationPage.css';
 
 type GameMode = 'overview' | 'flashcards' | 'quiz' | 'fillblank' | 'favorites';
@@ -77,7 +78,7 @@ export function SituationPage() {
           <button className="back-btn" onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">
             ← Back
           </button>
-          <h1>🔒 {situationNames[validSituation]}</h1>
+          <h1><Icon emoji="🔒" size="md" /> {situationNames[validSituation]}</h1>
         </header>
         <main className="situation-main">
           <div className="locked-message">
@@ -96,7 +97,7 @@ export function SituationPage() {
           ← Back
         </button>
         <div className="header-title">
-          <span className="header-icon">{situationIcons[validSituation]}</span>
+          <span className="header-icon"><Icon emoji={situationIcons[validSituation]} size="lg" /></span>
           <h1>{situationNames[validSituation]}</h1>
         </div>
         <p className="header-progress" aria-live="polite">
@@ -114,7 +115,7 @@ export function SituationPage() {
               onClick={() => setActiveMode('flashcards')}
               aria-label="Start learning flashcards"
             >
-              <span className="up-next-icon">📇</span>
+              <span className="up-next-icon"><Icon emoji="📇" size="lg" /></span>
               <div className="up-next-content">
                 <h3>Learn {nextSubcategory ? nextSubcategory.count : phrases.length} phrases</h3>
                 <p>{situationDescriptions[validSituation]}</p>
@@ -132,7 +133,7 @@ export function SituationPage() {
                 onClick={() => setActiveMode('quiz')}
                 aria-label="Start quiz to test your recall"
               >
-                <span className="practice-icon">❓</span>
+                <span className="practice-icon"><Icon emoji="❓" size="md" /></span>
                 <h3>Quiz</h3>
                 <p>Test your recall</p>
               </button>
@@ -141,7 +142,7 @@ export function SituationPage() {
                 onClick={() => setActiveMode('fillblank')}
                 aria-label="Start fill in the blank practice"
               >
-                <span className="practice-icon">📝</span>
+                <span className="practice-icon"><Icon emoji="📝" size="md" /></span>
                 <h3>Fill in the Blank</h3>
                 <p>Use them in context</p>
               </button>
@@ -150,7 +151,7 @@ export function SituationPage() {
                 onClick={() => setActiveMode('favorites')}
                 aria-label="View your favorite phrases"
               >
-                <span className="practice-icon">⭐</span>
+                <span className="practice-icon"><Icon emoji="⭐" size="md" /></span>
                 <h3>Favorites</h3>
                 <p>{situationFavorites.length} saved</p>
               </button>
@@ -161,7 +162,7 @@ export function SituationPage() {
           {reviewCount > 0 && (
             <section className="review-section">
               <p>
-                🔁 {reviewCount} phrase{reviewCount !== 1 ? 's' : ''} getting rusty
+                <Icon emoji="🔁" size="sm" /> {reviewCount} phrase{reviewCount !== 1 ? 's' : ''} getting rusty
               </p>
               <button
                 className="refresh-btn"

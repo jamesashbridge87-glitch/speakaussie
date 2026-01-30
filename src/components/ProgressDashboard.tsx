@@ -8,6 +8,7 @@ import { ConfidenceScore, MilestoneDisplay } from './ConfidenceScore';
 import { JourneyProgressDisplay, JourneyTimeline } from './JourneyProgress';
 import { ExportMenu } from './ExportMenu';
 import { PronunciationStatsDisplay } from './PronunciationPractice';
+import { Icon } from './Icon';
 import './ProgressDashboard.css';
 
 interface PronunciationOverallStats {
@@ -135,7 +136,7 @@ export function ProgressDashboard({
           onClick={() => setActiveTab('journey')}
         >
           Journey
-          <span className="tab-badge">{journeyProgress.currentPhase.icon}</span>
+          <span className="tab-badge"><Icon emoji={journeyProgress.currentPhase.icon} size="xs" /></span>
         </button>
         <button
           className={`tab-btn ${activeTab === 'confidence' ? 'active' : ''}`}
@@ -167,7 +168,7 @@ export function ProgressDashboard({
           <div className="stats-grid">
             <div className="stat-card highlight">
               <span className="stat-value">{stats.streak}</span>
-              <span className="stat-label">Day Streak 🔥</span>
+              <span className="stat-label">Day Streak <Icon emoji="🔥" size="sm" /></span>
             </div>
 
             <div className="stat-card">

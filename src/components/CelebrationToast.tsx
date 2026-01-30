@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Icon } from './Icon';
 import './CelebrationToast.css';
 
 export interface CelebrationData {
@@ -56,7 +57,7 @@ export function CelebrationToast({
       <button className="celebration-close" onClick={handleDismiss}>
         &times;
       </button>
-      <div className="celebration-icon">{celebration.icon}</div>
+      <div className="celebration-icon"><Icon emoji={celebration.icon} size="xl" /></div>
       <h3 className="celebration-title">{celebration.title}</h3>
       <p className="celebration-message">{celebration.message}</p>
     </div>

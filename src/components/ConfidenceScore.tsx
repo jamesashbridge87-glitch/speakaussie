@@ -1,4 +1,5 @@
 import { ConfidenceScoreData, LEVEL_LABELS, Milestone } from '../hooks/useConfidenceScore';
+import { Icon } from './Icon';
 import './ConfidenceScore.css';
 
 interface ConfidenceScoreProps {
@@ -176,7 +177,7 @@ function BreakdownItem({ label, value, max, icon, description }: BreakdownItemPr
   return (
     <div className="breakdown-item">
       <div className="breakdown-header">
-        <span className="breakdown-icon">{icon}</span>
+        <span className="breakdown-icon"><Icon emoji={icon} size="sm" /></span>
         <span className="breakdown-label">{label}</span>
         <span className="breakdown-value">{value}/{max}</span>
       </div>
@@ -205,7 +206,7 @@ export function MilestoneDisplay({ milestones, nextMilestone }: MilestoneDisplay
         <div className="next-milestone">
           <span className="next-milestone-label">Next up:</span>
           <div className="next-milestone-card">
-            <span className="milestone-icon">{nextMilestone.icon}</span>
+            <span className="milestone-icon"><Icon emoji={nextMilestone.icon} size="lg" /></span>
             <div className="milestone-info">
               <span className="milestone-title">{nextMilestone.title}</span>
               <span className="milestone-description">{nextMilestone.description}</span>
@@ -231,7 +232,7 @@ export function MilestoneDisplay({ milestones, nextMilestone }: MilestoneDisplay
           <div className="achieved-grid">
             {recentAchievements.map(milestone => (
               <div key={milestone.id} className="achieved-milestone">
-                <span className="milestone-icon">{milestone.icon}</span>
+                <span className="milestone-icon"><Icon emoji={milestone.icon} size="md" /></span>
                 <span className="milestone-title">{milestone.title}</span>
               </div>
             ))}
