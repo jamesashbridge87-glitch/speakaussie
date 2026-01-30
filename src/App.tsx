@@ -14,11 +14,12 @@ const UnifiedDashboard = lazy(() => import('./components/UnifiedDashboard'));
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/app" element={
+      <Route path="/" element={
         <div className="app">
           <AussieEnglishPractice />
         </div>
       } />
+      <Route path="/app" element={<Navigate to="/" replace />} />
       <Route path="/speak" element={
         <Suspense fallback={<LoadingSpinner />}>
           <SpeakFreePage />
@@ -39,7 +40,6 @@ function AppRoutes() {
           <UnifiedDashboard />
         </Suspense>
       } />
-      <Route path="/" element={<Navigate to="/app" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -71,12 +71,12 @@ export function UnifiedDashboard() {
   // Memoize navigation handlers
   const navigateToWorkplace = useCallback(() => navigate('/workplace'), [navigate]);
   const navigateToSpeak = useCallback(() => navigate('/speak'), [navigate]);
-  const navigateToApp = useCallback(() => navigate('/app'), [navigate]);
+  const navigateToApp = useCallback(() => navigate('/'), [navigate]);
 
   return (
     <div className="unified-dashboard">
       <header className="dashboard-header">
-        <button className="back-btn" onClick={() => navigate('/app')}>
+        <button className="back-btn" onClick={() => navigate('/')}>
           <DuotoneIcon icon={ArrowLeft} size="sm" colorScheme={colorSchemes.ui} /> Back to Main
         </button>
         <div className="header-brand">

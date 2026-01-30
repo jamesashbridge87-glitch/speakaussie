@@ -72,7 +72,7 @@ export function WorkplacePage() {
     <div className="workplace-page">
       {/* Header */}
       <header className="workplace-header">
-        <button className="back-to-main" onClick={() => navigate('/app')} aria-label="Go back to main app">
+        <button className="back-to-main" onClick={() => navigate('/')} aria-label="Go back to main app">
           ← Back to Main
         </button>
         <div className="header-brand">
@@ -477,7 +477,7 @@ export function WorkplacePage() {
             <a href="/stats" className="upgrade-link secondary">
               Stats Dashboard
             </a>
-            <a href="/app" className="upgrade-link primary">
+            <a href="/" className="upgrade-link primary">
               Full Experience
             </a>
           </div>
