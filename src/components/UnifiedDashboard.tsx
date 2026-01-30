@@ -23,6 +23,14 @@ import {
 } from './icons';
 import './UnifiedDashboard.css';
 
+// Progress calculation constants
+// Number of sessions considered "full" progress for the conversations stat card
+const SESSIONS_FOR_FULL_PROGRESS = 50;
+// Number of seconds in an hour - used to convert practice time to hours for progress display
+const SECONDS_PER_HOUR = 3600;
+// Number of quizzes considered "full" progress for the quizzes stat card
+const QUIZZES_FOR_FULL_PROGRESS = 20;
+
 // Pure utility function - no need to memoize
 function formatTime(seconds: number): string {
   if (seconds < 60) return `${seconds}s`;
@@ -145,7 +153,7 @@ export function UnifiedDashboard() {
             value={progressStats.totalSessions}
             label="Conversations"
             variant="conversations"
-            progress={(progressStats.totalSessions / 50) * 100}
+            progress={(progressStats.totalSessions / SESSIONS_FOR_FULL_PROGRESS) * 100}
             progressHint={`${progressStats.sessionsThisWeek} this week`}
           />
           <StatCard
@@ -153,7 +161,7 @@ export function UnifiedDashboard() {
             value={formatTime(progressStats.totalPracticeTime)}
             label="Practice Time"
             variant="time"
-            progress={(progressStats.totalPracticeTime / 3600) * 100}
+            progress={(progressStats.totalPracticeTime / SECONDS_PER_HOUR) * 100}
             progressHint={`${formatTime(progressStats.practiceTimeThisWeek)} this week`}
           />
           <StatCard
@@ -169,7 +177,7 @@ export function UnifiedDashboard() {
             value={quizzesCompleted}
             label="Quizzes Completed"
             variant="quizzes"
-            progress={(quizzesCompleted / 20) * 100}
+            progress={(quizzesCompleted / QUIZZES_FOR_FULL_PROGRESS) * 100}
             progressHint={`${cardsViewed} cards viewed`}
           />
           <StatCard
