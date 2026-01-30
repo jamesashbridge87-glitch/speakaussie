@@ -19,6 +19,7 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   const [playingVoiceId, setPlayingVoiceId] = useState<VoiceId | null>(null);
   const [isLoadingAudio, setIsLoadingAudio] = useState(false);
   const [loadingVoiceId, setLoadingVoiceId] = useState<VoiceId | null>(null);
+  const [audioErrorVoiceId, setAudioErrorVoiceId] = useState<VoiceId | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const voiceButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -90,9 +91,10 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
       return;
     }
 
-    // Reset any previous playing state
+    // Reset any previous playing/error state
     setIsPlayingIntro(false);
     setPlayingVoiceId(null);
+    setAudioErrorVoiceId(null);
 
     // Start loading audio
     setIsLoadingAudio(true);
@@ -123,7 +125,7 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
       setLoadingVoiceId(null);
       setIsPlayingIntro(false);
       setPlayingVoiceId(null);
-      console.warn('Intro audio not available');
+      setAudioErrorVoiceId(voiceId);
     };
 
     // Start loading the audio
@@ -158,6 +160,7 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
             const isSelected = selectedVoice === voiceId;
             const isPlaying = isPlayingIntro && playingVoiceId === voiceId;
             const isLoading = isLoadingAudio && loadingVoiceId === voiceId;
+            const hasError = audioErrorVoiceId === voiceId;
             const isFocused = focusedIndex === index;
 
             return (
@@ -207,6 +210,11 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
                     {isLoading ? 'Loading' : isPlaying ? 'Stop' : 'Preview'}
                   </span>
                 </button>
+                {hasError && (
+                  <p className="voice-audio-error">
+                    Preview unavailable. You can still select {voice.name}.
+                  </p>
+                )}
               </div>
             );
           })}

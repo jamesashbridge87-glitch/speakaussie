@@ -142,6 +142,15 @@
   outline-offset: 2px;
 }
 
+.voice-audio-error {
+  font-size: 0.8rem;
+  color: var(--brand-muted);
+  margin: 0;
+  max-width: 140px;
+  text-align: center;
+  line-height: 1.3;
+}
+
 .play-icon {
   flex-shrink: 0;
 }
