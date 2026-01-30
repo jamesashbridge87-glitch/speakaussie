@@ -8,8 +8,17 @@ import { ConfidenceScore, MilestoneDisplay } from './ConfidenceScore';
 import { JourneyProgressDisplay, JourneyTimeline } from './JourneyProgress';
 import { ExportMenu } from './ExportMenu';
 import { PronunciationStatsDisplay } from './PronunciationPractice';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Flame,
+  colorSchemes,
+} from './icons';
 import './ProgressDashboard.css';
+
+// Helper for phase icons
+const getPhaseIcon = (emoji: string) => {
+  return <span style={{ fontSize: 14 }}>{emoji}</span>;
+};
 
 interface PronunciationOverallStats {
   averageScore: number;
@@ -136,7 +145,7 @@ export function ProgressDashboard({
           onClick={() => setActiveTab('journey')}
         >
           Journey
-          <span className="tab-badge"><Icon emoji={journeyProgress.currentPhase.icon} size="xs" /></span>
+          <span className="tab-badge">{getPhaseIcon(journeyProgress.currentPhase.icon)}</span>
         </button>
         <button
           className={`tab-btn ${activeTab === 'confidence' ? 'active' : ''}`}
@@ -168,7 +177,7 @@ export function ProgressDashboard({
           <div className="stats-grid">
             <div className="stat-card highlight">
               <span className="stat-value">{stats.streak}</span>
-              <span className="stat-label">Day Streak <Icon emoji="🔥" size="sm" /></span>
+              <span className="stat-label">Day Streak <DuotoneIcon icon={Flame} size="sm" colorScheme={colorSchemes.stats} /></span>
             </div>
 
             <div className="stat-card">

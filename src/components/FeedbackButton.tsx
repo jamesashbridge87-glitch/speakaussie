@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  MessageSquare,
+  Lightbulb,
+  Hand,
+  Bug,
+  Theater,
+  colorSchemes,
+} from './icons';
 import './FeedbackButton.css';
+
+// Map feedback type icons
+const feedbackIconMap: Record<string, React.ReactNode> = {
+  '🐛': <DuotoneIcon icon={Bug} size="md" colorScheme={colorSchemes.stats} />,
+  '💡': <DuotoneIcon icon={Lightbulb} size="md" colorScheme={colorSchemes.stats} />,
+  '🎭': <DuotoneIcon icon={Theater} size="md" colorScheme={colorSchemes.socialCulture} />,
+  '💬': <DuotoneIcon icon={MessageSquare} size="md" colorScheme={colorSchemes.industry} />,
+};
+
+const getFeedbackIcon = (emoji: string, size: 'md' | 'lg' = 'md') => {
+  const icon = feedbackIconMap[emoji];
+  if (icon) return icon;
+  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+};
 
 interface FeedbackButtonProps {
   onSubmit?: (feedback: FeedbackData) => void;
@@ -85,7 +107,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
         onClick={() => setIsOpen(true)}
         aria-label="Give feedback"
       >
-        <span className="feedback-icon"><Icon emoji="💬" size="sm" /></span>
+        <span className="feedback-icon"><DuotoneIcon icon={MessageSquare} size="sm" colorScheme={colorSchemes.industry} /></span>
         <span className="feedback-label">Feedback</span>
       </button>
 
@@ -108,7 +130,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
                       className="feedback-type-btn"
                       onClick={() => handleTypeSelect(type.id)}
                     >
-                      <span className="type-icon"><Icon emoji={type.icon} size="md" /></span>
+                      <span className="type-icon">{getFeedbackIcon(type.icon, 'md')}</span>
                       <span className="type-label">{type.label}</span>
                       <span className="type-desc">{type.description}</span>
                     </button>
@@ -125,7 +147,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
 
                 <div className="feedback-type-header">
                   <span className="type-icon-large">
-                    <Icon emoji={feedbackTypes.find(t => t.id === selectedType)?.icon || ''} size="lg" />
+                    {getFeedbackIcon(feedbackTypes.find(t => t.id === selectedType)?.icon || '', 'lg')}
                   </span>
                   <h2>{feedbackTypes.find(t => t.id === selectedType)?.label}</h2>
                 </div>
@@ -163,7 +185,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
 
             {step === 'thanks' && (
               <div className="feedback-content thanks-content">
-                <div className="thanks-icon"><Icon emoji="🙏" size="xl" /></div>
+                <div className="thanks-icon"><DuotoneIcon icon={Hand} size="xl" colorScheme={colorSchemes.socialCulture} /></div>
                 <h2>Thanks for your feedback!</h2>
                 <p>We really appreciate you taking the time to help us improve SpeakAussie.</p>
                 <button className="feedback-done-btn" onClick={handleClose}>

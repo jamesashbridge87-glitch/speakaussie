@@ -1,6 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Sparkles,
+  Flame,
+  Star,
+  Crown,
+  colorSchemes,
+} from './icons';
+import { Rocket } from 'lucide-react';
 import './CelebrationToast.css';
+
+// Map celebration icons to Lucide components
+const celebrationIconMap: Record<string, React.ReactNode> = {
+  '🎉': <DuotoneIcon icon={Sparkles} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '🔥': <DuotoneIcon icon={Flame} size="xl" colorScheme={colorSchemes.stats} />,
+  '⭐': <DuotoneIcon icon={Star} size="xl" colorScheme={colorSchemes.stats} />,
+  '🚀': <DuotoneIcon icon={Rocket} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '👑': <DuotoneIcon icon={Crown} size="xl" colorScheme={colorSchemes.stats} />,
+};
+
+const getCelebrationIcon = (emoji: string) => {
+  return celebrationIconMap[emoji] || <span style={{ fontSize: 48 }}>{emoji}</span>;
+};
 
 export interface CelebrationData {
   id: string;
@@ -57,7 +78,7 @@ export function CelebrationToast({
       <button className="celebration-close" onClick={handleDismiss}>
         &times;
       </button>
-      <div className="celebration-icon"><Icon emoji={celebration.icon} size="xl" /></div>
+      <div className="celebration-icon">{getCelebrationIcon(celebration.icon)}</div>
       <h3 className="celebration-title">{celebration.title}</h3>
       <p className="celebration-message">{celebration.message}</p>
     </div>

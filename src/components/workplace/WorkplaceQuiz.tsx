@@ -9,8 +9,23 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
 import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
-import { Icon } from '../Icon';
+import {
+  DuotoneIcon,
+  HelpCircle,
+  Flame,
+  Trophy,
+  Sparkles,
+  ThumbsUp,
+  colorSchemes,
+} from '../icons';
 import './WorkplaceQuiz.css';
+
+// Map result icons
+const getResultIcon = (score: number, total: number) => {
+  if (score === total) return <DuotoneIcon icon={Trophy} size="xl" colorScheme={colorSchemes.stats} />;
+  if (score >= total * 0.8) return <DuotoneIcon icon={Sparkles} size="xl" colorScheme={colorSchemes.socialCulture} />;
+  return <DuotoneIcon icon={ThumbsUp} size="xl" colorScheme={colorSchemes.careerGrowth} />;
+};
 
 interface WorkplaceQuizProps {
   situation: WorkplaceSituation;
@@ -188,7 +203,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
       {quizState === 'start' && (
         <div className="quiz-start">
           <div className="quiz-intro">
-            <span className="quiz-icon"><Icon emoji="❓" size="xl" /></span>
+            <span className="quiz-icon"><DuotoneIcon icon={HelpCircle} size="xl" colorScheme={colorSchemes.stats} /></span>
             <h3>Ready for a Quiz?</h3>
             <p>Test your knowledge of {situationNames[situation].toLowerCase()} phrases.</p>
             <p className="quiz-info">{Math.min(QUIZ_LENGTH, phrases.length)} questions</p>
@@ -207,7 +222,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
             </span>
             <span className="quiz-score">Score: {score}</span>
             {streak >= 3 && (
-              <span className="streak-badge"><Icon emoji="🔥" size="xs" /> {streak} in a row!</span>
+              <span className="streak-badge"><DuotoneIcon icon={Flame} size="xs" colorScheme={colorSchemes.stats} /> {streak} in a row!</span>
             )}
           </div>
 
@@ -264,7 +279,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
         <div className="quiz-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
-              <Icon emoji={score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'} size="xl" />
+              {getResultIcon(score, questions.length)}
             </span>
             <h3>Quiz Complete!</h3>
           </div>

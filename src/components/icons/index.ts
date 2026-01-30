@@ -82,4 +82,7 @@ export {
   Smile,
   Frown,
   Meh,
+  Printer,
+  Bug,
+  Theater,
 } from 'lucide-react';

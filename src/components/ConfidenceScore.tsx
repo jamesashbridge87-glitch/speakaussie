@@ -1,6 +1,30 @@
 import { ConfidenceScoreData, LEVEL_LABELS, Milestone } from '../hooks/useConfidenceScore';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Flame,
+  BookOpen,
+  Target,
+  TrendingUp,
+  colorSchemes,
+} from './icons';
 import './ConfidenceScore.css';
+
+// Map breakdown icons to Lucide
+const breakdownIconMap: Record<string, React.ReactNode> = {
+  '🔥': <DuotoneIcon icon={Flame} size="sm" colorScheme={colorSchemes.stats} />,
+  '📚': <DuotoneIcon icon={BookOpen} size="sm" colorScheme={colorSchemes.industry} />,
+  '🎯': <DuotoneIcon icon={Target} size="sm" colorScheme={colorSchemes.careerGrowth} />,
+  '📈': <DuotoneIcon icon={TrendingUp} size="sm" colorScheme={colorSchemes.socialCulture} />,
+};
+
+const getBreakdownIcon = (emoji: string) => {
+  return breakdownIconMap[emoji] || <span style={{ fontSize: 16 }}>{emoji}</span>;
+};
+
+// Helper for milestone icons
+const getMilestoneIcon = (emoji: string, size: 'md' | 'lg' = 'lg') => {
+  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+};
 
 interface ConfidenceScoreProps {
   data: ConfidenceScoreData;
@@ -177,7 +201,7 @@ function BreakdownItem({ label, value, max, icon, description }: BreakdownItemPr
   return (
     <div className="breakdown-item">
       <div className="breakdown-header">
-        <span className="breakdown-icon"><Icon emoji={icon} size="sm" /></span>
+        <span className="breakdown-icon">{getBreakdownIcon(icon)}</span>
         <span className="breakdown-label">{label}</span>
         <span className="breakdown-value">{value}/{max}</span>
       </div>
@@ -206,7 +230,7 @@ export function MilestoneDisplay({ milestones, nextMilestone }: MilestoneDisplay
         <div className="next-milestone">
           <span className="next-milestone-label">Next up:</span>
           <div className="next-milestone-card">
-            <span className="milestone-icon"><Icon emoji={nextMilestone.icon} size="lg" /></span>
+            <span className="milestone-icon">{getMilestoneIcon(nextMilestone.icon, 'lg')}</span>
             <div className="milestone-info">
               <span className="milestone-title">{nextMilestone.title}</span>
               <span className="milestone-description">{nextMilestone.description}</span>
@@ -232,7 +256,7 @@ export function MilestoneDisplay({ milestones, nextMilestone }: MilestoneDisplay
           <div className="achieved-grid">
             {recentAchievements.map(milestone => (
               <div key={milestone.id} className="achieved-milestone">
-                <span className="milestone-icon"><Icon emoji={milestone.icon} size="md" /></span>
+                <span className="milestone-icon">{getMilestoneIcon(milestone.icon, 'md')}</span>
                 <span className="milestone-title">{milestone.title}</span>
               </div>
             ))}

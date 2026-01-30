@@ -6,8 +6,40 @@ import {
   COMFORT_MESSAGES,
   WELCOME_MESSAGES,
 } from '../hooks/useOnboarding';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Globe,
+  Home,
+  Briefcase,
+  Users,
+  MessageSquare,
+  Sparkles,
+  Frown,
+  Smile,
+  Target,
+  TrendingUp,
+  colorSchemes,
+} from './icons';
+import { MapPin } from 'lucide-react';
 import './OnboardingFlow.css';
+
+// Map option icons to Lucide components
+const optionIconMap: Record<string, React.ReactNode> = {
+  '🌏': <DuotoneIcon icon={Globe} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🏠': <DuotoneIcon icon={Home} size="lg" colorScheme={colorSchemes.dailyWork} />,
+  '🦘': <span style={{ fontSize: 32 }}>🦘</span>, // Keep kangaroo as emoji (no Lucide equivalent)
+  '💼': <DuotoneIcon icon={Briefcase} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🤝': <DuotoneIcon icon={Users} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🗣️': <DuotoneIcon icon={MessageSquare} size="lg" colorScheme={colorSchemes.industry} />,
+  '✨': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.stats} />,
+  '😰': <DuotoneIcon icon={Frown} size="lg" colorScheme={colorSchemes.ui} />,
+  '😊': <DuotoneIcon icon={Smile} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '😎': <DuotoneIcon icon={Smile} size="lg" colorScheme={colorSchemes.stats} />,
+};
+
+const getOptionIcon = (emoji: string) => {
+  return optionIconMap[emoji] || <span style={{ fontSize: 32 }}>{emoji}</span>;
+};
 
 interface OnboardingFlowProps {
   onComplete: (
@@ -234,7 +266,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${experienceLevel === option.value ? 'selected' : ''}`}
                   onClick={() => setExperienceLevel(option.value)}
                 >
-                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
+                  <span className="option-icon">{getOptionIcon(option.icon)}</span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -269,7 +301,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${goal === option.value ? 'selected' : ''}`}
                   onClick={() => setGoal(option.value)}
                 >
-                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
+                  <span className="option-icon">{getOptionIcon(option.icon)}</span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -304,7 +336,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
                   className={`option-card ${comfortLevel === option.value ? 'selected' : ''}`}
                   onClick={() => setComfortLevel(option.value)}
                 >
-                  <span className="option-icon"><Icon emoji={option.icon} size="lg" /></span>
+                  <span className="option-icon">{getOptionIcon(option.icon)}</span>
                   <span className="option-label">{option.label}</span>
                   <span className="option-description">{option.description}</span>
                 </button>
@@ -329,7 +361,7 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
         {/* Ready Step */}
         {step === 'ready' && comfortLevel && (
           <div className="onboarding-step ready-step">
-            <div className="ready-icon"><Icon emoji="🎉" size="xl" /></div>
+            <div className="ready-icon"><DuotoneIcon icon={Sparkles} size="xl" colorScheme={colorSchemes.socialCulture} /></div>
             <h2>You're all set{name ? `, ${name}` : ''}!</h2>
 
             <div className="encouragement-message">
@@ -340,15 +372,15 @@ export function OnboardingFlow({ onComplete, onSkip }: OnboardingFlowProps) {
               <h3>Your personalized plan:</h3>
               <ul>
                 <li>
-                  <span className="summary-icon"><Icon emoji="📍" size="sm" /></span>
+                  <span className="summary-icon"><DuotoneIcon icon={MapPin} size="sm" colorScheme={colorSchemes.socialCulture} /></span>
                   <span>Starting point matched to your experience</span>
                 </li>
                 <li>
-                  <span className="summary-icon"><Icon emoji="🎯" size="sm" /></span>
+                  <span className="summary-icon"><DuotoneIcon icon={Target} size="sm" colorScheme={colorSchemes.careerGrowth} /></span>
                   <span>Scenarios focused on {goal === 'all-of-above' ? 'all your goals' : goal?.replace('-', ' ')}</span>
                 </li>
                 <li>
-                  <span className="summary-icon"><Icon emoji="📈" size="sm" /></span>
+                  <span className="summary-icon"><DuotoneIcon icon={TrendingUp} size="sm" colorScheme={colorSchemes.stats} /></span>
                   <span>Difficulty adjusted to your comfort level</span>
                 </li>
               </ul>

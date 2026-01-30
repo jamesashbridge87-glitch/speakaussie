@@ -1,6 +1,30 @@
 import { JourneyProgress, JOURNEY_PHASES } from '../hooks/useJourneyProgress';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Target,
+  Lightbulb,
+  Sparkles,
+  Check,
+  colorSchemes,
+} from './icons';
 import './JourneyProgress.css';
+
+// Map phase icons to Lucide icons
+const phaseIconMap: Record<string, React.ReactNode> = {
+  '🌱': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🌟': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.stats} />,
+  '💪': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🚀': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '👑': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.stats} />,
+};
+
+const getPhaseIcon = (emoji: string, size: 'xs' | 'sm' | 'md' | 'lg' = 'lg') => {
+  // Return mapped icon or fallback to emoji
+  if (phaseIconMap[emoji]) {
+    return phaseIconMap[emoji];
+  }
+  return <span style={{ fontSize: size === 'xs' ? 12 : size === 'sm' ? 16 : size === 'md' ? 20 : 24 }}>{emoji}</span>;
+};
 
 interface JourneyProgressProps {
   progress: JourneyProgress;
@@ -25,7 +49,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Header with current phase */}
       <div className="journey-header">
         <div className="current-phase-badge">
-          <span className="phase-icon"><Icon emoji={currentPhase.icon} size="lg" /></span>
+          <span className="phase-icon">{getPhaseIcon(currentPhase.icon, 'lg')}</span>
           <div className="phase-info">
             <span className="phase-label">
               {isStarted ? `Week ${currentWeek} · Day ${currentDay}` : 'Ready to begin'}
@@ -35,7 +59,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
         </div>
         {isNewPhase && isStarted && (
           <div className="new-phase-celebration">
-            <Icon emoji="🎉" size="sm" /> New phase unlocked!
+            <DuotoneIcon icon={Sparkles} size="sm" colorScheme={colorSchemes.stats} /> New phase unlocked!
           </div>
         )}
       </div>
@@ -69,7 +93,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
               key={phase.id}
               className={`progress-phase-label ${phase.id === currentPhase.id ? 'active' : ''}`}
             >
-              <Icon emoji={phase.icon} size="xs" />
+              {getPhaseIcon(phase.icon, 'xs')}
             </span>
           ))}
         </div>
@@ -86,7 +110,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Weekly goal */}
       <div className="weekly-goal">
         <div className="goal-header">
-          <span className="goal-icon"><Icon emoji="🎯" size="sm" /></span>
+          <span className="goal-icon"><DuotoneIcon icon={Target} size="sm" colorScheme={colorSchemes.careerGrowth} /></span>
           <span className="goal-title">This Week's Goal</span>
         </div>
         <p className="goal-text">{weeklyGoal}</p>
@@ -95,7 +119,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       {/* Recommendation */}
       <div className="recommendation">
         <div className="recommendation-header">
-          <span className="recommendation-icon"><Icon emoji="💡" size="sm" /></span>
+          <span className="recommendation-icon"><DuotoneIcon icon={Lightbulb} size="sm" colorScheme={colorSchemes.stats} /></span>
           <span className="recommendation-title">Recommendation</span>
         </div>
         <p className="recommendation-text">{recommendation}</p>
@@ -138,7 +162,7 @@ export function JourneyTimeline({ progress }: JourneyTimelineProps) {
           return (
             <div key={phase.id} className={`timeline-item ${status}`}>
               <div className="timeline-marker">
-                {status === 'completed' ? '✓' : <Icon emoji={phase.icon} size="sm" />}
+                {status === 'completed' ? <DuotoneIcon icon={Check} size="sm" colorScheme={colorSchemes.stats} /> : getPhaseIcon(phase.icon, 'sm')}
               </div>
               <div className="timeline-content">
                 <div className="timeline-header">
@@ -181,7 +205,7 @@ export function JourneyCompact({ progress, onClick }: JourneyCompactProps) {
 
   return (
     <button className="journey-compact" onClick={onClick}>
-      <span className="journey-compact-icon"><Icon emoji={currentPhase.icon} size="md" /></span>
+      <span className="journey-compact-icon">{getPhaseIcon(currentPhase.icon, 'md')}</span>
       <div className="journey-compact-info">
         <span className="journey-compact-phase">{currentPhase.name}</span>
         <span className="journey-compact-day">

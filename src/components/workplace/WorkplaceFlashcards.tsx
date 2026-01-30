@@ -10,7 +10,12 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useTextToSpeech } from '../../hooks/useTextToSpeech';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
-import { Icon } from '../Icon';
+import {
+  DuotoneIcon,
+  Heart,
+  Volume2,
+  colorSchemes,
+} from '../icons';
 import './WorkplaceFlashcards.css';
 
 interface WorkplaceFlashcardsProps {
@@ -138,7 +143,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
               onClick={handleToggleFavorite}
               aria-label="Toggle favorite"
             >
-              <Icon emoji={isFavorite(currentPhrase.id) ? '❤️' : '🤍'} size="sm" />
+              <DuotoneIcon icon={Heart} size="sm" colorScheme={isFavorite(currentPhrase.id) ? colorSchemes.socialCulture : colorSchemes.ui} />
             </button>
             {ttsSupported && (
               <button
@@ -146,7 +151,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
                 onClick={(e) => handleSpeak(e, currentPhrase.phrase)}
                 aria-label="Listen to pronunciation"
               >
-                <Icon emoji="🔊" size="sm" />
+                <DuotoneIcon icon={Volume2} size="sm" colorScheme={colorSchemes.industry} />
               </button>
             )}
           </div>
@@ -217,7 +222,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
                     onClick={(e) => handleSpeak(e, currentPhrase.example)}
                     aria-label="Listen to example pronunciation"
                   >
-                    <Icon emoji="🔊" size="sm" /> Listen
+                    <DuotoneIcon icon={Volume2} size="sm" colorScheme={colorSchemes.industry} /> Listen
                   </button>
                 )}
               </div>

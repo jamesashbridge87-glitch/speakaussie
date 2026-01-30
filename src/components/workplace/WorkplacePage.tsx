@@ -10,8 +10,27 @@ import {
 } from '../../data/workplaceData';
 import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
-import { Icon } from '../Icon';
+import {
+  DuotoneIcon,
+  Flame,
+  Star,
+  Trophy,
+  Target,
+  Heart,
+  Lock,
+  Repeat,
+  colorSchemes,
+} from '../icons';
 import './WorkplacePage.css';
+
+// Helper to get situation icon (falls back to emoji)
+const getSituationIcon = (emoji: string, isLocked: boolean) => {
+  if (isLocked) {
+    return <DuotoneIcon icon={Lock} size="md" colorScheme={colorSchemes.ui} />;
+  }
+  // Return emoji as fallback since situations have unique emojis
+  return <span style={{ fontSize: 24 }}>{emoji}</span>;
+};
 
 type ViewMode = 'home' | 'all' | 'favorites' | 'stats';
 
@@ -69,17 +88,17 @@ export function WorkplacePage() {
         {/* Stats bar */}
         <div className="stats-bar">
           <div className="stat-item">
-            <span className="stat-icon"><Icon emoji="🔥" size="sm" /></span>
+            <span className="stat-icon"><DuotoneIcon icon={Flame} size="sm" colorScheme={colorSchemes.stats} /></span>
             <span className="stat-value">{streak}</span>
             <span className="stat-label">Streak</span>
           </div>
           <div className="stat-item">
-            <span className="stat-icon"><Icon emoji="⭐" size="sm" /></span>
+            <span className="stat-icon"><DuotoneIcon icon={Star} size="sm" colorScheme={colorSchemes.stats} /></span>
             <span className="stat-value">{xp}</span>
             <span className="stat-label">XP</span>
           </div>
           <div className="stat-item">
-            <span className="stat-icon"><Icon emoji="🏆" size="sm" /></span>
+            <span className="stat-icon"><DuotoneIcon icon={Trophy} size="sm" colorScheme={colorSchemes.stats} /></span>
             <span className="stat-value">{level}</span>
             <span className="stat-label">Level</span>
           </div>
@@ -123,7 +142,7 @@ export function WorkplacePage() {
           aria-label={`View favorites, ${favorites.length} saved`}
           aria-current={viewMode === 'favorites' ? 'page' : undefined}
         >
-          <Icon emoji="❤️" size="sm" /> {favorites.length}
+          <DuotoneIcon icon={Heart} size="sm" colorScheme={colorSchemes.socialCulture} /> {favorites.length}
         </button>
         <button
           className={`nav-btn ${viewMode === 'stats' ? 'active' : ''}`}
@@ -141,7 +160,7 @@ export function WorkplacePage() {
             {/* Quick Prep Section */}
             <section className="quick-prep-section">
               <div className="quick-prep-card">
-                <span className="quick-prep-icon"><Icon emoji="🎯" size="lg" /></span>
+                <span className="quick-prep-icon"><DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} /></span>
                 <h2>Quick Prep</h2>
                 <p>Got something coming up?</p>
                 <div className="quick-prep-buttons">
@@ -190,11 +209,11 @@ export function WorkplacePage() {
                         disabled={!isUnlocked}
                       >
                         <span className="path-icon">
-                          <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
+                          {getSituationIcon(situationIcons[situation], !isUnlocked)}
                         </span>
                         <span className="path-name">{situationNames[situation].split(' ')[0]}</span>
                         <span className="path-status">
-                          {isComplete ? '✓ Done' : isUnlocked ? `${progress.learned}/${progress.total}` : <Icon emoji="🔒" size="xs" />}
+                          {isComplete ? '✓ Done' : isUnlocked ? `${progress.learned}/${progress.total}` : <DuotoneIcon icon={Lock} size="xs" colorScheme={colorSchemes.ui} />}
                         </span>
                       </button>
                       {index < 2 && <span className="path-arrow">→</span>}
@@ -213,7 +232,7 @@ export function WorkplacePage() {
             {totalReviewCount > 0 && (
               <section className="review-reminder">
                 <p>
-                  <Icon emoji="🔁" size="sm" /> {totalReviewCount} phrase{totalReviewCount !== 1 ? 's' : ''} getting rusty —{' '}
+                  <DuotoneIcon icon={Repeat} size="sm" colorScheme={colorSchemes.stats} /> {totalReviewCount} phrase{totalReviewCount !== 1 ? 's' : ''} getting rusty —{' '}
                   <button className="link-btn" onClick={() => navigate('/workplace/small-talk')} aria-label="Refresh your rusty phrases">
                     quick refresh?
                   </button>
@@ -243,7 +262,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
+                        {getSituationIcon(situationIcons[situation], !isUnlocked)}
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">
@@ -286,7 +305,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
+                        {getSituationIcon(situationIcons[situation], !isUnlocked)}
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">
@@ -328,7 +347,7 @@ export function WorkplacePage() {
                       disabled={!isUnlocked}
                     >
                       <span className="situation-icon">
-                        <Icon emoji={!isUnlocked ? '🔒' : situationIcons[situation]} size="md" />
+                        {getSituationIcon(situationIcons[situation], !isUnlocked)}
                       </span>
                       <span className="situation-name">{situationNames[situation]}</span>
                       <div className="situation-progress">

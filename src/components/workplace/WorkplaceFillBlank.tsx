@@ -9,8 +9,23 @@ import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
 import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
-import { Icon } from '../Icon';
+import {
+  DuotoneIcon,
+  FileText,
+  Flame,
+  Trophy,
+  Sparkles,
+  ThumbsUp,
+  colorSchemes,
+} from '../icons';
 import './WorkplaceFillBlank.css';
+
+// Map result icons
+const getResultIcon = (score: number, total: number) => {
+  if (score === total) return <DuotoneIcon icon={Trophy} size="xl" colorScheme={colorSchemes.stats} />;
+  if (score >= total * 0.8) return <DuotoneIcon icon={Sparkles} size="xl" colorScheme={colorSchemes.socialCulture} />;
+  return <DuotoneIcon icon={ThumbsUp} size="xl" colorScheme={colorSchemes.careerGrowth} />;
+};
 
 interface WorkplaceFillBlankProps {
   situation: WorkplaceSituation;
@@ -179,7 +194,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
       {gameState === 'start' && (
         <div className="fill-blank-start">
           <div className="start-intro">
-            <span className="start-icon"><Icon emoji="📝" size="xl" /></span>
+            <span className="start-icon"><DuotoneIcon icon={FileText} size="xl" colorScheme={colorSchemes.careerGrowth} /></span>
             <h3>Complete the Sentence</h3>
             <p>Use {situationNames[situation].toLowerCase()} phrases in context.</p>
             <p className="start-info">{Math.min(QUIZ_LENGTH, phrases.length)} sentences</p>
@@ -198,7 +213,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
             </span>
             <span className="game-score">Score: {score}</span>
             {streak >= 3 && (
-              <span className="streak-badge"><Icon emoji="🔥" size="xs" /> {streak} streak!</span>
+              <span className="streak-badge"><DuotoneIcon icon={Flame} size="xs" colorScheme={colorSchemes.stats} /> {streak} streak!</span>
             )}
           </div>
 
@@ -256,7 +271,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
         <div className="fill-blank-results" aria-live="polite">
           <div className="results-header">
             <span className="results-icon">
-              <Icon emoji={score === questions.length ? '🏆' : score >= questions.length * 0.8 ? '🎉' : '👍'} size="xl" />
+              {getResultIcon(score, questions.length)}
             </span>
             <h3>Complete!</h3>
           </div>

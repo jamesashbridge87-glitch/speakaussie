@@ -1,6 +1,18 @@
 import { Achievement } from '../hooks/useAchievements';
-import { Icon } from './Icon';
+import {
+  DuotoneIcon,
+  Lock,
+  colorSchemes,
+} from './icons';
 import './AchievementDisplay.css';
+
+// Helper for achievement icons
+const getAchievementIcon = (emoji: string, isLocked: boolean, size: 'md' | 'lg' = 'lg') => {
+  if (isLocked) {
+    return <DuotoneIcon icon={Lock} size={size} colorScheme={colorSchemes.ui} />;
+  }
+  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+};
 
 export interface AchievementWithProgress {
   id: string;
@@ -57,7 +69,7 @@ export function AchievementDisplay({ achievements }: AchievementDisplayProps) {
                   className={`achievement-card ${achievement.unlocked ? 'unlocked' : 'locked'}`}
                 >
                   <div className="achievement-icon">
-                    <Icon emoji={achievement.unlocked ? achievement.icon : '🔒'} size="lg" />
+                    {getAchievementIcon(achievement.icon, !achievement.unlocked, 'lg')}
                   </div>
                   <div className="achievement-info">
                     <span className="achievement-title">{achievement.title}</span>
@@ -107,7 +119,7 @@ export function AchievementToast({ achievements, onDismiss }: AchievementToastPr
         <div className="toast-achievements">
           {achievements.map(achievement => (
             <div key={achievement.id} className="toast-achievement">
-              <span className="toast-icon"><Icon emoji={achievement.icon} size="lg" /></span>
+              <span className="toast-icon">{getAchievementIcon(achievement.icon, false, 'lg')}</span>
               <div className="toast-info">
                 <span className="toast-achievement-title">{achievement.title}</span>
                 <span className="toast-achievement-desc">{achievement.description}</span>
