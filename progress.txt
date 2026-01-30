@@ -152,3 +152,180 @@ Project: SpeakAussie Polish & Ship
   - For static data scenarios, skeleton loaders are not appropriate - they're for async operations
   - The existing Skeleton components (ScenarioGridSkeleton, etc.) are available for future use if API fetching is added
 ---
+
+## 2026-01-31 - UX-4
+- Improved ErrorBoundary focus management for screen reader accessibility
+- Files changed: src/components/ErrorBoundary.tsx, src/components/ErrorBoundary.css
+- **Learnings for future iterations:**
+  - For class components, use `createRef<HTMLDivElement>()` for ref creation
+  - Use `componentDidUpdate` to detect state changes and focus the element when error state becomes true
+  - Add `role="alert"` and `aria-live="assertive"` for immediate screen reader announcements
+  - Use `tabIndex={-1}` to make non-interactive elements focusable programmatically (not via tab)
+  - Add `.error-boundary-content:focus { outline: none; }` to hide focus ring for programmatic focus
+  - Pattern: Check `prevState` in componentDidUpdate to detect state transitions (e.g., `!prevState.hasError && this.state.hasError`)
+---
+
+## 2026-01-31 - UX-5
+- Improved NotFound page structure with proper landmarks and document title
+- Files changed: src/components/NotFound.tsx
+- **Learnings for future iterations:**
+  - Use `useEffect` with empty deps to set document.title on component mount
+  - Change outer container from `<div>` to `<main>` for proper landmark structure
+  - "404" should be visual decoration (use `<p aria-hidden="true">`), not the page heading
+  - "Page Not Found" should be the `<h1>` as it's the actual page title
+  - Pattern: document.title format is "Page Name - AppName" (e.g., "Page Not Found - SpeakAussie")
+---
+
+## 2026-01-31 - UX-6
+- Added skip link to UnifiedDashboard for keyboard accessibility
+- Files changed: src/components/UnifiedDashboard.tsx, src/components/UnifiedDashboard.css
+- **Learnings for future iterations:**
+  - Skip link pattern: `<a href="#main-id" className="skip-link">Skip to content</a>` as first child
+  - CSS: Position off-screen with `top: -100px`, move into view on `:focus` with `top: 16px`
+  - Add `id` attribute to main content element for the skip link to target
+  - Use `z-index: 1000` to ensure skip link appears above other elements
+  - Remove outline on skip link focus since border provides visual indicator
+---
+
+## 2026-01-31 - UX-7
+- Fixed heading hierarchy in UnifiedDashboard for proper document outline
+- Files changed: src/components/UnifiedDashboard.tsx, src/components/UnifiedDashboard.css
+- **Learnings for future iterations:**
+  - Changed "Your Progress Dashboard" from `<p>` to `<h2>` as it's the page-level title
+  - Changed "Level {level}" from `<h2>` to `<h3>` to maintain proper hierarchy under the h2 page title
+  - Updated CSS selectors from `.level-info h2` to `.level-info h3` (both main and responsive styles)
+  - Heading hierarchy in UnifiedDashboard is now: h1 (app name) → h2 (page title) → h3 (section content like "Level 5", "Recent Achievements", "Continue Learning")
+  - Visual appearance is unchanged because CSS uses class selectors, not element type selectors
+---
+
+## 2026-01-31 - UX-8
+- Replaced hardcoded colors in VoiceSelector.css with CSS variable references
+- Files changed: src/components/VoiceSelector.css
+- **Learnings for future iterations:**
+  - Used `color-mix(in srgb, var(--brand-color) 10%, transparent)` for rgba opacity variants
+  - For gradient darker shade: `color-mix(in srgb, var(--brand-primary) 80%, #000)` instead of hardcoded hex
+  - `color-mix()` has good browser support (all modern browsers) and works with CSS variables
+  - Pattern: Replace `rgba(R, G, B, 0.X)` with `color-mix(in srgb, var(--brand-color) X0%, transparent)`
+  - Replaced 4 hardcoded colors: rgba(17, 232, 246, 0.1), rgba(255, 101, 190, 0.1), #d654a0, rgba(255, 101, 190, 0.4)
+---
+
+## 2026-01-31 - UX-9
+- Audited icon re-exports bundle impact
+- Files changed: src/components/icons/index.ts
+- **Audit findings:**
+  - Tree-shaking works correctly - Vite/Rollup only includes used icons in final bundle
+  - Icon SVG data contributes ~12KB to 771KB bundle (~1.5%) - NOT significant
+  - 56 icons are actually used (44 from ./icons, 12 directly from lucide-react)
+  - 12 icons were re-exported but never used anywhere - removed them
+  - Removed: Award, Coffee, Mail, Meh, Pause, PenTool, PhoneCall, Puzzle, Settings, Spade, User, Video
+  - Reorganized exports with category comments for better readability
+- **Learnings for future iterations:**
+  - Use `npm run build` to see bundle sizes in terminal output
+  - Install `rollup-plugin-visualizer` temporarily to analyze bundle contents
+  - Lucide icons are tree-shakeable - re-exports don't hurt bundle size
+  - Pattern: Organize icon exports by category with comments for maintainability
+---
+
+## 2026-01-31 - CV-1
+- Fixed emotion leaking into spoken text by adding meta-instructions to prompts
+- Files changed: src/hooks/useElevenLabsConversation.ts
+- **Implementation details:**
+  - Added `EMOTION_HANDLING_INSTRUCTIONS` constant with clear meta-instructions for the AI
+  - Created `wrapPromptWithEmotionInstructions()` function to prepend instructions to all scenario prompts
+  - Instructions tell AI that emotion words (frustrated, happy, nervous, etc.) are directions for HOW to speak, not things to say
+  - Provides concrete wrong/right examples to guide the AI's behavior
+  - Applied to all scenario prompts via the startSession function
+- **Learnings for future iterations:**
+  - ElevenLabs AI can interpret prompt emotion descriptors as things to say out loud
+  - Solution is to add explicit meta-instructions that distinguish between tone directions and dialogue
+  - The wrapPromptWithEmotionInstructions pattern can be extended for other prompt preprocessing
+  - Keep meta-instructions concise but with concrete examples (WRONG/RIGHT format works well)
+---
+
+## 2026-01-31 - CV-2
+- Added Tom character personality to voices.ts
+- Files changed: src/data/voices.ts, src/hooks/useElevenLabsConversation.ts
+- **Implementation details:**
+  - Created VoicePersonality interface with description, traits, speakingStyle, and exampleExpressions
+  - Added personality property to Voice interface
+  - Tom's character: friendly Melbourne tradie in early 30s, laid-back, patient, dry humor
+  - Created buildCharacterContext() function to format personality into prompt text
+  - Character context is prepended to scenario prompts (before emotion handling instructions)
+  - Emma has empty personality placeholder (will be defined in CV-3)
+- **Learnings for future iterations:**
+  - VoicePersonality structure: description (background), traits (bullet points), speakingStyle (how to speak), exampleExpressions (sample phrases)
+  - buildCharacterContext() returns empty string if personality.description is empty (graceful handling for undefined personalities)
+  - Character context goes BEFORE the scenario prompt but AFTER emotion handling meta-instructions
+  - Good personality traits are specific and actionable (not just "friendly" but "friendly and approachable - makes everyone feel welcome")
+---
+
+## 2026-01-31 - CV-3
+- Added Emma character personality to voices.ts
+- Files changed: src/data/voices.ts
+- **Implementation details:**
+  - Emma: warm, energetic Queensland primary school teacher in late 20s
+  - Contrasts with Tom: more expressive, coastal lifestyle, nurturing teacher personality
+  - Unique traits: warm/encouraging, energetic/upbeat, genuinely curious, nurturing but not patronizing, quick-witted
+  - Speaking style: bright, clear accent with Queensland lilts, more expressive than Tom, uses phrases like "Oh lovely!" and "That's brilliant!"
+  - Example expressions: "Sweet as!", "Heaps good!", "Give it a burl", "Too easy!", "Reckon you've got this"
+- **Learnings for future iterations:**
+  - Character personalities should contrast with each other to feel distinct (Tom: laid-back tradie vs Emma: energetic teacher)
+  - Regional variation (Melbourne vs Queensland) adds authenticity to different characters
+  - buildCharacterContext() already exists from CV-2, so Emma's personality is automatically injected - no code changes needed beyond defining the personality
+  - Good character contrast: occupation (tradie vs teacher), energy level (laid-back vs upbeat), region (Melbourne suburbs vs coastal QLD)
+---
+
+## 2026-01-31 - CV-4
+- Added difficulty-based prompt modifiers that adjust AI speaking style based on scenario difficulty
+- Files changed: src/hooks/useElevenLabsConversation.ts
+- **Implementation details:**
+  - Created DIFFICULTY_MODIFIERS constant with instructions for beginner, intermediate, and advanced levels
+  - Beginner: slow, clear speech, minimal slang, short sentences, patient tone
+  - Intermediate: natural pace, common Aussie expressions, balanced authenticity and clarity
+  - Advanced: full natural speech, all slang and colloquialisms, realistic immersion
+  - Created getDifficultyModifier() function to retrieve the appropriate modifier
+  - Difficulty modifier is prepended to the prompt (after emotion instructions, before character context)
+- **Learnings for future iterations:**
+  - Difficulty type is already exported from src/data/scenarios.ts
+  - The prompt construction order is: EMOTION_HANDLING_INSTRUCTIONS + difficultyModifier + characterContext + basePrompt
+  - Beginner scenarios need clear guidance on pacing and pausing between sentences
+  - Advanced scenarios can include colorful expressions like "not here to fuck spiders" for authentic Aussie immersion
+  - The difficulty modifier goes before character context so the character speaks AT the specified difficulty level
+---
+
+## 2026-01-31 - CV-5
+- Enhanced voice-specific prompt injection with multiple template placeholders
+- Files changed: src/hooks/useElevenLabsConversation.ts
+- **Implementation details:**
+  - Created TemplatePlaceholders interface with 5 available placeholders: name, expression, speakingStyle, traits, description
+  - Added buildTemplatePlaceholders() function to construct placeholders from Voice data
+  - Replaced injectVoiceName() with injectTemplatePlaceholders() for richer substitution
+  - {expression} picks a random phrase from the character's exampleExpressions array
+  - Exported TemplatePlaceholders type so scenario authors can reference available placeholders
+- **Learnings for future iterations:**
+  - Scenario prompts can now use {name}, {expression}, {speakingStyle}, {traits}, {description} placeholders
+  - Example usage: "You are {name}, an Australian helping someone. {expression}"
+  - Adding new voice characters only requires adding VoicePersonality data - the template system handles injection automatically
+  - The buildTemplatePlaceholders function handles graceful fallbacks (empty strings) if personality data is missing
+---
+
+## 2026-01-31 - CV-6
+- Audited all scenario prompts for consistency across 17 scenario files (~126+ scenarios)
+- Files audited: src/data/scenarios.ts, src/data/scenarios-*.ts (all 16 additional files)
+- **Audit findings:**
+  - No TODO/FIXME/placeholder text found in any prompts
+  - All prompts follow consistent structure:
+    - Single-character: "You are {name}, [role description]..."
+    - Multi-character (10 scenarios): "You are playing multiple [description]..." with {name} referenced in the body
+  - All scenarios have complete fields (no empty culturalTip, prompt, firstMessage, or icon values)
+  - Cultural tips are appropriate and don't conflict with AI behavior instructions
+  - First messages use natural Australian greetings ("G'day!", "Hey!")
+  - Template placeholder {name} used consistently (170 occurrences across all files)
+  - Other placeholders ({expression}, {speakingStyle}, {traits}, {description}) available but not needed in base prompts since character context is injected separately via buildCharacterContext()
+- **No code changes required** - prompts are already consistent and high quality
+- **Learnings for future iterations:**
+  - Scenario prompts support 5 template placeholders: {name}, {expression}, {speakingStyle}, {traits}, {description}
+  - Multi-character scenarios start with "You are playing multiple..." and list numbered personas
+  - The "You are {name}" pattern is intentional and provides character context
+  - Cultural tips give guidance to users, not AI behavior instructions (those are in emotion handling and difficulty modifiers)
+---
