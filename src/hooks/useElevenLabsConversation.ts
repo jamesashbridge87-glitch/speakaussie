@@ -88,10 +88,72 @@ Now, here is your character and scenario:
 `;
 
 /**
- * Replace {name} placeholder in text with the voice's name
+ * Template placeholders available for use in scenario prompts and first messages.
+ * These allow scenario authors to inject voice-specific content.
+ *
+ * Available placeholders in prompts and firstMessage:
+ * - {name} - Voice name (e.g., "Tom", "Emma")
+ * - {expression} - A random expression from the character's repertoire
+ * - {speakingStyle} - The character's speaking style description
+ * - {traits} - Comma-separated list of character traits
+ * - {description} - Character background description
+ *
+ * Example usage in scenario prompt:
+ *   "You are {name}, an Australian helping someone order at a cafe. {expression}"
  */
-function injectVoiceName(text: string, voiceName: string): string {
-  return text.replace(/\{name\}/g, voiceName);
+export interface TemplatePlaceholders {
+  /** Voice name - e.g., "Tom", "Emma" */
+  name: string;
+  /** A random expression from the character's repertoire */
+  expression: string;
+  /** The character's speaking style description */
+  speakingStyle: string;
+  /** Comma-separated list of character traits */
+  traits: string;
+  /** Character background description */
+  description: string;
+}
+
+/**
+ * Build template placeholders from voice data.
+ * Returns an object with all available placeholders for template substitution.
+ */
+function buildTemplatePlaceholders(voice: Voice): TemplatePlaceholders {
+  const { personality, name } = voice;
+
+  // Pick a random expression (or fallback to empty)
+  const randomExpression =
+    personality.exampleExpressions.length > 0
+      ? personality.exampleExpressions[
+          Math.floor(Math.random() * personality.exampleExpressions.length)
+        ]
+      : '';
+
+  return {
+    name,
+    expression: randomExpression,
+    speakingStyle: personality.speakingStyle || '',
+    traits: personality.traits.join(', ') || '',
+    description: personality.description || '',
+  };
+}
+
+/**
+ * Replace template placeholders in text with voice-specific values.
+ * Supported placeholders:
+ * - {name} - Voice name (e.g., "Tom", "Emma")
+ * - {expression} - A random expression from the character's repertoire
+ * - {speakingStyle} - The character's speaking style description
+ * - {traits} - Comma-separated list of character traits
+ * - {description} - Character background description
+ */
+function injectTemplatePlaceholders(text: string, placeholders: TemplatePlaceholders): string {
+  return text
+    .replace(/\{name\}/g, placeholders.name)
+    .replace(/\{expression\}/g, placeholders.expression)
+    .replace(/\{speakingStyle\}/g, placeholders.speakingStyle)
+    .replace(/\{traits\}/g, placeholders.traits)
+    .replace(/\{description\}/g, placeholders.description);
 }
 
 /**
@@ -183,19 +245,22 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
     try {
       const { scenario, voice } = sessionOptions;
 
+      // Build template placeholders for this voice
+      const placeholders = buildTemplatePlaceholders(voice);
+
       // Build the character context from voice personality
       const characterContext = buildCharacterContext(voice.personality, voice.name);
 
       // Get difficulty-based speaking style modifier
       const difficultyModifier = getDifficultyModifier(scenario.difficulty);
 
-      // Inject the voice name into prompt and first message
-      const basePrompt = injectVoiceName(scenario.prompt, voice.name);
+      // Inject template placeholders into prompt and first message
+      const basePrompt = injectTemplatePlaceholders(scenario.prompt, placeholders);
       // Wrap with meta-instructions, difficulty modifier, and character context
       const prompt = wrapPromptWithEmotionInstructions(
         difficultyModifier + '\n' + characterContext + basePrompt
       );
-      const firstMessage = injectVoiceName(scenario.firstMessage, voice.name);
+      const firstMessage = injectTemplatePlaceholders(scenario.firstMessage, placeholders);
 
       await conversation.startSession({
         agentId: AGENT_ID,
