@@ -6,6 +6,21 @@ import { useWorkplaceProgress } from '../hooks/useWorkplaceProgress';
 import { StatCard } from './ui/StatCard';
 import { AchievementMini } from './ui/AchievementBadge';
 import { QuickLink } from './ui/QuickLink';
+import {
+  DuotoneIcon,
+  Trophy,
+  Star,
+  Flame,
+  Dumbbell,
+  MessageCircle,
+  Timer,
+  Briefcase,
+  HelpCircle,
+  Medal,
+  Mic,
+  ArrowLeft,
+  colorSchemes,
+} from './icons';
 import './UnifiedDashboard.css';
 
 // Pure utility function - no need to memoize
@@ -62,7 +77,7 @@ export function UnifiedDashboard() {
     <div className="unified-dashboard">
       <header className="dashboard-header">
         <button className="back-btn" onClick={() => navigate('/app')}>
-          ← Back to Main
+          <DuotoneIcon icon={ArrowLeft} size="sm" colorScheme={colorSchemes.ui} /> Back to Main
         </button>
         <div className="header-brand">
           <img
@@ -80,7 +95,7 @@ export function UnifiedDashboard() {
         <section className="dashboard-section level-section">
           <div className="level-display">
             <div className="level-badge">
-              <span className="level-icon">&#x1f3c6;</span>
+              <span className="level-icon"><DuotoneIcon icon={Trophy} size="lg" colorScheme={colorSchemes.stats} /></span>
               <span className="level-number">{level}</span>
             </div>
             <div className="level-info">
@@ -99,7 +114,7 @@ export function UnifiedDashboard() {
             </div>
           </div>
           <div className="total-xp">
-            <span className="xp-icon">&#x2b50;</span>
+            <span className="xp-icon"><DuotoneIcon icon={Star} size="md" colorScheme={colorSchemes.stats} /></span>
             <span className="xp-value">{xp}</span>
             <span className="xp-label">Total XP</span>
           </div>
@@ -108,14 +123,14 @@ export function UnifiedDashboard() {
         {/* Streak Section */}
         <section className="dashboard-section streak-section">
           <div className="streak-card current">
-            <span className="streak-icon">&#x1f525;</span>
+            <span className="streak-icon"><DuotoneIcon icon={Flame} size="lg" colorScheme={colorSchemes.stats} /></span>
             <div className="streak-info">
               <span className="streak-value">{streak}</span>
               <span className="streak-label">Day Streak</span>
             </div>
           </div>
           <div className="streak-card best">
-            <span className="streak-icon">&#x1f4aa;</span>
+            <span className="streak-icon"><DuotoneIcon icon={Dumbbell} size="lg" colorScheme={colorSchemes.stats} /></span>
             <div className="streak-info">
               <span className="streak-value">{maxStreak}</span>
               <span className="streak-label">Best Streak</span>
@@ -126,7 +141,7 @@ export function UnifiedDashboard() {
         {/* Stats Grid */}
         <section className="dashboard-section stats-grid">
           <StatCard
-            icon={<>&#x1f4ac;</>}
+            icon={<DuotoneIcon icon={MessageCircle} size="lg" colorScheme={colorSchemes.stats} />}
             value={progressStats.totalSessions}
             label="Conversations"
             variant="conversations"
@@ -134,7 +149,7 @@ export function UnifiedDashboard() {
             progressHint={`${progressStats.sessionsThisWeek} this week`}
           />
           <StatCard
-            icon={<>&#x23f1;</>}
+            icon={<DuotoneIcon icon={Timer} size="lg" colorScheme={colorSchemes.stats} />}
             value={formatTime(progressStats.totalPracticeTime)}
             label="Practice Time"
             variant="time"
@@ -142,7 +157,7 @@ export function UnifiedDashboard() {
             progressHint={`${formatTime(progressStats.practiceTimeThisWeek)} this week`}
           />
           <StatCard
-            icon={<>&#x1f4bc;</>}
+            icon={<DuotoneIcon icon={Briefcase} size="lg" colorScheme={colorSchemes.stats} />}
             value={workplaceProgress.learned}
             label="Workplace Phrases"
             variant="workplace"
@@ -150,7 +165,7 @@ export function UnifiedDashboard() {
             progressHint={`${workplaceProgress.situationsComplete} situations complete`}
           />
           <StatCard
-            icon={<>&#x2753;</>}
+            icon={<DuotoneIcon icon={HelpCircle} size="lg" colorScheme={colorSchemes.stats} />}
             value={quizzesCompleted}
             label="Quizzes Completed"
             variant="quizzes"
@@ -158,7 +173,7 @@ export function UnifiedDashboard() {
             progressHint={`${cardsViewed} cards viewed`}
           />
           <StatCard
-            icon={<>&#x1f3c5;</>}
+            icon={<DuotoneIcon icon={Medal} size="lg" colorScheme={colorSchemes.stats} />}
             value={unlockedAchievements.length}
             label="Achievements"
             variant="achievements"
@@ -186,19 +201,19 @@ export function UnifiedDashboard() {
           <h3>Continue Learning</h3>
           <div className="links-row">
             <QuickLink
-              icon={<>&#x1f4bc;</>}
+              icon={<DuotoneIcon icon={Briefcase} size="lg" colorScheme={colorSchemes.industry} />}
               text="Workplace"
               variant="workplace"
               onClick={navigateToWorkplace}
             />
             <QuickLink
-              icon={<>&#x1f3a4;</>}
+              icon={<DuotoneIcon icon={Mic} size="lg" colorScheme={colorSchemes.socialCulture} />}
               text="Speak"
               variant="speak"
               onClick={navigateToSpeak}
             />
             <QuickLink
-              icon={<>&#x1f4ac;</>}
+              icon={<DuotoneIcon icon={MessageCircle} size="lg" colorScheme={colorSchemes.careerGrowth} />}
               text="Practice"
               variant="practice"
               onClick={navigateToApp}
