@@ -13,6 +13,11 @@
   color: var(--brand-white);
 }
 
+/* Remove default focus outline for programmatic focus */
+.error-boundary-content:focus {
+  outline: none;
+}
+
 .error-boundary-title {
   font-size: 24px;
   font-weight: bold;
