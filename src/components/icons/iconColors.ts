@@ -8,42 +8,37 @@ export const colors = {
   lime: '#D2FF42',
 } as const;
 
+// Note: Originally designed for "duotone" icons with primary/secondary colors,
+// but Lucide icons only support a single color. Keeping simple single-color API.
 export type IconColorScheme = {
   primary: string;
-  secondary: string;
 };
 
 // Color schemes by group
 export const colorSchemes = {
-  // Career & Growth - Orange + Cyan
+  // Career & Growth - Orange
   careerGrowth: {
     primary: colors.orange,
-    secondary: colors.cyan,
   },
-  // Social & Culture - Pink + Cyan
+  // Social & Culture - Pink
   socialCulture: {
     primary: colors.pink,
-    secondary: colors.cyan,
   },
-  // Industry/Workplace - Cyan + Orange
+  // Industry/Workplace - Cyan
   industry: {
     primary: colors.cyan,
-    secondary: colors.orange,
   },
-  // Daily Work - Cyan + White
+  // Daily Work - Cyan
   dailyWork: {
     primary: colors.cyan,
-    secondary: colors.white,
   },
-  // Stats & Gamification - Orange + White
+  // Stats & Gamification - Orange
   stats: {
     primary: colors.orange,
-    secondary: colors.white,
   },
-  // UI & Navigation - Cyan + White
+  // UI & Navigation - Cyan
   ui: {
     primary: colors.cyan,
-    secondary: colors.white,
   },
 } as const;
 
