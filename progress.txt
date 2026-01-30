@@ -348,3 +348,20 @@ Project: SpeakAussie Polish & Ship
   - reportError() utility allows adding custom context (like componentStack) to error reports
   - Source maps are automatically uploaded when using Sentry's Vite plugin (optional future enhancement)
 ---
+
+## 2026-01-31 - IF-2
+- Improved backend error handling with proper middleware and logging
+- Files changed: backend/src/middleware/errorHandler.ts (new), backend/src/index.ts
+- **Implementation details:**
+  - Created errorHandler.ts with AppError class, errorHandler middleware, asyncHandler utility, notFoundHandler
+  - Global error handler logs errors with context (timestamp, method, path, query, userId)
+  - Client receives safe error responses without stack traces
+  - Handles known error types: AppError (operational), ZodError (validation), JWT errors, MulterError (file upload)
+  - asyncHandler() utility wraps async routes to automatically catch and forward errors
+  - notFoundHandler returns 404 with the requested path for debugging
+- **Learnings for future iterations:**
+  - asyncHandler pattern: `router.get('/route', asyncHandler(async (req, res) => { ... }))`
+  - AppError for operational errors: `throw new AppError(404, 'Resource not found')`
+  - Error handler must be registered last in Express middleware chain
+  - Use isOperational flag to distinguish expected errors from bugs
+---

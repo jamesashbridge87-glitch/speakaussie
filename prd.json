@@ -378,7 +378,7 @@
         "Async errors properly caught"
       ],
       "files": ["backend/src/index.ts", "backend/src/middleware/"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "IF-3",
