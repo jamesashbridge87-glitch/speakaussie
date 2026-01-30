@@ -10,7 +10,7 @@ interface VoiceSelectorProps {
 export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   const [selectedVoice, setSelectedVoice] = useState<VoiceId | null>(getVoicePreference());
   const [isPlayingIntro, setIsPlayingIntro] = useState(false);
-  const [audioError, setAudioError] = useState(false);
+  const [playingVoiceId, setPlayingVoiceId] = useState<VoiceId | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Cleanup audio on unmount
@@ -24,10 +24,14 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   }, []);
 
   const handleVoiceClick = (voiceId: VoiceId) => {
-    const voice = voices[voiceId];
     setSelectedVoice(voiceId);
     saveVoicePreference(voiceId);
-    setAudioError(false);
+  };
+
+  const handlePlayIntro = (voiceId: VoiceId, e: React.MouseEvent) => {
+    e.stopPropagation(); // Don't trigger voice selection
+
+    const voice = voices[voiceId];
 
     // Stop any currently playing audio
     if (audioRef.current) {
@@ -35,24 +39,33 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
       audioRef.current = null;
     }
 
+    // If clicking play on the same voice that's playing, just stop
+    if (isPlayingIntro && playingVoiceId === voiceId) {
+      setIsPlayingIntro(false);
+      setPlayingVoiceId(null);
+      return;
+    }
+
     // Play intro audio
     setIsPlayingIntro(true);
+    setPlayingVoiceId(voiceId);
     const audio = new Audio(`${import.meta.env.BASE_URL}${voice.introAudio.replace(/^\//, '')}`);
     audioRef.current = audio;
 
     audio.onended = () => {
       setIsPlayingIntro(false);
+      setPlayingVoiceId(null);
     };
 
     audio.onerror = () => {
       setIsPlayingIntro(false);
-      setAudioError(true);
-      console.warn('Intro audio not available yet - continuing without audio');
+      setPlayingVoiceId(null);
+      console.warn('Intro audio not available');
     };
 
     audio.play().catch(() => {
       setIsPlayingIntro(false);
-      setAudioError(true);
+      setPlayingVoiceId(null);
     });
   };
 
@@ -82,49 +95,50 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
           {(Object.keys(voices) as VoiceId[]).map((voiceId) => {
             const voice = voices[voiceId];
             const isSelected = selectedVoice === voiceId;
+            const isPlaying = isPlayingIntro && playingVoiceId === voiceId;
 
             return (
-              <button
-                key={voiceId}
-                className={`voice-option ${isSelected ? 'selected' : ''}`}
-                onClick={() => handleVoiceClick(voiceId)}
-                aria-pressed={isSelected}
-              >
-                <div className="voice-avatar-container">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${voice.avatar.replace(/^\//, '')}`}
-                    alt={voice.name}
-                    className="voice-avatar"
-                  />
-                  {isSelected && isPlayingIntro && (
-                    <div className="voice-playing-indicator">
-                      <span className="playing-dot"></span>
-                      <span className="playing-dot"></span>
-                      <span className="playing-dot"></span>
-                    </div>
+              <div key={voiceId} className="voice-option-wrapper">
+                <button
+                  className={`voice-option ${isSelected ? 'selected' : ''}`}
+                  onClick={() => handleVoiceClick(voiceId)}
+                  aria-pressed={isSelected}
+                >
+                  <div className="voice-avatar-container">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${voice.avatar.replace(/^\//, '')}`}
+                      alt={voice.name}
+                      className="voice-avatar"
+                    />
+                  </div>
+                  <span className="voice-name">{voice.name}</span>
+                  {isSelected && (
+                    <span className="voice-selected-badge">Selected</span>
                   )}
-                </div>
-                <span className="voice-name">{voice.name}</span>
-                {isSelected && (
-                  <span className="voice-selected-badge">Selected</span>
-                )}
-              </button>
+                </button>
+                <button
+                  className={`voice-play-btn ${isPlaying ? 'playing' : ''}`}
+                  onClick={(e) => handlePlayIntro(voiceId, e)}
+                  aria-label={isPlaying ? `Stop ${voice.name}'s intro` : `Play ${voice.name}'s intro`}
+                >
+                  {isPlaying ? (
+                    <span className="play-icon">■</span>
+                  ) : (
+                    <span className="play-icon">▶</span>
+                  )}
+                  <span className="play-text">{isPlaying ? 'Stop' : 'Preview'}</span>
+                </button>
+              </div>
             );
           })}
         </div>
 
-        {audioError && (
-          <p className="voice-audio-note">
-            Audio intro will be available soon
-          </p>
-        )}
-
         <button
           className="voice-continue-btn"
           onClick={handleContinue}
-          disabled={!selectedVoice || isPlayingIntro}
+          disabled={!selectedVoice}
         >
-          {isPlayingIntro ? 'Playing intro...' : 'Start Conversation'}
+          Start Conversation
         </button>
       </div>
     </div>
