@@ -15,6 +15,7 @@ import { JourneyCompact } from './JourneyProgress';
 import { OnboardingFlow } from './OnboardingFlow';
 import { CelebrationToast, useCelebrations, CELEBRATIONS } from './CelebrationToast';
 import { ScenarioIntro } from './ScenarioIntro';
+import { VoiceSelector } from './VoiceSelector';
 import { ProgressDashboard } from './ProgressDashboard';
 import { CultureModuleViewer } from './CultureModuleViewer';
 import { AudioVisualizer } from './AudioVisualizer';
@@ -28,6 +29,7 @@ import { FeedbackButton } from './FeedbackButton';
 import { NPSSurvey, useNPSSurvey } from './NPSSurvey';
 import { StreakReminder } from './StreakReminder';
 import { Scenario, getCategoryInfo, scenarios } from '../data/scenarios';
+import { Voice } from '../data/voices';
 import './AussieEnglishPractice.css';
 
 interface Message {
@@ -36,12 +38,13 @@ interface Message {
   timestamp: Date;
 }
 
-type ViewState = 'selector' | 'intro' | 'session';
+type ViewState = 'selector' | 'intro' | 'voice-select' | 'session';
 
 export function AussieEnglishPractice() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [viewState, setViewState] = useState<ViewState>('selector');
   const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
+  const [_selectedVoice, setSelectedVoice] = useState<Voice | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProgress, setShowProgress] = useState(false);
   const [showCultureGuide, setShowCultureGuide] = useState(false);
@@ -181,10 +184,24 @@ export function AussieEnglishPractice() {
 
   const handleBackToSelector = () => {
     setSelectedScenario(null);
+    setSelectedVoice(null);
     setViewState('selector');
   };
 
-  const startSession = async () => {
+  const handleProceedToVoiceSelect = () => {
+    setViewState('voice-select');
+  };
+
+  const handleVoiceSelect = (voice: Voice) => {
+    setSelectedVoice(voice);
+    startSession(voice);
+  };
+
+  const handleBackToIntro = () => {
+    setViewState('intro');
+  };
+
+  const startSession = async (voice: Voice) => {
     if (!selectedScenario) return;
 
     // Check usage limits based on authentication status
@@ -223,6 +240,7 @@ export function AussieEnglishPractice() {
 
       await conversation.startSession({
         scenario: selectedScenario,
+        voice: voice,
       });
 
       startTracking(selectedScenario.category as 'everyday' | 'slang' | 'workplace');
@@ -496,9 +514,16 @@ export function AussieEnglishPractice() {
       {viewState === 'intro' && selectedScenario && (
         <ScenarioIntro
           scenario={selectedScenario}
-          onStart={startSession}
+          onStart={handleProceedToVoiceSelect}
           onBack={handleBackToSelector}
           isLoading={isStarting}
+        />
+      )}
+
+      {viewState === 'voice-select' && selectedScenario && (
+        <VoiceSelector
+          onSelect={handleVoiceSelect}
+          onBack={handleBackToIntro}
         />
       )}
 

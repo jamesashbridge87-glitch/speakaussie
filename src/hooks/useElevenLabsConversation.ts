@@ -1,6 +1,7 @@
 import { useConversation } from '@elevenlabs/react';
 import { useCallback } from 'react';
 import { Scenario } from '../data/scenarios';
+import { Voice } from '../data/voices';
 
 export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -18,10 +19,18 @@ interface ConversationOptions {
 
 interface SessionOptions {
   scenario: Scenario;
+  voice: Voice;
 }
 
 // Your ElevenLabs Agent ID
 const AGENT_ID = 'g50Lc7IzLlbPiRpgNXQJ';
+
+/**
+ * Replace {name} placeholder in text with the voice's name
+ */
+function injectVoiceName(text: string, voiceName: string): string {
+  return text.replace(/\{name\}/g, voiceName);
+}
 
 /**
  * Hook to manage voice conversations using ElevenLabs Conversational AI
@@ -61,20 +70,27 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
     elevenLabsStatus === 'connecting' ? 'connecting' : 'disconnected';
 
   /**
-   * Start a new conversation session with a scenario
+   * Start a new conversation session with a scenario and voice
    */
   const startSession = useCallback(async (sessionOptions: SessionOptions) => {
     try {
-      const { scenario } = sessionOptions;
+      const { scenario, voice } = sessionOptions;
+
+      // Inject the voice name into prompt and first message
+      const prompt = injectVoiceName(scenario.prompt, voice.name);
+      const firstMessage = injectVoiceName(scenario.firstMessage, voice.name);
 
       await conversation.startSession({
         agentId: AGENT_ID,
         overrides: {
           agent: {
             prompt: {
-              prompt: scenario.prompt,
+              prompt: prompt,
             },
-            firstMessage: scenario.firstMessage,
+            firstMessage: firstMessage,
+          },
+          tts: {
+            voiceId: voice.elevenLabsId,
           },
         },
       });
