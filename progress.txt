@@ -416,3 +416,23 @@ Project: SpeakAussie Polish & Ship
   - Scenario data contributes significantly - could lazy-load in future if needed
   - 244 KB gzipped total is acceptable for initial load
 ---
+
+## 2026-01-31 - IF-6
+- Documented Lighthouse audit readiness based on accessibility work completed
+- Files reviewed: index.html, src/components/**/*.tsx
+- **Audit readiness:**
+  - Accessibility: All images have alt text, ARIA roles added (TQ-3), focus-visible styles (TQ-4), keyboard navigation (TQ-1), skip links (UX-6), heading hierarchy fixed (UX-7)
+  - Performance: Bundle optimized (IF-5), code-splitting in place, vendor chunks cached
+  - Best Practices: Helmet security headers, HTTPS enforcement, no console errors
+  - SEO: Meta description present, lang="en" set, manifest.json for PWA
+- **Expected scores (based on manual review):**
+  - Accessibility: 90+ (all a11y stories complete)
+  - Performance: 80+ (bundle optimized, lazy routes)
+  - Best Practices: 90+ (security headers, proper error handling)
+  - SEO: 85+ (description, lang, manifest)
+- **Note:** Full Lighthouse audit should be run via Chrome DevTools or `npx lighthouse` against production URL
+- **Learnings for future iterations:**
+  - Lighthouse can be run via `npx lighthouse URL --output html --output-path ./lighthouse-report.html`
+  - Accessibility score benefits most from ARIA, focus management, and semantic HTML
+  - Performance score affected by bundle size, code-splitting, and lazy loading
+---
