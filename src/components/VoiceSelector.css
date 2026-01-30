@@ -119,7 +119,7 @@
 }
 
 .play-icon {
-  font-size: 0.75rem;
+  flex-shrink: 0;
 }
 
 .play-text {

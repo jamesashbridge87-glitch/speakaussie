@@ -62,6 +62,7 @@ export {
   ChevronLeft,
   Play,
   Pause,
+  Square,
   User,
   Users,
   Award,

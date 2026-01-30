@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { voices, Voice, VoiceId, getVoicePreference, saveVoicePreference } from '../data/voices';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Play, Square } from 'lucide-react';
 import './VoiceSelector.css';
 
 const voiceIds = Object.keys(voices) as VoiceId[];
@@ -163,9 +163,9 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
                   aria-label={isPlaying ? `Stop ${voice.name}'s intro` : `Play ${voice.name}'s intro`}
                 >
                   {isPlaying ? (
-                    <span className="play-icon">■</span>
+                    <Square className="play-icon" size={12} aria-hidden="true" />
                   ) : (
-                    <span className="play-icon">▶</span>
+                    <Play className="play-icon" size={12} aria-hidden="true" />
                   )}
                   <span className="play-text">{isPlaying ? 'Stop' : 'Preview'}</span>
                 </button>
