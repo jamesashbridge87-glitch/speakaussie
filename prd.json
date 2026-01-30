@@ -405,7 +405,7 @@
         "Integrates with analytics from IF-3"
       ],
       "files": ["src/components/SubscriptionPlans.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "IF-5",

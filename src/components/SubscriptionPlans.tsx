@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSubscription } from '../hooks/useSubscription';
 import { useAuth } from '../hooks/useAuth';
+import { trackSubscriptionView, trackSubscriptionSelect } from '../lib/analytics';
 import './SubscriptionPlans.css';
 
 interface SubscriptionPlansProps {
@@ -13,12 +14,18 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Track when subscription plans are viewed
+  useEffect(() => {
+    trackSubscriptionView();
+  }, []);
+
   const handleSelectPlan = async (plan: 'starter' | 'professional' | 'executive') => {
     if (!isAuthenticated) {
       onAuthRequired?.();
       return;
     }
 
+    trackSubscriptionSelect(plan);
     setLoadingPlan(plan);
     setError(null);
 
@@ -49,7 +56,7 @@ export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
       price: 29,
       minutes: 5,
       description: 'Start building confidence',
-      features: ['5 minutes per day', 'All scenarios', 'Slang library', 'Basic progress tracking'],
+      features: ['5 minutes per day', 'All scenarios', 'Progress tracking'],
     },
     {
       id: 'professional',

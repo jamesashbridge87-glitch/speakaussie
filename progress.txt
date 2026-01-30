@@ -383,3 +383,17 @@ Project: SpeakAussie Polish & Ship
   - crypto.randomUUID() generates session IDs (with fallback for older browsers)
   - Event queue pattern: batch events and flush periodically or when queue is full
 ---
+
+## 2026-01-31 - IF-4
+- Added conversion tracking to subscription funnel
+- Files changed: src/components/SubscriptionPlans.tsx
+- **Implementation details:**
+  - trackSubscriptionView() fires on component mount
+  - trackSubscriptionSelect(planId) fires when user clicks a plan button
+  - Integrates with analytics service from IF-3
+  - Funnel: view -> select -> (Stripe checkout - tracked server-side)
+- **Learnings for future iterations:**
+  - useEffect with empty deps for "view" events on component mount
+  - Track selection before async operation starts (in case checkout redirects immediately)
+  - Subscription completion should be tracked server-side via Stripe webhook (not implemented here)
+---
