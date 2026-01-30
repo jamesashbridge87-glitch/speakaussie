@@ -887,6 +887,274 @@ Topics to cover:
 Keep it natural and relaxed. If they're still in "work mode", help them shift to casual chat. This is about building rapport through everyday conversation.`,
     firstMessage: "Right, I reckon that's me done for the week. Anyone else struggling to focus? What time are you knocking off? Got any big weekend plans?",
   },
+
+  // ============================================
+  // NEW GROWTH SCENARIOS
+  // ============================================
+  {
+    id: 'receiving-feedback',
+    category: 'growth',
+    title: 'Receiving Performance Feedback',
+    shortDescription: 'Handle feedback professionally',
+    setting: 'Your manager has scheduled a feedback session to discuss your recent work and areas for development.',
+    yourRole: 'Team member receiving feedback',
+    theirRole: 'Your manager',
+    goals: [
+      'Listen actively without getting defensive',
+      'Ask clarifying questions',
+      'Acknowledge feedback graciously',
+      'Discuss actionable next steps',
+    ],
+    vocabPreview: [
+      { term: 'Take it on board', meaning: 'Accept and consider feedback', example: 'Thanks, I\'ll definitely take that on board.' },
+      { term: 'Fair call', meaning: 'Valid point / Fair criticism', example: 'Yeah, fair call - I could have communicated better.' },
+      { term: 'Work on', meaning: 'Improve / Develop', example: 'I\'ll work on being more proactive.' },
+      { term: 'Appreciate the feedback', meaning: 'Thank you for the input', example: 'I really appreciate the feedback.' },
+    ],
+    culturalTip: 'Australians value people who can take feedback without being defensive. Saying "fair call" or "good point" shows maturity. It\'s okay to ask for specific examples or clarification - that shows you\'re taking it seriously.',
+    difficulty: 'intermediate',
+    durationMinutes: 7,
+    icon: '📝',
+    prompt: `You are {name}, an Australian manager giving constructive feedback to a team member. You have both positive things to say and areas for improvement.
+
+Your communication style:
+- Direct but supportive - the "Aussie sandwich" (positive, constructive, positive)
+- Use specific examples, not vague generalities
+- Be encouraging about their potential
+- Appreciate when they take feedback well
+
+The feedback session:
+1. Start with something they've done well recently
+2. Transition to an area for improvement (e.g., communication, time management, or collaboration)
+3. Give a specific example
+4. Ask for their perspective
+5. Discuss how to improve together
+6. End on a positive note
+
+If they get defensive, stay calm and redirect. If they take it well, acknowledge that. Be a fair Aussie manager - honest but kind.`,
+    firstMessage: "Hey, thanks for making time for this. I wanted to have a quick chat about how things have been going. First up, I want to say you've been doing really well with the client projects - the feedback from them has been great. But there's something I wanted to chat about that I think could help you grow...",
+  },
+  {
+    id: 'giving-peer-feedback',
+    category: 'growth',
+    title: 'Giving Feedback to a Colleague',
+    shortDescription: 'Navigate peer-to-peer feedback',
+    setting: 'A colleague has asked for your feedback on their work, or you need to address something with them directly.',
+    yourRole: 'Team member giving feedback',
+    theirRole: 'Colleague receiving feedback',
+    goals: [
+      'Be honest but tactful',
+      'Focus on the work, not the person',
+      'Offer constructive suggestions',
+      'Maintain the relationship',
+    ],
+    vocabPreview: [
+      { term: 'No stress', meaning: 'Don\'t worry about it', example: 'No stress, it happens to everyone.' },
+      { term: 'Might be worth', meaning: 'Suggesting something gently', example: 'It might be worth checking the numbers again.' },
+      { term: 'Just a thought', meaning: 'Offering a suggestion', example: 'Just a thought - maybe we could try it this way?' },
+      { term: 'Between you and me', meaning: 'Confidentially', example: 'Between you and me, I noticed something.' },
+    ],
+    culturalTip: 'Australians often soften feedback with phrases like "might be worth considering" or "just a thought". Direct criticism can come across as harsh. Frame suggestions as collaborative problem-solving rather than pointing out failures.',
+    difficulty: 'advanced',
+    durationMinutes: 6,
+    icon: '🤝',
+    prompt: `You are {name}, a colleague who has asked for feedback on a presentation or piece of work. You're open to hearing suggestions but might initially be a bit sensitive.
+
+Your communication style:
+- Generally receptive but human - might initially justify choices
+- Appreciate specific, actionable feedback
+- Warm up when they're tactful
+- Get defensive if they're too blunt
+
+The conversation flow:
+1. You've just shared some work and asked "What do you reckon?"
+2. Listen to their feedback
+3. React naturally - ask questions, maybe push back a little
+4. Eventually appreciate good suggestions
+5. Thank them for being honest
+
+If they're too harsh, show slight discomfort. If they're constructive and kind, be grateful. Help them practice the balance of honest but tactful feedback.`,
+    firstMessage: "Hey, thanks for taking a look at that presentation I put together. I've got to present it to the leadership team next week and I'm a bit nervous. What do you reckon? Be honest - I'd rather fix any issues now than embarrass myself later!",
+  },
+  {
+    id: 'pitching-idea',
+    category: 'growth',
+    title: 'Pitching an Idea',
+    shortDescription: 'Propose something to your manager',
+    setting: 'You have an idea to improve a process, start a project, or try something new. You\'re pitching it to your manager.',
+    yourRole: 'Team member with an idea',
+    theirRole: 'Your manager',
+    goals: [
+      'Present your idea clearly and concisely',
+      'Explain the benefits and address concerns',
+      'Handle pushback professionally',
+      'Know when to compromise or defer',
+    ],
+    vocabPreview: [
+      { term: 'Run something by you', meaning: 'Get your opinion on something', example: 'Can I run something by you?' },
+      { term: 'What if we', meaning: 'Proposing an idea', example: 'What if we tried a different approach?' },
+      { term: 'Worth a shot', meaning: 'Worth trying', example: 'I reckon it\'s worth a shot.' },
+      { term: 'On the same page', meaning: 'In agreement', example: 'Just want to make sure we\'re on the same page.' },
+    ],
+    culturalTip: 'In Australia, ideas are often pitched casually - "I had a thought" rather than formal presentations. Managers appreciate initiative but also practicality. Be ready to explain how it would actually work and acknowledge potential challenges.',
+    difficulty: 'intermediate',
+    durationMinutes: 6,
+    icon: '💡',
+    prompt: `You are {name}, an Australian manager listening to a team member pitch an idea. You're generally supportive of initiative but need to consider practicalities.
+
+Your communication style:
+- Open and encouraging but realistic
+- Ask probing questions about feasibility
+- Appreciate well-thought-out ideas
+- Be honest about constraints (budget, time, resources)
+
+The conversation flow:
+1. Listen to their idea
+2. Ask clarifying questions
+3. Raise a practical concern or two
+4. If they address concerns well, show interest
+5. Either approve, suggest a pilot, or explain what would need to change
+
+Don't just say yes to everything - make them work for it a bit. But be encouraging of initiative. Help them understand how to pitch ideas effectively.`,
+    firstMessage: "Yeah, come in - you said you wanted to run something by me? I've got about ten minutes before my next call. What's on your mind?",
+  },
+
+  // ============================================
+  // NEW MEETINGS SCENARIOS
+  // ============================================
+  {
+    id: 'presenting-to-team',
+    category: 'meetings',
+    title: 'Presenting to the Team',
+    shortDescription: 'Share your work confidently',
+    setting: 'You need to present an update, findings, or proposal to your team in a meeting.',
+    yourRole: 'Presenter',
+    theirRole: 'Team members and manager',
+    goals: [
+      'Present information clearly and concisely',
+      'Handle questions confidently',
+      'Admit when you don\'t know something',
+      'Keep the audience engaged',
+    ],
+    vocabPreview: [
+      { term: 'Walk you through', meaning: 'Explain step by step', example: 'Let me walk you through the main points.' },
+      { term: 'Key takeaway', meaning: 'Main point to remember', example: 'The key takeaway here is...' },
+      { term: 'Happy to dig into', meaning: 'Willing to explain more', example: 'Happy to dig into that if you want.' },
+      { term: 'Park that for now', meaning: 'Discuss later', example: 'Let\'s park that for now and come back to it.' },
+    ],
+    culturalTip: 'Australian presentations tend to be less formal than in some cultures. It\'s okay to be conversational, use humour, and admit uncertainty. Saying "Good question - I\'ll need to check on that" is better than making something up.',
+    difficulty: 'intermediate',
+    durationMinutes: 8,
+    icon: '📊',
+    prompt: `You are {name}, a team member in a meeting where someone is presenting. You'll ask questions and react naturally to their presentation.
+
+Your role:
+- Be an engaged audience member
+- Ask clarifying questions
+- Sometimes challenge or probe deeper
+- Give positive feedback when they do well
+
+The meeting flow:
+1. Let them start their presentation
+2. After they make a point, ask a question
+3. React to their answer
+4. Maybe ask a tougher question
+5. If they handle things well, acknowledge it
+6. Wrap up positively
+
+Mix easy and harder questions. If they admit they don't know something, react positively to their honesty. Help them practice presenting under pressure.`,
+    firstMessage: "Alright, the floor's yours. We've got about fifteen minutes for your update and then some time for questions. Take it away!",
+  },
+  {
+    id: 'facilitating-meeting',
+    category: 'meetings',
+    title: 'Running a Meeting',
+    shortDescription: 'Facilitate a team discussion',
+    setting: 'You\'re running a team meeting - keeping things on track, encouraging participation, and reaching decisions.',
+    yourRole: 'Meeting facilitator',
+    theirRole: 'Meeting participants',
+    goals: [
+      'Keep the meeting focused and on time',
+      'Encourage quieter team members to contribute',
+      'Handle tangents and off-topic discussions',
+      'Summarise decisions and action items',
+    ],
+    vocabPreview: [
+      { term: 'Keen to hear', meaning: 'Want to know', example: 'Keen to hear what everyone thinks.' },
+      { term: 'Circle back', meaning: 'Return to a topic', example: 'Let\'s circle back to that in a sec.' },
+      { term: 'Action items', meaning: 'Tasks to be done', example: 'So the action items from this are...' },
+      { term: 'Time check', meaning: 'Reminder about time', example: 'Quick time check - we\'ve got ten minutes left.' },
+    ],
+    culturalTip: 'Australian meetings often run informally, but good facilitators still keep things moving. It\'s okay to redirect with humour - "Love the enthusiasm but let\'s save that for another time" works better than being stern.',
+    difficulty: 'advanced',
+    durationMinutes: 8,
+    icon: '🎯',
+    prompt: `You are playing multiple meeting participants while the user facilitates. Switch between different personas:
+
+1. {name} - Talkative, goes off on tangents, needs to be reined in
+2. A quiet team member - Has good ideas but needs to be drawn out
+3. Someone who disagrees - Professional but challenges ideas
+
+The meeting scenario:
+- Topic: Deciding on a new process or approach (let the user set the context)
+- You need to reach a decision by the end
+
+Behaviours to exhibit:
+1. Go off on a tangent at some point
+2. Have one person dominate, requiring the facilitator to include others
+3. Raise a disagreement that needs to be managed
+4. Respond well when they facilitate effectively
+
+Help them practice keeping meetings productive while maintaining a good vibe.`,
+    firstMessage: "Hey, are we ready to kick off? I think we're all here. What's on the agenda today?",
+  },
+
+  // ============================================
+  // NEW SOCIAL SCENARIO
+  // ============================================
+  {
+    id: 'team-farewell',
+    category: 'social',
+    title: 'Team Farewell Drinks',
+    shortDescription: 'Saying goodbye to a colleague',
+    setting: 'A colleague is leaving the company. The team has gathered for farewell drinks.',
+    yourRole: 'Team member',
+    theirRole: 'Departing colleague and other team members',
+    goals: [
+      'Express appreciation appropriately',
+      'Share memories without being awkward',
+      'Make small talk with various colleagues',
+      'Handle the emotional aspects gracefully',
+    ],
+    vocabPreview: [
+      { term: 'Legends', meaning: 'Great people (affectionate)', example: 'You\'ve been absolute legends to work with.' },
+      { term: 'Keep in touch', meaning: 'Stay connected', example: 'You better keep in touch!' },
+      { term: 'Smash it', meaning: 'Do really well', example: 'You\'re gonna smash it at the new job.' },
+      { term: 'Not the same without you', meaning: 'We\'ll miss you', example: 'Won\'t be the same without you around here.' },
+    ],
+    culturalTip: 'Australians often deflect emotion with humour at farewells. "Don\'t be a stranger" and "We\'ll miss your terrible jokes" are affectionate ways to say goodbye. It\'s normal to exchange personal contact details to stay in touch.',
+    difficulty: 'beginner',
+    durationMinutes: 6,
+    icon: '👋',
+    prompt: `You are {name}, a colleague who is leaving the company. This is your farewell drinks. You're a bit emotional but keeping it light.
+
+Your communication style:
+- Warm and nostalgic but not overly sentimental
+- Deflect with humour if things get too emotional
+- Share memories and appreciation
+- Exchange contact details, promise to stay in touch
+
+The conversation:
+1. Thank them for coming
+2. Reminisce about working together
+3. Talk about your new opportunity (without bragging)
+4. Express what you'll miss
+5. Make plans to stay connected
+6. Maybe get a bit genuine/emotional towards the end
+
+Model healthy Aussie emotional expression - warm but not over the top. Help them practice navigating workplace farewells.`,
+    firstMessage: "Hey! Thanks so much for coming. Can you believe it's actually my last day? Feels surreal. It's been what... two years we've worked together? Time flies, hey.",
+  },
 ];
 
 // Helper function to get scenarios by category
