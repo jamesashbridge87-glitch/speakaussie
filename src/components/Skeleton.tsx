@@ -35,7 +35,7 @@ export function Skeleton({
 // Pre-built skeleton patterns for common use cases
 export function ScenarioCardSkeleton() {
   return (
-    <div className="skeleton-scenario-card">
+    <div className="skeleton-scenario-card" aria-hidden="true">
       <Skeleton variant="rectangular" height={120} />
       <div className="skeleton-scenario-content">
         <Skeleton variant="text" width="60%" />
@@ -48,7 +48,7 @@ export function ScenarioCardSkeleton() {
 
 export function ScenarioGridSkeleton() {
   return (
-    <div className="skeleton-scenario-grid" aria-label="Loading scenarios">
+    <div className="skeleton-scenario-grid" role="status" aria-busy="true" aria-label="Loading scenarios">
       {Array.from({ length: 6 }, (_, i) => (
         <ScenarioCardSkeleton key={i} />
       ))}
@@ -58,7 +58,7 @@ export function ScenarioGridSkeleton() {
 
 export function StatCardSkeleton() {
   return (
-    <div className="skeleton-stat-card">
+    <div className="skeleton-stat-card" aria-hidden="true">
       <Skeleton variant="circular" width={48} height={48} />
       <div className="skeleton-stat-content">
         <Skeleton variant="text" width="50%" height={24} />
@@ -70,7 +70,7 @@ export function StatCardSkeleton() {
 
 export function DashboardSkeleton() {
   return (
-    <div className="skeleton-dashboard" aria-label="Loading dashboard">
+    <div className="skeleton-dashboard" role="status" aria-busy="true" aria-label="Loading dashboard">
       <div className="skeleton-header">
         <Skeleton variant="text" width="40%" height={32} />
       </div>
@@ -90,7 +90,7 @@ export function DashboardSkeleton() {
 
 export function FlashcardSkeleton() {
   return (
-    <div className="skeleton-flashcard" aria-label="Loading flashcard">
+    <div className="skeleton-flashcard" role="status" aria-busy="true" aria-label="Loading flashcard">
       <Skeleton variant="rectangular" height={280} className="skeleton-flashcard-main" />
       <div className="skeleton-flashcard-nav">
         <Skeleton variant="rectangular" width={80} height={44} />
@@ -103,7 +103,7 @@ export function FlashcardSkeleton() {
 
 export function ListItemSkeleton() {
   return (
-    <div className="skeleton-list-item">
+    <div className="skeleton-list-item" aria-hidden="true">
       <Skeleton variant="circular" width={40} height={40} />
       <div className="skeleton-list-content">
         <Skeleton variant="text" width="70%" />
@@ -115,7 +115,7 @@ export function ListItemSkeleton() {
 
 export function ListSkeleton({ count = 5 }: { count?: number }) {
   return (
-    <div className="skeleton-list" aria-label="Loading list">
+    <div className="skeleton-list" role="status" aria-busy="true" aria-label="Loading list">
       {Array.from({ length: count }, (_, i) => (
         <ListItemSkeleton key={i} />
       ))}

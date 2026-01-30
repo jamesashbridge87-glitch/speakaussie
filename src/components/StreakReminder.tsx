@@ -99,7 +99,7 @@ export function StreakReminder({ variant = 'banner', onDismiss }: StreakReminder
 
   if (variant === 'toast') {
     return (
-      <div className={`streak-toast ${content.type}`}>
+      <div className={`streak-toast ${content.type}`} role="status" aria-live="polite">
         <span className="streak-toast-icon">{content.icon}</span>
         <div className="streak-toast-content">
           <strong>{content.title}</strong>
@@ -113,7 +113,7 @@ export function StreakReminder({ variant = 'banner', onDismiss }: StreakReminder
   }
 
   return (
-    <div className={`streak-banner ${content.type}`}>
+    <div className={`streak-banner ${content.type}`} role="status" aria-live="polite">
       <span className="streak-banner-icon">{content.icon}</span>
       <div className="streak-banner-content">
         <strong>{content.title}</strong>
