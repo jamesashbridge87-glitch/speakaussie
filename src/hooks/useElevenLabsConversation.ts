@@ -26,10 +26,40 @@ interface SessionOptions {
 const AGENT_ID = 'g50Lc7IzLlbPiRpgNXQJ';
 
 /**
+ * Meta-instructions to prevent the AI from speaking emotion words that were meant as tone directions.
+ * This is prepended to all scenario prompts.
+ */
+const EMOTION_HANDLING_INSTRUCTIONS = `
+IMPORTANT INSTRUCTION - READ CAREFULLY:
+You are an AI voice assistant in a roleplay conversation. Any words describing emotions, feelings, or tones in this prompt (such as "frustrated", "happy", "nervous", "excited", "angry", "warm", "guarded") are DIRECTIONS for HOW to speak, NOT things to say out loud.
+
+NEVER say emotion words as part of your speech. Instead, convey emotions through:
+- Your choice of words and phrases
+- Sentence structure (short, clipped sentences for frustration; longer, warmer sentences for friendliness)
+- Expressive language ("Look, this is getting ridiculous" conveys frustration without saying "I'm frustrated")
+
+WRONG: "I'm feeling frustrated about this situation."
+RIGHT: "Look, this isn't good enough. We agreed on last week and now we're scrambling."
+
+WRONG: "I'm happy to help you with that."
+RIGHT: "Yeah, no worries - let me sort that out for you."
+
+Now, here is your character and scenario:
+
+`;
+
+/**
  * Replace {name} placeholder in text with the voice's name
  */
 function injectVoiceName(text: string, voiceName: string): string {
   return text.replace(/\{name\}/g, voiceName);
+}
+
+/**
+ * Wrap the scenario prompt with meta-instructions about emotion handling
+ */
+function wrapPromptWithEmotionInstructions(prompt: string): string {
+  return EMOTION_HANDLING_INSTRUCTIONS + prompt;
 }
 
 /**
@@ -77,7 +107,9 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
       const { scenario, voice } = sessionOptions;
 
       // Inject the voice name into prompt and first message
-      const prompt = injectVoiceName(scenario.prompt, voice.name);
+      const basePrompt = injectVoiceName(scenario.prompt, voice.name);
+      // Wrap with meta-instructions to prevent emotion words leaking into speech
+      const prompt = wrapPromptWithEmotionInstructions(basePrompt);
       const firstMessage = injectVoiceName(scenario.firstMessage, voice.name);
 
       await conversation.startSession({
