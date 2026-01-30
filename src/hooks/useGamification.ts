@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { slangData } from '../data/slangData';
 import { safeGetItem, safeSetItem, safeRemoveItem } from '../utils/storage';
 
 // XP rewards for different activities
@@ -115,14 +114,12 @@ export function useGamification() {
     safeSetItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
 
-  // Check and update daily challenge on mount
+  // Daily challenge tracking (term selection removed with slang module)
   useEffect(() => {
     const today = new Date().toDateString();
     if (state.lastDailyChallenge !== today) {
-      const randomIndex = Math.floor(Math.random() * slangData.length);
       setState(prev => ({
         ...prev,
-        todaysDailyTerm: slangData[randomIndex].id,
         lastDailyChallenge: today,
       }));
     }
@@ -386,9 +383,9 @@ export function useGamification() {
   }, [state.xp, state.level]);
 
   const getDailyChallengeTerm = useCallback(() => {
-    if (!state.todaysDailyTerm) return null;
-    return slangData.find(t => t.id === state.todaysDailyTerm) || null;
-  }, [state.todaysDailyTerm]);
+    // Slang module removed - daily challenge terms no longer available
+    return null;
+  }, []);
 
   const isDailyChallengeCompleted = useCallback(() => {
     const today = new Date().toDateString();
@@ -396,8 +393,9 @@ export function useGamification() {
   }, [state.dailyChallengeCompletedToday]);
 
   const getFavoriteTerms = useCallback(() => {
-    return slangData.filter(term => state.favorites.includes(term.id));
-  }, [state.favorites]);
+    // Slang module removed - favorite terms no longer available
+    return [];
+  }, []);
 
   const getUnlockedAchievements = useCallback(() => {
     return ACHIEVEMENTS.filter(a => state.unlockedAchievements.includes(a.id));

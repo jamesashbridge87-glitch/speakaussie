@@ -457,9 +457,6 @@ export function WorkplacePage() {
             <a href="/stats" className="upgrade-link secondary">
               Stats Dashboard
             </a>
-            <a href="/slang" className="upgrade-link secondary">
-              Aussie Slang
-            </a>
             <a href="/app" className="upgrade-link primary">
               Full Experience
             </a>

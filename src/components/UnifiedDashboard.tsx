@@ -3,7 +3,6 @@ import { useMemo, useCallback } from 'react';
 import { useGamification } from '../hooks/useGamification';
 import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useWorkplaceProgress } from '../hooks/useWorkplaceProgress';
-import { useSlangProgress } from '../hooks/useSlangProgress';
 import { StatCard } from './ui/StatCard';
 import { AchievementMini } from './ui/AchievementBadge';
 import { QuickLink } from './ui/QuickLink';
@@ -41,15 +40,10 @@ export function UnifiedDashboard() {
   // Workplace progress
   const { getOverallProgress: getWorkplaceOverall } = useWorkplaceProgress();
 
-  // Slang progress
-  const { getLearnedCount, getMasteredCount } = useSlangProgress();
-
   // Memoize computed values
   const xpProgress = useMemo(() => getXPProgress(), [getXPProgress]);
   const progressStats = useMemo(() => getStats(), [getStats]);
   const workplaceProgress = useMemo(() => getWorkplaceOverall(), [getWorkplaceOverall]);
-  const slangLearned = useMemo(() => getLearnedCount(), [getLearnedCount]);
-  const slangMastered = useMemo(() => getMasteredCount(), [getMasteredCount]);
   const unlockedAchievements = useMemo(() => getUnlockedAchievements(), [getUnlockedAchievements]);
   const allAchievements = useMemo(() => getAllAchievements(), [getAllAchievements]);
 
@@ -60,7 +54,6 @@ export function UnifiedDashboard() {
   );
 
   // Memoize navigation handlers
-  const navigateToSlang = useCallback(() => navigate('/slang'), [navigate]);
   const navigateToWorkplace = useCallback(() => navigate('/workplace'), [navigate]);
   const navigateToSpeak = useCallback(() => navigate('/speak'), [navigate]);
   const navigateToApp = useCallback(() => navigate('/app'), [navigate]);
@@ -149,14 +142,6 @@ export function UnifiedDashboard() {
             progressHint={`${formatTime(progressStats.practiceTimeThisWeek)} this week`}
           />
           <StatCard
-            icon={<>&#x1f4da;</>}
-            value={slangMastered}
-            label="Slang Mastered"
-            variant="slang"
-            progress={(slangMastered / 50) * 100}
-            progressHint={`${slangLearned} terms learned`}
-          />
-          <StatCard
             icon={<>&#x1f4bc;</>}
             value={workplaceProgress.learned}
             label="Workplace Phrases"
@@ -200,12 +185,6 @@ export function UnifiedDashboard() {
         <section className="dashboard-section quick-links">
           <h3>Continue Learning</h3>
           <div className="links-row">
-            <QuickLink
-              icon={<>&#x1f4da;</>}
-              text="Slang"
-              variant="slang"
-              onClick={navigateToSlang}
-            />
             <QuickLink
               icon={<>&#x1f4bc;</>}
               text="Workplace"

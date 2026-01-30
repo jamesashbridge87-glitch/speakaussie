@@ -6,7 +6,6 @@ import { LoadingSpinner } from './components/LoadingSpinner';
 import { NotFound } from './components/NotFound';
 
 // Lazy load route components for code-splitting
-const SlangPage = lazy(() => import('./components/slang/SlangPage'));
 const WorkplacePage = lazy(() => import('./components/workplace/WorkplacePage'));
 const SituationPage = lazy(() => import('./components/workplace/SituationPage'));
 const SpeakFreePage = lazy(() => import('./components/SpeakFreePage'));
@@ -23,11 +22,6 @@ function AppRoutes() {
       <Route path="/speak" element={
         <Suspense fallback={<LoadingSpinner />}>
           <SpeakFreePage />
-        </Suspense>
-      } />
-      <Route path="/slang" element={
-        <Suspense fallback={<LoadingSpinner />}>
-          <SlangPage />
         </Suspense>
       } />
       <Route path="/workplace" element={
