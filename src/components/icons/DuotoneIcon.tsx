@@ -1,15 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import { IconColorScheme, colorSchemes } from './iconColors';
-
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-const sizeMap: Record<IconSize, number> = {
-  xs: 16,
-  sm: 20,
-  md: 24,
-  lg: 32,
-  xl: 48,
-};
+import { IconSize, sizeMap } from './types';
 
 interface DuotoneIconProps {
   icon: LucideIcon;

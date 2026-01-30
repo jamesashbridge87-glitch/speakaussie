@@ -23,7 +23,8 @@ export {
 } from './iconColors';
 
 export type { IconColorScheme } from './iconColors';
-export type { IconSize } from './DuotoneIcon';
+export type { IconSize } from './types';
+export { sizeMap } from './types';
 
 // Re-export commonly used Lucide icons for convenience
 export {
