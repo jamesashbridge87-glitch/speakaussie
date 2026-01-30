@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { scenarios, Scenario, ScenarioCategory } from '../data/scenarios';
+import { Scenario, ScenarioCategory } from '../data/scenarios';
+import { allScenarios as scenarios } from '../data/allScenarios';
 
 // Spaced repetition intervals in days
 const SPACED_INTERVALS = [1, 3, 7, 14, 30];

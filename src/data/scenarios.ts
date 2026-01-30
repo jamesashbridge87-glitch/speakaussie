@@ -1,4 +1,4 @@
-export type ScenarioCategory = 'interview' | 'first-weeks' | 'day-to-day' | 'meetings' | 'growth' | 'social';
+export type ScenarioCategory = 'interview' | 'first-weeks' | 'day-to-day' | 'meetings' | 'growth' | 'social' | 'difficult' | 'healthcare' | 'tech' | 'diverse' | 'admin' | 'wellbeing';
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 
 export interface VocabItem {
@@ -75,6 +75,48 @@ export const categories: CategoryInfo[] = [
     description: 'Connect and belong',
     icon: '🎉',
     order: 6,
+  },
+  {
+    id: 'difficult',
+    title: 'Difficult Conversations',
+    description: 'Handle tough talks with confidence',
+    icon: '🎭',
+    order: 7,
+  },
+  {
+    id: 'healthcare',
+    title: 'Healthcare',
+    description: 'Communicate clearly in medical settings',
+    icon: '🏥',
+    order: 8,
+  },
+  {
+    id: 'tech',
+    title: 'Tech & IT',
+    description: 'Communicate in technical environments',
+    icon: '💻',
+    order: 9,
+  },
+  {
+    id: 'diverse',
+    title: 'Diverse Teams',
+    description: 'Thrive in multicultural workplaces',
+    icon: '🌏',
+    order: 10,
+  },
+  {
+    id: 'admin',
+    title: 'Aussie Admin',
+    description: 'Navigate Australian workplace systems',
+    icon: '📋',
+    order: 11,
+  },
+  {
+    id: 'wellbeing',
+    title: 'Wellbeing',
+    description: 'Mental health at work conversations',
+    icon: '💚',
+    order: 12,
   },
 ];
 

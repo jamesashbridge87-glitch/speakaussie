@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
-import { categories, getScenariosByCategory, Scenario, ScenarioCategory, scenarios } from '../data/scenarios';
+import { Scenario, ScenarioCategory } from '../data/scenarios';
+import { allScenarios as scenarios, allCategories as categories, getAllScenariosByCategory as getScenariosByCategory } from '../data/allScenarios';
 import { useScenarioProgress } from '../hooks/useScenarioProgress';
 import './ScenarioSelector.css';
 

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { SessionRecord } from './useProgressTracking';
 import { OnboardingData } from './useOnboarding';
-import { scenarios, Scenario, ScenarioCategory } from '../data/scenarios';
+import { Scenario, ScenarioCategory } from '../data/scenarios';
+import { allScenarios as scenarios } from '../data/allScenarios';
 
 export interface ScenarioRecommendation {
   scenario: Scenario;
@@ -19,6 +20,12 @@ const GOAL_CATEGORY_WEIGHTS: Record<string, Record<ScenarioCategory, number>> = 
     'meetings': 3,
     'growth': 2,
     'social': 1,
+    'difficult': 3,
+    'healthcare': 2,
+    'tech': 2,
+    'diverse': 2,
+    'admin': 1.5,
+    'wellbeing': 2,
   },
   'social-connections': {
     'interview': 0.5,
@@ -27,6 +34,12 @@ const GOAL_CATEGORY_WEIGHTS: Record<string, Record<ScenarioCategory, number>> = 
     'meetings': 1,
     'growth': 0.5,
     'social': 3,
+    'difficult': 1.5,
+    'healthcare': 1,
+    'tech': 1,
+    'diverse': 3,
+    'admin': 0.5,
+    'wellbeing': 2.5,
   },
   'sound-local': {
     'interview': 1,
@@ -35,6 +48,12 @@ const GOAL_CATEGORY_WEIGHTS: Record<string, Record<ScenarioCategory, number>> = 
     'meetings': 1.5,
     'growth': 1,
     'social': 3,
+    'difficult': 1.5,
+    'healthcare': 2,
+    'tech': 1.5,
+    'diverse': 2.5,
+    'admin': 2,
+    'wellbeing': 1.5,
   },
   'all-of-above': {
     'interview': 2,
@@ -43,6 +62,12 @@ const GOAL_CATEGORY_WEIGHTS: Record<string, Record<ScenarioCategory, number>> = 
     'meetings': 2,
     'growth': 2,
     'social': 2,
+    'difficult': 2,
+    'healthcare': 2,
+    'tech': 2,
+    'diverse': 2,
+    'admin': 2,
+    'wellbeing': 2,
   },
 };
 
@@ -116,6 +141,12 @@ export function useScenarioRecommendations(
         'meetings': 'workplace',
         'growth': 'career',
         'social': 'social',
+        'difficult': 'communication',
+        'healthcare': 'industry',
+        'tech': 'industry',
+        'diverse': 'social',
+        'admin': 'workplace',
+        'wellbeing': 'social',
       };
       const scenarioGroup = categoryGroups[scenario.category];
       const recentlyPracticedGroups = new Set(recentSessions.map(() => 'workplace')); // Simplified

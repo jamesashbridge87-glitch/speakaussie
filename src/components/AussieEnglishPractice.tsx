@@ -28,7 +28,8 @@ import { PostSessionFeedback, SessionFeeling } from './PostSessionFeedback';
 import { FeedbackButton } from './FeedbackButton';
 import { NPSSurvey, useNPSSurvey } from './NPSSurvey';
 import { StreakReminder } from './StreakReminder';
-import { Scenario, getCategoryInfo, scenarios } from '../data/scenarios';
+import { Scenario } from '../data/scenarios';
+import { allScenarios as scenarios, getAllCategoryInfo as getCategoryInfo } from '../data/allScenarios';
 import { Voice } from '../data/voices';
 import './AussieEnglishPractice.css';
 
