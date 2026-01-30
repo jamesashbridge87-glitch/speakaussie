@@ -1,3 +1,51 @@
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-bg);
+  padding: 20px;
+}
+
+.not-found-content {
+  max-width: 500px;
+  text-align: center;
+  color: var(--brand-white);
+}
+
+.not-found-code {
+  font-size: 96px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+  color: var(--brand-primary);
+  line-height: 1;
+}
+
+.not-found-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--brand-white);
+}
+
+.not-found-message {
+  font-size: 16px;
+  margin-bottom: 32px;
+  color: var(--brand-muted);
+  line-height: 1.5;
+}
+
+.not-found-link {
+  display: inline-block;
+  background-color: var(--brand-primary);
+  color: var(--brand-white);
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .not-found-link:focus-visible {
   outline: 2px solid var(--brand-cyan);
   outline-offset: 2px;
