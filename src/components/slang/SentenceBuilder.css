@@ -8,18 +8,18 @@
 }
 
 .game-start h2 {
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 12px;
 }
 
 .game-start p {
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   margin-bottom: 8px;
 }
 
 .game-tip {
   font-size: 0.9rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   margin-bottom: 24px !important;
 }
 
@@ -32,22 +32,22 @@
   justify-content: space-between;
   margin-bottom: 20px;
   font-size: 0.95rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
 }
 
 .sentence-display {
-  background: var(--color-light);
+  background: var(--brand-card);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 20px;
   font-size: 1.25rem;
   line-height: 2;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .sentence-part {
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .word-blank {
@@ -55,36 +55,36 @@
   min-width: 80px;
   padding: 4px 12px;
   margin: 0 4px;
-  background: var(--color-gray-100);
-  border: 2px dashed var(--color-gray-400);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed var(--brand-muted);
   border-radius: 6px;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .word-blank:hover {
-  border-color: var(--color-primary);
-  background: var(--color-gray-50);
+  border-color: var(--brand-primary);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .word-blank.filled {
   border-style: solid;
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-dark);
+  border-color: var(--brand-primary);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
 }
 
 .word-blank.correct {
-  border-color: #22c55e;
-  background: #22c55e;
+  border-color: var(--brand-success);
+  background: var(--brand-success);
   color: white;
 }
 
 .word-blank.incorrect {
-  border-color: #ef4444;
-  background: #ef4444;
+  border-color: var(--brand-error);
+  background: var(--brand-error);
   color: white;
 }
 
@@ -98,20 +98,20 @@
 
 .draggable-word {
   padding: 10px 16px;
-  background: var(--color-light);
-  border: 2px solid var(--color-gray-300);
+  background: var(--brand-card);
+  border: 2px solid var(--brand-border);
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--color-dark);
+  color: var(--brand-white);
   cursor: grab;
   user-select: none;
   transition: all 0.2s;
 }
 
 .draggable-word:hover {
-  border-color: var(--color-primary);
-  background: var(--color-gray-50);
+  border-color: var(--brand-primary);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .draggable-word:active {
@@ -120,19 +120,19 @@
 }
 
 .draggable-word.selected {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-dark);
+  border-color: var(--brand-primary);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
 }
 
 .draggable-word.correct-word {
-  border-color: #22c55e;
-  background: #dcfce7;
+  border-color: var(--brand-success);
+  background: rgba(34, 197, 94, 0.2);
 }
 
 .draggable-word.incorrect-word {
-  border-color: #ef4444;
-  background: #fee2e2;
+  border-color: var(--brand-error);
+  background: rgba(239, 68, 68, 0.2);
 }
 
 .draggable-word.dragging {
@@ -157,30 +157,31 @@
 }
 
 .hint-btn {
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--brand-cyan);
+  color: var(--brand-bg);
   border: none;
 }
 
 .hint-btn:hover {
-  background: var(--color-secondary-dark);
+  background: #0ed4e0;
 }
 
 .skip-btn {
-  background: var(--color-light);
-  color: var(--color-gray-600);
-  border: 1px solid var(--color-gray-300);
+  background: var(--brand-card);
+  color: var(--brand-muted);
+  border: 1px solid var(--brand-border);
 }
 
 .skip-btn:hover {
-  background: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--brand-muted);
 }
 
 .hint-text {
   text-align: center;
-  color: var(--color-primary-dark);
+  color: var(--brand-orange);
   font-style: italic;
-  background: #fef3c7;
+  background: rgba(253, 164, 0, 0.15);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -194,22 +195,22 @@
 }
 
 .feedback.correct {
-  background: #f0fdf4;
-  border: 1px solid #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--brand-success);
 }
 
 .feedback.correct p {
-  color: #166534;
+  color: var(--brand-success);
   font-weight: 600;
 }
 
 .feedback.incorrect {
-  background: #fef2f2;
-  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--brand-error);
 }
 
 .feedback.incorrect p {
-  color: #991b1b;
+  color: var(--brand-error);
 }
 
 .game-results {
@@ -218,7 +219,7 @@
 }
 
 .game-results h2 {
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 20px;
 }
 
@@ -230,24 +231,24 @@
   display: block;
   font-size: 4rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--brand-primary);
 }
 
 .score-label {
   display: block;
   font-size: 1.2rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
 }
 
 .results-message {
   font-size: 1.1rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   margin-bottom: 24px;
 }
 
 .start-btn {
-  background: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   border: none;
   padding: 14px 32px;
   border-radius: 8px;
@@ -259,7 +260,7 @@
 
 .start-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 101, 190, 0.3);
 }
 
 @media (max-width: 480px) {

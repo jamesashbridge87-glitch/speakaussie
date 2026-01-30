@@ -5,16 +5,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: var(--brand-card, #1a1a1a);
   border-radius: 20px;
   padding: 32px 40px;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   z-index: 2000;
   max-width: 400px;
   width: 90%;
   animation: celebrationEnter 0.4s ease-out;
   overflow: hidden;
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
 }
 
 .celebration-toast.leaving {
@@ -55,12 +56,12 @@
   height: 6px;
   background: linear-gradient(
     90deg,
-    #ff6b6b,
-    #ffd93d,
-    #6bcb77,
-    #4d96ff,
-    #9b59b6,
-    #ff6b6b
+    var(--brand-primary, #FF65BE),
+    var(--brand-yellow, #FBFF22),
+    var(--brand-lime, #D2FF42),
+    var(--brand-cyan, #11E8F6),
+    var(--brand-orange, #FDA400),
+    var(--brand-primary, #FF65BE)
   );
   background-size: 200% 100%;
   animation: confettiFlow 2s linear infinite;
@@ -82,10 +83,10 @@
   width: 32px;
   height: 32px;
   border: none;
-  background: #f1f5f9;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   font-size: 1.25rem;
-  color: #64748b;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
@@ -94,8 +95,8 @@
 }
 
 .celebration-close:hover {
-  background: #e2e8f0;
-  color: #334155;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--brand-white, #FFFFFF);
 }
 
 .celebration-icon {
@@ -123,13 +124,13 @@
   margin: 0 0 12px 0;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .celebration-message {
   margin: 0;
   font-size: 1rem;
-  color: #64748b;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   line-height: 1.5;
 }
 
@@ -141,7 +142,7 @@
   left: -100vw;
   right: -100vw;
   bottom: -100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   z-index: -1;
   backdrop-filter: blur(2px);
 }

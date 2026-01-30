@@ -107,6 +107,7 @@
 
 .skeleton-progress-section {
   background: var(--brand-card, #1a1a1a);
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
@@ -144,6 +145,7 @@
   gap: 1rem;
   padding: 1rem;
   background: var(--brand-card, #1a1a1a);
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
   border-radius: 12px;
 }
 

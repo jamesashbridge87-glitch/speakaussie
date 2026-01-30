@@ -1,8 +1,9 @@
 .achievement-display {
-  background-color: #ffffff;
+  background-color: var(--brand-card, #1a1a1a);
   border-radius: 12px;
   padding: 20px;
   margin-top: 16px;
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
 }
 
 .achievement-header {
@@ -15,13 +16,13 @@
 .achievement-header h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: #1a1a2e;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .achievement-count {
   font-size: 0.85rem;
-  color: #6b7280;
-  background-color: #f1f5f9;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 4px 10px;
   border-radius: 12px;
 }
@@ -36,7 +37,7 @@
 
 .achievement-category h4 {
   font-size: 0.8rem;
-  color: #9ca3af;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0 0 10px 0;
@@ -53,14 +54,15 @@
   align-items: flex-start;
   gap: 12px;
   padding: 12px;
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   transition: all 0.2s;
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
 }
 
 .achievement-card.unlocked {
-  background-color: #fef3c7;
-  border: 1px solid #fbbf24;
+  background-color: rgba(253, 164, 0, 0.15);
+  border: 1px solid rgba(253, 164, 0, 0.4);
 }
 
 .achievement-card.locked {
@@ -75,12 +77,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
 }
 
 .achievement-card.locked .achievement-icon {
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .achievement-info {
@@ -94,18 +96,18 @@
 .achievement-title {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .achievement-description {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   line-height: 1.3;
 }
 
 .achievement-date {
   font-size: 0.7rem;
-  color: #9ca3af;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   margin-top: 4px;
 }
 
@@ -115,21 +117,21 @@
 
 .achievement-progress-bar {
   height: 4px;
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   overflow: hidden;
 }
 
 .achievement-progress-fill {
   height: 100%;
-  background-color: #00843D;
+  background-color: var(--brand-lime, #D2FF42);
   border-radius: 2px;
   transition: width 0.3s ease;
 }
 
 .achievement-progress-text {
   font-size: 0.7rem;
-  color: #9ca3af;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   margin-top: 2px;
 }
 
@@ -140,7 +142,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,13 +156,14 @@
 }
 
 .achievement-toast {
-  background-color: #ffffff;
+  background-color: var(--brand-card, #1a1a1a);
   border-radius: 16px;
   padding: 24px;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.3s ease;
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
 }
 
 @keyframes slideUp {
@@ -182,7 +185,7 @@
 .toast-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .toast-achievements {
@@ -197,9 +200,9 @@
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background-color: #fef3c7;
+  background-color: rgba(253, 164, 0, 0.15);
   border-radius: 10px;
-  border: 1px solid #fbbf24;
+  border: 1px solid rgba(253, 164, 0, 0.4);
 }
 
 .toast-icon {
@@ -214,19 +217,19 @@
 .toast-achievement-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .toast-achievement-desc {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
 }
 
 .toast-dismiss {
   width: 100%;
   padding: 12px 24px;
-  background-color: #00843D;
-  color: white;
+  background-color: var(--brand-primary, #FF65BE);
+  color: var(--brand-white, #FFFFFF);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -236,5 +239,5 @@
 }
 
 .toast-dismiss:hover {
-  background-color: #006b32;
+  background-color: #e05aa8;
 }

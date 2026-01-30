@@ -1,8 +1,17 @@
+/*
+ * SlangPage.css
+ * Brand: Your Aussie Uncle
+ * Mobile-first dark theme design
+ */
+
 .slang-page-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e6f9fb 100%);
+  background: var(--brand-bg);
+  color: var(--brand-white);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Game Notification */
@@ -11,14 +20,15 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%) translateY(-20px);
-  background: var(--color-dark);
-  color: var(--color-light);
+  background: var(--brand-card);
+  color: var(--brand-white);
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 500;
   z-index: 1000;
   opacity: 0;
   transition: all 0.3s ease;
+  border: 1px solid var(--brand-border);
 }
 
 .game-notification.show {
@@ -33,7 +43,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +57,8 @@
 }
 
 .achievement-content {
-  background: var(--color-light);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 16px;
   padding: 24px;
   text-align: center;
@@ -62,7 +73,7 @@
 }
 
 .achievement-content h3 {
-  color: var(--color-primary-dark);
+  color: var(--brand-lime);
   margin-bottom: 16px;
 }
 
@@ -80,36 +91,37 @@
 
 .achievement-item strong {
   display: block;
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .achievement-item p {
   margin: 0;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.9rem;
 }
 
 .achievement-content button {
-  background: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   border: none;
   padding: 12px 32px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 44px;
 }
 
 .achievement-content button:hover {
   transform: translateY(-2px);
+  opacity: 0.9;
 }
 
 /* Header */
 .slang-header {
   text-align: center;
   padding: 24px 16px 16px;
-  background: var(--color-light);
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .slang-header .header-brand {
@@ -123,17 +135,18 @@
 .slang-header .header-logo {
   height: 48px;
   width: auto;
+  border-radius: 50%;
 }
 
 .slang-header h1 {
   margin: 0;
   font-size: 1.75rem;
-  color: var(--color-dark);
+  color: var(--brand-lime);
 }
 
 .slang-header .header-subtitle {
   margin: 0 0 16px 0;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 1rem;
 }
 
@@ -158,12 +171,14 @@
 .stat-value {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--brand-yellow);
 }
 
 .stat-label {
   font-size: 0.75rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 /* XP Progress */
@@ -174,14 +189,14 @@
 
 .xp-bar {
   height: 8px;
-  background: var(--color-gray-200);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .xp-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-yellow));
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -189,8 +204,9 @@
 .xp-text {
   display: block;
   font-size: 0.75rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   margin-top: 4px;
+  text-align: center;
 }
 
 /* Search */
@@ -210,11 +226,13 @@
   padding: 8px;
   border-radius: 8px;
   transition: background 0.2s;
+  color: var(--brand-white);
+  min-height: 44px;
 }
 
 .search-toggle:hover,
 .search-toggle.active {
-  background: var(--color-gray-100);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .search-box {
@@ -225,28 +243,41 @@
 
 .search-input {
   padding: 8px 12px;
-  border: 1px solid var(--color-gray-300);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 0.95rem;
   width: 200px;
+  background: var(--brand-card);
+  color: var(--brand-white);
+  min-height: 44px;
+}
+
+.search-input::placeholder {
+  color: var(--brand-muted);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
 }
 
 .search-clear {
   background: none;
   border: none;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   cursor: pointer;
   font-size: 1rem;
+  min-height: 44px;
+  padding: 8px;
+}
+
+.search-clear:hover {
+  color: var(--brand-white);
 }
 
 .search-results {
-  background: var(--color-light);
-  border: 1px solid var(--color-gray-200);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   padding: 12px;
   margin-top: 12px;
@@ -257,7 +288,7 @@
 
 .search-count {
   font-size: 0.85rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   margin-bottom: 8px;
 }
 
@@ -265,7 +296,7 @@
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 1px solid var(--color-gray-100);
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .search-result-item:last-child {
@@ -273,24 +304,25 @@
 }
 
 .search-result-item strong {
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .search-result-item span {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.9rem;
 }
 
 .search-more {
   font-size: 0.85rem;
-  color: var(--color-gray-400);
+  color: var(--brand-muted);
   text-align: center;
   margin-top: 8px;
 }
 
 /* Daily Challenge */
 .daily-challenge {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: linear-gradient(135deg, rgba(253, 164, 0, 0.2) 0%, rgba(253, 164, 0, 0.1) 100%);
+  border-bottom: 1px solid rgba(253, 164, 0, 0.3);
   padding: 12px 16px;
 }
 
@@ -313,19 +345,19 @@
 
 .daily-text strong {
   display: block;
-  color: var(--color-dark);
+  color: var(--brand-orange);
   font-size: 0.9rem;
 }
 
 .daily-text p {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
 }
 
 .daily-btn {
-  background: var(--color-dark);
-  color: var(--color-light);
+  background: var(--brand-orange);
+  color: var(--brand-bg);
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
@@ -333,10 +365,13 @@
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
+  min-height: 44px;
+  transition: all 0.2s ease;
 }
 
 .daily-btn:hover {
   transform: translateY(-1px);
+  opacity: 0.9;
 }
 
 /* Mode Selector */
@@ -345,8 +380,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 16px;
-  background: var(--color-light);
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .mode-row {
@@ -361,14 +395,15 @@
 
 .mode-btn {
   padding: 10px 16px;
-  background: var(--color-gray-50);
-  border: 1px solid var(--color-gray-300);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--color-gray-600);
+  color: var(--brand-white);
   cursor: pointer;
   transition: all 0.2s;
+  min-height: 44px;
 }
 
 .mode-btn.small {
@@ -377,14 +412,14 @@
 }
 
 .mode-btn:hover {
-  background: var(--color-gray-100);
-  border-color: var(--color-gray-400);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .mode-btn.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--brand-bg);
   font-weight: 700;
 }
 
@@ -403,13 +438,15 @@
 }
 
 .favorites-section h2 {
-  color: var(--color-dark);
+  color: var(--brand-lime);
   margin-bottom: 16px;
+  font-size: 1.25rem;
 }
 
 .no-favorites {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-style: italic;
+  padding: 2rem 1rem;
 }
 
 .favorites-list {
@@ -419,28 +456,28 @@
 }
 
 .favorite-card {
-  background: var(--color-light);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 12px;
   padding: 16px;
   text-align: left;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .fav-term {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--brand-primary);
   margin-bottom: 4px;
 }
 
 .fav-meaning {
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 8px;
 }
 
 .fav-example {
   font-size: 0.9rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-style: italic;
 }
 
@@ -450,12 +487,13 @@
 }
 
 .achievements-section h2 {
-  color: var(--color-dark);
+  color: var(--brand-lime);
   margin-bottom: 8px;
+  font-size: 1.25rem;
 }
 
 .achievements-count {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   margin-bottom: 20px;
 }
 
@@ -466,20 +504,20 @@
 }
 
 .achievement-badge {
-  background: var(--color-light);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 12px;
   padding: 16px 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
 
 .achievement-badge.unlocked {
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--brand-primary);
 }
 
 .achievement-badge.locked {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .badge-icon {
@@ -492,14 +530,14 @@
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 4px;
 }
 
 .badge-desc {
   display: block;
   font-size: 0.75rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
 }
 
 /* Stats Section */
@@ -508,8 +546,9 @@
 }
 
 .stats-section h2 {
-  color: var(--color-dark);
+  color: var(--brand-lime);
   margin-bottom: 20px;
+  font-size: 1.25rem;
 }
 
 .stats-grid {
@@ -520,57 +559,64 @@
 }
 
 .stat-card {
-  background: var(--color-light);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--brand-primary);
 }
 
 .stat-name {
   display: block;
   font-size: 0.8rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .reset-btn {
-  background: var(--color-gray-200);
-  color: var(--color-gray-600);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(253, 164, 0, 0.1);
+  border: 1px solid rgba(253, 164, 0, 0.4);
+  border-radius: 12px;
+  color: var(--brand-orange);
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  min-height: 48px;
 }
 
 .reset-btn:hover {
-  background: var(--color-gray-300);
+  background: rgba(253, 164, 0, 0.2);
 }
 
 /* Upgrade Banner */
 .upgrade-banner {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  background: var(--brand-card);
   padding: 24px 16px;
   text-align: center;
+  border-top: 1px solid var(--brand-border);
 }
 
 .upgrade-content h3 {
   margin: 0 0 8px 0;
-  color: var(--color-dark);
   font-size: 1.2rem;
+  color: var(--brand-lime);
 }
 
 .upgrade-content p {
   margin: 0 0 16px 0;
-  color: var(--color-dark);
-  opacity: 0.8;
+  color: var(--brand-muted);
+  font-size: 0.95rem;
 }
 
 .upgrade-links {
@@ -581,48 +627,50 @@
 }
 
 .upgrade-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 10px 20px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.2s;
+  min-height: 44px;
 }
 
 .upgrade-link.primary {
-  background: var(--color-dark);
-  color: var(--color-light);
+  background: var(--brand-primary);
+  border: 1px solid var(--brand-primary);
+  color: var(--brand-bg);
 }
 
 .upgrade-link.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
 }
 
 .upgrade-link.secondary {
-  background: var(--color-light);
-  color: var(--color-dark);
-  border: 1px solid var(--color-dark);
+  background: transparent;
+  border: 1px solid var(--brand-cyan);
+  color: var(--brand-cyan);
 }
 
 .upgrade-link.secondary:hover {
-  background: var(--color-gray-50);
+  background: rgba(17, 232, 246, 0.1);
 }
 
 /* Footer */
 .slang-footer {
   text-align: center;
   padding: 16px;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.85rem;
-  background: var(--color-light);
-  border-top: 1px solid var(--color-gray-200);
+  border-top: 1px solid var(--brand-border);
 }
 
 .slang-footer a {
-  color: var(--color-primary-dark);
+  color: var(--brand-cyan);
   text-decoration: none;
+  font-weight: 500;
 }
 
 .slang-footer a:hover {
@@ -711,5 +759,13 @@
     width: 100%;
     max-width: 200px;
     text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Safe area support for mobile */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .slang-footer {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
   }
 }

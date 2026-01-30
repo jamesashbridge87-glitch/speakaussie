@@ -7,13 +7,14 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-dark);
-  color: var(--color-light);
+  background: var(--brand-card);
+  color: var(--brand-white);
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 500;
   z-index: 1000;
   animation: slideIn 0.3s ease;
+  border: 1px solid var(--brand-border);
 }
 
 @keyframes slideIn {
@@ -35,12 +36,12 @@
 
 .game-start h2,
 .game-results h2 {
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 12px;
 }
 
 .game-start p {
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   margin-bottom: 24px;
 }
 
@@ -58,34 +59,35 @@
 .option-group label {
   display: block;
   font-weight: 600;
-  color: var(--color-dark);
+  color: var(--brand-white);
   margin-bottom: 6px;
 }
 
 .game-select {
   width: 100%;
   padding: 12px;
-  border: 1px solid var(--color-gray-300);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 1rem;
-  background: var(--color-light);
+  background: var(--brand-card);
+  color: var(--brand-white);
   cursor: pointer;
 }
 
 .game-select:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
 }
 
 .terms-count {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.9rem;
   margin-bottom: 16px;
 }
 
 .start-btn {
-  background: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   border: none;
   padding: 14px 32px;
   border-radius: 8px;
@@ -97,7 +99,7 @@
 
 .start-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 101, 190, 0.3);
 }
 
 .start-btn:disabled {
@@ -114,30 +116,30 @@
   justify-content: space-between;
   margin-bottom: 20px;
   font-size: 0.95rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
 }
 
 .game-score {
   font-weight: 600;
-  color: var(--color-primary-dark);
+  color: var(--brand-primary);
 }
 
 .question-card {
-  background: var(--color-light);
+  background: var(--brand-card);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .sentence-text {
   font-size: 1.2rem;
-  color: var(--color-dark);
+  color: var(--brand-white);
   line-height: 1.6;
   margin-bottom: 12px;
 }
 
 .hint-text {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-style: italic;
   margin-bottom: 20px;
 }
@@ -145,36 +147,38 @@
 .answer-input {
   width: 100%;
   padding: 14px;
-  border: 2px solid var(--color-gray-300);
+  border: 2px solid var(--brand-border);
   border-radius: 8px;
   font-size: 1.1rem;
   margin-bottom: 16px;
   transition: border-color 0.2s;
+  background: var(--brand-bg);
+  color: var(--brand-white);
 }
 
 .answer-input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
 }
 
 .answer-input.correct {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: var(--brand-success);
+  background: rgba(34, 197, 94, 0.15);
 }
 
 .answer-input.incorrect {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: var(--brand-error);
+  background: rgba(239, 68, 68, 0.15);
 }
 
 .answer-input:disabled {
-  background: var(--color-gray-50);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .submit-btn {
   width: 100%;
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--brand-cyan);
+  color: var(--brand-bg);
   border: none;
   padding: 14px;
   border-radius: 8px;
@@ -185,7 +189,7 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: var(--color-secondary-dark);
+  background: #0ed4e0;
 }
 
 .submit-btn:disabled {
@@ -201,21 +205,21 @@
 }
 
 .feedback.correct {
-  background: #f0fdf4;
-  border: 1px solid #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--brand-success);
 }
 
 .feedback.correct p {
-  color: #166534;
+  color: var(--brand-success);
 }
 
 .feedback.incorrect {
-  background: #fef2f2;
-  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--brand-error);
 }
 
 .feedback.incorrect p {
-  color: #991b1b;
+  color: var(--brand-error);
 }
 
 .feedback strong {
@@ -223,9 +227,9 @@
 }
 
 .next-btn {
-  background: var(--color-dark);
-  color: var(--color-light);
-  border: none;
+  background: var(--brand-card);
+  color: var(--brand-white);
+  border: 1px solid var(--brand-border);
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 1rem;
@@ -237,7 +241,8 @@
 
 .next-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--brand-primary);
 }
 
 .game-results {
@@ -252,18 +257,18 @@
   display: block;
   font-size: 4rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--brand-primary);
 }
 
 .score-label {
   display: block;
   font-size: 1.2rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
 }
 
 .results-message {
   font-size: 1.1rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   margin-bottom: 24px;
 }
 

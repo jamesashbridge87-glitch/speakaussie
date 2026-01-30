@@ -9,7 +9,22 @@
 
   /* Background & Surface Colors */
   --brand-bg: #111111;
+  --brand-bg-light: #1a1a1a;
   --brand-card: #1a1a1a;
+  --brand-card-hover: #242424;
   --brand-border: rgba(255, 255, 255, 0.12);
+  --brand-border-strong: rgba(255, 255, 255, 0.2);
   --brand-muted: rgba(255, 255, 255, 0.6);
+  --brand-muted-light: rgba(255, 255, 255, 0.4);
+
+  /* Semantic Colors */
+  --brand-success: #22c55e;
+  --brand-error: #ef4444;
+  --brand-warning: #f59e0b;
+
+  /* Shadows */
+  --brand-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --brand-glow-primary: 0 0 20px rgba(255, 101, 190, 0.3);
+  --brand-glow-cyan: 0 0 20px rgba(17, 232, 246, 0.3);
+  --brand-glow-orange: 0 0 20px rgba(253, 164, 0, 0.3);
 }

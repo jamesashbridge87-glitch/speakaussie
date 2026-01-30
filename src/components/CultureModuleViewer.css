@@ -11,12 +11,12 @@
 .culture-modules-header h2 {
   margin: 0 0 8px 0;
   font-size: 1.75rem;
-  color: #1e293b;
+  color: var(--brand-white);
 }
 
 .culture-modules-header p {
   margin: 0;
-  color: #64748b;
+  color: var(--brand-muted);
   font-size: 1rem;
 }
 
@@ -32,8 +32,8 @@
   align-items: flex-start;
   gap: 16px;
   padding: 20px;
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 12px;
   cursor: pointer;
   text-align: left;
@@ -42,8 +42,8 @@
 }
 
 .culture-module-card:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  border-color: var(--brand-primary);
+  box-shadow: 0 4px 12px rgba(255, 101, 190, 0.2);
   transform: translateY(-2px);
 }
 
@@ -61,20 +61,20 @@
   margin: 0 0 8px 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--brand-white);
   line-height: 1.3;
 }
 
 .culture-module-info p {
   margin: 0 0 8px 0;
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--brand-muted);
   line-height: 1.4;
 }
 
 .culture-module-time {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--brand-muted);
 }
 
 /* Culture Module Detail */
@@ -89,26 +89,27 @@
   align-items: center;
   gap: 4px;
   padding: 8px 16px;
-  background: #f1f5f9;
-  border: none;
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 0.9rem;
-  color: #475569;
+  color: var(--brand-muted);
   cursor: pointer;
   margin-bottom: 24px;
   transition: all 0.2s;
 }
 
 .culture-back-button:hover {
-  background: #e2e8f0;
-  color: #1e293b;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--brand-primary);
+  color: var(--brand-white);
 }
 
 .culture-module-header {
   text-align: center;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .culture-detail-icon {
@@ -120,17 +121,17 @@
 .culture-module-header h1 {
   margin: 0 0 12px 0;
   font-size: 1.75rem;
-  color: #1e293b;
+  color: var(--brand-white);
   line-height: 1.3;
 }
 
 .culture-reading-time {
   display: inline-block;
   padding: 4px 12px;
-  background: #f1f5f9;
+  background: var(--brand-card);
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--brand-muted);
 }
 
 /* Content Sections */
@@ -145,14 +146,14 @@
 .culture-section h2 {
   margin: 0 0 12px 0;
   font-size: 1.25rem;
-  color: #1e293b;
+  color: var(--brand-white);
   font-weight: 600;
 }
 
 .culture-section p {
   margin: 0;
   font-size: 1rem;
-  color: #475569;
+  color: var(--brand-muted);
   line-height: 1.7;
 }
 
@@ -160,31 +161,32 @@
 .culture-tip {
   margin-top: 16px;
   padding: 16px;
-  background: #fef3c7;
+  background: rgba(253, 164, 0, 0.15);
+  border: 1px solid rgba(253, 164, 0, 0.3);
   border-radius: 8px;
   font-size: 0.95rem;
-  color: #92400e;
+  color: var(--brand-orange);
   line-height: 1.5;
 }
 
 .tip-label {
   font-weight: 600;
-  color: #78350f;
+  color: var(--brand-orange);
 }
 
 /* Examples */
 .culture-examples {
   margin-top: 16px;
   padding: 16px;
-  background: #f0f9ff;
+  background: rgba(17, 232, 246, 0.1);
   border-radius: 8px;
-  border-left: 3px solid #3b82f6;
+  border-left: 3px solid var(--brand-cyan);
 }
 
 .examples-label {
   display: block;
   font-weight: 600;
-  color: #1e40af;
+  color: var(--brand-cyan);
   margin-bottom: 8px;
   font-size: 0.9rem;
 }
@@ -196,7 +198,7 @@
 
 .culture-examples li {
   font-size: 0.95rem;
-  color: #1e3a5f;
+  color: var(--brand-white);
   line-height: 1.6;
   margin-bottom: 6px;
 }
@@ -207,7 +209,8 @@
 
 /* Key Takeaways */
 .culture-takeaways {
-  background: #f0fdf4;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
   padding: 24px;
   border-radius: 12px;
   margin-bottom: 32px;
@@ -216,7 +219,7 @@
 .culture-takeaways h2 {
   margin: 0 0 16px 0;
   font-size: 1.1rem;
-  color: #166534;
+  color: var(--brand-success);
   font-weight: 600;
 }
 
@@ -227,7 +230,7 @@
 
 .culture-takeaways li {
   font-size: 0.95rem;
-  color: #15803d;
+  color: var(--brand-success);
   line-height: 1.6;
   margin-bottom: 8px;
 }
@@ -238,23 +241,23 @@
 
 /* Related Scenarios */
 .culture-related-scenarios {
-  background: #f8fafc;
+  background: var(--brand-card);
   padding: 24px;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--brand-border);
 }
 
 .culture-related-scenarios h2 {
   margin: 0 0 8px 0;
   font-size: 1.1rem;
-  color: #1e293b;
+  color: var(--brand-white);
   font-weight: 600;
 }
 
 .culture-related-scenarios p {
   margin: 0 0 16px 0;
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--brand-muted);
 }
 
 .related-scenario-buttons {
@@ -265,8 +268,8 @@
 
 .related-scenario-btn {
   padding: 10px 16px;
-  background: #3b82f6;
-  color: white;
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   border: none;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -276,7 +279,7 @@
 }
 
 .related-scenario-btn:hover {
-  background: #2563eb;
+  filter: brightness(1.1);
   transform: translateY(-1px);
 }
 

@@ -5,17 +5,19 @@
 
 .export-trigger {
   padding: 8px 16px;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background-color: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 6px;
-  color: #4b5563;
+  color: var(--brand-muted);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .export-trigger:hover:not(:disabled) {
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--brand-primary);
+  color: var(--brand-white);
 }
 
 .export-trigger:disabled {
@@ -36,10 +38,10 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   z-index: 100;
   min-width: 280px;
@@ -71,11 +73,11 @@
 }
 
 .export-option:hover {
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .export-option:not(:last-child) {
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--brand-border);
 }
 
 .export-icon {
@@ -91,10 +93,10 @@
 .export-option-title {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #1a1a2e;
+  color: var(--brand-white);
 }
 
 .export-option-desc {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--brand-muted);
 }

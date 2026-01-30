@@ -10,17 +10,17 @@
 }
 
 .streak-banner.success {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: linear-gradient(135deg, rgba(253, 164, 0, 0.2) 0%, rgba(253, 164, 0, 0.1) 100%);
   border: 1px solid rgba(253, 164, 0, 0.3);
 }
 
 .streak-banner.warning {
-  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
-  border: 1px solid rgba(251, 146, 60, 0.4);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .streak-banner.neutral {
-  background: linear-gradient(135deg, #e6f9fb 0%, #cff3f6 100%);
+  background: linear-gradient(135deg, rgba(17, 232, 246, 0.2) 0%, rgba(17, 232, 246, 0.1) 100%);
   border: 1px solid rgba(17, 232, 246, 0.3);
 }
 
@@ -38,12 +38,12 @@
 
 .streak-banner-content strong {
   font-size: 0.95rem;
-  color: var(--color-dark, #221f1f);
+  color: var(--brand-white, #FFFFFF);
 }
 
 .streak-banner-message {
   font-size: 0.85rem;
-  color: var(--color-gray-600, #4b5563);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
 }
 
 .streak-counter {
@@ -51,7 +51,7 @@
   flex-direction: column;
   align-items: center;
   padding: 8px 12px;
-  background: rgba(253, 164, 0, 0.15);
+  background: rgba(253, 164, 0, 0.2);
   border-radius: 8px;
   margin-right: 8px;
 }
@@ -59,13 +59,13 @@
 .streak-number {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-primary-dark, #e59400);
+  color: var(--brand-orange, #FDA400);
   line-height: 1;
 }
 
 .streak-label {
   font-size: 0.65rem;
-  color: var(--color-gray-500, #6b7280);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   text-transform: uppercase;
 }
 
@@ -75,7 +75,7 @@
   right: 8px;
   background: none;
   border: none;
-  color: var(--color-gray-400, #9ca3af);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   cursor: pointer;
   font-size: 0.9rem;
   padding: 4px;
@@ -86,7 +86,7 @@
 
 .streak-banner-dismiss:hover {
   opacity: 1;
-  color: var(--color-gray-600, #4b5563);
+  color: var(--brand-white, #FFFFFF);
 }
 
 /* Streak Toast */
@@ -100,7 +100,7 @@
   padding: 16px 20px;
   border-radius: 12px;
   max-width: 320px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   animation: slideIn 0.3s ease-out;
 }
@@ -117,18 +117,18 @@
 }
 
 .streak-toast.success {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 1px solid rgba(253, 164, 0, 0.3);
+  background: linear-gradient(135deg, rgba(253, 164, 0, 0.3) 0%, rgba(253, 164, 0, 0.2) 100%);
+  border: 1px solid rgba(253, 164, 0, 0.4);
 }
 
 .streak-toast.warning {
-  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
-  border: 1px solid rgba(251, 146, 60, 0.4);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0.2) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.4);
 }
 
 .streak-toast.neutral {
-  background: linear-gradient(135deg, #e6f9fb 0%, #cff3f6 100%);
-  border: 1px solid rgba(17, 232, 246, 0.3);
+  background: linear-gradient(135deg, rgba(17, 232, 246, 0.3) 0%, rgba(17, 232, 246, 0.2) 100%);
+  border: 1px solid rgba(17, 232, 246, 0.4);
 }
 
 .streak-toast-icon {
@@ -143,20 +143,20 @@
 .streak-toast-content strong {
   display: block;
   font-size: 0.95rem;
-  color: var(--color-dark, #221f1f);
+  color: var(--brand-white, #FFFFFF);
   margin-bottom: 4px;
 }
 
 .streak-toast-content p {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--color-gray-600, #4b5563);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
 }
 
 .streak-toast-dismiss {
   background: none;
   border: none;
-  color: var(--color-gray-400, #9ca3af);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   cursor: pointer;
   font-size: 1rem;
   padding: 0;
@@ -167,7 +167,7 @@
 
 .streak-toast-dismiss:hover {
   opacity: 1;
-  color: var(--color-gray-600, #4b5563);
+  color: var(--brand-white, #FFFFFF);
 }
 
 /* Responsive */

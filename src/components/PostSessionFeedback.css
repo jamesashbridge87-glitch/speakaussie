@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,12 +15,13 @@
 }
 
 .post-session-modal {
-  background: white;
+  background: var(--brand-card, #1a1a1a);
   border-radius: 20px;
   max-width: 480px;
   width: 100%;
   overflow: hidden;
   animation: modalSlideIn 0.3s ease-out;
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
 }
 
 @keyframes modalSlideIn {
@@ -49,26 +50,26 @@
 .feeling-step h2 {
   margin: 0 0 4px 0;
   font-size: 1.5rem;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .scenario-name {
   margin: 0 0 24px 0;
-  color: #64748b;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   font-size: 0.95rem;
 }
 
 .feeling-question {
   margin: 0 0 8px 0;
   font-size: 1.1rem;
-  color: #334155;
+  color: var(--brand-white, #FFFFFF);
   font-weight: 500;
 }
 
 .feeling-hint {
   margin: 0 0 20px 0;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
 }
 
 .feeling-buttons {
@@ -81,8 +82,8 @@
   flex: 1;
   max-width: 120px;
   padding: 20px 16px;
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
+  background: var(--brand-bg, #111111);
+  border: 2px solid var(--brand-border, rgba(255, 255, 255, 0.12));
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s;
@@ -97,18 +98,18 @@
 }
 
 .feeling-btn.great:hover {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: var(--brand-success, #22c55e);
+  background: rgba(34, 197, 94, 0.1);
 }
 
 .feeling-btn.okay:hover {
-  border-color: #f59e0b;
-  background: #fffbeb;
+  border-color: var(--brand-orange, #FDA400);
+  background: rgba(253, 164, 0, 0.1);
 }
 
 .feeling-btn.tough:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--brand-cyan, #11E8F6);
+  background: rgba(17, 232, 246, 0.1);
 }
 
 .feeling-emoji {
@@ -118,12 +119,12 @@
 .feeling-label {
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .feeling-desc {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
 }
 
 /* Encouragement Step */
@@ -145,7 +146,7 @@
 
 .encouragement-message {
   font-size: 1.2rem;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
   line-height: 1.5;
   margin: 0 0 20px 0;
   font-weight: 500;
@@ -153,8 +154,8 @@
 
 /* Review Schedule Info */
 .review-schedule-info {
-  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(0, 212, 170, 0.2) 100%);
-  border: 1px solid rgba(0, 212, 170, 0.3);
+  background: linear-gradient(135deg, rgba(255, 101, 190, 0.1) 0%, rgba(255, 101, 190, 0.2) 100%);
+  border: 1px solid rgba(255, 101, 190, 0.3);
   border-radius: 12px;
   padding: 14px 16px;
   display: flex;
@@ -172,13 +173,14 @@
 .review-text {
   margin: 0;
   font-size: 0.9rem;
-  color: #047857;
+  color: var(--brand-primary, #FF65BE);
   line-height: 1.4;
   font-weight: 500;
 }
 
 .tip-box {
-  background: #fef3c7;
+  background: rgba(253, 164, 0, 0.1);
+  border: 1px solid rgba(253, 164, 0, 0.3);
   border-radius: 12px;
   padding: 16px 20px;
   display: flex;
@@ -196,14 +198,14 @@
 .tip-text {
   margin: 0;
   font-size: 0.95rem;
-  color: #92400e;
+  color: var(--brand-orange, #FDA400);
   line-height: 1.5;
 }
 
 .continue-btn {
   padding: 14px 40px;
-  background: #3b82f6;
-  color: white;
+  background: var(--brand-primary, #FF65BE);
+  color: var(--brand-bg, #111111);
   border: none;
   border-radius: 12px;
   font-size: 1rem;
@@ -213,15 +215,16 @@
 }
 
 .continue-btn:hover {
-  background: #2563eb;
+  background: #e055a8;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 101, 190, 0.4);
 }
 
 /* Next Step */
 .next-step h2 {
   margin: 0 0 24px 0;
   font-size: 1.5rem;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
 }
 
 .next-options {
@@ -235,8 +238,8 @@
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
+  background: var(--brand-bg, #111111);
+  border: 2px solid var(--brand-border, rgba(255, 255, 255, 0.12));
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
@@ -246,8 +249,8 @@
 }
 
 .next-option:hover {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--brand-primary, #FF65BE);
+  background: rgba(255, 101, 190, 0.05);
 }
 
 .next-option .option-icon {
@@ -264,35 +267,35 @@
   display: block;
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--brand-white, #FFFFFF);
   margin-bottom: 2px;
 }
 
 .next-option .option-desc {
   display: block;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .next-option.recommended {
-  border-color: #fda400;
-  background: #fffbeb;
+  border-color: var(--brand-orange, #FDA400);
+  background: rgba(253, 164, 0, 0.1);
 }
 
 .next-option.recommended:hover {
-  border-color: #e59400;
-  background: #fef3c7;
+  border-color: var(--brand-orange, #FDA400);
+  background: rgba(253, 164, 0, 0.15);
 }
 
 .recommended-badge {
   position: absolute;
   top: -8px;
   right: 12px;
-  background: #fda400;
-  color: #1e293b;
+  background: var(--brand-orange, #FDA400);
+  color: var(--brand-bg, #111111);
   font-size: 0.7rem;
   font-weight: 600;
   padding: 3px 8px;
@@ -301,13 +304,13 @@
 }
 
 .next-option.pronunciation {
-  border-color: #11E8F6;
-  background: #f0fdfa;
+  border-color: var(--brand-cyan, #11E8F6);
+  background: rgba(17, 232, 246, 0.1);
 }
 
 .next-option.pronunciation:hover {
-  border-color: #0ea5e9;
-  background: #e0f7fa;
+  border-color: var(--brand-cyan, #11E8F6);
+  background: rgba(17, 232, 246, 0.15);
 }
 
 /* Mobile Adjustments */

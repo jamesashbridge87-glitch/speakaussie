@@ -23,21 +23,22 @@
 .filter-select {
   flex: 1;
   padding: 10px 12px;
-  border: 1px solid var(--color-gray-300);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 0.85rem;
-  background: var(--color-light);
+  background: var(--brand-card);
+  color: var(--brand-white);
   cursor: pointer;
 }
 
 .filter-select:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
 }
 
 .card-counter {
   font-size: 0.9rem;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   white-space: nowrap;
 }
 
@@ -79,20 +80,20 @@
   align-items: center;
   padding: 24px;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   text-align: center;
 }
 
 .flashcard-front {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, #cc4e98 100%);
   position: relative;
 }
 
 .flashcard-front .term {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--brand-bg);
 }
 
 /* Difficulty badge */
@@ -117,24 +118,24 @@
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
   font-size: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
-  color: var(--color-dark);
+  color: var(--brand-bg);
 }
 
 .favorite-btn:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
 }
 
 .favorite-btn.active {
-  color: #ef4444;
-  background: rgba(255, 255, 255, 0.5);
+  color: var(--brand-error);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* Voice practice button */
@@ -146,7 +147,7 @@
   height: 44px;
   border-radius: 50%;
   border: none;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -155,12 +156,12 @@
 }
 
 .voice-btn:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
 }
 
 .voice-btn.recording {
-  background: #ef4444;
+  background: var(--brand-error);
   animation: pulse-record 1s ease-in-out infinite;
 }
 
@@ -180,8 +181,8 @@
 }
 
 .flashcard-back {
-  background: var(--color-light);
-  border: 2px solid var(--color-secondary);
+  background: var(--brand-card);
+  border: 2px solid var(--brand-cyan);
   transform: rotateY(180deg);
   gap: 12px;
 }
@@ -189,7 +190,7 @@
 .flashcard-back .meaning {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .example-section {
@@ -203,14 +204,14 @@
 .example-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-gray-400);
+  color: var(--brand-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .flashcard-back .example {
   font-size: 0.95rem;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   font-style: italic;
 }
 
@@ -223,16 +224,17 @@
   height: 44px;
   border-radius: 50%;
   border: none;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  color: var(--brand-white);
 }
 
 .speak-btn:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
 }
 
@@ -244,12 +246,12 @@
   position: static;
   width: 32px;
   height: 32px;
-  background: var(--color-gray-100);
+  background: var(--brand-border);
   margin-top: 4px;
 }
 
 .speak-btn.small:hover {
-  background: var(--color-gray-200);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .speaker-icon {
@@ -275,10 +277,10 @@
 .voice-practice-section {
   width: 100%;
   max-width: 400px;
-  background: var(--color-light);
+  background: var(--brand-card);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .listening-indicator {
@@ -286,14 +288,14 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   font-size: 0.95rem;
 }
 
 .pulse-dot {
   width: 12px;
   height: 12px;
-  background: #ef4444;
+  background: var(--brand-error);
   border-radius: 50%;
   animation: pulse-dot 1s ease-in-out infinite;
 }
@@ -311,7 +313,7 @@
 
 .voice-transcript {
   text-align: center;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   font-style: italic;
   margin: 8px 0;
 }
@@ -336,7 +338,7 @@
 }
 
 .voice-error {
-  color: #ef4444;
+  color: var(--brand-error);
   text-align: center;
   font-size: 0.9rem;
 }
@@ -351,25 +353,26 @@
 .nav-btn {
   flex: 1;
   padding: 12px 16px;
-  background: var(--color-light);
-  border: 1px solid var(--color-gray-300);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 500;
+  color: var(--brand-white);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .nav-btn:hover {
-  background: var(--color-gray-50);
-  border-color: var(--color-gray-400);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--brand-muted);
 }
 
 .flip-btn {
   flex: 1.5;
   padding: 12px 16px;
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--brand-cyan);
+  color: var(--brand-bg);
   border: none;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -379,7 +382,7 @@
 }
 
 .flip-btn:hover {
-  background: var(--color-secondary-dark);
+  background: #0ed4e0;
   transform: translateY(-1px);
 }
 

@@ -1,6 +1,7 @@
 .audio-visualizer {
   width: 100%;
-  background-color: #1a1a2e;
+  background-color: var(--brand-card, #1a1a1a);
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -18,7 +19,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--brand-muted, rgba(255, 255, 255, 0.6));
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }

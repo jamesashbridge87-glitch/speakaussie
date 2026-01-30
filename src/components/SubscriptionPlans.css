@@ -10,18 +10,18 @@
 .plans-header h2 {
   margin: 0 0 8px 0;
   font-size: 1.75rem;
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .plans-header p {
   margin: 0;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
 }
 
 .plans-error {
-  background-color: #fee2e2;
-  border: 1px solid var(--color-error);
-  color: var(--color-error);
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--brand-error);
+  color: var(--brand-error);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -36,8 +36,8 @@
 }
 
 .plan-card {
-  background: var(--color-light);
-  border: 2px solid var(--color-gray-200);
+  background: var(--brand-card);
+  border: 2px solid var(--brand-border);
   border-radius: 16px;
   padding: 24px;
   position: relative;
@@ -45,18 +45,18 @@
 }
 
 .plan-card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(253, 164, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(255, 101, 190, 0.2);
 }
 
 .plan-card.popular {
-  border-color: var(--color-primary);
+  border-color: var(--brand-primary);
 }
 
 .plan-card.current {
-  border-color: var(--color-secondary);
-  background: #e6f9fb;
+  border-color: var(--brand-cyan);
+  background: rgba(17, 232, 246, 0.1);
 }
 
 .popular-badge {
@@ -64,8 +64,8 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -77,8 +77,8 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--brand-cyan);
+  color: var(--brand-bg);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -88,12 +88,12 @@
 .plan-card h3 {
   margin: 0 0 4px 0;
   font-size: 1.25rem;
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .plan-description {
   margin: 0 0 16px 0;
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.85rem;
 }
 
@@ -104,18 +104,18 @@
 .price-amount {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: var(--brand-white);
 }
 
 .price-period {
-  color: var(--color-gray-500);
+  color: var(--brand-muted);
   font-size: 0.9rem;
 }
 
 .plan-minutes {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--color-primary-dark);
+  color: var(--brand-orange);
   margin-bottom: 16px;
 }
 
@@ -129,23 +129,23 @@
   padding: 6px 0;
   padding-left: 24px;
   position: relative;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   font-size: 0.9rem;
 }
 
 .plan-features li::before {
-  content: '✓';
+  content: '\2713';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
+  color: var(--brand-lime);
   font-weight: bold;
 }
 
 .plan-button {
   width: 100%;
   padding: 12px;
-  background: var(--color-primary);
-  color: var(--color-dark);
+  background: var(--brand-primary);
+  color: var(--brand-bg);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -155,41 +155,42 @@
 }
 
 .plan-button:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  filter: brightness(1.1);
   transform: translateY(-1px);
 }
 
 .plan-button:disabled {
-  background: var(--color-gray-300);
-  color: var(--color-gray-500);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--brand-muted);
   cursor: not-allowed;
 }
 
 .plan-button.current {
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  background: var(--brand-cyan);
+  color: var(--brand-bg);
 }
 
 .manage-subscription {
   text-align: center;
   padding-top: 16px;
-  border-top: 1px solid var(--color-gray-200);
+  border-top: 1px solid var(--brand-border);
 }
 
 .manage-btn {
   padding: 10px 24px;
-  background: var(--color-light);
-  border: 1px solid var(--color-gray-300);
+  background: var(--brand-card);
+  border: 1px solid var(--brand-border);
   border-radius: 8px;
-  color: var(--color-gray-600);
+  color: var(--brand-muted);
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .manage-btn:hover {
-  background: var(--color-gray-50);
-  border-color: var(--color-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--brand-cyan);
+  color: var(--brand-white);
 }
 
 @media (max-width: 640px) {
