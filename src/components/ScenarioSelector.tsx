@@ -2,7 +2,67 @@ import { useState, useMemo, useCallback } from 'react';
 import { Scenario, ScenarioCategory } from '../data/scenarios';
 import { allScenarios as scenarios, allCategories as categories, getAllScenariosByCategory as getScenariosByCategory } from '../data/allScenarios';
 import { useScenarioProgress } from '../hooks/useScenarioProgress';
+import {
+  DuotoneIcon,
+  Target,
+  Briefcase,
+  BarChart3,
+  TrendingUp,
+  Sparkles,
+  Theater,
+  Stethoscope,
+  Laptop,
+  Users,
+  FileText,
+  Heart,
+  Globe,
+  Phone,
+  Crown,
+  Plane,
+  Smile,
+  UtensilsCrossed,
+  HardHat,
+  GraduationCap,
+  Building,
+  BookOpen,
+  colorSchemes,
+} from './icons';
+import { Rocket } from 'lucide-react';
 import './ScenarioSelector.css';
+
+// Map category/scenario emojis to Lucide icons
+const iconMap: Record<string, React.ReactNode> = {
+  '🎯': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🚀': <DuotoneIcon icon={Rocket} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '💼': <DuotoneIcon icon={Briefcase} size="lg" colorScheme={colorSchemes.industry} />,
+  '📊': <DuotoneIcon icon={BarChart3} size="lg" colorScheme={colorSchemes.stats} />,
+  '📈': <DuotoneIcon icon={TrendingUp} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🎉': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🎭': <DuotoneIcon icon={Theater} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🏥': <DuotoneIcon icon={Stethoscope} size="lg" colorScheme={colorSchemes.industry} />,
+  '💻': <DuotoneIcon icon={Laptop} size="lg" colorScheme={colorSchemes.industry} />,
+  '🌏': <DuotoneIcon icon={Globe} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '📋': <DuotoneIcon icon={FileText} size="lg" colorScheme={colorSchemes.dailyWork} />,
+  '💚': <DuotoneIcon icon={Heart} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🤝': <DuotoneIcon icon={Users} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '📞': <DuotoneIcon icon={Phone} size="lg" colorScheme={colorSchemes.industry} />,
+  '👑': <DuotoneIcon icon={Crown} size="lg" colorScheme={colorSchemes.stats} />,
+  '✈️': <DuotoneIcon icon={Plane} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '😂': <DuotoneIcon icon={Smile} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🍽️': <DuotoneIcon icon={UtensilsCrossed} size="lg" colorScheme={colorSchemes.industry} />,
+  '🏗️': <DuotoneIcon icon={HardHat} size="lg" colorScheme={colorSchemes.industry} />,
+  '🎓': <DuotoneIcon icon={GraduationCap} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🏦': <DuotoneIcon icon={Building} size="lg" colorScheme={colorSchemes.industry} />,
+  '📚': <DuotoneIcon icon={BookOpen} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+};
+
+const getScenarioIcon = (emoji: string, size: 'md' | 'lg' = 'lg') => {
+  if (iconMap[emoji]) {
+    return iconMap[emoji];
+  }
+  // Fallback to emoji for unmapped icons
+  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+};
 
 interface ScenarioSelectorProps {
   onSelectScenario: (scenario: Scenario) => void;
@@ -101,7 +161,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
         disabled={disabled}
       >
         <div className="scenario-card-header">
-          <span className="scenario-icon">{scenario.icon}</span>
+          <span className="scenario-icon">{getScenarioIcon(scenario.icon, 'md')}</span>
           <div className="scenario-meta">
             {isDue && (
               <span className="review-badge" title="Due for review">
@@ -254,7 +314,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
         </button>
 
         <div className="category-header">
-          <span className="category-header-icon">{categoryInfo?.icon}</span>
+          <span className="category-header-icon">{getScenarioIcon(categoryInfo?.icon || '', 'lg')}</span>
           <div>
             <h3>{categoryInfo?.title}</h3>
             <p className="selector-subtitle">{categoryInfo?.description}</p>
@@ -288,7 +348,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
               onClick={() => handleCategoryClick(category.id)}
               disabled={disabled}
             >
-              <span className="category-icon">{category.icon}</span>
+              <span className="category-icon">{getScenarioIcon(category.icon, 'lg')}</span>
               <span className="category-title">{category.title}</span>
               <span className="category-description">{category.description}</span>
               <div className="category-badges">

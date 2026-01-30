@@ -1,5 +1,64 @@
 import { Scenario } from '../data/scenarios';
+import {
+  DuotoneIcon,
+  Target,
+  Briefcase,
+  BarChart3,
+  TrendingUp,
+  Sparkles,
+  Theater,
+  Stethoscope,
+  Laptop,
+  Users,
+  FileText,
+  Heart,
+  Globe,
+  Phone,
+  Crown,
+  Plane,
+  Smile,
+  UtensilsCrossed,
+  HardHat,
+  GraduationCap,
+  Building,
+  BookOpen,
+  colorSchemes,
+} from './icons';
+import { Rocket } from 'lucide-react';
 import './ScenarioIntro.css';
+
+// Map scenario emojis to Lucide icons
+const iconMap: Record<string, React.ReactNode> = {
+  '🎯': <DuotoneIcon icon={Target} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '🚀': <DuotoneIcon icon={Rocket} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '💼': <DuotoneIcon icon={Briefcase} size="xl" colorScheme={colorSchemes.industry} />,
+  '📊': <DuotoneIcon icon={BarChart3} size="xl" colorScheme={colorSchemes.stats} />,
+  '📈': <DuotoneIcon icon={TrendingUp} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '🎉': <DuotoneIcon icon={Sparkles} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '🎭': <DuotoneIcon icon={Theater} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '🏥': <DuotoneIcon icon={Stethoscope} size="xl" colorScheme={colorSchemes.industry} />,
+  '💻': <DuotoneIcon icon={Laptop} size="xl" colorScheme={colorSchemes.industry} />,
+  '🌏': <DuotoneIcon icon={Globe} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '📋': <DuotoneIcon icon={FileText} size="xl" colorScheme={colorSchemes.dailyWork} />,
+  '💚': <DuotoneIcon icon={Heart} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '🤝': <DuotoneIcon icon={Users} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '📞': <DuotoneIcon icon={Phone} size="xl" colorScheme={colorSchemes.industry} />,
+  '👑': <DuotoneIcon icon={Crown} size="xl" colorScheme={colorSchemes.stats} />,
+  '✈️': <DuotoneIcon icon={Plane} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '😂': <DuotoneIcon icon={Smile} size="xl" colorScheme={colorSchemes.socialCulture} />,
+  '🍽️': <DuotoneIcon icon={UtensilsCrossed} size="xl" colorScheme={colorSchemes.industry} />,
+  '🏗️': <DuotoneIcon icon={HardHat} size="xl" colorScheme={colorSchemes.industry} />,
+  '🎓': <DuotoneIcon icon={GraduationCap} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+  '🏦': <DuotoneIcon icon={Building} size="xl" colorScheme={colorSchemes.industry} />,
+  '📚': <DuotoneIcon icon={BookOpen} size="xl" colorScheme={colorSchemes.careerGrowth} />,
+};
+
+const getScenarioIcon = (emoji: string) => {
+  if (iconMap[emoji]) {
+    return iconMap[emoji];
+  }
+  return <span style={{ fontSize: 48 }}>{emoji}</span>;
+};
 
 interface ScenarioIntroProps {
   scenario: Scenario;
@@ -25,7 +84,7 @@ export function ScenarioIntro({ scenario, onStart, onBack, isLoading = false }: 
       </button>
 
       <div className="intro-header">
-        <span className="intro-icon">{scenario.icon}</span>
+        <span className="intro-icon">{getScenarioIcon(scenario.icon)}</span>
         <div>
           <h2>{scenario.title}</h2>
           <div className="intro-meta">

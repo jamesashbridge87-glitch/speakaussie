@@ -3,7 +3,73 @@ import { useNavigate } from 'react-router-dom';
 import { Scenario } from '../data/scenarios';
 import { getRandomEncouragement, getScenarioTip } from '../data/feedbackMessages';
 import { useScenarioProgress, SessionFeedback } from '../hooks/useScenarioProgress';
+import {
+  DuotoneIcon,
+  Target,
+  Briefcase,
+  BarChart3,
+  TrendingUp,
+  Sparkles,
+  Theater,
+  Stethoscope,
+  Laptop,
+  Users,
+  FileText,
+  Heart,
+  Globe,
+  Phone,
+  Crown,
+  Plane,
+  Smile,
+  UtensilsCrossed,
+  HardHat,
+  GraduationCap,
+  Building,
+  BookOpen,
+  Mic,
+  Repeat,
+  colorSchemes,
+} from './icons';
+import { Rocket, Star, Dumbbell, Calendar, Lightbulb, ClipboardList } from 'lucide-react';
 import './PostSessionFeedback.css';
+
+// Map scenario emojis to Lucide icons
+const iconMap: Record<string, React.ReactNode> = {
+  '🎯': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🚀': <DuotoneIcon icon={Rocket} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '💼': <DuotoneIcon icon={Briefcase} size="lg" colorScheme={colorSchemes.industry} />,
+  '📊': <DuotoneIcon icon={BarChart3} size="lg" colorScheme={colorSchemes.stats} />,
+  '📈': <DuotoneIcon icon={TrendingUp} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🎉': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🎭': <DuotoneIcon icon={Theater} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🏥': <DuotoneIcon icon={Stethoscope} size="lg" colorScheme={colorSchemes.industry} />,
+  '💻': <DuotoneIcon icon={Laptop} size="lg" colorScheme={colorSchemes.industry} />,
+  '🌏': <DuotoneIcon icon={Globe} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '📋': <DuotoneIcon icon={FileText} size="lg" colorScheme={colorSchemes.dailyWork} />,
+  '💚': <DuotoneIcon icon={Heart} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🤝': <DuotoneIcon icon={Users} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '📞': <DuotoneIcon icon={Phone} size="lg" colorScheme={colorSchemes.industry} />,
+  '👑': <DuotoneIcon icon={Crown} size="lg" colorScheme={colorSchemes.stats} />,
+  '✈️': <DuotoneIcon icon={Plane} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '😂': <DuotoneIcon icon={Smile} size="lg" colorScheme={colorSchemes.socialCulture} />,
+  '🍽️': <DuotoneIcon icon={UtensilsCrossed} size="lg" colorScheme={colorSchemes.industry} />,
+  '🏗️': <DuotoneIcon icon={HardHat} size="lg" colorScheme={colorSchemes.industry} />,
+  '🎓': <DuotoneIcon icon={GraduationCap} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🏦': <DuotoneIcon icon={Building} size="lg" colorScheme={colorSchemes.industry} />,
+  '📚': <DuotoneIcon icon={BookOpen} size="lg" colorScheme={colorSchemes.careerGrowth} />,
+  '🔄': <DuotoneIcon icon={Repeat} size="md" colorScheme={colorSchemes.stats} />,
+  '🎤': <DuotoneIcon icon={Mic} size="md" colorScheme={colorSchemes.socialCulture} />,
+  '📅': <DuotoneIcon icon={Calendar} size="md" colorScheme={colorSchemes.dailyWork} />,
+  '💡': <DuotoneIcon icon={Lightbulb} size="md" colorScheme={colorSchemes.stats} />,
+  '📝': <DuotoneIcon icon={ClipboardList} size="md" colorScheme={colorSchemes.dailyWork} />,
+};
+
+const getIcon = (emoji: string) => {
+  if (iconMap[emoji]) {
+    return iconMap[emoji];
+  }
+  return <span style={{ fontSize: 32 }}>{emoji}</span>;
+};
 
 export type SessionFeeling = 'great' | 'okay' | 'tough';
 
@@ -91,7 +157,7 @@ export function PostSessionFeedback({
       <div className="post-session-modal">
         {step === 'feeling' && (
           <div className="feedback-step feeling-step">
-            <div className="step-icon">{scenario.icon}</div>
+            <div className="step-icon">{getIcon(scenario.icon)}</div>
             <h2>Session Complete!</h2>
             <p className="scenario-name">{scenario.title}</p>
             <p className="feeling-question">How did that go?</p>
@@ -102,7 +168,7 @@ export function PostSessionFeedback({
                 className="feeling-btn great"
                 onClick={() => handleFeelingSelect('great')}
               >
-                <span className="feeling-emoji">&#x1F60A;</span>
+                <span className="feeling-emoji"><DuotoneIcon icon={Smile} size="lg" colorScheme={colorSchemes.socialCulture} /></span>
                 <span className="feeling-label">Great</span>
                 <span className="feeling-desc">I felt confident</span>
               </button>
@@ -111,7 +177,7 @@ export function PostSessionFeedback({
                 className="feeling-btn okay"
                 onClick={() => handleFeelingSelect('okay')}
               >
-                <span className="feeling-emoji">&#x1F610;</span>
+                <span className="feeling-emoji"><DuotoneIcon icon={Dumbbell} size="lg" colorScheme={colorSchemes.stats} /></span>
                 <span className="feeling-label">Okay</span>
                 <span className="feeling-desc">Getting there</span>
               </button>
@@ -120,7 +186,7 @@ export function PostSessionFeedback({
                 className="feeling-btn tough"
                 onClick={() => handleFeelingSelect('tough')}
               >
-                <span className="feeling-emoji">&#x1F613;</span>
+                <span className="feeling-emoji"><DuotoneIcon icon={Heart} size="lg" colorScheme={colorSchemes.ui} /></span>
                 <span className="feeling-label">Tough</span>
                 <span className="feeling-desc">Found it hard</span>
               </button>
@@ -131,14 +197,18 @@ export function PostSessionFeedback({
         {step === 'feedback' && feeling && (
           <div className="feedback-step encouragement-step">
             <div className="encouragement-icon">
-              {feeling === 'great' ? '\u{1F31F}' : feeling === 'okay' ? '\u{1F4AA}' : '\u{1F917}'}
+              {feeling === 'great'
+                ? <DuotoneIcon icon={Star} size="xl" colorScheme={colorSchemes.stats} />
+                : feeling === 'okay'
+                ? <DuotoneIcon icon={Dumbbell} size="xl" colorScheme={colorSchemes.careerGrowth} />
+                : <DuotoneIcon icon={Heart} size="xl" colorScheme={colorSchemes.socialCulture} />}
             </div>
 
             <p className="encouragement-message">{encouragement}</p>
 
             {daysUntilReview !== null && (
               <div className="review-schedule-info">
-                <span className="review-icon">&#x1F4C5;</span>
+                <span className="review-icon"><DuotoneIcon icon={Calendar} size="sm" colorScheme={colorSchemes.dailyWork} /></span>
                 <p className="review-text">
                   {daysUntilReview === 0
                     ? "We'll remind you to practice this again today"
@@ -151,7 +221,7 @@ export function PostSessionFeedback({
             )}
 
             <div className="tip-box">
-              <span className="tip-icon">&#x1F4A1;</span>
+              <span className="tip-icon"><DuotoneIcon icon={Lightbulb} size="sm" colorScheme={colorSchemes.stats} /></span>
               <p className="tip-text">{tip}</p>
             </div>
 
@@ -167,7 +237,7 @@ export function PostSessionFeedback({
 
             <div className="next-options">
               <button className="next-option repeat" onClick={handleRepeat}>
-                <span className="option-icon">&#x1F504;</span>
+                <span className="option-icon"><DuotoneIcon icon={Repeat} size="md" colorScheme={colorSchemes.stats} /></span>
                 <div className="option-content">
                   <span className="option-title">Practice again</span>
                   <span className="option-desc">Repeat {scenario.title}</span>
@@ -176,7 +246,7 @@ export function PostSessionFeedback({
 
               {recommendedScenario && (
                 <button className="next-option recommended" onClick={handleTryRecommended}>
-                  <span className="option-icon">{recommendedScenario.icon}</span>
+                  <span className="option-icon">{getIcon(recommendedScenario.icon)}</span>
                   <div className="option-content">
                     <span className="option-title">Try something new</span>
                     <span className="option-desc">{recommendedScenario.title}</span>
@@ -186,7 +256,7 @@ export function PostSessionFeedback({
               )}
 
               <button className="next-option pronunciation" onClick={handlePracticePronunciation}>
-                <span className="option-icon">&#x1F3A4;</span>
+                <span className="option-icon"><DuotoneIcon icon={Mic} size="md" colorScheme={colorSchemes.socialCulture} /></span>
                 <div className="option-content">
                   <span className="option-title">Practice pronunciation</span>
                   <span className="option-desc">Polish your Aussie accent</span>
@@ -194,7 +264,7 @@ export function PostSessionFeedback({
               </button>
 
               <button className="next-option browse" onClick={handleDone}>
-                <span className="option-icon">&#x1F4CB;</span>
+                <span className="option-icon"><DuotoneIcon icon={ClipboardList} size="md" colorScheme={colorSchemes.dailyWork} /></span>
                 <div className="option-content">
                   <span className="option-title">Browse scenarios</span>
                   <span className="option-desc">See all practice options</span>
