@@ -8,6 +8,7 @@ import {
 import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
+import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
 import './WorkplaceFillBlank.css';
 
 interface WorkplaceFillBlankProps {
@@ -151,6 +152,22 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
 
   const question = questions[currentIndex];
 
+  // Keyboard navigation
+  const handleKeyboardAnswer = useCallback((index: number) => {
+    if (gameState === 'playing' && question && index < question.options.length) {
+      handleAnswer(question.options[index]);
+    }
+  }, [gameState, question, handleAnswer]);
+
+  useQuizKeyboard({
+    isPlaying: gameState === 'playing',
+    isFeedback: gameState === 'feedback',
+    optionsCount: question?.options.length ?? 4,
+    onSelectAnswer: handleKeyboardAnswer,
+    onNext: nextQuestion,
+    onBack,
+  });
+
   return (
     <div className="fill-blank">
       <div className="fill-blank-header">
@@ -204,11 +221,16 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
                 }`}
                 onClick={() => gameState === 'playing' && handleAnswer(option)}
                 disabled={gameState === 'feedback'}
+                aria-label={`Option ${index + 1}: ${option}. Press ${index + 1} to select.`}
               >
+                <span className="option-key">{index + 1}</span>
                 {option}
               </button>
             ))}
           </div>
+          {gameState === 'playing' && (
+            <p className="keyboard-hint">Press 1-{question.options.length} to answer, Esc to exit</p>
+          )}
 
           {gameState === 'feedback' && (
             <div className={`feedback-panel ${isCorrect ? 'correct' : 'incorrect'}`}>

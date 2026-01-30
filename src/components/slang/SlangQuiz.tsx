@@ -3,6 +3,7 @@ import { slangData, categories, categoryNames, difficulties, difficultyNames, Sl
 import { useSlangProgress } from '../../hooks/useSlangProgress';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
 import { useGamification } from '../../hooks/useGamification';
+import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
 import './SlangQuiz.css';
 
 type QuizDirection = 'term-to-meaning' | 'meaning-to-term';
@@ -138,6 +139,28 @@ export function SlangQuiz() {
 
   const question = questions[currentQuestion];
 
+  // Keyboard navigation
+  const handleKeyboardAnswer = useCallback((index: number) => {
+    if (quizState === 'playing' && question && index < question.options.length) {
+      handleAnswer(question.options[index]);
+    }
+  }, [quizState, question, handleAnswer]);
+
+  const handleBack = useCallback(() => {
+    if (quizState !== 'start') {
+      setQuizState('start');
+    }
+  }, [quizState]);
+
+  useQuizKeyboard({
+    isPlaying: quizState === 'playing',
+    isFeedback: quizState === 'feedback',
+    optionsCount: question?.options.length ?? 4,
+    onSelectAnswer: handleKeyboardAnswer,
+    onNext: nextQuestion,
+    onBack: handleBack,
+  });
+
   return (
     <div className="slang-quiz">
       {quizState === 'start' && (
@@ -232,11 +255,16 @@ export function SlangQuiz() {
                   }`}
                   onClick={() => quizState === 'playing' && handleAnswer(option)}
                   disabled={quizState === 'feedback'}
+                  aria-label={`Option ${index + 1}: ${option}. Press ${index + 1} to select.`}
                 >
+                  <span className="answer-key">{index + 1}</span>
                   {option}
                 </button>
               ))}
             </div>
+            {quizState === 'playing' && (
+              <p className="keyboard-hint">Press 1-{question.options.length} to answer, Esc to go back</p>
+            )}
           </div>
 
           {quizState === 'feedback' && (

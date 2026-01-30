@@ -8,6 +8,7 @@ import {
 import { useWorkplaceProgress } from '../../hooks/useWorkplaceProgress';
 import { useGamification } from '../../hooks/useGamification';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
+import { useQuizKeyboard } from '../../hooks/useQuizKeyboard';
 import './WorkplaceQuiz.css';
 
 interface WorkplaceQuizProps {
@@ -160,6 +161,22 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
 
   const question = questions[currentQuestion];
 
+  // Keyboard navigation
+  const handleKeyboardAnswer = useCallback((index: number) => {
+    if (quizState === 'playing' && question && index < question.options.length) {
+      handleAnswer(question.options[index]);
+    }
+  }, [quizState, question, handleAnswer]);
+
+  useQuizKeyboard({
+    isPlaying: quizState === 'playing',
+    isFeedback: quizState === 'feedback',
+    optionsCount: question?.options.length ?? 4,
+    onSelectAnswer: handleKeyboardAnswer,
+    onNext: nextQuestion,
+    onBack,
+  });
+
   return (
     <div className="workplace-quiz">
       <div className="quiz-header">
@@ -211,11 +228,16 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
                   }`}
                   onClick={() => quizState === 'playing' && handleAnswer(option)}
                   disabled={quizState === 'feedback'}
+                  aria-label={`Option ${index + 1}: ${option}. Press ${index + 1} to select.`}
                 >
+                  <span className="answer-key">{index + 1}</span>
                   {option}
                 </button>
               ))}
             </div>
+            {quizState === 'playing' && (
+              <p className="keyboard-hint">Press 1-{question.options.length} to answer, Esc to exit</p>
+            )}
           </div>
 
           {quizState === 'feedback' && (

@@ -1,0 +1,166 @@
+/*
+ * Skeleton.css
+ * Loading skeleton components
+ * Brand: Your Aussie Uncle
+ */
+
+/* Base skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--brand-card, #1a1a1a) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    var(--brand-card, #1a1a1a) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Variants */
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.skeleton-circular {
+  border-radius: 50%;
+}
+
+.skeleton-rectangular {
+  border-radius: 12px;
+}
+
+.skeleton-card {
+  border-radius: 16px;
+  min-height: 120px;
+}
+
+/* Scenario Card Skeleton */
+.skeleton-scenario-card {
+  background: var(--brand-card, #1a1a1a);
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.skeleton-scenario-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Scenario Grid Skeleton */
+.skeleton-scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+/* Stat Card Skeleton */
+.skeleton-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--brand-card, #1a1a1a);
+  border: 1px solid var(--brand-border, rgba(255, 255, 255, 0.12));
+  border-radius: 16px;
+}
+
+.skeleton-stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+/* Dashboard Skeleton */
+.skeleton-dashboard {
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skeleton-header {
+  margin-bottom: 2rem;
+}
+
+.skeleton-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton-progress-section {
+  background: var(--brand-card, #1a1a1a);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Flashcard Skeleton */
+.skeleton-flashcard {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.skeleton-flashcard-main {
+  min-height: 280px;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-flashcard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* List Skeleton */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeleton-list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--brand-card, #1a1a1a);
+  border-radius: 12px;
+}
+
+.skeleton-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .skeleton-scenario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeleton-stats-row {
+    grid-template-columns: 1fr;
+  }
+}

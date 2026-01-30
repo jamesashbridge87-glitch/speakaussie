@@ -386,3 +386,31 @@
 .done-btn:active {
   transform: scale(0.98);
 }
+
+/* Keyboard Navigation */
+.option-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand-cyan, #11E8F6);
+  flex-shrink: 0;
+}
+
+.option-btn.correct .option-key,
+.option-btn.incorrect .option-key {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.keyboard-hint {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--brand-muted, rgba(255, 255, 255, 0.5));
+}
