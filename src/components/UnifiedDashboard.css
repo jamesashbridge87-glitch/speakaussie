@@ -139,7 +139,7 @@
   flex: 1;
 }
 
-.level-info h2 {
+.level-info h3 {
   margin: 0 0 8px 0;
   font-size: 1.25rem;
   color: var(--brand-white);
@@ -533,7 +533,7 @@
     text-align: center;
   }
 
-  .level-info h2 {
+  .level-info h3 {
     text-align: center;
   }
 }

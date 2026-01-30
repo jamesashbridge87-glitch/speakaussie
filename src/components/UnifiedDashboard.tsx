@@ -98,7 +98,7 @@ export function UnifiedDashboard() {
           />
           <h1>SpeakAussie</h1>
         </div>
-        <p className="header-subtitle">Your Progress Dashboard</p>
+        <h2 className="header-subtitle">Your Progress Dashboard</h2>
       </header>
 
       <main id="dashboard-content" className="dashboard-main">
@@ -110,7 +110,7 @@ export function UnifiedDashboard() {
               <span className="level-number">{level}</span>
             </div>
             <div className="level-info">
-              <h2>Level {level}</h2>
+              <h3>Level {level}</h3>
               <div className="xp-bar-container">
                 <div className="xp-bar">
                   <div
