@@ -5,6 +5,18 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate vendor chunks for better caching
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-sentry': ['@sentry/react'],
+          'vendor-elevenlabs': ['@elevenlabs/react'],
+        },
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',

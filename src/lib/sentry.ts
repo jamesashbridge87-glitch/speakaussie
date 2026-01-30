@@ -18,21 +18,11 @@ export function initSentry(): void {
   Sentry.init({
     dsn,
     environment: import.meta.env.MODE,
-    // Enable source maps for readable stack traces
-    integrations: [
-      Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration({
-        // Mask all text and block all media for privacy
-        maskAllText: true,
-        blockAllMedia: true,
-      }),
-    ],
+    // Enable browser tracing (replay disabled to reduce bundle size ~200KB)
+    integrations: [Sentry.browserTracingIntegration()],
     // Sample rates - adjust based on traffic
     // For production, start with 10% of transactions
     tracesSampleRate: import.meta.env.PROD ? 0.1 : 1.0,
-    // Capture 10% of sessions for replay (errors always captured)
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
     // Only send errors from our domain
     allowUrls: [window.location.origin],
     // Don't send PII

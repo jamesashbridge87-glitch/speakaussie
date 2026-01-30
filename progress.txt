@@ -397,3 +397,22 @@ Project: SpeakAussie Polish & Ship
   - Track selection before async operation starts (in case checkout redirects immediately)
   - Subscription completion should be tracked server-side via Stripe webhook (not implemented here)
 ---
+
+## 2026-01-31 - IF-5
+- Audited bundle size and implemented code-splitting optimization
+- Files changed: vite.config.ts, src/lib/sentry.ts, vite.config.analyze.ts (new)
+- **Audit findings:**
+  - Initial bundle: 789 KB (main index.js)
+  - After optimization: 579 KB main + 177 KB react vendor + 23 KB elevenlabs + 11 KB sentry = 790 KB total
+  - Gzipped: 175 KB main + 58 KB react + 7 KB elevenlabs + 3.5 KB sentry = ~244 KB total gzipped
+  - Main contributors: scenario data (~9300 lines), react-dom, @elevenlabs/react
+- **Optimizations implemented:**
+  - Added manualChunks to split vendor dependencies for better caching
+  - Disabled Sentry replay integration (not needed, saves future download)
+  - Created vite.config.analyze.ts for future bundle analysis
+- **Learnings for future iterations:**
+  - manualChunks pattern: split large vendor deps for browser caching
+  - Use `npm run build -- --config vite.config.analyze.ts` to generate bundle-stats.html
+  - Scenario data contributes significantly - could lazy-load in future if needed
+  - 244 KB gzipped total is acceptable for initial load
+---
