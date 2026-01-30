@@ -6,8 +6,10 @@ import {
   Hand,
   Bug,
   Theater,
+  ArrowLeft,
   colorSchemes,
 } from './icons';
+import { X } from 'lucide-react';
 import './FeedbackButton.css';
 
 // Map feedback type icons
@@ -115,7 +117,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
         <div className="feedback-overlay" onClick={handleClose}>
           <div className="feedback-modal" onClick={e => e.stopPropagation()}>
             <button className="feedback-close" onClick={handleClose}>
-              ×
+              <X size={20} />
             </button>
 
             {step === 'type' && (
@@ -142,7 +144,7 @@ export function FeedbackButton({ onSubmit }: FeedbackButtonProps) {
             {step === 'form' && selectedType && (
               <div className="feedback-content">
                 <button className="feedback-back" onClick={() => setStep('type')}>
-                  ← Back
+                  <ArrowLeft size={16} /> Back
                 </button>
 
                 <div className="feedback-type-header">

@@ -5,25 +5,31 @@ import {
   Lightbulb,
   Sparkles,
   Check,
+  Crown,
   colorSchemes,
 } from './icons';
+import { Rocket, Dumbbell, Sprout } from 'lucide-react';
 import './JourneyProgress.css';
 
-// Map phase icons to Lucide icons
-const phaseIconMap: Record<string, React.ReactNode> = {
-  '🌱': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.socialCulture} />,
-  '🌟': <DuotoneIcon icon={Sparkles} size="lg" colorScheme={colorSchemes.stats} />,
-  '💪': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
-  '🚀': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.careerGrowth} />,
-  '👑': <DuotoneIcon icon={Target} size="lg" colorScheme={colorSchemes.stats} />,
-};
-
+// Map phase icons to Lucide icons with size support
 const getPhaseIcon = (emoji: string, size: 'xs' | 'sm' | 'md' | 'lg' = 'lg') => {
-  // Return mapped icon or fallback to emoji
-  if (phaseIconMap[emoji]) {
-    return phaseIconMap[emoji];
-  }
-  return <span style={{ fontSize: size === 'xs' ? 12 : size === 'sm' ? 16 : size === 'md' ? 20 : 24 }}>{emoji}</span>;
+  const sizeMap: Record<string, 'sm' | 'md' | 'lg' | 'xl'> = {
+    'xs': 'sm',
+    'sm': 'sm',
+    'md': 'md',
+    'lg': 'lg',
+  };
+  const mappedSize = sizeMap[size] || 'md';
+
+  const iconMap: Record<string, React.ReactNode> = {
+    '🌱': <DuotoneIcon icon={Sprout} size={mappedSize} colorScheme={colorSchemes.socialCulture} />,
+    '🌟': <DuotoneIcon icon={Sparkles} size={mappedSize} colorScheme={colorSchemes.stats} />,
+    '💪': <DuotoneIcon icon={Dumbbell} size={mappedSize} colorScheme={colorSchemes.careerGrowth} />,
+    '🚀': <DuotoneIcon icon={Rocket} size={mappedSize} colorScheme={colorSchemes.careerGrowth} />,
+    '👑': <DuotoneIcon icon={Crown} size={mappedSize} colorScheme={colorSchemes.stats} />,
+  };
+
+  return iconMap[emoji] || <DuotoneIcon icon={Target} size={mappedSize} colorScheme={colorSchemes.careerGrowth} />;
 };
 
 interface JourneyProgressProps {

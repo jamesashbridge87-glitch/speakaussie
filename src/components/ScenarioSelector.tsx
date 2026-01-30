@@ -27,7 +27,7 @@ import {
   BookOpen,
   colorSchemes,
 } from './icons';
-import { Rocket } from 'lucide-react';
+import { Rocket, X, ArrowLeft, Search } from 'lucide-react';
 import './ScenarioSelector.css';
 
 // Map category/scenario emojis to Lucide icons
@@ -197,7 +197,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
   const renderSearchBox = () => (
     <div className="search-section">
       <div className="search-box">
-        <span className="search-icon">&#128269;</span>
+        <span className="search-icon"><Search size={18} /></span>
         <input
           type="text"
           placeholder="Search scenarios..."
@@ -207,7 +207,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
         />
         {searchQuery && (
           <button className="search-clear" onClick={clearSearch}>
-            &#x2715;
+            <X size={16} />
           </button>
         )}
       </div>
@@ -310,7 +310,7 @@ export function ScenarioSelector({ onSelectScenario, disabled = false }: Scenari
     return (
       <div className="scenario-selector">
         <button className="back-button" onClick={handleBack} disabled={disabled}>
-          &#x2190; Back to categories
+          <ArrowLeft size={16} /> Back to categories
         </button>
 
         <div className="category-header">

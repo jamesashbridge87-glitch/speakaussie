@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Folder } from 'lucide-react';
 
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -112,7 +113,8 @@ export function CategoryIcon({ category, size = 'md', className }: CategoryIconP
   const icon = iconMap[category];
 
   if (!icon) {
-    return <span style={{ fontSize: size === 'xl' ? 48 : 24 }}>📁</span>;
+    const pixelSize = sizeMap[size];
+    return <Folder size={pixelSize} />;
   }
 
   return (

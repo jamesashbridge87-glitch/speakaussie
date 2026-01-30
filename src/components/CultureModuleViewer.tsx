@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { cultureModules, CultureModule, getCultureModuleById } from '../data/cultureModules';
+import { ArrowLeft } from 'lucide-react';
 import './CultureModuleViewer.css';
 
 interface CultureModuleViewerProps {
@@ -69,7 +70,7 @@ function CultureModuleDetail({ module, onBack, onSelectScenario }: CultureModule
   return (
     <div className="culture-module-detail">
       <button className="culture-back-button" onClick={onBack}>
-        ← Back to Culture Guide
+        <ArrowLeft size={16} /> Back to Culture Guide
       </button>
 
       <div className="culture-module-header">

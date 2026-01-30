@@ -5,6 +5,7 @@ import {
   Hand,
   colorSchemes,
 } from './icons';
+import { X } from 'lucide-react';
 import './NPSSurvey.css';
 
 interface NPSSurveyProps {
@@ -56,7 +57,7 @@ export function NPSSurvey({ onComplete, onDismiss }: NPSSurveyProps) {
     <div className={`nps-overlay ${isLeaving ? 'leaving' : ''}`}>
       <div className="nps-modal">
         <button className="nps-close" onClick={handleClose}>
-          ×
+          <X size={20} />
         </button>
 
         {step === 'score' && (

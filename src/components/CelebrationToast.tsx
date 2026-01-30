@@ -7,7 +7,7 @@ import {
   Crown,
   colorSchemes,
 } from './icons';
-import { Rocket } from 'lucide-react';
+import { Rocket, X } from 'lucide-react';
 import './CelebrationToast.css';
 
 // Map celebration icons to Lucide components
@@ -76,7 +76,7 @@ export function CelebrationToast({
     <div className={`celebration-toast ${isLeaving ? 'leaving' : ''}`}>
       <div className="celebration-confetti" />
       <button className="celebration-close" onClick={handleDismiss}>
-        &times;
+        <X size={20} />
       </button>
       <div className="celebration-icon">{getCelebrationIcon(celebration.icon)}</div>
       <h3 className="celebration-title">{celebration.title}</h3>

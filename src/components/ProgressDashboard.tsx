@@ -11,13 +11,24 @@ import { PronunciationStatsDisplay } from './PronunciationPractice';
 import {
   DuotoneIcon,
   Flame,
+  Sparkles,
+  Target,
+  Crown,
   colorSchemes,
 } from './icons';
+import { Rocket, Dumbbell, Sprout } from 'lucide-react';
 import './ProgressDashboard.css';
 
-// Helper for phase icons
+// Helper for phase icons - matches JourneyProgress icons
 const getPhaseIcon = (emoji: string) => {
-  return <span style={{ fontSize: 14 }}>{emoji}</span>;
+  const iconMap: Record<string, React.ReactNode> = {
+    '🌱': <DuotoneIcon icon={Sprout} size="sm" colorScheme={colorSchemes.socialCulture} />,
+    '🌟': <DuotoneIcon icon={Sparkles} size="sm" colorScheme={colorSchemes.stats} />,
+    '💪': <DuotoneIcon icon={Dumbbell} size="sm" colorScheme={colorSchemes.careerGrowth} />,
+    '🚀': <DuotoneIcon icon={Rocket} size="sm" colorScheme={colorSchemes.careerGrowth} />,
+    '👑': <DuotoneIcon icon={Crown} size="sm" colorScheme={colorSchemes.stats} />,
+  };
+  return iconMap[emoji] || <DuotoneIcon icon={Target} size="sm" colorScheme={colorSchemes.careerGrowth} />;
 };
 
 interface PronunciationOverallStats {

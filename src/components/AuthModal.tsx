@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { X } from 'lucide-react';
 import './AuthModal.css';
 
 interface AuthModalProps {
@@ -48,7 +49,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
     <div className="auth-modal-overlay" onClick={onClose}>
       <div className="auth-modal" onClick={e => e.stopPropagation()}>
         <button className="auth-modal-close" onClick={onClose}>
-          &times;
+          <X size={20} />
         </button>
 
         <h2>{mode === 'login' ? 'Welcome Back!' : 'Create Account'}</h2>

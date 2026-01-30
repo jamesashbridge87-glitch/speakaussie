@@ -31,6 +31,7 @@ import { StreakReminder } from './StreakReminder';
 import { Scenario } from '../data/scenarios';
 import { allScenarios as scenarios, getAllCategoryInfo as getCategoryInfo } from '../data/allScenarios';
 import { Voice } from '../data/voices';
+import { ChevronRight, X } from 'lucide-react';
 import './AussieEnglishPractice.css';
 
 interface Message {
@@ -453,7 +454,7 @@ export function AussieEnglishPractice() {
         <div className="plans-modal-overlay" onClick={() => setShowPlans(false)}>
           <div className="plans-modal" onClick={e => e.stopPropagation()}>
             <button className="plans-modal-close" onClick={() => setShowPlans(false)} aria-label="Close subscription plans modal">
-              &times;
+              <X size={24} />
             </button>
             <SubscriptionPlans onAuthRequired={() => setShowAuthModal(true)} />
           </div>
@@ -503,7 +504,7 @@ export function AussieEnglishPractice() {
                   <span className="recommendation-title">{dailyRecommendation.scenario.title}</span>
                   <span className="recommendation-reason">{dailyRecommendation.reason}</span>
                 </div>
-                <span className="recommendation-arrow">→</span>
+                <span className="recommendation-arrow"><ChevronRight size={20} /></span>
               </button>
             </div>
           )}

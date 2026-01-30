@@ -14,8 +14,10 @@ import {
   DuotoneIcon,
   Heart,
   Volume2,
+  ArrowLeft,
   colorSchemes,
 } from '../icons';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './WorkplaceFlashcards.css';
 
 interface WorkplaceFlashcardsProps {
@@ -98,7 +100,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
   if (!currentPhrase) {
     return (
       <div className="workplace-flashcards">
-        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview"><ArrowLeft size={16} /> Back</button>
         <p>No phrases available for this filter.</p>
       </div>
     );
@@ -107,7 +109,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
   return (
     <div className="workplace-flashcards">
       <div className="flashcard-header">
-        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview"><ArrowLeft size={16} /> Back</button>
         <span className="subcategory-label">
           {subcategoryNames[currentPhrase.subcategory] || currentPhrase.subcategory}
         </span>
@@ -265,7 +267,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
           disabled={currentIndex === 0}
           aria-label="Go to previous flashcard"
         >
-          ← Previous
+          <ChevronLeft size={16} /> Previous
         </button>
         <span className="card-counter" aria-live="polite">
           {currentIndex + 1} / {filteredPhrases.length}
@@ -276,7 +278,7 @@ export function WorkplaceFlashcards({ situation, onBack }: WorkplaceFlashcardsPr
           disabled={currentIndex === filteredPhrases.length - 1}
           aria-label="Go to next flashcard"
         >
-          Next →
+          Next <ChevronRight size={16} />
         </button>
       </div>
     </div>

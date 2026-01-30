@@ -24,7 +24,7 @@ import {
   BookOpen,
   colorSchemes,
 } from './icons';
-import { Rocket } from 'lucide-react';
+import { Rocket, ArrowLeft } from 'lucide-react';
 import './ScenarioIntro.css';
 
 // Map scenario emojis to Lucide icons
@@ -80,7 +80,7 @@ export function ScenarioIntro({ scenario, onStart, onBack, isLoading = false }: 
   return (
     <div className="scenario-intro">
       <button className="back-link" onClick={onBack} disabled={isLoading}>
-        ← Choose different scenario
+        <ArrowLeft size={16} /> Choose different scenario
       </button>
 
       <div className="intro-header">

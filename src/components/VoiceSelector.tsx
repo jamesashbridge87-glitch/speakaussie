@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { voices, Voice, VoiceId, getVoicePreference, saveVoicePreference } from '../data/voices';
+import { ArrowLeft } from 'lucide-react';
 import './VoiceSelector.css';
 
 interface VoiceSelectorProps {
@@ -82,7 +83,7 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   return (
     <div className="voice-selector">
       <button className="voice-back-btn" onClick={onBack}>
-        ← Back
+        <ArrowLeft size={16} /> Back
       </button>
 
       <div className="voice-selector-content">

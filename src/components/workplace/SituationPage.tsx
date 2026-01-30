@@ -21,13 +21,27 @@ import {
   HelpCircle,
   Star,
   Repeat,
+  MessageSquare,
+  TrendingUp,
+  Mic,
+  Smile,
+  ArrowLeft,
   colorSchemes,
 } from '../icons';
+import { Beer, RefreshCw, ChevronRight } from 'lucide-react';
 import './SituationPage.css';
 
 // Helper for situation icons
 const getSituationIcon = (emoji: string, size: 'sm' | 'md' | 'lg' = 'lg') => {
-  return <span style={{ fontSize: size === 'sm' ? 16 : size === 'md' ? 24 : 32 }}>{emoji}</span>;
+  const iconMap: Record<string, React.ReactNode> = {
+    '💬': <DuotoneIcon icon={MessageSquare} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '🍻': <DuotoneIcon icon={Beer} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '😏': <DuotoneIcon icon={Smile} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '📈': <DuotoneIcon icon={TrendingUp} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '🔄': <DuotoneIcon icon={RefreshCw} size={size} colorScheme={colorSchemes.stats} />,
+    '🎤': <DuotoneIcon icon={Mic} size={size} colorScheme={colorSchemes.industry} />,
+  };
+  return iconMap[emoji] || <DuotoneIcon icon={MessageSquare} size={size} colorScheme={colorSchemes.socialCulture} />;
 };
 
 type GameMode = 'overview' | 'flashcards' | 'quiz' | 'fillblank' | 'favorites';
@@ -89,7 +103,7 @@ export function SituationPage() {
       <div className="situation-page locked">
         <header className="situation-header">
           <button className="back-btn" onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">
-            ← Back
+            <ArrowLeft size={16} /> Back
           </button>
           <h1><DuotoneIcon icon={Lock} size="md" colorScheme={colorSchemes.ui} /> {situationNames[validSituation]}</h1>
         </header>
@@ -107,7 +121,7 @@ export function SituationPage() {
     <div className="situation-page">
       <header className="situation-header">
         <button className="back-btn" onClick={() => navigate('/workplace')} aria-label="Go back to workplace overview">
-          ← Back
+          <ArrowLeft size={16} /> Back
         </button>
         <div className="header-title">
           <span className="header-icon">{getSituationIcon(situationIcons[validSituation], 'lg')}</span>
@@ -133,7 +147,7 @@ export function SituationPage() {
                 <h3>Learn {nextSubcategory ? nextSubcategory.count : phrases.length} phrases</h3>
                 <p>{situationDescriptions[validSituation]}</p>
               </div>
-              <span className="up-next-arrow">→</span>
+              <span className="up-next-arrow"><ChevronRight size={24} /></span>
             </button>
           </section>
 
@@ -235,7 +249,7 @@ export function SituationPage() {
       {activeMode === 'favorites' && (
         <main className="situation-main" role="main">
           <button className="mode-back-btn" onClick={() => setActiveMode('overview')} aria-label="Go back to situation overview">
-            ← Back to Overview
+            <ArrowLeft size={16} /> Back to Overview
           </button>
           <h2>Your Favorites</h2>
           {situationFavorites.length === 0 ? (

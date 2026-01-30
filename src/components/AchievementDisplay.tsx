@@ -2,16 +2,47 @@ import { Achievement } from '../hooks/useAchievements';
 import {
   DuotoneIcon,
   Lock,
+  Target,
+  Flame,
+  Trophy,
+  MessageSquare,
+  Timer,
+  Home,
+  Briefcase,
+  Star,
+  Mic,
+  Calendar,
   colorSchemes,
 } from './icons';
+import { Zap, Clock } from 'lucide-react';
 import './AchievementDisplay.css';
 
-// Helper for achievement icons
+// Map achievement emoji icons to DuotoneIcon components
 const getAchievementIcon = (emoji: string, isLocked: boolean, size: 'md' | 'lg' = 'lg') => {
   if (isLocked) {
     return <DuotoneIcon icon={Lock} size={size} colorScheme={colorSchemes.ui} />;
   }
-  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+
+  const iconMap: Record<string, React.ReactNode> = {
+    '🎯': <DuotoneIcon icon={Target} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '🔥': <DuotoneIcon icon={Flame} size={size} colorScheme={colorSchemes.stats} />,
+    '⚡': <DuotoneIcon icon={Zap} size={size} colorScheme={colorSchemes.stats} />,
+    '🏆': <DuotoneIcon icon={Trophy} size={size} colorScheme={colorSchemes.stats} />,
+    '💬': <DuotoneIcon icon={MessageSquare} size={size} colorScheme={colorSchemes.industry} />,
+    '🗣️': <DuotoneIcon icon={MessageSquare} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '💯': <DuotoneIcon icon={Target} size={size} colorScheme={colorSchemes.stats} />,
+    '⏱️': <DuotoneIcon icon={Timer} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '⌛': <DuotoneIcon icon={Timer} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '🕐': <DuotoneIcon icon={Clock} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '🏠': <DuotoneIcon icon={Home} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '💼': <DuotoneIcon icon={Briefcase} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '🌟': <DuotoneIcon icon={Star} size={size} colorScheme={colorSchemes.stats} />,
+    '🎙️': <DuotoneIcon icon={Mic} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '📅': <DuotoneIcon icon={Calendar} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '🦘': <span style={{ fontSize: size === 'md' ? 24 : 32 }}>🦘</span>, // Keep kangaroo as emoji (no Lucide equivalent)
+  };
+
+  return iconMap[emoji] || <DuotoneIcon icon={Star} size={size} colorScheme={colorSchemes.stats} />;
 };
 
 export interface AchievementWithProgress {

@@ -5,8 +5,13 @@ import {
   BookOpen,
   Target,
   TrendingUp,
+  Trophy,
+  Crown,
+  Star,
+  Timer,
   colorSchemes,
 } from './icons';
+import { Footprints, Dumbbell } from 'lucide-react';
 import './ConfidenceScore.css';
 
 // Map breakdown icons to Lucide
@@ -23,7 +28,20 @@ const getBreakdownIcon = (emoji: string) => {
 
 // Helper for milestone icons
 const getMilestoneIcon = (emoji: string, size: 'md' | 'lg' = 'lg') => {
-  return <span style={{ fontSize: size === 'md' ? 24 : 32 }}>{emoji}</span>;
+  const iconMap: Record<string, React.ReactNode> = {
+    '👣': <DuotoneIcon icon={Footprints} size={size} colorScheme={colorSchemes.socialCulture} />,
+    '🎯': <DuotoneIcon icon={Target} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '⭐': <DuotoneIcon icon={Star} size={size} colorScheme={colorSchemes.stats} />,
+    '💯': <DuotoneIcon icon={Target} size={size} colorScheme={colorSchemes.stats} />,
+    '⏱️': <DuotoneIcon icon={Timer} size={size} colorScheme={colorSchemes.dailyWork} />,
+    '📚': <DuotoneIcon icon={BookOpen} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '🏆': <DuotoneIcon icon={Trophy} size={size} colorScheme={colorSchemes.stats} />,
+    '🔥': <DuotoneIcon icon={Flame} size={size} colorScheme={colorSchemes.stats} />,
+    '💪': <DuotoneIcon icon={Dumbbell} size={size} colorScheme={colorSchemes.careerGrowth} />,
+    '👑': <DuotoneIcon icon={Crown} size={size} colorScheme={colorSchemes.stats} />,
+    '🌟': <DuotoneIcon icon={Star} size={size} colorScheme={colorSchemes.stats} />,
+  };
+  return iconMap[emoji] || <DuotoneIcon icon={Star} size={size} colorScheme={colorSchemes.stats} />;
 };
 
 interface ConfidenceScoreProps {

@@ -19,17 +19,30 @@ import {
   Heart,
   Lock,
   Repeat,
+  MessageSquare,
+  TrendingUp,
+  Mic,
+  Smile,
+  ArrowLeft,
   colorSchemes,
 } from '../icons';
+import { Beer, RefreshCw, ChevronRight } from 'lucide-react';
 import './WorkplacePage.css';
 
-// Helper to get situation icon (falls back to emoji)
+// Helper to get situation icon
 const getSituationIcon = (emoji: string, isLocked: boolean) => {
   if (isLocked) {
     return <DuotoneIcon icon={Lock} size="md" colorScheme={colorSchemes.ui} />;
   }
-  // Return emoji as fallback since situations have unique emojis
-  return <span style={{ fontSize: 24 }}>{emoji}</span>;
+  const iconMap: Record<string, React.ReactNode> = {
+    '💬': <DuotoneIcon icon={MessageSquare} size="md" colorScheme={colorSchemes.socialCulture} />,
+    '🍻': <DuotoneIcon icon={Beer} size="md" colorScheme={colorSchemes.socialCulture} />,
+    '😏': <DuotoneIcon icon={Smile} size="md" colorScheme={colorSchemes.socialCulture} />,
+    '📈': <DuotoneIcon icon={TrendingUp} size="md" colorScheme={colorSchemes.careerGrowth} />,
+    '🔄': <DuotoneIcon icon={RefreshCw} size="md" colorScheme={colorSchemes.stats} />,
+    '🎤': <DuotoneIcon icon={Mic} size="md" colorScheme={colorSchemes.industry} />,
+  };
+  return iconMap[emoji] || <DuotoneIcon icon={MessageSquare} size="md" colorScheme={colorSchemes.socialCulture} />;
 };
 
 type ViewMode = 'home' | 'all' | 'favorites' | 'stats';
@@ -73,7 +86,7 @@ export function WorkplacePage() {
       {/* Header */}
       <header className="workplace-header">
         <button className="back-to-main" onClick={() => navigate('/')} aria-label="Go back to main app">
-          ← Back to Main
+          <ArrowLeft size={16} /> Back to Main
         </button>
         <div className="header-brand">
           <img
@@ -216,7 +229,7 @@ export function WorkplacePage() {
                           {isComplete ? '✓ Done' : isUnlocked ? `${progress.learned}/${progress.total}` : <DuotoneIcon icon={Lock} size="xs" colorScheme={colorSchemes.ui} />}
                         </span>
                       </button>
-                      {index < 2 && <span className="path-arrow">→</span>}
+                      {index < 2 && <span className="path-arrow"><ChevronRight size={16} /></span>}
                     </div>
                   );
                 })}
@@ -224,7 +237,7 @@ export function WorkplacePage() {
               </div>
 
               <button className="see-all-btn" onClick={() => setViewMode('all')} aria-label="See all available situations">
-                See all situations →
+                See all situations <ChevronRight size={16} />
               </button>
             </section>
 
@@ -374,7 +387,7 @@ export function WorkplacePage() {
             </div>
 
             <button className="back-btn" onClick={() => setViewMode('home')} aria-label="Go back to home view">
-              ← Back to Home
+              <ArrowLeft size={16} /> Back to Home
             </button>
           </section>
         )}

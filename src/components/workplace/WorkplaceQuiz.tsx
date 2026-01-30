@@ -16,8 +16,10 @@ import {
   Trophy,
   Sparkles,
   ThumbsUp,
+  ArrowLeft,
   colorSchemes,
 } from '../icons';
+import { ChevronRight } from 'lucide-react';
 import './WorkplaceQuiz.css';
 
 // Map result icons
@@ -196,7 +198,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
   return (
     <div className="workplace-quiz">
       <div className="quiz-header">
-        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview"><ArrowLeft size={16} /> Back</button>
         <h2>{situationNames[situation]} Quiz</h2>
       </div>
 
@@ -268,7 +270,7 @@ export function WorkplaceQuiz({ situation, onBack }: WorkplaceQuizProps) {
               )}
               <p className="explanation">{question.explanation}</p>
               <button className="next-btn" onClick={nextQuestion} aria-label={currentQuestion + 1 >= questions.length ? 'See results' : 'Go to next question'}>
-                {currentQuestion + 1 >= questions.length ? 'See Results' : 'Next →'}
+                {currentQuestion + 1 >= questions.length ? 'See Results' : <>Next <ChevronRight size={16} /></>}
               </button>
             </div>
           )}

@@ -85,4 +85,12 @@ export {
   Printer,
   Bug,
   Theater,
+  Rocket,
+  ClipboardList,
+  Search,
+  AlertTriangle,
+  RefreshCw,
+  Spade,
+  PenTool,
+  Puzzle,
 } from 'lucide-react';

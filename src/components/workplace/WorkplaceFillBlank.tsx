@@ -16,8 +16,10 @@ import {
   Trophy,
   Sparkles,
   ThumbsUp,
+  ArrowLeft,
   colorSchemes,
 } from '../icons';
+import { ChevronRight } from 'lucide-react';
 import './WorkplaceFillBlank.css';
 
 // Map result icons
@@ -187,7 +189,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
   return (
     <div className="fill-blank">
       <div className="fill-blank-header">
-        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview">← Back</button>
+        <button className="back-btn" onClick={onBack} aria-label="Go back to situation overview"><ArrowLeft size={16} /> Back</button>
         <h2>Fill in the Blank</h2>
       </div>
 
@@ -260,7 +262,7 @@ export function WorkplaceFillBlank({ situation, onBack }: WorkplaceFillBlankProp
               )}
               <p className="feedback-context">{question.phrase.context}</p>
               <button className="next-btn" onClick={nextQuestion} aria-label={currentIndex + 1 >= questions.length ? 'See results' : 'Go to next question'}>
-                {currentIndex + 1 >= questions.length ? 'See Results' : 'Next →'}
+                {currentIndex + 1 >= questions.length ? 'See Results' : <>Next <ChevronRight size={16} /></>}
               </button>
             </div>
           )}
