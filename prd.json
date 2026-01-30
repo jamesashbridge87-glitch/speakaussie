@@ -16,7 +16,7 @@
         "Tab moves focus to the next interactive element (play button or continue)"
       ],
       "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-2",
@@ -29,7 +29,7 @@
         "Components still render correctly without animations"
       ],
       "files": ["src/components/Skeleton.css", "src/components/StreakReminder.css"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-3",
@@ -42,7 +42,7 @@
         "aria-busy is used appropriately during loading states"
       ],
       "files": ["src/components/StreakReminder.tsx", "src/components/Skeleton.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-4",
@@ -57,7 +57,7 @@
         "Focus styles use :focus-visible to avoid showing on mouse clicks"
       ],
       "files": ["src/components/VoiceSelector.css", "src/components/ErrorBoundary.tsx", "src/components/NotFound.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-5",
@@ -71,7 +71,7 @@
         "Component still functions correctly"
       ],
       "files": ["src/components/ErrorBoundary.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-6",
@@ -85,7 +85,7 @@
         "Component still functions correctly"
       ],
       "files": ["src/components/NotFound.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-7",
@@ -99,7 +99,7 @@
         "Calculations remain functionally identical"
       ],
       "files": ["src/components/UnifiedDashboard.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-8",
@@ -113,7 +113,7 @@
         "Decision documented in code comment"
       ],
       "files": ["src/components/icons/DuotoneIcon.tsx", "src/components/icons/iconColors.ts"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-9",
@@ -127,7 +127,7 @@
         "All existing usages continue to work"
       ],
       "files": ["src/components/icons/DuotoneIcon.tsx", "src/components/icons/CustomIcon.tsx", "src/components/icons/index.ts"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "TQ-10",
@@ -141,7 +141,7 @@
         "Buttons remain accessible with proper aria-labels"
       ],
       "files": ["src/components/VoiceSelector.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "UX-1",
@@ -154,7 +154,7 @@
         "Loading state clears when audio starts playing or fails"
       ],
       "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "UX-2",
@@ -167,7 +167,7 @@
         "Error state is visually distinct but not alarming"
       ],
       "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "UX-3",
@@ -181,7 +181,7 @@
         "Document any missing loading states found and fix them"
       ],
       "files": ["src/components/ScenarioSelector.tsx", "src/components/Skeleton.tsx"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "UX-4",

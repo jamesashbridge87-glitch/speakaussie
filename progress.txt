@@ -8,5 +8,147 @@ Project: SpeakAussie Polish & Ship
 - Use `npx tsc --noEmit` to typecheck
 - Lucide icons are re-exported from src/components/icons/index.ts
 - Component CSS files are colocated with their .tsx files
+- For radio group patterns, use roving tabindex (focused item has tabIndex=0, others have tabIndex=-1)
+- No lint script in package.json - just run typecheck
+- Lucide icons only support single color - DuotoneIcon/IconColorScheme uses `primary` color only
 
+---
+
+## 2026-01-31 - TQ-1
+- Implemented keyboard navigation for VoiceSelector component
+- Files changed: src/components/VoiceSelector.tsx, src/components/VoiceSelector.css
+- **Learnings for future iterations:**
+  - VoiceSelector uses a list of voice options that should be treated as a radio group
+  - Used roving tabindex pattern with useRef array for button references
+  - Added focus-visible styles to CSS for keyboard focus indication
+  - Arrow keys navigate, Enter/Space selects
+---
+
+## 2026-01-31 - TQ-2
+- Added prefers-reduced-motion support to Skeleton and StreakReminder components
+- Files changed: src/components/Skeleton.css, src/components/StreakReminder.css
+- **Learnings for future iterations:**
+  - Skeleton.css has a `skeleton-shimmer` keyframe animation that can be disabled with `animation: none`
+  - StreakReminder.css has a `slideIn` keyframe animation for toast notifications
+  - Pattern for reduced motion: `@media (prefers-reduced-motion: reduce) { .element { animation: none; } }`
+  - For skeleton, also reset background to solid color when animation is disabled
+---
+
+## 2026-01-31 - TQ-3
+- Added ARIA roles for screen reader accessibility
+- Files changed: src/components/StreakReminder.tsx, src/components/Skeleton.tsx
+- **Learnings for future iterations:**
+  - StreakReminder toast/banner: use `role="status" aria-live="polite"` for status announcements
+  - Skeleton containers (grid-level): use `role="status" aria-busy="true"` with aria-label for loading state
+  - Individual skeleton items: use `aria-hidden="true"` since they're decorative
+  - Use `role="status"` (not progressbar) for indeterminate loading states without known completion percentage
+---
+
+## 2026-01-31 - TQ-4
+- Added focus-visible styles for keyboard accessibility
+- Files changed: src/components/VoiceSelector.css, src/components/ErrorBoundary.tsx, src/components/ErrorBoundary.css, src/components/NotFound.tsx, src/components/NotFound.css
+- **Learnings for future iterations:**
+  - VoiceSelector voice options already had focus-visible from TQ-1, added it to play button
+  - ErrorBoundary and NotFound use inline styles, so created separate CSS files for focus-visible
+  - Pattern: Add className to element that needs focus-visible, then define `:focus-visible { outline: 2px solid var(--brand-cyan); outline-offset: 2px; }` in CSS
+  - Use var(--brand-cyan) for focus outline to match codebase pattern
+---
+
+## 2026-01-31 - TQ-5
+- Replaced hardcoded colors in ErrorBoundary with CSS variables
+- Files changed: src/components/ErrorBoundary.tsx, src/components/ErrorBoundary.css
+- **Learnings for future iterations:**
+  - Moved all inline styles from the `styles` object to ErrorBoundary.css
+  - Color mappings: #111111 → var(--brand-bg), #ffffff → var(--brand-white), #FF65BE → var(--brand-primary), #1a1a1a → var(--brand-card), rgba(255,255,255,0.12) → var(--brand-border), rgba(255,255,255,0.6) → var(--brand-muted), #ff6b6b → var(--brand-error)
+  - Removed the `styles` object entirely from the component - all styling now via CSS classes
+  - Component uses className attributes for all styled elements
+---
+
+## 2026-01-31 - TQ-6
+- Replaced hardcoded colors in NotFound with CSS variables
+- Files changed: src/components/NotFound.tsx, src/components/NotFound.css
+- **Learnings for future iterations:**
+  - Same pattern as TQ-5: moved all inline styles from `styles` object to CSS file
+  - Color mappings: #111111 → var(--brand-bg), #ffffff → var(--brand-white), #FF65BE → var(--brand-primary), rgba(255,255,255,0.8) → var(--brand-muted)
+  - Removed the `styles` object entirely from the component
+  - NotFound.css already existed from TQ-4 with focus-visible styles - added all other styles to it
+---
+
+## 2026-01-31 - TQ-7
+- Extracted magic numbers in UnifiedDashboard to named constants
+- Files changed: src/components/UnifiedDashboard.tsx
+- **Learnings for future iterations:**
+  - Magic numbers were used in progress calculations for StatCard components
+  - Added constants: SESSIONS_FOR_FULL_PROGRESS = 50, SECONDS_PER_HOUR = 3600, QUIZZES_FOR_FULL_PROGRESS = 20
+  - Constants placed at top of file with explanatory comments above each
+  - Pattern: Place constants after imports, before any functions, with comments explaining what each represents
+---
+
+## 2026-01-31 - TQ-8
+- Removed unused secondary color from IconColorScheme interface
+- Files changed: src/components/icons/iconColors.ts
+- **Learnings for future iterations:**
+  - "DuotoneIcon" was misleading - Lucide icons only support single color via `color` prop
+  - Removed `secondary` property from IconColorScheme type and all colorSchemes objects
+  - Added comment explaining the design decision (Lucide limitation)
+  - The icon system effectively uses single colors per category, not true duotone
+---
+
+## 2026-01-31 - TQ-9
+- Consolidated IconSize type to single definition
+- Files changed: src/components/icons/types.ts (new), src/components/icons/DuotoneIcon.tsx, src/components/icons/CustomIcon.tsx, src/components/icons/index.ts
+- **Learnings for future iterations:**
+  - Created new types.ts file in icons/ folder for shared types
+  - Both IconSize type and sizeMap constant were duplicated - consolidated both
+  - Updated index.ts to export IconSize from types.ts and also export sizeMap for external use
+  - Pattern: Put shared types/constants in a types.ts file within the feature folder
+---
+
+## 2026-01-31 - TQ-10
+- Replaced Unicode play/stop symbols with Lucide icons in VoiceSelector
+- Files changed: src/components/VoiceSelector.tsx, src/components/VoiceSelector.css, src/components/icons/index.ts
+- **Learnings for future iterations:**
+  - Lucide `Square` icon works well for stop buttons
+  - When replacing text with SVG icons, update CSS from font-size to flexbox styling (flex-shrink: 0)
+  - Add `aria-hidden="true"` to decorative icons when the button already has aria-label
+  - Import paths: can import Lucide icons directly from 'lucide-react' or from icons/index.ts re-exports
+---
+
+## 2026-01-31 - UX-1
+- Added audio loading state to VoiceSelector play button
+- Files changed: src/components/VoiceSelector.tsx, src/components/VoiceSelector.css, src/components/icons/index.ts
+- **Learnings for future iterations:**
+  - Use `oncanplaythrough` event to detect when audio is ready to play without buffering
+  - Added `Loader2` from Lucide for spinning loading indicator
+  - Track loading state separately from playing state (isLoadingAudio, loadingVoiceId)
+  - Pattern for loading spinners: use `animation: spin 1s linear infinite` with @keyframes spin
+  - Disable button during loading with `disabled` attribute and `cursor: wait` style
+  - Allow cancellation of loading by clicking the same button again
+---
+
+## 2026-01-31 - UX-2
+- Added audio error handling to VoiceSelector
+- Files changed: src/components/VoiceSelector.tsx, src/components/VoiceSelector.css
+- **Learnings for future iterations:**
+  - Added audioErrorVoiceId state to track which voice had an error
+  - Error message displayed below play button: "Preview unavailable. You can still select {voice.name}."
+  - Error state clears when user tries to play a voice again
+  - CSS uses var(--brand-muted) for error text to be visible but not alarming
+  - Keep error messages friendly and suggest next steps (can still select the voice)
+---
+
+## 2026-01-31 - UX-3
+- Audited scenario loading states in ScenarioSelector component
+- Files reviewed: src/components/ScenarioSelector.tsx, src/components/Skeleton.tsx, src/data/allScenarios.ts
+- **Audit findings:**
+  - No loading states needed - scenario data is **statically imported** at build time, not fetched via API
+  - `allScenarios` and `allCategories` are synchronous JavaScript module imports
+  - `useScenarioProgress` hook reads from localStorage synchronously in useState initializer
+  - No flash of empty content occurs since data is available on first render
+  - `ScenarioGridSkeleton` exists but correctly isn't used (no async loading to display it for)
+  - Only `authLoading` state exists in parent component (for authentication status, not scenarios)
+- **Learnings for future iterations:**
+  - Scenario data is bundled at build time via static imports, not fetched from an API
+  - For static data scenarios, skeleton loaders are not appropriate - they're for async operations
+  - The existing Skeleton components (ScenarioGridSkeleton, etc.) are available for future use if API fetching is added
 ---
