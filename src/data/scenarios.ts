@@ -1,4 +1,4 @@
-export type ScenarioCategory = 'interview' | 'first-weeks' | 'day-to-day' | 'meetings' | 'growth' | 'social' | 'difficult' | 'healthcare' | 'tech' | 'diverse' | 'admin' | 'wellbeing';
+export type ScenarioCategory = 'interview' | 'first-weeks' | 'day-to-day' | 'meetings' | 'growth' | 'social' | 'difficult' | 'healthcare' | 'tech' | 'diverse' | 'admin' | 'wellbeing' | 'networking' | 'phone-video' | 'leadership' | 'pre-arrival' | 'humor' | 'hospitality' | 'construction' | 'education' | 'finance' | 'strategic-settler';
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 
 export interface VocabItem {
@@ -117,6 +117,76 @@ export const categories: CategoryInfo[] = [
     description: 'Mental health at work conversations',
     icon: '💚',
     order: 12,
+  },
+  {
+    id: 'networking',
+    title: 'Networking',
+    description: 'Professional events and connections',
+    icon: '🤝',
+    order: 13,
+  },
+  {
+    id: 'phone-video',
+    title: 'Phone & Video',
+    description: 'Remote communication skills',
+    icon: '📱',
+    order: 14,
+  },
+  {
+    id: 'leadership',
+    title: 'Leadership',
+    description: 'Managing and leading teams',
+    icon: '👔',
+    order: 15,
+  },
+  {
+    id: 'pre-arrival',
+    title: 'Pre-Arrival',
+    description: 'Prepare before you land',
+    icon: '✈️',
+    order: 16,
+  },
+  {
+    id: 'humor',
+    title: 'Aussie Humor',
+    description: 'Master Australian wit and banter',
+    icon: '😄',
+    order: 17,
+  },
+  {
+    id: 'hospitality',
+    title: 'Hospitality & Retail',
+    description: 'Customer-facing industries',
+    icon: '🛎️',
+    order: 18,
+  },
+  {
+    id: 'construction',
+    title: 'Construction & Trades',
+    description: 'Building sites and trade work',
+    icon: '🔨',
+    order: 19,
+  },
+  {
+    id: 'education',
+    title: 'Education',
+    description: 'Teaching and academic settings',
+    icon: '📚',
+    order: 20,
+  },
+  {
+    id: 'finance',
+    title: 'Finance & Professional',
+    description: 'Corporate and professional services',
+    icon: '💼',
+    order: 21,
+  },
+  {
+    id: 'strategic-settler',
+    title: 'Career Advancement',
+    description: 'Long-term career growth in Australia',
+    icon: '🎯',
+    order: 22,
   },
 ];
 

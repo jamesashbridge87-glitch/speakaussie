@@ -8,6 +8,16 @@ import { phase3Scenarios } from './scenarios-phase3';
 import { phase4Scenarios } from './scenarios-phase4';
 import { phase5Scenarios } from './scenarios-phase5';
 import { phase6Scenarios } from './scenarios-phase6';
+import { networkingScenarios } from './scenarios-networking';
+import { phoneVideoScenarios } from './scenarios-phone-video';
+import { leadershipScenarios } from './scenarios-leadership';
+import { preArrivalScenarios } from './scenarios-pre-arrival';
+import { humorScenarios } from './scenarios-humor';
+import { hospitalityScenarios } from './scenarios-hospitality';
+import { constructionScenarios } from './scenarios-construction';
+import { educationScenarios } from './scenarios-education';
+import { financeScenarios } from './scenarios-finance';
+import { strategicSettlerScenarios } from './scenarios-strategic-settler';
 
 // Combine all scenarios - fix category type casting
 const fixCategories = (scenarios: Scenario[]): Scenario[] => {
@@ -26,6 +36,16 @@ export const allScenarios: Scenario[] = [
   ...fixCategories(phase4Scenarios),
   ...fixCategories(phase5Scenarios),
   ...fixCategories(phase6Scenarios),
+  ...fixCategories(networkingScenarios),
+  ...fixCategories(phoneVideoScenarios),
+  ...fixCategories(leadershipScenarios),
+  ...fixCategories(preArrivalScenarios),
+  ...fixCategories(humorScenarios),
+  ...fixCategories(hospitalityScenarios),
+  ...fixCategories(constructionScenarios),
+  ...fixCategories(educationScenarios),
+  ...fixCategories(financeScenarios),
+  ...fixCategories(strategicSettlerScenarios),
 ];
 
 // All categories combined (base categories already include new ones from update)
