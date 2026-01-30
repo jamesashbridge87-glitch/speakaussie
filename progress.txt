@@ -436,3 +436,32 @@ Project: SpeakAussie Polish & Ship
   - Accessibility score benefits most from ARIA, focus management, and semantic HTML
   - Performance score affected by bundle size, code-splitting, and lazy loading
 ---
+
+## 2026-01-31 - IF-7
+- Improved health check endpoint with meaningful status checks
+- Files changed: backend/src/index.ts
+- **Implementation details:**
+  - Added database connectivity check via `db.prepare('SELECT 1').get()`
+  - Returns version from package.json
+  - Returns uptime via `process.uptime()`
+  - Checks external service configuration (Stripe, Anthropic, Fish Audio, ElevenLabs)
+  - Three status levels: healthy, degraded (missing services), unhealthy (db down)
+  - Returns 503 status code when unhealthy
+- **Response format:**
+  ```json
+  {
+    "status": "healthy|degraded|unhealthy",
+    "version": "1.0.0",
+    "timestamp": "2026-01-31T...",
+    "uptime": 12345.67,
+    "checks": {
+      "database": { "status": "ok" },
+      "externalServices": { "status": "ok" }
+    }
+  }
+  ```
+- **Learnings for future iterations:**
+  - Use `import { version } from '../package.json' with { type: 'json' }` for package version
+  - better-sqlite3's `db.prepare().get()` is synchronous - simple for health checks
+  - Return 503 for unhealthy to signal load balancers not to route traffic
+---

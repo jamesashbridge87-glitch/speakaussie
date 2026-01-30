@@ -3,7 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import { initializeDatabase } from './db/database.js';
+import { initializeDatabase, db } from './db/database.js';
+import { version } from '../package.json' with { type: 'json' };
 
 // Routes
 import authRoutes from './routes/auth.js';
@@ -62,9 +63,55 @@ app.use('/api/billing/webhook', express.raw({ type: 'application/json' }));
 // Parse JSON for other routes
 app.use(express.json());
 
-// Health check
+// Health check - verifies service health
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  const checks: Record<string, { status: 'ok' | 'error'; message?: string }> = {};
+  let overallStatus: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
+
+  // Check database connectivity
+  try {
+    db.prepare('SELECT 1').get();
+    checks.database = { status: 'ok' };
+  } catch (err) {
+    checks.database = {
+      status: 'error',
+      message: err instanceof Error ? err.message : 'Database unavailable',
+    };
+    overallStatus = 'unhealthy';
+  }
+
+  // Check if external services are configured (degraded if not)
+  const externalServices = {
+    stripe: !!process.env.STRIPE_SECRET_KEY,
+    anthropic: !!process.env.ANTHROPIC_API_KEY,
+    fishAudio: !!process.env.FISH_AUDIO_API_KEY,
+    elevenLabs: !!process.env.ELEVENLABS_AGENT_ID,
+  };
+
+  const missingServices = Object.entries(externalServices)
+    .filter(([, configured]) => !configured)
+    .map(([name]) => name);
+
+  if (missingServices.length > 0) {
+    checks.externalServices = {
+      status: 'error',
+      message: `Missing: ${missingServices.join(', ')}`,
+    };
+    if (overallStatus === 'healthy') {
+      overallStatus = 'degraded';
+    }
+  } else {
+    checks.externalServices = { status: 'ok' };
+  }
+
+  const statusCode = overallStatus === 'unhealthy' ? 503 : 200;
+  res.status(statusCode).json({
+    status: overallStatus,
+    version,
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    checks,
+  });
 });
 
 // API routes

@@ -447,7 +447,7 @@
         "Response includes version info"
       ],
       "files": ["backend/src/index.ts"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "IF-8",
