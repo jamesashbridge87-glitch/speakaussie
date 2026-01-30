@@ -365,3 +365,21 @@ Project: SpeakAussie Polish & Ship
   - Error handler must be registered last in Express middleware chain
   - Use isOperational flag to distinguish expected errors from bugs
 ---
+
+## 2026-01-31 - IF-3
+- Added privacy-respecting frontend analytics
+- Files changed: src/lib/analytics.ts (new), src/main.tsx, src/components/AussieEnglishPractice.tsx
+- **Implementation details:**
+  - Custom analytics service (no third-party scripts - works with ad blockers)
+  - Respects Do Not Track (navigator.doNotTrack)
+  - No PII collected (only anonymous events)
+  - Events batched and sent via sendBeacon for reliability
+  - Graceful degradation - analytics failures don't break the app
+  - Events tracked: page_view, session_start, scenario_start, scenario_complete, voice_selected
+  - Subscription funnel events also available: subscription_view, subscription_select
+- **Learnings for future iterations:**
+  - sendBeacon() is more reliable than fetch() for analytics (works on page unload)
+  - Use visibilitychange event to flush on tab switch, pagehide for full navigation
+  - crypto.randomUUID() generates session IDs (with fallback for older browsers)
+  - Event queue pattern: batch events and flush periodically or when queue is full
+---

@@ -392,7 +392,7 @@
         "Works with ad blockers gracefully (doesn't break app)"
       ],
       "files": ["src/main.tsx", "src/components/AussieEnglishPractice.tsx", "package.json"],
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "IF-4",

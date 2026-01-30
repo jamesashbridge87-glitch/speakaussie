@@ -2,6 +2,11 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useElevenLabsConversation } from '../hooks/useElevenLabsConversation';
 import { useProgressTracking } from '../hooks/useProgressTracking';
+import {
+  trackScenarioStart,
+  trackScenarioComplete,
+  trackVoiceSelected,
+} from '../lib/analytics';
 import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useAuth } from '../hooks/useAuth';
@@ -58,6 +63,7 @@ export function AussieEnglishPractice() {
   const [completedScenario, setCompletedScenario] = useState<Scenario | null>(null);
   const backendSessionId = useRef<string | null>(null);
   const anonymousSessionStart = useRef<number | null>(null);
+  const sessionStartTime = useRef<number | null>(null);
   const navigate = useNavigate();
 
   const { isAuthenticated, isLoading: authLoading } = useAuth();
@@ -124,11 +130,9 @@ export function AussieEnglishPractice() {
 
   const conversation = useElevenLabsConversation({
     onConnect: () => {
-      console.log('Connected to ElevenLabs conversation');
       setError(null);
     },
     onDisconnect: () => {
-      console.log('Disconnected from conversation');
       setViewState('selector');
       setSelectedScenario(null);
     },
@@ -196,6 +200,7 @@ export function AussieEnglishPractice() {
 
   const handleVoiceSelect = (voice: Voice) => {
     setSelectedVoice(voice);
+    trackVoiceSelected(voice.id);
     startSession(voice);
   };
 
@@ -245,7 +250,9 @@ export function AussieEnglishPractice() {
         voice: voice,
       });
 
-      startTracking(selectedScenario.category as 'everyday' | 'slang' | 'workplace');
+      startTracking(selectedScenario.category as 'everyday' | 'workplace');
+      trackScenarioStart(selectedScenario.id, selectedScenario.category, selectedScenario.difficulty);
+      sessionStartTime.current = Date.now();
       setViewState('session');
       setIsStarting(false);
     } catch (err) {
@@ -261,7 +268,14 @@ export function AussieEnglishPractice() {
 
       // Finalize pronunciation scores if any
       if (currentSession && selectedScenario) {
-        finalizeSessionScores(currentSession.id, selectedScenario.category as 'everyday' | 'slang' | 'workplace');
+        finalizeSessionScores(currentSession.id, selectedScenario.category as 'everyday' | 'workplace');
+      }
+
+      // Track scenario completion with duration
+      if (selectedScenario && sessionStartTime.current) {
+        const durationSeconds = Math.round((Date.now() - sessionStartTime.current) / 1000);
+        trackScenarioComplete(selectedScenario.id, selectedScenario.category, durationSeconds);
+        sessionStartTime.current = null;
       }
 
       // Record usage based on authentication status
