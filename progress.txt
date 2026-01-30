@@ -1,0 +1,12 @@
+# Ralph Progress Log
+Started: 2026-01-31
+Project: SpeakAussie Polish & Ship
+
+## Codebase Patterns
+- CSS variables are in src/styles/variables.css (--brand-primary, --brand-bg, etc.)
+- Icon components are in src/components/icons/ (DuotoneIcon, CustomIcon)
+- Use `npx tsc --noEmit` to typecheck
+- Lucide icons are re-exported from src/components/icons/index.ts
+- Component CSS files are colocated with their .tsx files
+
+---

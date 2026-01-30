@@ -2,6 +2,7 @@
   "name": "SpeakAussie Polish & Ship",
   "description": "Production-ready quality improvements - bugs, accessibility, UX, content, infrastructure",
   "created": "2026-01-31",
+  "branchName": "ralph/polish-and-ship",
   "stories": [
     {
       "id": "TQ-1",
