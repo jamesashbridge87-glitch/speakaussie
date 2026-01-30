@@ -12,6 +12,7 @@ import subscriptionRoutes from './routes/subscriptions.js';
 import sessionRoutes from './routes/sessions.js';
 import billingRoutes from './routes/billing.js';
 import voiceRoutes from './routes/voice.js';
+import adminRoutes from './routes/admin.js';
 
 // Error handling
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
@@ -120,6 +121,7 @@ app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/billing', billingRoutes);
 app.use('/api/voice', voiceRoutes);
+app.use('/api/admin', adminRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

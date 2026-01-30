@@ -465,3 +465,26 @@ Project: SpeakAussie Polish & Ship
   - better-sqlite3's `db.prepare().get()` is synchronous - simple for health checks
   - Return 503 for unhealthy to signal load balancers not to route traffic
 ---
+
+## 2026-01-31 - IF-8
+- Reviewed API rate limiting and added admin usage monitoring endpoints
+- Files changed: backend/src/routes/admin.ts (new), backend/src/index.ts, backend/.env.example
+- **Existing implementation (already in place):**
+  - Usage tracked per user via `usage_records` table (daily minutes, session counts)
+  - Sessions tracked via `practice_sessions` table
+  - Rate limiting via `checkUsageLimits` middleware (blocks when daily limit reached)
+  - Plan limits in `plan_limits` table (free: 2min, starter: 5min, pro: 15min, exec: 60min)
+- **New admin endpoints added:**
+  - `GET /api/admin/usage/summary` - Overall stats (users, subscriptions, today/month usage)
+  - `GET /api/admin/usage/daily` - Daily breakdown (last N days)
+  - `GET /api/admin/usage/top-users` - Top users by usage
+  - Protected by `X-Admin-Api-Key` header
+- **Architecture note:**
+  - ElevenLabs is used directly from frontend (via @elevenlabs/react with Agent ID)
+  - App-level limits (per user daily minutes) prevent excessive ElevenLabs usage
+  - Alert mechanism would need external service (email/Slack) - not implemented
+- **Learnings for future iterations:**
+  - Simple API key auth (`X-Admin-Api-Key` header) is sufficient for internal admin endpoints
+  - better-sqlite3 aggregations (SUM, COUNT, GROUP BY) work synchronously
+  - For actual alerts, integrate with email service or Slack webhook in checkUsageLimits middleware
+---

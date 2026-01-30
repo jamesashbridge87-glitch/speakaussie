@@ -461,7 +461,7 @@
         "Usage visible in admin/monitoring"
       ],
       "files": ["backend/src/routes/", "backend/src/services/"],
-      "status": "pending"
+      "status": "complete"
     }
   ]
 }
