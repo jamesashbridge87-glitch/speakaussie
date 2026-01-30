@@ -1,0 +1,4 @@
+.error-boundary-reload:focus-visible {
+  outline: 2px solid var(--brand-cyan);
+  outline-offset: 2px;
+}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './NotFound.css';
 
 export function NotFound() {
   return (
@@ -10,7 +11,7 @@ export function NotFound() {
           G'day mate! Looks like you've wandered off the beaten track.
           This page doesn't exist.
         </p>
-        <Link to="/" style={styles.link}>
+        <Link to="/" style={styles.link} className="not-found-link">
           Head back home
         </Link>
       </div>

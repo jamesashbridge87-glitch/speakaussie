@@ -113,6 +113,11 @@
   color: var(--brand-primary);
 }
 
+.voice-play-btn:focus-visible {
+  outline: 2px solid var(--brand-cyan);
+  outline-offset: 2px;
+}
+
 .play-icon {
   font-size: 0.75rem;
 }
