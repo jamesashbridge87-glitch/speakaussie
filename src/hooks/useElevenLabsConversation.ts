@@ -1,7 +1,7 @@
 import { useConversation } from '@elevenlabs/react';
 import { useCallback } from 'react';
 import { Scenario } from '../data/scenarios';
-import { Voice } from '../data/voices';
+import { Voice, VoicePersonality } from '../data/voices';
 
 export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -56,6 +56,37 @@ function injectVoiceName(text: string, voiceName: string): string {
 }
 
 /**
+ * Build character context section from voice personality to inject into prompts.
+ * Returns empty string if personality is not defined.
+ */
+function buildCharacterContext(personality: VoicePersonality, voiceName: string): string {
+  // Skip if personality is not yet defined (empty description)
+  if (!personality.description) {
+    return '';
+  }
+
+  const lines = [
+    `YOUR CHARACTER: ${voiceName}`,
+    '',
+    personality.description,
+    '',
+    'PERSONALITY TRAITS:',
+    ...personality.traits.map((trait) => `- ${trait}`),
+    '',
+    'SPEAKING STYLE:',
+    personality.speakingStyle,
+    '',
+    'EXPRESSIONS YOU NATURALLY USE:',
+    personality.exampleExpressions.map((expr) => `"${expr}"`).join(', '),
+    '',
+    '---',
+    '',
+  ];
+
+  return lines.join('\n');
+}
+
+/**
  * Wrap the scenario prompt with meta-instructions about emotion handling
  */
 function wrapPromptWithEmotionInstructions(prompt: string): string {
@@ -106,10 +137,13 @@ export function useElevenLabsConversation(options: ConversationOptions = {}) {
     try {
       const { scenario, voice } = sessionOptions;
 
+      // Build the character context from voice personality
+      const characterContext = buildCharacterContext(voice.personality, voice.name);
+
       // Inject the voice name into prompt and first message
       const basePrompt = injectVoiceName(scenario.prompt, voice.name);
-      // Wrap with meta-instructions to prevent emotion words leaking into speech
-      const prompt = wrapPromptWithEmotionInstructions(basePrompt);
+      // Wrap with meta-instructions and character context
+      const prompt = wrapPromptWithEmotionInstructions(characterContext + basePrompt);
       const firstMessage = injectVoiceName(scenario.firstMessage, voice.name);
 
       await conversation.startSession({
