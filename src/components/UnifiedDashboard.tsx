@@ -83,6 +83,9 @@ export function UnifiedDashboard() {
 
   return (
     <div className="unified-dashboard">
+      <a href="#dashboard-content" className="skip-link">
+        Skip to dashboard content
+      </a>
       <header className="dashboard-header">
         <button className="back-btn" onClick={() => navigate('/')}>
           <DuotoneIcon icon={ArrowLeft} size="sm" colorScheme={colorSchemes.ui} /> Back to Main
@@ -98,7 +101,7 @@ export function UnifiedDashboard() {
         <p className="header-subtitle">Your Progress Dashboard</p>
       </header>
 
-      <main className="dashboard-main">
+      <main id="dashboard-content" className="dashboard-main">
         {/* Level & XP Section */}
         <section className="dashboard-section level-section">
           <div className="level-display">
