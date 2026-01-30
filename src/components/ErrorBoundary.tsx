@@ -1,4 +1,5 @@
 import { Component, createRef, ErrorInfo, ReactNode } from 'react';
+import { reportError } from '../lib/sentry';
 import './ErrorBoundary.css';
 
 interface Props {
@@ -25,6 +26,10 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Report to Sentry with React component stack
+    reportError(error, {
+      componentStack: errorInfo.componentStack,
+    });
   }
 
   componentDidUpdate(_prevProps: Props, prevState: State): void {

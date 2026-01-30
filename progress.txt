@@ -329,3 +329,22 @@ Project: SpeakAussie Polish & Ship
   - The "You are {name}" pattern is intentional and provides character context
   - Cultural tips give guidance to users, not AI behavior instructions (those are in emotion handling and difficulty modifiers)
 ---
+
+## 2026-01-31 - IF-1
+- Integrated Sentry error tracking service for production monitoring
+- Files changed: src/lib/sentry.ts (new), src/main.tsx, src/components/ErrorBoundary.tsx, package.json, .env.example, .env.production
+- **Implementation details:**
+  - Installed @sentry/react package
+  - Created src/lib/sentry.ts with initSentry() and reportError() functions
+  - Environment-based initialization: skips in dev unless VITE_SENTRY_DSN is set
+  - ErrorBoundary now reports caught errors with React component stack
+  - Sentry SDK automatically captures unhandled promise rejections via globalHandlersIntegration
+  - Configured privacy settings: maskAllText, blockAllMedia for replays, sendDefaultPii: false
+  - Added ignore patterns for common non-actionable errors (network, extensions, ResizeObserver)
+  - Sample rates: 10% transactions, 10% replays (100% on error)
+- **Learnings for future iterations:**
+  - Sentry React SDK includes all needed integrations by default (browserTracing, replay, globalHandlers)
+  - Use `import.meta.env.VITE_*` for Vite environment variables
+  - reportError() utility allows adding custom context (like componentStack) to error reports
+  - Source maps are automatically uploaded when using Sentry's Vite plugin (optional future enhancement)
+---
