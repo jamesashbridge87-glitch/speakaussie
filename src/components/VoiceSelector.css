@@ -78,6 +78,11 @@
   transform: translateY(-2px);
 }
 
+.voice-option:focus-visible {
+  outline: 2px solid var(--brand-cyan);
+  outline-offset: 2px;
+}
+
 .voice-option.selected {
   border-color: var(--brand-primary);
   background: rgba(255, 101, 190, 0.1);

@@ -1,7 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { voices, Voice, VoiceId, getVoicePreference, saveVoicePreference } from '../data/voices';
 import { ArrowLeft } from 'lucide-react';
 import './VoiceSelector.css';
+
+const voiceIds = Object.keys(voices) as VoiceId[];
 
 interface VoiceSelectorProps {
   onSelect: (voice: Voice) => void;
@@ -10,9 +12,13 @@ interface VoiceSelectorProps {
 
 export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   const [selectedVoice, setSelectedVoice] = useState<VoiceId | null>(getVoicePreference());
+  const [focusedIndex, setFocusedIndex] = useState<number>(
+    selectedVoice ? voiceIds.indexOf(selectedVoice) : 0
+  );
   const [isPlayingIntro, setIsPlayingIntro] = useState(false);
   const [playingVoiceId, setPlayingVoiceId] = useState<VoiceId | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const voiceButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Cleanup audio on unmount
   useEffect(() => {
@@ -22,6 +28,34 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
         audioRef.current = null;
       }
     };
+  }, []);
+
+  // Handle keyboard navigation within voice options
+  const handleVoiceKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
+    let newIndex = index;
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        e.preventDefault();
+        newIndex = (index + 1) % voiceIds.length;
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        e.preventDefault();
+        newIndex = (index - 1 + voiceIds.length) % voiceIds.length;
+        break;
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        handleVoiceClick(voiceIds[index]);
+        return;
+      default:
+        return;
+    }
+
+    setFocusedIndex(newIndex);
+    voiceButtonRefs.current[newIndex]?.focus();
   }, []);
 
   const handleVoiceClick = (voiceId: VoiceId) => {
@@ -92,18 +126,24 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
           Choose your conversation partner for this session
         </p>
 
-        <div className="voice-options">
-          {(Object.keys(voices) as VoiceId[]).map((voiceId) => {
+        <div className="voice-options" role="radiogroup" aria-label="Choose your conversation partner">
+          {voiceIds.map((voiceId, index) => {
             const voice = voices[voiceId];
             const isSelected = selectedVoice === voiceId;
             const isPlaying = isPlayingIntro && playingVoiceId === voiceId;
+            const isFocused = focusedIndex === index;
 
             return (
               <div key={voiceId} className="voice-option-wrapper">
                 <button
+                  ref={(el) => { voiceButtonRefs.current[index] = el; }}
                   className={`voice-option ${isSelected ? 'selected' : ''}`}
                   onClick={() => handleVoiceClick(voiceId)}
-                  aria-pressed={isSelected}
+                  onKeyDown={(e) => handleVoiceKeyDown(e, index)}
+                  onFocus={() => setFocusedIndex(index)}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={isFocused ? 0 : -1}
                 >
                   <div className="voice-avatar-container">
                     <img
