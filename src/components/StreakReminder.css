@@ -116,6 +116,13 @@
   }
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .streak-toast {
+    animation: none;
+  }
+}
+
 .streak-toast.success {
   background: linear-gradient(135deg, rgba(253, 164, 0, 0.3) 0%, rgba(253, 164, 0, 0.2) 100%);
   border: 1px solid rgba(253, 164, 0, 0.4);

@@ -26,6 +26,14 @@
   }
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--brand-card, #1a1a1a);
+  }
+}
+
 /* Variants */
 .skeleton-text {
   height: 1em;
