@@ -113,6 +113,30 @@
   color: var(--brand-primary);
 }
 
+.voice-play-btn.loading {
+  border-color: var(--brand-muted);
+  color: var(--brand-muted);
+  cursor: wait;
+}
+
+.voice-play-btn:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .voice-play-btn:focus-visible {
   outline: 2px solid var(--brand-cyan);
   outline-offset: 2px;

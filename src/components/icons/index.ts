@@ -95,4 +95,5 @@ export {
   Spade,
   PenTool,
   Puzzle,
+  Loader2,
 } from 'lucide-react';

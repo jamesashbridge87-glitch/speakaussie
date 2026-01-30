@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { voices, Voice, VoiceId, getVoicePreference, saveVoicePreference } from '../data/voices';
-import { ArrowLeft, Play, Square } from 'lucide-react';
+import { ArrowLeft, Play, Square, Loader2 } from 'lucide-react';
 import './VoiceSelector.css';
 
 const voiceIds = Object.keys(voices) as VoiceId[];
@@ -17,6 +17,8 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
   );
   const [isPlayingIntro, setIsPlayingIntro] = useState(false);
   const [playingVoiceId, setPlayingVoiceId] = useState<VoiceId | null>(null);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(false);
+  const [loadingVoiceId, setLoadingVoiceId] = useState<VoiceId | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const voiceButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -81,11 +83,35 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
       return;
     }
 
-    // Play intro audio
-    setIsPlayingIntro(true);
-    setPlayingVoiceId(voiceId);
+    // If clicking on same voice that's loading, cancel
+    if (isLoadingAudio && loadingVoiceId === voiceId) {
+      setIsLoadingAudio(false);
+      setLoadingVoiceId(null);
+      return;
+    }
+
+    // Reset any previous playing state
+    setIsPlayingIntro(false);
+    setPlayingVoiceId(null);
+
+    // Start loading audio
+    setIsLoadingAudio(true);
+    setLoadingVoiceId(voiceId);
+
     const audio = new Audio(`${import.meta.env.BASE_URL}${voice.introAudio.replace(/^\//, '')}`);
     audioRef.current = audio;
+
+    audio.oncanplaythrough = () => {
+      // Audio is ready to play without buffering
+      setIsLoadingAudio(false);
+      setLoadingVoiceId(null);
+      setIsPlayingIntro(true);
+      setPlayingVoiceId(voiceId);
+      audio.play().catch(() => {
+        setIsPlayingIntro(false);
+        setPlayingVoiceId(null);
+      });
+    };
 
     audio.onended = () => {
       setIsPlayingIntro(false);
@@ -93,15 +119,15 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
     };
 
     audio.onerror = () => {
+      setIsLoadingAudio(false);
+      setLoadingVoiceId(null);
       setIsPlayingIntro(false);
       setPlayingVoiceId(null);
       console.warn('Intro audio not available');
     };
 
-    audio.play().catch(() => {
-      setIsPlayingIntro(false);
-      setPlayingVoiceId(null);
-    });
+    // Start loading the audio
+    audio.load();
   };
 
   const handleContinue = () => {
@@ -131,6 +157,7 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
             const voice = voices[voiceId];
             const isSelected = selectedVoice === voiceId;
             const isPlaying = isPlayingIntro && playingVoiceId === voiceId;
+            const isLoading = isLoadingAudio && loadingVoiceId === voiceId;
             const isFocused = focusedIndex === index;
 
             return (
@@ -158,16 +185,27 @@ export function VoiceSelector({ onSelect, onBack }: VoiceSelectorProps) {
                   )}
                 </button>
                 <button
-                  className={`voice-play-btn ${isPlaying ? 'playing' : ''}`}
+                  className={`voice-play-btn ${isPlaying ? 'playing' : ''} ${isLoading ? 'loading' : ''}`}
                   onClick={(e) => handlePlayIntro(voiceId, e)}
-                  aria-label={isPlaying ? `Stop ${voice.name}'s intro` : `Play ${voice.name}'s intro`}
+                  aria-label={
+                    isLoading
+                      ? `Loading ${voice.name}'s intro`
+                      : isPlaying
+                        ? `Stop ${voice.name}'s intro`
+                        : `Play ${voice.name}'s intro`
+                  }
+                  disabled={isLoading}
                 >
-                  {isPlaying ? (
+                  {isLoading ? (
+                    <Loader2 className="play-icon loading-spinner" size={12} aria-hidden="true" />
+                  ) : isPlaying ? (
                     <Square className="play-icon" size={12} aria-hidden="true" />
                   ) : (
                     <Play className="play-icon" size={12} aria-hidden="true" />
                   )}
-                  <span className="play-text">{isPlaying ? 'Stop' : 'Preview'}</span>
+                  <span className="play-text">
+                    {isLoading ? 'Loading' : isPlaying ? 'Stop' : 'Preview'}
+                  </span>
                 </button>
               </div>
             );
