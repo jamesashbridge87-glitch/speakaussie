@@ -2,18 +2,187 @@
   box-sizing: border-box;
 }
 
+/* Mobile-first base styles */
+html {
+  /* Support for iOS safe areas (notch, Dynamic Island, home indicator) */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: var(--brand-bg, #111111);
   color: var(--brand-white, #FFFFFF);
   min-height: 100vh;
+  min-height: -webkit-fill-available; /* iOS viewport fix */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  min-height: -webkit-fill-available; /* iOS viewport fix */
+  /* Safe area padding for content */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ================================
+   MOBILE-FIRST GLOBAL STYLES
+   ================================ */
+
+/* Touch Target Sizes - Minimum 44px per Apple/Google guidelines */
+button,
+a,
+[role="button"],
+input[type="checkbox"],
+input[type="radio"],
+.clickable {
+  min-height: var(--touch-target-min, 44px);
+  /* Ensure adequate touch area even if visually smaller */
+  position: relative;
+}
+
+/* Prevent text selection on interactive elements */
+button,
+[role="button"],
+.card,
+.clickable {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch feedback for all interactive elements */
+button:active:not(:disabled),
+[role="button"]:active,
+.clickable:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Prevent input zoom on iOS - minimum 16px font */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* Smooth scrolling for all scrollable containers */
+[data-scrollable],
+.scrollable {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbars on mobile but keep functionality */
+@media (max-width: 768px) {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-cyan, #11E8F6);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================
+   RESPONSIVE BREAKPOINTS
+   Mobile-first approach
+   ================================ */
+
+/* Base: Mobile (< 480px) - styles above */
+
+/* Large phones (480px+) */
+@media (min-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Tablets (768px+) */
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+
+  /* Larger touch targets on tablets */
+  button,
+  a,
+  [role="button"] {
+    min-height: 48px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+
+  /* Mouse users don't need large touch targets */
+  button,
+  a,
+  [role="button"] {
+    min-height: auto;
+  }
+
+  /* Re-enable hover effects on desktop */
+  button:hover:not(:disabled),
+  a:hover,
+  [role="button"]:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Utility classes for responsive visibility */
+.mobile-only {
+  display: block;
+}
+.tablet-only,
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+  .tablet-only {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tablet-only {
+    display: none;
+  }
+  .desktop-only {
+    display: block;
+  }
 }

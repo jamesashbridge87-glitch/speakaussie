@@ -1,0 +1,42 @@
+{
+  "name": "SpeakAussie - Learn Australian English",
+  "short_name": "SpeakAussie",
+  "description": "Practice Australian English with AI-powered conversation scenarios. Master Aussie slang, workplace communication, and everyday phrases.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-AU",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Start Practice",
+      "short_name": "Practice",
+      "description": "Start a conversation practice session",
+      "url": "/?action=practice",
+      "icons": [{ "src": "/favicon.png", "sizes": "64x64" }]
+    }
+  ]
+}

@@ -27,4 +27,26 @@
   --brand-glow-primary: 0 0 20px rgba(255, 101, 190, 0.3);
   --brand-glow-cyan: 0 0 20px rgba(17, 232, 246, 0.3);
   --brand-glow-orange: 0 0 20px rgba(253, 164, 0, 0.3);
+
+  /* Mobile Touch Target Sizes */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+
+  /* Spacing Scale (mobile-first) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Breakpoints (for reference in JS) */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
 }

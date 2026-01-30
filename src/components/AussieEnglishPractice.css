@@ -856,8 +856,54 @@
   border-color: #dc2626;
 }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+   Mobile-first approach
+   ================================ */
+
+/* Base mobile styles (< 480px) */
+.aussie-practice-container {
+  padding: 12px;
+}
+
+.practice-header h1 {
+  font-size: 1.35rem;
+}
+
+.message.user {
+  margin-left: 16px;
+}
+
+.message.agent {
+  margin-right: 16px;
+}
+
+.feedback-section {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.header-actions {
+  gap: 8px;
+}
+
+.login-btn {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
+
+.conversation-display {
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.push-to-talk-btn {
+  width: 140px;
+  height: 140px;
+}
+
+/* Large phones (480px+) */
+@media (min-width: 480px) {
   .aussie-practice-container {
     padding: 16px;
   }
@@ -867,14 +913,56 @@
   }
 
   .message.user {
-    margin-left: 20px;
+    margin-left: 30px;
   }
 
   .message.agent {
-    margin-right: 20px;
+    margin-right: 30px;
   }
 
-  .feedback-section {
-    flex-wrap: wrap;
+  .push-to-talk-btn {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Tablets (768px+) */
+@media (min-width: 768px) {
+  .aussie-practice-container {
+    padding: 20px;
+  }
+
+  .practice-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .message.user {
+    margin-left: 40px;
+  }
+
+  .message.agent {
+    margin-right: 40px;
+  }
+
+  .conversation-display {
+    min-height: 250px;
+    max-height: 350px;
+  }
+
+  .push-to-talk-btn {
+    width: 160px;
+    height: 160px;
+  }
+
+  .login-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .conversation-display {
+    max-height: 400px;
   }
 }
