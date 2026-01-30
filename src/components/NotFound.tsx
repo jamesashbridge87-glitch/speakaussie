@@ -1,12 +1,17 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './NotFound.css';
 
 export function NotFound() {
+  useEffect(() => {
+    document.title = 'Page Not Found - SpeakAussie';
+  }, []);
+
   return (
-    <div className="not-found-container">
+    <main className="not-found-container">
       <div className="not-found-content">
-        <h1 className="not-found-code">404</h1>
-        <h2 className="not-found-title">Page Not Found</h2>
+        <p className="not-found-code" aria-hidden="true">404</p>
+        <h1 className="not-found-title">Page Not Found</h1>
         <p className="not-found-message">
           G'day mate! Looks like you've wandered off the beaten track.
           This page doesn't exist.
@@ -15,6 +20,6 @@ export function NotFound() {
           Head back home
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
