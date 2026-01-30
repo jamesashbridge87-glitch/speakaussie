@@ -1,0 +1,466 @@
+{
+  "name": "SpeakAussie Polish & Ship",
+  "description": "Production-ready quality improvements - bugs, accessibility, UX, content, infrastructure",
+  "created": "2026-01-31",
+  "stories": [
+    {
+      "id": "TQ-1",
+      "phase": "Technical Quality",
+      "title": "Add keyboard navigation to VoiceSelector",
+      "description": "Users cannot navigate between voice options using keyboard. Add arrow key navigation between Tom and Emma options.",
+      "acceptance_criteria": [
+        "Arrow keys (left/right or up/down) navigate between voice options",
+        "Enter or Space selects the focused voice option",
+        "Focus is visually indicated on the current option",
+        "Tab moves focus to the next interactive element (play button or continue)"
+      ],
+      "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-2",
+      "phase": "Technical Quality",
+      "title": "Add prefers-reduced-motion support",
+      "description": "Skeleton and StreakReminder animations run regardless of user motion preferences. Respect the prefers-reduced-motion media query.",
+      "acceptance_criteria": [
+        "Skeleton shimmer animation is disabled when prefers-reduced-motion: reduce",
+        "StreakReminder slide-in animation is disabled when prefers-reduced-motion: reduce",
+        "Components still render correctly without animations"
+      ],
+      "files": ["src/components/Skeleton.css", "src/components/StreakReminder.css"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-3",
+      "phase": "Technical Quality",
+      "title": "Add missing ARIA roles",
+      "description": "Screen readers don't properly announce loading and notification states. Add appropriate ARIA roles.",
+      "acceptance_criteria": [
+        "StreakReminder has role='status' for screen reader announcements",
+        "Skeleton containers have role='progressbar' or appropriate loading role",
+        "aria-busy is used appropriately during loading states"
+      ],
+      "files": ["src/components/StreakReminder.tsx", "src/components/Skeleton.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-4",
+      "phase": "Technical Quality",
+      "title": "Add focus-visible styles",
+      "description": "Keyboard users cannot see focus indicators on several interactive elements. Add visible focus styles.",
+      "acceptance_criteria": [
+        "VoiceSelector voice options have visible focus ring",
+        "VoiceSelector play button has visible focus ring",
+        "ErrorBoundary reload button has visible focus ring",
+        "NotFound home link has visible focus ring",
+        "Focus styles use :focus-visible to avoid showing on mouse clicks"
+      ],
+      "files": ["src/components/VoiceSelector.css", "src/components/ErrorBoundary.tsx", "src/components/NotFound.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-5",
+      "phase": "Technical Quality",
+      "title": "Replace hardcoded colors in ErrorBoundary",
+      "description": "ErrorBoundary uses inline hex color values instead of CSS variables. Move to external CSS using brand variables.",
+      "acceptance_criteria": [
+        "All inline styles moved to ErrorBoundary.css",
+        "Colors reference CSS variables from variables.css",
+        "Visual appearance unchanged",
+        "Component still functions correctly"
+      ],
+      "files": ["src/components/ErrorBoundary.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-6",
+      "phase": "Technical Quality",
+      "title": "Replace hardcoded colors in NotFound",
+      "description": "NotFound page uses inline hex color values instead of CSS variables. Move to external CSS using brand variables.",
+      "acceptance_criteria": [
+        "All inline styles moved to NotFound.css",
+        "Colors reference CSS variables from variables.css",
+        "Visual appearance unchanged",
+        "Component still functions correctly"
+      ],
+      "files": ["src/components/NotFound.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-7",
+      "phase": "Technical Quality",
+      "title": "Extract magic numbers in UnifiedDashboard",
+      "description": "UnifiedDashboard has unexplained numbers (50, 3600, 20) used in progress calculations. Extract to named constants.",
+      "acceptance_criteria": [
+        "Magic numbers extracted to named constants at top of file",
+        "Each constant has a comment explaining what it represents",
+        "Examples: SESSIONS_FOR_FULL_PROGRESS = 50, SECONDS_PER_HOUR = 3600",
+        "Calculations remain functionally identical"
+      ],
+      "files": ["src/components/UnifiedDashboard.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-8",
+      "phase": "Technical Quality",
+      "title": "Fix DuotoneIcon secondary color API",
+      "description": "IconColorScheme has a 'secondary' property that is never used, making the API misleading. Either implement or remove.",
+      "acceptance_criteria": [
+        "Either: secondary color is applied to icon (true duotone effect)",
+        "Or: secondary removed from IconColorScheme interface if not needed",
+        "All existing usages continue to work",
+        "Decision documented in code comment"
+      ],
+      "files": ["src/components/icons/DuotoneIcon.tsx", "src/components/icons/iconColors.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-9",
+      "phase": "Technical Quality",
+      "title": "Consolidate IconSize type",
+      "description": "IconSize is defined in both DuotoneIcon.tsx and CustomIcon.tsx creating duplication. Consolidate to single source.",
+      "acceptance_criteria": [
+        "IconSize defined once in icons/index.ts or separate types file",
+        "Both DuotoneIcon and CustomIcon import from shared location",
+        "No duplicate type definitions",
+        "All existing usages continue to work"
+      ],
+      "files": ["src/components/icons/DuotoneIcon.tsx", "src/components/icons/CustomIcon.tsx", "src/components/icons/index.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "TQ-10",
+      "phase": "Technical Quality",
+      "title": "Replace VoiceSelector Unicode symbols with Lucide icons",
+      "description": "VoiceSelector uses Unicode ▶ and ■ for play/stop instead of Lucide icons like the rest of the codebase.",
+      "acceptance_criteria": [
+        "Play button uses Lucide Play icon",
+        "Stop button uses Lucide Square icon",
+        "Icons styled consistently with rest of app",
+        "Buttons remain accessible with proper aria-labels"
+      ],
+      "files": ["src/components/VoiceSelector.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-1",
+      "phase": "UX Polish",
+      "title": "Add VoiceSelector audio loading state",
+      "description": "No feedback when user clicks play on voice preview - they don't know if audio is loading.",
+      "acceptance_criteria": [
+        "Loading spinner or indicator appears when audio is loading",
+        "Play button is disabled during loading",
+        "Loading state clears when audio starts playing or fails"
+      ],
+      "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-2",
+      "phase": "UX Polish",
+      "title": "Add VoiceSelector audio error handling",
+      "description": "If voice preview audio fails to load, user gets no feedback - error only logs to console.",
+      "acceptance_criteria": [
+        "User sees friendly error message if audio fails to load",
+        "Error message suggests trying again or continuing without preview",
+        "Error state is visually distinct but not alarming"
+      ],
+      "files": ["src/components/VoiceSelector.tsx", "src/components/VoiceSelector.css"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-3",
+      "phase": "UX Polish",
+      "title": "Audit scenario loading states",
+      "description": "Verify skeleton loaders appear appropriately during all data fetches and loading states.",
+      "acceptance_criteria": [
+        "Scenario grid shows skeleton while loading",
+        "No flash of empty content before data appears",
+        "Loading states feel smooth and professional",
+        "Document any missing loading states found and fix them"
+      ],
+      "files": ["src/components/ScenarioSelector.tsx", "src/components/Skeleton.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-4",
+      "phase": "UX Polish",
+      "title": "Improve ErrorBoundary focus management",
+      "description": "When an error occurs, keyboard focus doesn't move to the error, making it hard for screen reader users to notice.",
+      "acceptance_criteria": [
+        "When error boundary catches an error, focus moves to error container or retry button",
+        "Error container has appropriate role and aria attributes",
+        "Screen readers announce the error"
+      ],
+      "files": ["src/components/ErrorBoundary.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-5",
+      "phase": "UX Polish",
+      "title": "Improve NotFound page structure",
+      "description": "NotFound page doesn't update document title and lacks proper landmark structure.",
+      "acceptance_criteria": [
+        "document.title updates to 'Page Not Found - SpeakAussie'",
+        "Content wrapped in <main> landmark",
+        "Heading hierarchy is correct (h1 for page title)",
+        "Return home link is prominent and accessible"
+      ],
+      "files": ["src/components/NotFound.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-6",
+      "phase": "UX Polish",
+      "title": "Add skip link to UnifiedDashboard",
+      "description": "UnifiedDashboard is a large page with no skip-to-content link for keyboard users.",
+      "acceptance_criteria": [
+        "Skip link appears as first focusable element",
+        "Skip link is visually hidden until focused",
+        "Clicking skip link jumps to main content area",
+        "Skip link text is descriptive (e.g., 'Skip to dashboard content')"
+      ],
+      "files": ["src/components/UnifiedDashboard.tsx", "src/components/UnifiedDashboard.css"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-7",
+      "phase": "UX Polish",
+      "title": "Fix heading hierarchy in UnifiedDashboard",
+      "description": "'Your Progress Dashboard' is rendered as a <p> instead of proper heading, breaking document outline.",
+      "acceptance_criteria": [
+        "Page has logical heading hierarchy (h1 -> h2 -> h3)",
+        "'Your Progress Dashboard' or equivalent is a proper heading",
+        "Screen readers can navigate by headings",
+        "Visual appearance unchanged"
+      ],
+      "files": ["src/components/UnifiedDashboard.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-8",
+      "phase": "UX Polish",
+      "title": "Replace VoiceSelector hardcoded colors",
+      "description": "VoiceSelector CSS has hardcoded rgba(255, 101, 190, ...) values instead of CSS variables.",
+      "acceptance_criteria": [
+        "All hardcoded color values replaced with CSS variables",
+        "Use existing brand variables from variables.css",
+        "Visual appearance unchanged",
+        "Colors will update correctly if brand colors change"
+      ],
+      "files": ["src/components/VoiceSelector.css"],
+      "status": "pending"
+    },
+    {
+      "id": "UX-9",
+      "phase": "UX Polish",
+      "title": "Review icon re-exports bundle impact",
+      "description": "icons/index.ts re-exports 68 Lucide icons which may impact bundle size. Audit and optimize.",
+      "acceptance_criteria": [
+        "Document current bundle size impact of icon re-exports",
+        "If significant (>50KB), remove unused re-exports",
+        "If not significant, document finding and close",
+        "All icon imports continue to work"
+      ],
+      "files": ["src/components/icons/index.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-1",
+      "phase": "Content/Voice",
+      "title": "Fix emotion leaking into spoken text",
+      "description": "AI sometimes says emotion words like 'happy' instead of conveying the emotion through tone. Remove or restructure emotion instructions.",
+      "acceptance_criteria": [
+        "AI never says emotion words that were meant as instructions",
+        "Emotion/tone conveyed through voice, not spoken text",
+        "Review prompts and ElevenLabs configuration for emotion handling",
+        "Test with multiple scenarios to verify fix"
+      ],
+      "files": ["src/hooks/useElevenLabsConversation.ts", "src/data/scenarios.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-2",
+      "phase": "Content/Voice",
+      "title": "Add Tom character personality",
+      "description": "Tom voice has no personality beyond the name. Add character traits and speaking style.",
+      "acceptance_criteria": [
+        "voices.ts has personality description for Tom",
+        "Tom has defined traits (e.g., friendly, encouraging, uses specific expressions)",
+        "Prompts inject Tom's character context",
+        "Tom feels distinct from Emma in conversations"
+      ],
+      "files": ["src/data/voices.ts", "src/hooks/useElevenLabsConversation.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-3",
+      "phase": "Content/Voice",
+      "title": "Add Emma character personality",
+      "description": "Emma voice has no personality beyond the name. Add character traits and speaking style.",
+      "acceptance_criteria": [
+        "voices.ts has personality description for Emma",
+        "Emma has defined traits distinct from Tom",
+        "Prompts inject Emma's character context",
+        "Emma feels like a different character than Tom"
+      ],
+      "files": ["src/data/voices.ts", "src/hooks/useElevenLabsConversation.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-4",
+      "phase": "Content/Voice",
+      "title": "Add difficulty-based prompt modifiers",
+      "description": "Scenarios have difficulty field but prompts don't adjust. AI should speak differently for beginner vs advanced.",
+      "acceptance_criteria": [
+        "Beginner scenarios: AI speaks more clearly, less slang, slower pace",
+        "Intermediate scenarios: Natural Aussie speech with some expressions",
+        "Advanced scenarios: Full natural speech, more colloquialisms",
+        "Difficulty modifiers injected into prompts automatically"
+      ],
+      "files": ["src/hooks/useElevenLabsConversation.ts", "src/data/scenarios.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-5",
+      "phase": "Content/Voice",
+      "title": "Enhance voice-specific prompt injection",
+      "description": "Currently only {name} is substituted in prompts. Add richer character context injection.",
+      "acceptance_criteria": [
+        "Prompts include character personality traits",
+        "Prompts include character-specific speaking style",
+        "Template system supports multiple placeholders",
+        "Easy to add new voice characters in future"
+      ],
+      "files": ["src/hooks/useElevenLabsConversation.ts", "src/data/voices.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "CV-6",
+      "phase": "Content/Voice",
+      "title": "Audit scenario prompts for consistency",
+      "description": "Review all 22 category prompts for quality and consistency. Fix any issues found.",
+      "acceptance_criteria": [
+        "All prompts follow consistent structure",
+        "No placeholder or TODO text remaining",
+        "Cultural tips align with AI behavior instructions",
+        "First messages feel natural and match scenario tone",
+        "Document any issues found and fixes made"
+      ],
+      "files": ["src/data/scenarios.ts", "src/data/scenarios-*.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-1",
+      "phase": "Infrastructure",
+      "title": "Integrate error tracking service",
+      "description": "Errors only log to console. Add proper error tracking for production monitoring.",
+      "acceptance_criteria": [
+        "Error tracking service integrated (e.g., Sentry)",
+        "ErrorBoundary reports caught errors",
+        "Unhandled promise rejections captured",
+        "Source maps uploaded for readable stack traces",
+        "Environment configured (dev vs prod)"
+      ],
+      "files": ["src/components/ErrorBoundary.tsx", "src/main.tsx", "package.json"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-2",
+      "phase": "Infrastructure",
+      "title": "Review backend error handling",
+      "description": "Ensure Express backend has proper error handling middleware and logging.",
+      "acceptance_criteria": [
+        "Global error handler catches all errors",
+        "Errors logged with context (route, user, timestamp)",
+        "Client receives appropriate error responses (not stack traces)",
+        "Async errors properly caught"
+      ],
+      "files": ["backend/src/index.ts", "backend/src/middleware/"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-3",
+      "phase": "Infrastructure",
+      "title": "Add basic frontend analytics",
+      "description": "No visibility into how users use the app. Add basic event tracking.",
+      "acceptance_criteria": [
+        "Analytics service integrated (e.g., Plausible, PostHog, or simple custom)",
+        "Track: page views, session starts, scenario completions",
+        "Privacy-respecting (no PII)",
+        "Works with ad blockers gracefully (doesn't break app)"
+      ],
+      "files": ["src/main.tsx", "src/components/AussieEnglishPractice.tsx", "package.json"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-4",
+      "phase": "Infrastructure",
+      "title": "Add conversion tracking",
+      "description": "Can't measure subscription funnel effectiveness. Add conversion tracking.",
+      "acceptance_criteria": [
+        "Track: view subscription plans, select plan, complete subscription",
+        "Funnel can be analyzed to find drop-off points",
+        "Integrates with analytics from IF-3"
+      ],
+      "files": ["src/components/SubscriptionPlans.tsx"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-5",
+      "phase": "Infrastructure",
+      "title": "Audit bundle size",
+      "description": "Unknown if bundle is optimized. Audit and identify any bloat.",
+      "acceptance_criteria": [
+        "Run bundle analyzer and document current size",
+        "Identify any unexpectedly large dependencies",
+        "Recommend optimizations if bundle > 500KB",
+        "Implement quick wins if found"
+      ],
+      "files": ["package.json", "vite.config.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-6",
+      "phase": "Infrastructure",
+      "title": "Run Lighthouse audit and fix issues",
+      "description": "Unknown performance and accessibility scores. Run Lighthouse and address issues.",
+      "acceptance_criteria": [
+        "Lighthouse scores documented for performance, accessibility, best practices, SEO",
+        "Score 90+ on accessibility",
+        "Score 80+ on performance",
+        "Any critical issues fixed"
+      ],
+      "files": [],
+      "status": "pending"
+    },
+    {
+      "id": "IF-7",
+      "phase": "Infrastructure",
+      "title": "Improve health check endpoint",
+      "description": "Health check may not verify actual service health. Make it meaningful.",
+      "acceptance_criteria": [
+        "/health returns meaningful status",
+        "Checks database connectivity",
+        "Returns degraded status if external services unreachable",
+        "Response includes version info"
+      ],
+      "files": ["backend/src/index.ts"],
+      "status": "pending"
+    },
+    {
+      "id": "IF-8",
+      "phase": "Infrastructure",
+      "title": "Review API rate limiting and usage tracking",
+      "description": "ElevenLabs has usage limits. Ensure tracking and alerts are in place.",
+      "acceptance_criteria": [
+        "ElevenLabs usage tracked per user",
+        "Usage limits enforced before hitting API limits",
+        "Alert mechanism if approaching monthly limits",
+        "Usage visible in admin/monitoring"
+      ],
+      "files": ["backend/src/routes/", "backend/src/services/"],
+      "status": "pending"
+    }
+  ]
+}
