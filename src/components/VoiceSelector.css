@@ -20,7 +20,7 @@
 }
 
 .voice-back-btn:hover {
-  background: rgba(17, 232, 246, 0.1);
+  background: color-mix(in srgb, var(--brand-cyan) 10%, transparent);
   border-color: var(--brand-cyan);
 }
 
@@ -85,7 +85,7 @@
 
 .voice-option.selected {
   border-color: var(--brand-primary);
-  background: rgba(255, 101, 190, 0.1);
+  background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
   box-shadow: var(--brand-glow-primary);
 }
 
@@ -191,7 +191,8 @@
 }
 
 .voice-continue-btn {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, #d654a0 100%);
+  /* Gradient from brand-primary to a darker shade using color-mix */
+  background: linear-gradient(135deg, var(--brand-primary) 0%, color-mix(in srgb, var(--brand-primary) 80%, #000) 100%);
   color: var(--brand-white);
   border: none;
   padding: 16px 48px;
@@ -205,7 +206,7 @@
 
 .voice-continue-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 101, 190, 0.4);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--brand-primary) 40%, transparent);
 }
 
 .voice-continue-btn:disabled {
